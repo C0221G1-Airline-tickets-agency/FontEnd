@@ -1,0 +1,31 @@
+.footer {
+  width: 100%;
+  padding: 20px 6%;
+  color: black;
+  font-weight: bold;
+  position: relative;
+  bottom: 0;
+}
+
+.footer .column:first-child img {
+  width: 26px;
+  height: 26px;
+}
+
+.footer .column:nth-child(3) img {
+  width: 101px;
+  height: 31px;
+
+}
+
+.footer .column:nth-child(3) img:first-child {
+  width: 43px;
+  height: 38px;
+
+}
+
+.footer .column:nth-child(4) img {
+  width: 112px;
+  height: 43px;
+
+}
