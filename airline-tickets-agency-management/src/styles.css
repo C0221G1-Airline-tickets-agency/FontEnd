@@ -12,6 +12,6 @@ body {
 }
 body {
   background: url("./assets/img/half-opacity-pink-smallsize.png");
-  background-size: cover;
+  background-size: auto;
   overflow-x: hidden;
 }

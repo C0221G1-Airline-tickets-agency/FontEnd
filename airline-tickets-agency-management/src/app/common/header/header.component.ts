@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  isDropDown = false;
+  isLogin = false;
+  accountName = 'Việt Nam Vô Địch';
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
+
+  getDropDown() {
+    this.isDropDown = !this.isDropDown;
+  }
+
 
 }

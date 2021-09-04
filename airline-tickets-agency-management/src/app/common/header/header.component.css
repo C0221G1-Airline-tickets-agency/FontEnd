@@ -2,7 +2,7 @@
   --navbar-hidden: rgba(44, 62, 80, 0.9);
   --text-color: #fff;
 }
-/*#region HEADER*/
+
 body, header, header ul {
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@ body, header, header ul {
 }
 
 header {
-  color: var(--text-color);
+  color: #fff;
   background: #e54744;
   height: 80px;
   width: 100%;
@@ -31,70 +31,72 @@ header.sticky {
 
 header a {
   text-decoration: none;
-  color: var(--text-color);
+  color: #fff;
 }
 
 header a:hover {
-  color: var(--text-color);
+  color: #fff;
 }
 
-header span {
-  width: 180px;
+header .account {
+  font-size: 17px;
   display: flex;
   position: absolute;
   top: 10px;
-  right: 90px;
+  right: 100px;
 }
 
 label.logo,
 label.logo1 {
-  color: var(--text-color);
-  font-family: 'Algerian', cursive;
-  /*font-family: 'Snap ITC', cursive;*/
-  /*font-family: 'OCR A', cursive;*/
+  color: #fff;
+  font-family: 'Bookman', 'Tahoma', 'Verdana';
   padding-left: 40px;
   font-size: 35px;
   line-height: 80px;
   font-weight: bold;
 }
+
 label.logo1 {
   display: none;
 }
-header ul {
+
+header .my-nav {
   float: right;
   margin-right: 20px;
 }
 
 
-header ul li {
+header .my-nav li {
   display: inline-block;
-  line-height: 110px;
-  padding: 4px 4px 4px 10px;
+  padding: 5px 7px;
+  margin-top: 45px;
   box-sizing: border-box;
-
+}
+header .my-nav li:hover {
+  background: #f7f7f7;
+  border-radius: 5px;
 }
 
-header ul li a {
-  color: var(--text-color);
+header .my-nav li a {
+  color: #fff;
   font-weight: bold;
   font-size: 17px;
   border-radius: 3px;
   text-transform: uppercase;
 }
 
-header ul li a:hover {
+header .my-nav li:hover a{
   color: red;
   font-weight: bold;
-  background: #f7f7f7;
+
   text-decoration: none;
 }
 
 header .checkBtn {
   font-size: 25px;
-  color: var(--text-color);
+  color: #fff;
   float: right;
   line-height: 80px;
-  margin-right: 40px;
   cursor: pointer;
   display: none;
 }
@@ -103,48 +105,90 @@ header #check {
   display: none;
 }
 
-@media (max-width: 1090px) {
-  label.logo1 {
-    width: 200px;
-    padding-left: 0;
+header .account-login {
+  position: relative;
+}
+
+header .account-login .icon-account {
+  font-size: 12px;
+  margin-top: 2px;
+  color: black;
+  position: absolute;
+  top: 4px;
+  right: 7px;
+}
+
+header .account-login .icon-account .fa-chevron-up,
+header .account-login .icon-account .fa-chevron-down {
+  margin-top: 3px;
+  color: white;
+}
+header .account-login input {
+  color: white;
+  background: #B9382A;
+  border: 1.5px solid white;
+  border-radius: 5px;
+}
+header .account-login .account-info {
+  width: 174px;
+  padding: 15px 0;
+  color: white;
+  background: rgba(44, 62, 80, 0.9);
+  box-shadow: 0 5px 20px #888888;
+  border-radius: 5px;
+  position: absolute;
+  top: 29.41px;
+  right: 0;
+}
+
+header .account-login .account-info li {
+  padding-left: 20px;
+}
+header .account-login .account-info li:hover a {
+  border-radius: 5px;
+  box-shadow: 0 3px yellow;
+  transition: box-shadow .3s, color .3s;
+}
+@media (max-width: 1005px) {
+  header {
+    padding: 0 20px;
   }
-  label.logo1 {
-    display: inline;
-  }
-  label.logo {
-    display: none;
+  header .account {
+    right: 40px;
   }
 }
-@media (max-width: 915px) {
+
+@media (max-width: 877px) {
   header {
-    padding: 0 30px;
+    padding: 0 35px;
   }
 
   header label.logo {
-    padding-left: 40px;
+    padding-left: 30px;
   }
 
-  header ul li a {
+  header .my-nav li a {
     font-size: 16px;
   }
 
-  header span {
+  header .account {
     position: absolute;
     top: 28px;
-    right: 100px;
+    right: 70px;
   }
 
   header .checkBtn {
+    margin-top: 2px;
     display: block;
   }
 
-  header ul {
+  header .my-nav {
     position: fixed;
     width: 40%;
     height: 200px;
     margin-left: 60%;
     padding-left: 20px;
-    background: var(--navbar-hidden);
+    background: rgba(44, 62, 80, 0.9);
     box-shadow: 0 5px 20px #888888;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -154,28 +198,44 @@ header #check {
     transition: all .5s;
   }
 
-  header ul li {
+  header .my-nav li {
     display: block;
     margin: 10px 0;
     line-height: 30px;
   }
-
-  header ul li a {
-    font-size: 15px;
+  header .my-nav li:hover {
+    background: none;
   }
 
-  header li a:hover {
+  header .my-nav li a {
+    font-size: 15px;
+    color: white;
+  }
+
+  header .my-nav li a:hover {
+    color: white;
     background: none;
+    box-shadow: 0 3px yellow;
+    transition: box-shadow .3s, color .3s;
   }
 
   header #check:checked ~ ul {
     left: 0;
   }
 }
-
-.carousel {
-  width: 100%;
-  height: calc(100vh - 80px);
-  margin-top: 80px;
-  clear: left;
+@media (max-width: 560px) {
+  header {
+    padding: 0 10px;
+  }
+  header .logo img {
+    width: 200px!important;
+    height: 60px;
+    margin-top: 10px!important;
+  }
+  header .account {
+    right: 40px;
+  }
+  header .checkBtn i {
+    margin-bottom: 10px;
+  }
 }
