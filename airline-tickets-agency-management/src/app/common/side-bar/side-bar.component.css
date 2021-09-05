@@ -41,6 +41,49 @@
   font-weight: bold;
   font-size: larger;
 }
-/*#region Test*/
+.side-bar .checkBtn {
+  margin-top: 5px;
+  font-size: 25px;
+  /*color: black;*/
+  float: right;
+  cursor: pointer;
+  display: none;
+}
 
-/*#endregion*/
+.side-bar #check1 {
+  display: none;
+}
+.background-side {
+  display: block;
+}
+@media (max-width: 995px) {
+  .admin-content {
+    position: relative;
+  }
+  .side-bar .checkBtn {
+    padding-left: 20px;
+    padding-right: 10px;
+    display: block;
+    z-index: 100;
+  }
+  .side-bar {
+    position: absolute;
+    top: 0;
+    left: 15px;
+    z-index: 100;
+  }
+
+  .background-side {
+    width: 260px;
+    display: none;
+  }
+
+  #check1:checked ~ .background-side {
+    display: block;
+  }
+  #check1:checked + .checkBtn{
+    padding-left: 0;
+  }
+}
+
+
