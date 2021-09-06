@@ -1,8 +1,5 @@
 <div class="row">
-  <div class="col-3 col-lg-3">
-    <app-side-bar></app-side-bar>
-  </div>
-  <div class="col-xl-9  col-lg-9 col-md-12 col-sm-12">
+  <div class="col-xl-9 mx-auto col-lg-9 col-md-12 col-sm-12">
     <div class="container container-new bg  position-relative ">
       <div class="row d-flex justify-content-center position-relative">
         <h5 class="bg-danger text-light p-3 w-100 ">Thêm mới tin
@@ -62,7 +59,7 @@
                 trống
               </div>
               <div class="invalid-feedback" *ngIf="newsTitle.hasError('minlength') && newsTitle.touched">Tiêu đề không
-                nhỏ hơn 5
+                nhỏ hơn 66
                 ký tự
               </div>
               <div class="invalid-feedback" *ngIf="newsTitle.hasError('maxlength') && newsTitle.touched">Tiêu đề không
@@ -80,7 +77,7 @@
               </div>
               <div class="invalid-feedback" *ngIf="newsContent.hasError('minlength') && newsContent.touched">Nội dung
                 không nhỏ
-                hơn 5 ký tự
+                hơn 66 ký tự
               </div>
               <div class="invalid-feedback" *ngIf="newsContent.hasError('maxlength') && newsContent.touched">Nội dung
                 không lớn

@@ -31,13 +31,15 @@ export class NewsManipulationComponent implements OnInit {
   formNews: FormGroup;
   categorys: Category[] = [];
   typeComponent = 'create';
+
   constructor(@Inject(AngularFireStorage) private storage: AngularFireStorage,
               @Inject(UploadFileService) private uploadFileService: UploadFileService,
               private fb: FormBuilder,
               private datePipe: DatePipe,
               public dialog: MatDialog,
               private route: ActivatedRoute,
-              private newsService: NewsService) { }
+              private newsService: NewsService,
+              private toastr: ToastrService) { }
 
 
   ngOnInit(): void {
@@ -103,10 +105,10 @@ export class NewsManipulationComponent implements OnInit {
     this.formNews = this.fb.group({
       newsId: ['', []],
       newsCode: [newsCode, []],
-      newsTitle: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+      newsTitle: ['', [Validators.required, Validators.minLength(66), Validators.maxLength(120)]],
       newsImage: ['', []],
       newsImageName: ['', [Validators.required]],
-      newsContent: ['', [Validators.required]],
+      newsContent: ['', [Validators.required, Validators.minLength(666), Validators.maxLength(1200)]],
       newsWriteDay: [newsWriteDay, []],
       NewsViews: [0, []],
       flag: [true, []],
@@ -120,21 +122,35 @@ export class NewsManipulationComponent implements OnInit {
 
   save() {
     if (this.checkValidate()) {
-      const name = this.selectedImage.name;
-      const fileRef = this.storage.ref(name);
-      this.storage.upload(name, this.selectedImage).snapshotChanges().pipe(
+    const t = Swal.fire({
+      title: 'Đang gửi dữ liệu',
+      text: 'Vui lòng chờ ...',
+      imageUrl: '../../../../../assets/img/spin.gif',
+      showConfirmButton: false,
+    });
+    const name = this.selectedImage.name;
+    const fileRef = this.storage.ref(name);
+    this.storage.upload(name, this.selectedImage).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             this.url = url;
             this.newsImage.setValue(url);
             this.news = this.formNews.value;
-            this.newsService.create(this.news).subscribe(
+            console.log(this.news);
+            this.newsService.create(this.news).subscribe(value => {
+                this.toastr.success(this.typeComponent === 'create' ?
+                  'Tạo mới bài viết thành công' :
+                  'Chỉnh sửa bài viết thành công',
+                  'Thành công');
+              }, error => {}, () => Swal.close()
             );
-          });
+          }
+          );
         })
       ).subscribe();
     }
   }
+
   checkValidate(): boolean {
     if (this.newsContent.invalid) {
       this.alertError('Nội dung không hợp lệ');
@@ -167,6 +183,8 @@ export class NewsManipulationComponent implements OnInit {
     const data = this.formNews.value;
     const dialogRef = this.dialog.open(NewsReviewComponent, {
       width: '750px',
+      autoFocus: false,
+      maxHeight: '90vh',
       data
     });
     dialogRef.afterClosed().subscribe(result => {
