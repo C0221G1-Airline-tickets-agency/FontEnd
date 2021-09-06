@@ -7,6 +7,7 @@ import { HomeComponent } from '../client/component/home/home.component';
 import { ManagementComponent } from './management/management.component';
 import {AppModule} from '../app.module';
 import {CommonClientModule} from '../common/common-client/common-client.module';
+import { EmployeeComponent } from './component/employee/employee.component';
 
 
 
@@ -16,7 +17,7 @@ import {CommonClientModule} from '../common/common-client/common-client.module';
     ManagementRoutingModule,
     CommonClientModule,
   ],
-  declarations: [ReportComponent, HomeComponent, ManagementComponent],
+  declarations: [ReportComponent, HomeComponent, ManagementComponent, EmployeeComponent],
   bootstrap: [ManagementComponent]
 })
 export class ManagementModule { }
