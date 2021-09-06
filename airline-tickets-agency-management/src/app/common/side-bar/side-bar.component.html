@@ -32,7 +32,7 @@
         </div>
       </ul>
     </li>
-    <li class="menu-item p-0" *ngIf="isAdmin">
+    <li class="menu-item p-0" *ngIf="isAdmin && isEmployee">
       <ul class="menu-item-child">
         <li class="item item-hover"><a class="pl-2 to-text-sidebar">Quản trị viên<i
           class="fa fa-caret-down ml-2" aria-hidden="true"></i></a></li>
@@ -62,18 +62,17 @@
         </div>
       </ul>
     </li >
-    <li class="menu-item p-0" *ngIf="isAdmin">
+    <li class="menu-item p-0" *ngIf="isAdmin ">
       <ul class="menu-item-child">
         <li class="item item-hover"><a class="pl-2 to-text-sidebar">Quản lý nhân viên<i
           class="fa fa-caret-down ml-2" aria-hidden="true"></i></a></li>
         <div class="menu-item-child active">
-          <li class="item-hover"><a href="" class="pl-4 d-flex">
+          <li class="item-hover"><a href="/management/employee-information" class="pl-4 d-flex">
             <div class="pr-2" style="margin-top: -2px">
               <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </div>
             <div>Thông tin nhân viên</div>
           </a>
-
           </li>
           <li class="item-hover"><a href="" class="pl-4 d-flex">
             <div class="pr-2" style="margin-top: -2px">

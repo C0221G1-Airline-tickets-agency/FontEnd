@@ -7,6 +7,8 @@ import { HomeComponent } from '../client/component/home/home.component';
 import { ManagementComponent } from './management/management.component';
 import {AppModule} from '../app.module';
 import {CommonClientModule} from '../common/common-client/common-client.module';
+import { EmployeeInformationComponent } from './component/employee-information/employee-information.component';
+import { EmployeeChangePasswordComponent } from './component/employee-change-password/employee-change-password.component';
 
 
 
@@ -16,7 +18,7 @@ import {CommonClientModule} from '../common/common-client/common-client.module';
     ManagementRoutingModule,
     CommonClientModule,
   ],
-  declarations: [ReportComponent, HomeComponent, ManagementComponent],
+  declarations: [ReportComponent, HomeComponent, ManagementComponent, EmployeeInformationComponent, EmployeeChangePasswordComponent],
   bootstrap: [ManagementComponent]
 })
 export class ManagementModule { }

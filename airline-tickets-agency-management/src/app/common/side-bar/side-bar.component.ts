@@ -8,6 +8,8 @@ import {Component, Input, OnInit} from '@angular/core';
 export class SideBarComponent implements OnInit {
   @Input()
   isAdmin = false;
+  @Input()
+  isEmployee = false;
   constructor() { }
 
   ngOnInit(): void {
