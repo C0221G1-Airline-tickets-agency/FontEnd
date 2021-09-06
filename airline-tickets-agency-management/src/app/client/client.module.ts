@@ -10,11 +10,13 @@ import {ClientComponent} from './client/client.component';
 import {CommonClientModule} from '../common/common-client/common-client.module';
 import { FlightListComponent } from './component/flight-ticket/flight-management/flight-list/flight-list.component';
 import { DialogDeleteComponent } from './component/flight-ticket/flight-management/dialog-delete/dialog-delete.component';
+import { FlightCreateComponent } from './component/flight-ticket/flight-management/flight-create/flight-create.component';
+import { FlightEditComponent } from './component/flight-ticket/flight-management/flight-edit/flight-edit.component';
 
 
 
 @NgModule({
-  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, FlightListComponent, DialogDeleteComponent],
+  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, FlightListComponent, DialogDeleteComponent, FlightCreateComponent, FlightEditComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,

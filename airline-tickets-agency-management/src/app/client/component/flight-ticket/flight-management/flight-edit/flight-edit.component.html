@@ -1,0 +1,171 @@
+
+
+<div class="container pt-5">
+  <!--        nơi đổ dữ liệu router-outlet              -->
+
+  <fieldset class="scheduler-border" style="background: white;box-shadow: 0 0 2px 2px #cccccc;">
+    <legend class="scheduler-border text-center" style="background: #e54744">
+      <h2 style="text-align: center ;font-size: 50px">Thay đổi thông tin chuyến bay</h2>
+    </legend>
+    <br>
+    <form [formGroup]="flightForm" (ngSubmit)="updateFlight()" class="form-group col-12">
+      <div class="row input-group">
+        <div class="col-3 folow-right">
+          <span>Hãng <label>(*)</label></span>
+        </div>
+        <div class="col-8">
+          <select class="form-control" formControlName="airline" [compareWith]="compareFn">
+            <option *ngFor="let airline of airlines" [ngValue]="airline" >{{airline.airlineName}}</option>
+          </select>
+          <div  class="alert alert-danger" role="alert" *ngIf="!airline.valid && (airline.dirty || airline.touched)">
+            <div [hidden]="!airline.errors.required">
+              <p style="color: red">Hãng bay không được để trống</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="row input-group">
+        <div class="col-3 folow-right">
+          <span>Mã chuyến bay <label>(*)</label></span>
+        </div>
+        <div class="col-8">
+          <div class="d-flex align-items-center">
+            <input class="form-control" type="text" formControlName="flightCode">
+          </div>
+          <div  class="alert alert-danger" role="alert" *ngIf="!flightCode.valid && (flightCode.dirty || flightCode.touched)">
+            <div [hidden]="!flightCode.errors.required">
+              <p style="color: red">Mã chuyến bay không được để trống</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="row input-group">
+        <div class="col-3 folow-right">
+          <span>Ngày bay <label>(*)</label></span>
+        </div>
+        <div class="col-4">
+          <input type="date" class="form-control" formControlName="flightDate">
+
+          <div  class="alert alert-danger" role="alert" *ngIf="!flightDate.valid && (flightDate.dirty || flightDate.touched)">
+            <div [hidden]="!flightDate.errors.pattern">
+              <p style="color: red"> phải đúng định dạng ngày </p>
+            </div>
+            <div [hidden]="!flightDate.errors.required">
+              <p style="color: red">ngày không được để trống</p>
+            </div>
+            <div [hidden]="!flightDate.errors.gte">
+              <p style="color: red">ngày phải lớn hơn ngày hiện tại</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row input-group">
+        <div class="col-3 folow-right">
+          <span>Giờ khởi hành <label>(*)</label></span>
+        </div>
+        <div class="col-4">
+          <input type="time" class="form-control" formControlName="departureTime">
+
+          <div  class="alert alert-danger" role="alert" *ngIf="!departureTime.valid && (departureTime.dirty || departureTime.touched)">
+            <div [hidden]="!departureTime.errors.pattern">
+              <p style="color: red"> Giờ khởi hành phải đúng định dạng HH:ss </p>
+            </div>
+            <div [hidden]="!departureTime.errors.required">
+              <p style="color: red">Giờ khởi hành không được để trống</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row input-group">
+        <div class="col-3 folow-right">
+          <span>Giờ đến <label>(*)</label></span>
+        </div>
+        <div class="col-4">
+          <input type="time" class="form-control" formControlName="endTime">
+
+          <div  class="alert alert-danger" role="alert" *ngIf="!endTime.valid && (endTime.dirty || endTime.touched)">
+            <div [hidden]="!endTime.errors.pattern">
+              <p style="color: red"> Giờ đến phải đúng định dạng HH:ss </p>
+            </div>
+            <div [hidden]="!endTime.errors.required">
+              <p style="color: red">Giờ đến không được để trống</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row input-group">
+        <div class="col-3 folow-right">
+          <span>Điểm đi <label>(*)</label></span>
+        </div>
+        <div class="col-8">
+          <select class="form-control" formControlName="locationTo" [compareWith]="compareFn1">
+            <option *ngFor="let location of locations" [ngValue]="location">{{location.cityName}}</option>
+          </select>
+          <div  class="alert alert-danger" role="alert" *ngIf="!locationTo.valid && (locationTo.dirty || locationTo.touched)">
+            <div [hidden]="!locationTo.errors.required">
+              <p style="color: red">Điểm đi không được để trống</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <br>
+
+      <div class="row input-group">
+        <div class="col-3 folow-right">
+          <span>Điểm đến <label>(*)</label></span>
+        </div>
+        <div class="col-8">
+          <select class="form-control" formControlName="locationFrom" [compareWith]="compareFn1">
+            <option *ngFor="let location of locations" [ngValue]="location">{{location.cityName}}</option>
+          </select>
+          <div  class="alert alert-danger" role="alert" *ngIf="!locationFrom.valid && (locationFrom.dirty || locationFrom.touched)">
+            <div [hidden]="!locationFrom.errors.required">
+              <p style="color: red">Điểm đến không được để trống</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <br>
+      <div class="row input-group">
+        <div class="col-3 folow-right">
+          <span>Gía <label>(*)</label></span>
+        </div>
+        <div class="col-8">
+          <input type="text" class="form-control" formControlName="flightPrice" >
+          <div  class="alert alert-danger" role="alert" *ngIf="!flightPrice.valid && (flightPrice.dirty || flightPrice.touched)">
+            <div [hidden]="!flightPrice.errors.required">
+              <p style="color: red">Gía không được để trống</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="d-flex justify-content-end pb-3 mt-3">
+        <button class="mr-5 btn btn-success" type="submit" [disabled]="!flightForm.valid" (click)="dialogRef.close(true)"><i class="fa fa-check"
+                                                                                                                             aria-hidden="true"  ></i> Sửa
+        </button>
+        <button class="btn btn-back" style="background: #005cbf;color: white;margin-right: 94px"
+                type="button" (click)="dialogRef.close(false)">
+          <i class="icon-sidebar fa fa-reply "></i>
+          Trở về
+        </button>
+      </div>
+    </form>
+  </fieldset>
+</div>
+
+
+
+
+
+
+
