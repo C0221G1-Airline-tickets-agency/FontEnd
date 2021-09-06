@@ -11,6 +11,8 @@ import { CustomerComponent } from './component/customer/customer.component';
 import { DeleteCustomerComponent } from './component/delete-customer/delete-customer.component';
 import {ToastrModule, ToastrService} from 'ngx-toastr';
 import {MatDialogModule} from '@angular/material/dialog';
+import { CreateCustomerComponent } from './component/ business/create-customer/create-customer.component';
+import { EditCustomerComponent } from './component/ business/edit-customer/edit-customer.component';
 
 
 
@@ -22,7 +24,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ToastrModule,
     MatDialogModule
   ],
-  declarations: [ReportComponent, HomeComponent, ManagementComponent, CustomerComponent, DeleteCustomerComponent],
+  declarations: [ReportComponent, HomeComponent, ManagementComponent, CustomerComponent, DeleteCustomerComponent, CreateCustomerComponent, EditCustomerComponent],
   bootstrap: [ManagementComponent]
 })
 export class ManagementModule { }
