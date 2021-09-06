@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {DialogService} from '../../../../service/dialog.service';
+import {MatDialog} from '@angular/material/dialog';
+import {CustomerDialogCancelTicketComponent} from '../customer-dialog-cancel-ticket/customer-dialog-cancel-ticket.component';
 
 declare let paypal: any;
 
@@ -9,7 +12,7 @@ declare let paypal: any;
 })
 export class CustomerPaymentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private matDialog: MatDialog) { }
 
   paypalConfig = {
     env: 'sandbox',
@@ -84,6 +87,11 @@ export class CustomerPaymentComponent implements OnInit {
       scriptTagElement.src = 'https://www.paypalobjects.com/api/checkout.js';
       scriptTagElement.onload = resolve;
       document.body.appendChild(scriptTagElement);
+    });
+  }
+
+  dialogCancel() {
+    const dialog = this.matDialog.open(CustomerDialogCancelTicketComponent, {
     });
   }
 }

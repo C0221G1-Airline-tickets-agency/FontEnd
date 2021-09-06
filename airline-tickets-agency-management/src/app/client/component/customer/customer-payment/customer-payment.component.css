@@ -150,6 +150,12 @@ i:hover {
   font-weight: bold;
 }
 
-
+.btnCancel{
+  color: dodgerblue;
+}
+.btnCancel:hover{
+  color: darkblue;
+  text-decoration-line: underline;
+}
 
 

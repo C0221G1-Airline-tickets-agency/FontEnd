@@ -12,17 +12,22 @@ import { CustomerPaymentComponent } from './component/customer/customer-payment/
 import { CustomerTransactionHistoryComponent } from './component/customer/customer-transaction-history/customer-transaction-history.component';
 // tslint:disable-next-line:max-line-length
 import { CustomerDialogCancelTicketComponent } from './component/customer/customer-dialog-cancel-ticket/customer-dialog-cancel-ticket.component';
+import { FlightListComponent } from './component/flight-ticket/flight-management/flight-list/flight-list.component';
+import { DialogDeleteComponent } from './component/flight-ticket/flight-management/dialog-delete/dialog-delete.component';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, CustomerPaymentComponent, CustomerTransactionHistoryComponent, CustomerDialogCancelTicketComponent],
+  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, CustomerPaymentComponent, CustomerTransactionHistoryComponent, CustomerDialogCancelTicketComponent, FlightListComponent, DialogDeleteComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,
     ReactiveFormsModule,
-    CommonClientModule
+    CommonClientModule,
+    MatDialogModule
   ],
   bootstrap: [ClientComponent]
 })
