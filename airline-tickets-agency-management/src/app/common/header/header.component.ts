@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +10,8 @@ export class HeaderComponent implements OnInit {
   isDropDown = false;
   isLogin = false;
   accountName = 'Việt Nam Vô Địch';
-
+  @Input()
+  isAdmin = false;
   constructor() {
   }
 
