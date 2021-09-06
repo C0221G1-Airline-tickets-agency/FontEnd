@@ -6,21 +6,33 @@ import {AppComponent} from './app.component';
 import {FooterComponent} from './common/footer/footer.component';
 
 import {SideBarComponent} from './common/side-bar/side-bar.component';
-import {HeaderComponent} from "./common/header/header.component";
-
+import {HeaderComponent} from './common/header/header.component';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import {DatePipe} from '@angular/common';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {Overlay} from 'ngx-toastr';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TruncatePipe} from './client/component/news/news-list/TruncatePipe';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    SideBarComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    MatDialogModule,
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [FormBuilder, DatePipe, MatDialog, Overlay],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

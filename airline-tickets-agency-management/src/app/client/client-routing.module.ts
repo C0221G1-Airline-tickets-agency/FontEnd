@@ -1,0 +1,37 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import {NewsManipulationComponent} from './component/news/news-manipulation/news-manipulation.component';
+import {ManagementComponent} from '../management/management/management.component';
+import {ReportComponent} from '../management/component/report/report.component';
+import {ClientComponent} from './client/client.component';
+import {HomeComponent} from './component/home/home.component';
+import {NewsListComponent} from './component/news/news-list/news-list.component';
+import {NewsDetailsComponent} from './component/news/news-details/news-details.component';
+
+
+const routes: Routes = [
+  {
+    path: '', component: ClientComponent,
+    children:
+      [
+        {
+          path: '', component: HomeComponent
+        },
+        {
+          path: 'news/manipulation', component: NewsManipulationComponent
+        },
+        {
+          path: 'news/news-list', component: NewsListComponent
+        },
+        {
+          path: 'news/news-details', component: NewsDetailsComponent
+        }
+      ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class ClientRoutingModule { }
