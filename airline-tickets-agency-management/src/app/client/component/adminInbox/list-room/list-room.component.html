@@ -1,0 +1,13 @@
+<ul class="user_list">
+
+  <li *ngFor="let item of listRoom" >
+    <div class="user_item" (click)="goToRoom(item.roomname)">
+      <div class="avatar_user" >
+
+        <img src="../../../../../assets/img/user.jpg" height="280" width="310"/>
+      </div>
+      <div  class="name_user">{{item.nickname}}</div>
+    </div>
+  </li>
+</ul>
+

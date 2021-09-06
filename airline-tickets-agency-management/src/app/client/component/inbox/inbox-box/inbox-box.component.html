@@ -1,0 +1,11 @@
+<div class="chat-room">
+  <div class="heading-inbox">
+    <h5>Đồng hành cùng mỗi chuyến bay</h5>
+    <span class="close-inbox" ><i (click)="closeBox()" class="fa fa-times-circle-o"></i></span>
+  </div>
+  <app-signup [ngStyle]="{'display':flat?'none':'block'}" (control)="takeControl($event)"></app-signup>
+  <app-chat-room [ngStyle]="{'display':flat?'block':'none'}"></app-chat-room>
+</div>
+
+
+

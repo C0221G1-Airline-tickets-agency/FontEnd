@@ -7,15 +7,17 @@ import { HomeComponent } from '../client/component/home/home.component';
 import { ManagementComponent } from './management/management.component';
 import {AppModule} from '../app.module';
 import {CommonClientModule} from '../common/common-client/common-client.module';
+import {ClientModule} from "../client/client.module";
 
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ManagementRoutingModule,
-    CommonClientModule,
-  ],
+    imports: [
+        CommonModule,
+        ManagementRoutingModule,
+        CommonClientModule,
+        ClientModule,
+    ],
   declarations: [ReportComponent, HomeComponent, ManagementComponent],
   bootstrap: [ManagementComponent]
 })
