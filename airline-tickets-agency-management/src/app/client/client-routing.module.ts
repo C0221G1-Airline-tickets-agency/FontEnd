@@ -5,6 +5,7 @@ import {ManagementComponent} from '../management/management/management.component
 import {ReportComponent} from '../management/component/report/report.component';
 import {ClientComponent} from './client/client.component';
 import {HomeComponent} from './component/home/home.component';
+import {FlightListComponent} from './component/flight-ticket/flight-management/flight-list/flight-list.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,9 @@ const routes: Routes = [
         },
         {
           path: 'news/manipulation', component: NewsManipulationComponent
+        },
+        {
+          path: 'flight-management', component: FlightListComponent,
         }
       ]
   }
