@@ -1,0 +1,48 @@
+
+<div class="container">
+  <fieldset class="border p-2">
+    <legend class="scheduler-border text-center" style="background: #e54744">
+      <h2 style="color: white">Thông tin admin</h2>
+    </legend>
+    <div *ngIf="admin==null" style="color: red"> <b>(Không có dữ liệu phù hợp) </b> </div>
+    <div class="row" style="height:100% ; width: auto" *ngIf="admin">
+      <div class="col-lg-6 pl-5">
+        <table  class="table " style="height: 100% ; width: 100% ">
+          <tr>
+            <td>Họ và tên</td>
+            <td>{{admin.employee.employeeName}}</td>
+          </tr>
+          <tr>
+            <td>Ngày Sinh</td>
+            <td>{{admin.employee.employeeBirthday}}</td>
+          </tr>
+          <tr>
+            <td>Địa chỉ</td>
+            <td>{{admin.employee.employeeAddress}}</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>email@admin</td>
+          </tr>
+          <tr>
+            <td>Giới tính</td>
+            <td>{{admin.employee.employeeGender}}</td>
+          </tr>
+          <tr>
+            <td>Điện thoại</td>
+            <td>{{admin.employee.employeePhoneNumber}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-lg-6 text-center pl-5">
+        <div class="row text-center">
+          <img src="{{admin.employee.employeeImage}}"
+               style="background: #dddddd; border-radius: 50%; border: 2px solid #a1a1a1; height:200px; padding: 10px; text-align: center;margin-left:auto;margin-right:auto;margin-bottom: 20px"/>
+        </div>
+        <button (click)="openDialog()" type="button" class="btn btn-success">
+          Đổi mật khẩu
+        </button>
+      </div>
+    </div>
+  </fieldset>
+</div>
