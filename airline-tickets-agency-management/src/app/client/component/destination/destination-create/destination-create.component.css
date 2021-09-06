@@ -527,43 +527,6 @@ header #check {
 
 /*#endregion*/
 
-/*#region SCROLL*/
-/*.scroll::-webkit-scrollbar {*/
-/*    width: 12px;*/
-/*}*/
-
-/*.scroll::-webkit-scrollbar-track {*/
-/*    background: white;*/
-/*}*/
-
-/*.scroll::-webkit-scrollbar-thumb {*/
-/*    background-color: #567FEA;*/
-/*    border-radius: 20px;*/
-/*    border: 3px solid white;*/
-/*}*/
-
-/*.scroll {*/
-/*    overflow: auto;*/
-
-/*}*/
-
-/*.outer {*/
-/*    overflow-y: auto;*/
-/*    height: 150px;*/
-/*    width: 100%;*/
-
-/*}*/
-
-
-/*.outer th {*/
-/*    text-align: left;*/
-/*    top: 0;*/
-/*    position: sticky;*/
-/*    background-color: #567FEA;*/
-/*}*/
-
-/*#endregion*/
-
 @media (max-width: 930px) {
   .carousel {
     position: relative;
@@ -601,8 +564,6 @@ header #check {
 
   .flights-10 .flight {
     box-sizing: border-box;
-    /*width: 20%;*/
-    /*height: 20%;*/
   }
 }
 
@@ -685,10 +646,11 @@ header #check {
   font-weight: bold;
   font-size: larger;
 }
-/*#region Test*/
 
-/*#endregion*/
-
+legend h1 {
+  font-size: large;
+  padding-top: 15px
+}
 
 
 

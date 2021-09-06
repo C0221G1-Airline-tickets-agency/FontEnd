@@ -1,1 +1,82 @@
-<p>destination-update works!</p>
+<div class="container-fluid row">
+  <div class="col-md-2 col-sm-2"></div>
+  <div class="col-md-8 col-sm-8 ml-3" style="">
+    <fieldset class="scheduler-border" style="background: white;box-shadow: 0 0 2px 2px #cccccc;">
+      <legend class="scheduler-border text-center" style="background: #e54744;height: 50px"><h1>CHỈNH SỬA ĐIỂM ĐẾN</h1></legend>
+      <br>
+      <div class="form-group col-12">
+        <div class="row input-group">
+          <div class="col-2 folow-right">Tên điểm đến :</div>
+          <div class="col-10">
+            <div class="d-flex align-items-center">
+              <input  class="form-control" type="text" value="Gia Lai">
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-2 folow-right">Mô tả :</div>
+          <div class="col-10">
+            <textarea class="form-control" rows="5" type="text"></textarea>
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-2 folow-right pr-0">Chọn ảnh chính :</div>
+          <div class="col-10">
+            <input class="btn pl-2 pr-2" type="button" style="background-color: #9fcdff" value="Chọn ảnh chính">
+            <small style="font-weight: lighter; font-style: italic; margin-left: 10px">gia-lai.png</small>
+          </div>
+        </div>
+        <br>
+        <div class="row input-group mb-4">
+          <div class="col-2 folow-right">Chọn địa danh :</div>
+          <div class="col-8">
+            <input class="btn" type="button" style="background-color: #9fcdff" value="Thêm địa danh" data-toggle="modal" data-target="#addModal">
+          </div>
+        </div>
+
+        <div>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-5">
+              <table class="table table-active table-bordered" style="margin-left: -5px">
+                <tr>
+                  <th class="p-1">STT</th>
+                  <th class="p-1">Địa danh</th>
+                  <th class="p-1" colspan="2"></th>
+                </tr>
+                <tr>
+                  <td class="p-1">1</td>
+                  <td class="p-1">Biển hồ T’ nưng</td>
+                  <td class="p-1"><a href="" style="color: green">Sửa</a></td>
+                  <td class="p-1"><a href="" style="color: red">Xóa</a></td>
+
+                </tr>
+                <tr>
+                  <td class="p-1">2</td>
+                  <td class="p-1">Núi lửa Chư Đăng Ya</td>
+                  <td class="p-1"><a href="" style="color: green">Sửa</a></td>
+                  <td class="p-1"><a href="" style="color: red">Xóa</a></td>
+                </tr>
+                <tr>
+                  <td class="p-1">3</td>
+                  <td class="p-1">Huyện Chư Sê</td>
+                  <td class="p-1"><a href="" style="color: green">Sửa</a></td>
+                  <td class="p-1"><a href="" style="color: red">Xóa</a></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end pb-3">
+          <button class="mr-5 btn btn-success" type="button"><i class="fa fa-check" aria-hidden="true"></i> Hoàn tất</button>
+          <button class="btn btn-back" style="background: #005cbf;color: white;margin-right: 33px" type="button"><i class="icon-sidebar fa fa-reply "></i>Trở về</button>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</div>
+
+

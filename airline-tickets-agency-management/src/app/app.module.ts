@@ -16,6 +16,7 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ClientModule} from './client/client.module';
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     MatDialogModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ClientModule,
+    ReactiveFormsModule
   ],
   providers: [FormBuilder, DatePipe, MatDialog, Overlay],
   bootstrap: [AppComponent]
