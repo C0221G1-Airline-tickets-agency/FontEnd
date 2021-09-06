@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  displayFlat: boolean= true;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  controlInbox() {
+    if(this.displayFlat){
+      this.displayFlat=false;
+    }else {
+      this.displayFlat=true;
+    }
+  }
+  closeBox(e:boolean) {
+    this.displayFlat=e;
   }
 
 }

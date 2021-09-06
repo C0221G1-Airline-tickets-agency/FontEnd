@@ -1,0 +1,6 @@
+<div class="area_msg row">
+  <input class="col-11" type="text"  (keydown)="handleKeyDow($event)" [(ngModel)]="msg">
+  <div class="col-1">
+    <button  style="background: #e54744;width: 40px;height: 40px;border-radius: 40px" class="btn "  (click)="sendMessage()"> <i  class="fa fa-paper-plane-o "  aria-hidden="true"></i></button>
+  </div>
+</div>
