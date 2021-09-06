@@ -11,9 +11,13 @@ const routes: Routes = [
       [
         {
           path: 'report', component: ReportComponent
+        },
+        {
+          path: 'ticket',
+          loadChildren: () => import('./component/ticket/ticket.module').then(module => module.TicketModule)
         }
       ]
-  }
+  },
 ];
 
 @NgModule({
