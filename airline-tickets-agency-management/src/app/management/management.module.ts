@@ -5,8 +5,10 @@ import { ManagementRoutingModule } from './management-routing.module';
 import { ReportComponent } from './component/report/report.component';
 import { HomeComponent } from '../client/component/home/home.component';
 import { ManagementComponent } from './management/management.component';
-import {AppModule} from '../app.module';
+
 import {CommonClientModule} from '../common/common-client/common-client.module';
+import { StatisticalComponent } from './component/statistical/statistical.component';
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 
 
@@ -15,8 +17,9 @@ import {CommonClientModule} from '../common/common-client/common-client.module';
     CommonModule,
     ManagementRoutingModule,
     CommonClientModule,
+    NgApexchartsModule
   ],
-  declarations: [ReportComponent, HomeComponent, ManagementComponent],
+  declarations: [ReportComponent, HomeComponent, ManagementComponent, StatisticalComponent],
   bootstrap: [ManagementComponent]
 })
 export class ManagementModule { }

@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {ReportComponent} from './component/report/report.component';
 import {ManagementComponent} from './management/management.component';
+import {StatisticalComponent} from './component/statistical/statistical.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,9 @@ const routes: Routes = [
       [
         {
           path: 'report', component: ReportComponent
+        },
+        {
+          path: 'statistical', component: StatisticalComponent
         }
       ]
   }

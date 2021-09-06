@@ -1,1 +1,79 @@
-<p>abc</p>
+<div>
+  <h1 class="d-flex justify-content-center">Thống kê báo cáo</h1>
+  <div>
+    <div class="bg1">
+      <div class="d-flex justify-content-center title">
+        <h3>Báo cáo</h3>
+      </div>
+      <div class="main">
+        <div class="row">
+          <div class="col-7">
+            <form action="/action_page.php">
+              <div class="d-flex my-3">
+                <label class="m-3">Chọn kiểu: </label><br>
+                <select class="mx-3">
+                  <option>Hình tròn</option>
+                  <option>Hình cột</option>
+                  <option>Hình đường</option>
+                </select>
+              </div>
+              <div class="d-flex my-3">
+                <label class="m-3">Chọn loại: </label><br>
+                <select class="mx-3">
+                  <option>Doanh thu</option>
+                  <option>Top nhân viên</option>
+                  <option>Top hãng hàng không</option>
+                </select>
+              </div>
+              <div class="d-flex">
+                  <input type="radio" name="datetime"
+                         class="my-4">
+                 <label class="m-3">Thời gian: </label>
+                <select>
+                  <option>Tuần này</option>
+                  <option>Tháng này</option>
+                  <option>Năm này</option>
+                </select>
+              </div>
+              <div class="d-flex">
+                  <input type="radio" name="datetime">
+                <label class="m-3">Từ ngày:</label>
+                <input type="date" class="w">
+                <label class="m-3">Đến ngày:</label>
+                <input id="today2" type="date">
+              </div>
+                <label>So sánh với</label>
+              <div class="d-flex">
+                <input type="radio" class="my-4" name="fav_language">
+                  <label class="m-3">Thời gian: </label>
+                <select>
+                  <option>Tuần trước</option>
+                  <option>Tháng trước</option>
+                  <option>Năm trước</option>
+                </select>
+              </div>
+              <div class="d-flex">
+                <input type="radio" name="fav_language" value="JavaScript" class="my-4">
+                <label class="m-3">Từ ngày:</label>
+                <input type="date" class="w">
+                <label class="m-3">Đến ngày:</label>
+                <input id="today" type="date">
+              </div>
+              <button class="bt btn bn-search my-5"><i class="fa fa-search"
+                                                       aria-hidden="true"></i>
+                xem
+              </button>
+            </form>
+          </div>
+          <div class="col-5">
+            <img src="./assets/img/bieu-do-tron-1024x530.jpg" height="175" width="350"/>
+
+            <img src="./assets/img/bieu-do-histogram-1024x482.jpg" height="175" width="350"/>
+
+            <img src="./assets/img/chart-line.png" height="175" width="350"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
