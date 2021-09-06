@@ -8,11 +8,13 @@ import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 
 import {ClientComponent} from './client/client.component';
 import {CommonClientModule} from '../common/common-client/common-client.module';
+import { DestinationCreateComponent } from './component/destination/destination-create/destination-create.component';
+import { DestinationUpdateComponent } from './component/destination/destination-update/destination-update.component';
 
 
 
 @NgModule({
-  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent],
+  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, DestinationCreateComponent, DestinationUpdateComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,

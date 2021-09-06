@@ -5,6 +5,8 @@ import {ManagementComponent} from '../management/management/management.component
 import {ReportComponent} from '../management/component/report/report.component';
 import {ClientComponent} from './client/client.component';
 import {HomeComponent} from './component/home/home.component';
+import {DestinationCreateComponent} from './component/destination/destination-create/destination-create.component';
+import {DestinationUpdateComponent} from './component/destination/destination-update/destination-update.component';
 
 
 const routes: Routes = [
@@ -17,6 +19,12 @@ const routes: Routes = [
         },
         {
           path: 'news/manipulation', component: NewsManipulationComponent
+        },
+        {
+          path: 'destination/create-destination', component: DestinationCreateComponent
+        },
+        {
+          path: 'destination/edit-destination', component: DestinationUpdateComponent
         }
       ]
   }
