@@ -14,6 +14,7 @@ import { PassengerInformationComponent } from './component/flight-ticket/buy-tic
 
 import { FlightListComponent } from './component/flight-ticket/flight-management/flight-list/flight-list.component';
 import { DialogDeleteComponent } from './component/flight-ticket/flight-management/dialog-delete/dialog-delete.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -26,7 +27,8 @@ import { DialogDeleteComponent } from './component/flight-ticket/flight-manageme
     CommonModule,
     ClientRoutingModule,
     ReactiveFormsModule,
-    CommonClientModule
+    CommonClientModule,
+    MatDialogModule
   ],
   bootstrap: [ClientComponent]
 })
