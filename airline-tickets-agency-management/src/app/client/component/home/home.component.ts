@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CheapestTicket} from '../../../model/home/cheapest-ticket';
 import {TicketHomeService} from '../../../service/home/ticket-home.service';
 import {formatDate} from '@angular/common';
 import {Location} from '../../../model/home/location';
+import {SearchTicket} from '../../../model/home/search-ticket';
+import {Router} from '@angular/router';
+
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-home',
@@ -25,8 +29,10 @@ export class HomeComponent implements OnInit {
   // Chức năng
   locationList: Location[] = [];
   top10cheapestFlight: CheapestTicket[] = [];
+  searchTicket: SearchTicket;
 
-  constructor(private ticketHomeService: TicketHomeService) {
+  constructor(private ticketHomeService: TicketHomeService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -144,16 +150,24 @@ export class HomeComponent implements OnInit {
 
   //#endregion
 
-  searchTicket() {
-    if (this.isTwoWay && (!this.locationTo || !this.locationFrom || !this.endTime)) {
-      alert('Lỗi');
+  getSearchTicket() {
+    if ((this.isTwoWay && (!this.locationTo || !this.locationFrom || !this.endTime)) ||
+      (!this.isTwoWay && (!this.locationTo || !this.locationFrom))) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Xảy ra lỗi',
+        text: 'Vui lòng điền đầy đủ thông tin!'
+      });
+      return;
     }
-    if (!this.isTwoWay && (!this.locationTo || !this.locationFrom)) {
-      alert('Lỗi');
-    }
-    // Thực hiện search vé ơ đây
-
-
+    this.searchTicket = {
+      locationTo: this.locationTo,
+      locationFrom: this.locationFrom,
+      departureTime: this.departureTime,
+      endTime: this.endTime,
+      passenger: this.adults + ',' + this.children + ',' + this.baby
+    };
+    this.router.navigateByUrl('/test', {state: this.searchTicket});
   }
 
   chosenFlight(flightId: number) {

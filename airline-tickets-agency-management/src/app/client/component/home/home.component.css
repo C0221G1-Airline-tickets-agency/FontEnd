@@ -149,6 +149,9 @@
 .flight:hover .location {
   color: white;
 }
+.flight:hover img {
+  filter: drop-shadow(0 0 8px yellow);
+}
 /*#endregion*/
 
 /*#region SCROLL*/

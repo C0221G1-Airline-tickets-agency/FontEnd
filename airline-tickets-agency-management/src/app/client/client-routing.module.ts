@@ -5,6 +5,7 @@ import {ManagementComponent} from '../management/management/management.component
 import {ReportComponent} from '../management/component/report/report.component';
 import {ClientComponent} from './client/client.component';
 import {HomeComponent} from './component/home/home.component';
+import {TestComponent} from './component/test/test.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,9 @@ const routes: Routes = [
         },
         {
           path: 'news/manipulation', component: NewsManipulationComponent
+        },
+        {
+          path: 'test', component: TestComponent
         }
       ]
   }
