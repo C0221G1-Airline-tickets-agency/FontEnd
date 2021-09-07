@@ -8,7 +8,7 @@
         </div>
         <div class="col-4 px-0 ">
           <select id="searchType" class="form-control" (change)="changeTypeSearch($event.target)">
-            <option value=""  disabled selected>Vui lòng chọn</option>
+            <option value="" disabled selected>Vui lòng chọn</option>
             <option value="employee_code">Mã nhân viên</option>
             <option value="employee_name">Họ Tên</option>
             <option value="employee_birthday">Ngày sinh</option>
@@ -38,8 +38,8 @@
     </div>
   </div>
   <div>
-    <h2 class="text-center" *ngIf="isFail">Không tìm thấy dữ liệu</h2>
-    <table *ngIf="!isFail" id="nam-dep-trai-vu-tru3" class="table table-striped table-bordered">
+
+    <table id="nam-dep-trai-vu-tru3" class="table table-striped table-bordered">
       <thead class="thead text-center">
       <tr>
         <th>#</th>
@@ -53,6 +53,7 @@
       </tr>
       </thead>
       <tbody>
+      <tr *ngIf="isFail"><td class="text-center" colspan="8">Không tìm thấy dữ liệu</td></tr>
       <tr *ngFor="let i of employees;index as j" [style]="i.employeeId==employeeIdChoice?'background: #f3b4ad': ''"
           (click)="getEmployeeDelete(i.employeeId,i.employeeName)">
         <td>{{j + page * 5 + 1}}</td>
