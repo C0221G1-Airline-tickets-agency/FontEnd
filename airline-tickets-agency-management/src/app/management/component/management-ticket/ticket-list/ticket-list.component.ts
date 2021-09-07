@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Ticket} from '../../../../model/flight-ticket/ticket';
 import {TicketService} from '../../../../service/ticket.service';
 import {MatDialog} from '@angular/material/dialog';
+import {TicketEditComponent} from "../ticket-edit/ticket-edit.component";
+import {TicketPrintComponent} from "../ticket-print/ticket-print.component";
 
 
 @Component({
@@ -48,22 +50,22 @@ export class TicketListComponent implements OnInit {
     if (this.ticketColor == null) {
       alert('vui lòng chọn trường muốn sửa.');
     } else {
-      // const dialogRef = this.dialog.open(TicketEditComponent, {
-      //   width: '600px',
-      //   data: this.ticket
-      // });
+      const dialogRef = this.dialog.open(TicketEditComponent, {
+        width: '600px',
+        data: this.ticket
+      });
     }
   }
   //
   onPrintHandler(): void {
-  //   if (this.ticketColor == null) {
-  //     alert('vui lòng chọn trường muốn in.');
-  //   } else {
-  //     const dialogRef = this.dialog.open(TicketPrintComponent, {
-  //       width: '900px',
-  //       data: this.ticket
-  //     });
-  //   }
+    if (this.ticketColor == null) {
+      alert('vui lòng chọn trường muốn in.');
+    } else {
+      const dialogRef = this.dialog.open(TicketPrintComponent, {
+        width: '900px',
+        data: this.ticket
+      });
+    }
   }
 
 }

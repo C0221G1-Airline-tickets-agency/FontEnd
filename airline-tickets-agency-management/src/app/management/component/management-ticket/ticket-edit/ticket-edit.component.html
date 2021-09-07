@@ -1,0 +1,90 @@
+<div class="scheduler-border d-flex justify-content-center align-items-center"
+     style="background: #e54744;height: 50px;color: white">
+  <h2>Thay đổi thông tin vé</h2>
+</div>
+<br>
+<form action="" class="form-group col-12" [formGroup]="editForm" (ngSubmit)="update()">
+  <input type="hidden" formControlName="ticketId">
+  <div class="row input-group">
+    <div class="col-3 folow-right">
+      <span>Mã đặt chổ</span>
+    </div>
+    <div class="col-8">
+      <div class="d-flex align-items-center">
+        <input readonly class="form-control" type="text" formControlName="ticketCode">
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row input-group">
+    <div class="col-3 folow-right">
+      <span>Họ và tên <label>(<label style="color: red">*</label>)</label></span>
+    </div>
+    <div class="col-8">
+      <input class="form-control" type="text" formControlName="passengerName">
+      <!--        <small style="color: red">Tên khách hàng không được để trống.</small>-->
+    </div>
+  </div>
+  <br>
+  <div class="row input-group">
+    <div class="col-3 folow-right">
+      <span>Điểm đi</span>
+    </div>
+    <div class="col-8">
+      <input readonly type="text" class="form-control" formControlName="locationTo">
+    </div>
+  </div>
+  <br>
+  <div class="row input-group">
+    <div class="col-3 folow-right">
+      <span>Điểm đến</span>
+    </div>
+    <div class="col-8">
+      <input readonly type="text" class="form-control" formControlName="locationFrom">
+    </div>
+  </div>
+  <br>
+  <div class="row input-group">
+    <div class="col-3 folow-right">
+      <span>Ngày Đi</span>
+    </div>
+    <div class="col-8">
+      <input readonly class="form-control" type="text" formControlName="flightDate">
+    </div>
+  </div>
+  <br>
+  <div class="row input-group">
+    <div class="col-3 folow-right">
+      <span>Giá vé</span>
+    </div>
+    <div class="col-8">
+      <input readonly class="form-control" type="text" formControlName="price">
+
+    </div>
+  </div>
+  <br>
+  <div class="row input-group">
+    <div class="col-3 folow-right">
+      <span>Email <label>(<label style="color: red">*</label>)</label></span>
+    </div>
+    <div class="col-8">
+      <input class="form-control" type="email" formControlName="passengerEmail">
+      <!--        <small style="color: red">Email này không được để trống.</small><br>-->
+      <!--        <small style="color: red">Sai định dạng email.</small>-->
+    </div>
+  </div>
+  <br>
+
+
+  <div class=" justify-content-end pb-3">
+    <button style="margin-left: 170px" class="btn btn-success" type="submit"(click)="dialogRef.close(true)">
+      <i class="fa fa-check" aria-hidden="true" ></i> Hoàn tất
+    </button>
+    <button class="btn btn-back" style="background: #005cbf;color: white;margin-left: 10px"
+            type="button" (click)="dialogRef.close(false)" data-dismiss="modal">
+      <i class="icon-sidebar fa fa-reply "></i>
+      Trở về
+    </button>
+  </div>
+</form>
+
