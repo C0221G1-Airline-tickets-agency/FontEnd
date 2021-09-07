@@ -1,13 +1,14 @@
 <div class="sub-main">
   <div class="d-flex justify-content-center py-4">
-    <h2 class="col-4">Quản lý bán vé</h2>
-    <div class="col-8">
+    <h2 class="col-3">Quản lý bán vé</h2>
+    <div class="col-9">
+      <form  [formGroup]="formSearch" (ngSubmit)="searchTicket()">
       <div class="d-flex justify-content-end">
         <div class="col-4 px-0 d-flex justify-content-end pl-3">
           <label class="search-text">Tìm kiếm theo</label>
         </div>
         <div class="col-3 px-0 pl-3">
-          <select class="form-control" (change)="selectFilter($event.target)">
+          <select class="form-control" formControlName="filter">
             <option value="0">Tên người đi</option>
             <option value="1">Mã đặt chỗ</option>
             <option  value="2">Tuyến bay</option>
@@ -15,15 +16,16 @@
           </select>
         </div>
         <div class="col-3 px-0 pl-3 mr-1">
-          <input [type]="filerType == 3 ? 'date': 'text'"   placeholder="Tìm kiếm..." style="border: 1px solid ; outline: none"
-                 class="form-control" formControl="keySearch">
+          <input id="inputSearch" [type]="formSearch.get('filter').value == 3 ? 'date': 'text'"   placeholder="Tìm kiếm..." style="border: 1px solid ; outline: none"
+                 class="form-control" formControlName="key">
         </div>
         <div class="col-2 px-0 d-flex justify-content-end">
-          <button class="btn btn-print text-light" (click)="searchTicket()"><i
+          <button class="btn btn-print text-light" style="margin-right: 1px" type="submit"><i
             class="fa fa-search "></i> Tìm kiếm
           </button>
         </div>
       </div>
+      </form>
     </div>
   </div>
   <div class="mx-3">
@@ -39,31 +41,49 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let t of tickets, let i = index">
-        <td>{{i+1}}</td>
-        <td>{{t.passengerName}}</td>
-        <td>{{t.chairName}}</td>
-        <td>{{t.flight.locationFrom.cityName + " - " + t.flight.locationTo.cityName}} </td>
-        <td>{{t.ticketPrice}}</td>
-      </tr>
+      <ng-container *ngIf="tickets.length > 0">
+        <tr *ngFor="let t of tickets, let i = index" (click)="getTicketId(t.ticketId); ; getPres(t)"  [class.selected]="err? null: t.ticketId === idSelect">
+          <td>{{i+1}}</td>
+          <td>{{t.passengerName}}</td>
+          <td>{{t.chairName}}</td>
+          <td>{{t.flight.locationFrom.cityName + " - " + t.flight.locationTo.cityName}} </td>
+          <td>{{t.flight.flightDate | date : "dd/MM/yyyy"}}</td>
+          <td>{{t.ticketPrice | currency : "VND" : ""}}</td>
+        </tr>
+<!--        <ng-container *ngFor="let row of rows">-->
+<!--          <tr *ngIf="row > tickets.length">-->
+<!--            <td></td>-->
+<!--            <td></td>-->
+<!--            <td></td>-->
+<!--            <td></td>-->
+<!--            <td></td>-->
+<!--            <td></td>-->
+<!--          </tr>-->
+<!--        </ng-container>-->
+      </ng-container>
+      <ng-container *ngIf="tickets.length ==0">
+        <tr>
+          <td colspan="6" style="color:red;text-align: center">Không có dữ liệu</td>
+        </tr>
+      </ng-container>
       </tbody>
     </table>
   </div>
-  <!--  <div class="d-flex justify-content-end pt-1 pb-2 mx-3">-->
-  <!--    <nav aria-label="Page navigation example">-->
-  <!--      <ul class="pagination">-->
-  <!--        <li class="page-item"><a class="page-link" (click)="previous()" *ngIf="page">Trước</a></li>-->
-  <!--        <li class="page-item" *ngFor="let p of pages; let i=index"><a class="page-link" (click)="setPage(i)" [style]="(page == i) ? 'background: #63B8FF; color: white': ''">{{i+1}}</a></li>-->
-  <!--        <li class="page-item"><a class="page-link" (click)="next()" *ngIf="page<pages.length-1">Sau</a></li>-->
-  <!--      </ul>-->
-  <!--    </nav>-->
-  <!--  </div>-->
+    <div class="d-flex justify-content-end pt-1 pb-2 mx-3">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" (click)="previous()" >Trước</a></li>
+          <li class="page-item" *ngFor="let p of pages; let i=index"><a class="page-link" (click)="setPage(i)" [style]="(page == i) ? 'background: #63B8FF; color: white': ''">{{i+1}}</a></li>
+          <li class="page-item"><a class="page-link" (click)="next()" >Sau</a></li>
+        </ul>
+      </nav>
+    </div>
   <div class="d-flex justify-content-end  pb-4">
     <div class="row mx-3">
       <button class="btn btn-search mr-3 " type="button"><i class="fa fa-plus"></i> Nhập vé
       </button>
       <button class="mr-3 btn btn-edit" type="button"><i class="fa fa-edit"></i> Sửa</button>
-      <button class="mr-3 btn btn-delete" type="button" (click)="clickDelete()"><i class="fa fa-trash"></i> Xóa
+      <button class="mr-3 btn btn-delete" type="button" (click)="deleteTicket()"><i class="fa fa-trash"></i> Xóa
       </button>
       <button class="mr-3 btn btn-print" type="button"><i class="fa fa-print"></i> In vé
       </button>
