@@ -23,5 +23,5 @@ export interface Ticket {
   passengerEmail?: string;
   flight ?: Flight;
   ticketStatus ?: TicketStatus;
-  customer?: String;
+  user?: String;
 }

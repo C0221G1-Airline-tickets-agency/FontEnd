@@ -1,0 +1,81 @@
+<div id="content" class="container mb-5 sub-main my-5 ">
+  <div class=" pt-4 mt-3  mb-4 justify-content-between">
+    <div class="row" style="width: 1200px">
+      <div class="col-12 col-md-12 col-sm-12">
+        <h2 class=" pb-2 " style="font-size: 30px;font-weight: bold">Quản lý chuyến bay</h2>
+      </div>
+    </div>
+    <!--                <div class="row mt-2 justify-content-end " style="width: 1125px">-->
+    <div class="d-flex justify-content-end mr-4">
+      <label class="font-weight-bold search-text pr-2">Tìm kiếm theo </label>
+      <select class="select-field select-witch" style="height: 30px; margin-right: 10px" >
+        <option class="option" disabled selected>--Mời chọn--</option>
+        <option class="option">Mã chuyến bay</option>
+        <option class="option">Ngày khởi hành</option>
+        <option class="option">Loại chuyến bay</option>
+        <option class="option">Giá tiền</option>
+      </select>
+      <div  class="pl-4 row ">
+        <input  type="text" placeholder="Tìm kiếm" style="border: 1px solid ; width: 200px; outline: none"  class=" input-search select-witch ">
+        <button class=" btn btn-search  ml-3" style="height: 30px"><i class=" fa fa-search "></i> Xem</button>
+      </div>
+
+    </div>
+
+    <!--                </div>-->
+  </div>
+  <div class="" style="overflow-x: auto">
+    <table class="table table-striped   table-bordered">
+      <thead class="thead">
+      <tr>
+        <th style="width: 5%">STT</th>
+        <th style="width: 10%">Hãng</th>
+        <th style="width: 10%">Mã chuyến bay</th>
+        <!--                        <th style="width: 12.5%">Loại chuyến bay</th>-->
+        <th style="width: 10%">Giờ khởi hành</th>
+        <th style="width: 12%">Giá</th>
+        <th style="width: 10%">Điểm đi</th>
+        <th style="width: 10%">Điểm đến</th>
+        <th style="width: 10%">Thời gian</th>
+        <!--                        <th style="width: 14.5%">Số lượng hành khách</th>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let flightObj of flights; let i = index" (click)= "deleteById(flightObj.flightId)" (click) = "onSelect(flightObj)" [class.selected] = "error ? null : flightObj === selectedObj" >
+        <td>{{i + 1}}</td>
+        <td>{{flightObj.airline.airlineName}}</td>
+        <td>{{flightObj.flightCode}}</td>
+        <!--                        <td>Chiều đi</td>-->
+        <td>{{flightObj.departureTime}} - {{flightObj.endTime}}</td>
+        <td>{{flightObj.flightPrice}}</td>
+        <td>{{flightObj.locationTo.cityName}}</td>
+        <td>{{flightObj.locationFrom.cityName}}</td>
+        <td>{{flightObj.flightDate | date :"dd/MM/yyyy"}}</td>
+        <!--                        <td>600</td>-->
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="d-flex justify-content-end pt-1 pb-2">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Đầu</a></li>
+        <li class="page-item"><a class="page-link" href="#">Trước</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">...</a></li>
+        <li class="page-item"><a class="page-link" href="#">20</a></li>
+        <li class="page-item"><a class="page-link" href="#">Sau</a></li>
+        <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="d-flex justify-content-end  pb-3">
+    <button class="btn btn-search mr-3 fa fa-plus" type="submit" > Thêm </button>
+    <button class="mr-3 btn btn-print" type="button" data-toggle="modal" data-target="#exampleModal1" ><i class="fa fa-edit"></i> Sửa </button>
+    <button class="mr-3 btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal2" (click)="deleteFlight()" ><i class="fa fa-trash"></i> Xóa  </button>
+    <button class="btn btn-return" type="button"  data-toggle="modal" data-target="#exampleModal3"><i class="fa fa-reply"></i> Trở về </button>
+  </div>
+</div>
+

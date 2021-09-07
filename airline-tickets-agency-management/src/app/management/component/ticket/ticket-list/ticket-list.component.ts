@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Ticket} from "../../../../model/flight-ticket/ticket";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {TicketService} from "../../../../service/ticket/ticket.service";
+import {TicketService} from "../../../../service/flight-ticket/ticket/ticket.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ToastrService} from "ngx-toastr";
 import Swal from 'sweetalert2';
@@ -87,7 +87,7 @@ export class TicketListComponent implements OnInit {
           '                    <p>Mã đặt chỗ: ' + this.ticket.chairName + '&emsp;&emsp;&emsp;&emsp;&emsp;Họ tên: ' + this.ticket.passengerName + '</p>\n' +
           '                    <p>Chuyến bay: ' + this.ticket.flight.locationFrom.cityName + ' - ' + this.ticket.flight.locationTo.cityName + '</p>\n' +
           '                    <p>Ngày: ' + this.formatDate(this.ticket.flight.flightDate) + '</p>\n' +
-          '                    <p>Giá: ' + this.ticket.ticketPrice + '</p>',
+          '                    <p>Giá: ' + this.formatter.format(this.ticket.ticketPrice+(this.ticket.ticketPrice*this.ticket.ticketTypePrice)+this.ticket.plusBaggage+(this.ticket.ticketPrice*this.ticket.tax)-(this.ticket.ticketPrice*this.ticket.passengerTypePrice))+ '</p>',
         showCancelButton: true,
         confirmButtonText: '<i class="fa fa-trash-o"></i> Xóa',
         confirmButtonColor: '#dc3545',
@@ -134,4 +134,8 @@ export class TicketListComponent implements OnInit {
   formatDate(date: string): string {
     return this.datePipe.transform(date, 'dd/MM/yyyy')
   }
+  formatter = new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'VND',
+  });
 }

@@ -48,7 +48,7 @@
           <td>{{t.chairName}}</td>
           <td>{{t.flight.locationFrom.cityName + " - " + t.flight.locationTo.cityName}} </td>
           <td>{{t.flight.flightDate | date : "dd/MM/yyyy"}}</td>
-          <td>{{t.ticketPrice | currency : "VND" : ""}}</td>
+          <td>{{t.ticketPrice+(t.ticketPrice*t.ticketTypePrice)+t.plusBaggage+(t.ticketPrice*t.tax)-(t.ticketPrice*t.passengerTypePrice) | currency : "VND" : ""}}</td>
         </tr>
 <!--        <ng-container *ngFor="let row of rows">-->
 <!--          <tr *ngIf="row > tickets.length">-->
