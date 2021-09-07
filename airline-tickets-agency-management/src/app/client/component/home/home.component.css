@@ -211,10 +211,6 @@
 }
 
 @media (max-width: 550px) {
-  #carouselExampleIndicators {
-    margin-top: 80px;
-  }
-
   .carousel-indicators {
     margin-bottom: 10px !important;
   }
