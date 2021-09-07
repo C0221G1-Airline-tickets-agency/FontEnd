@@ -1,12 +1,11 @@
-import {Flight} from "./flight";
-import {TicketStatus} from "./ticket-status";
-import {Customer} from "./customer";
+import {Flight} from './flight';
+import {TicketStatus} from './ticket-status';
 
 export interface Ticket {
   ticketId?: number;
   ticketCode?: string;
   plusBaby?: boolean;
-  plusBaggage?: string;
+  plusBaggage?: number;
   ticketType?: string;
   ticketTypePrice?: number;
   ticketPrice?: number;
@@ -22,8 +21,7 @@ export interface Ticket {
   passengerPhone?: string;
   passengerIdCard?: string;
   passengerEmail?: string;
-  flag?: boolean;
   flight?: Flight;
   ticketStatus?: TicketStatus;
-  customer?: Customer;
+  user?: string;
 }

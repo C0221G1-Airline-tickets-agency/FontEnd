@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Ticket} from '../../../../model/flight-ticket/ticket';
-import {TicketService} from '../../../../service/ticket.service';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {TicketService} from '../../../../service/flight-ticket/ticket/ticket.service';
 import {MatDialog} from '@angular/material/dialog';
-import {TicketEditComponent} from "../ticket-edit/ticket-edit.component";
-import {TicketPrintComponent} from "../ticket-print/ticket-print.component";
-import {Toast, ToastrService} from "ngx-toastr";
-
+import {ToastrService} from 'ngx-toastr';
+import Swal from 'sweetalert2';
+import {DatePipe} from '@angular/common';
+import {TicketEditComponent} from '../ticket-edit/ticket-edit.component';
+import {TicketPrintComponent} from '../ticket-print/ticket-print.component';
 
 @Component({
   selector: 'app-ticket-list',
@@ -14,43 +16,136 @@ import {Toast, ToastrService} from "ngx-toastr";
 })
 export class TicketListComponent implements OnInit {
 
-  tickets: Ticket[];
-  ticket: Ticket;
-  ticketColor: number;
-  err = true;
-
   constructor(private ticketService: TicketService,
               private dialog: MatDialog,
-              private toast: ToastrService) {
+              private fb: FormBuilder,
+              private datePipe: DatePipe,
+              private toastr: ToastrService) {
   }
+  tickets: Ticket[] = [];
+  pages: Array<any> = [];
+  page = 0;
+  filerType = 0;
+  keySearch = '';
+  idSelect: number;
+  ticket: Ticket;
+  err = true;
+  formSearch: FormGroup;
+  formatter = new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'VND',
+  });
 
   ngOnInit(): void {
-    this.getAll();
+    this.getListTicket();
+    this.createForm();
   }
 
-  getAll() {
-    this.ticketService.getAll().subscribe(next => {
-      this.tickets = next;
+  getListTicket() {
+    this.ticketService.findTicketsByFilter(this.filerType, this.keySearch, this.page).subscribe(data => {
+      if (data == null) {
+        this.tickets = [];
+        this.pages = new Array<any>();
+      } else {
+        this.tickets = data.content;
+        this.pages = new Array<any>(data.totalPages);
+      }
     });
   }
 
-  ticketId(ticketId: number) {
-    this.err = !this.err;
-    if (this.err === false) {
-      this.ticketColor = ticketId;
+  createForm() {
+    this.formSearch = this.fb.group({
+      filter: new FormControl(0),
+      key: new FormControl()
+    });
+  }
 
+  previous() {
+    if (this.page === 0) {
+      this.toastr.error('Không tìm thấy trang !', 'Cảnh báo : ');
     } else {
-      this.ticketColor = null;
+      this.page = this.page - 1;
+      this.getListTicket();
     }
   }
 
-  ticketObj(t: Ticket) {
+  next() {
+    if (this.page > this.pages.length - 2) {
+      this.toastr.error('Không tìm thấy trang !', 'Cảnh báo : ');
+    } else {
+      this.page = this.page + 1;
+      this.getListTicket();
+    }
+  }
+
+  setPage(i: number) {
+    this.page = i;
+    this.getListTicket();
+  }
+
+  deleteTicket() {
+    if (this.idSelect == null) {
+
+    } else {
+      Swal.fire({
+        title: 'Xóa vé?',
+        html: '<p style="color: red">Bạn có chắc chắn muốn xóa vé có :</p>\n' +
+          // tslint:disable-next-line:max-line-length
+          '                    <p>Mã đặt chỗ: ' + this.ticket.chairName + '&emsp;&emsp;&emsp;&emsp;&emsp;Họ tên: ' + this.ticket.passengerName + '</p>\n' +
+          // tslint:disable-next-line:max-line-length
+          '                    <p>Chuyến bay: ' + this.ticket.flight.locationFrom.cityName + ' - ' + this.ticket.flight.locationTo.cityName + '</p>\n' +
+          '                    <p>Ngày: ' + this.formatDate(this.ticket.flight.flightDate) + '</p>\n' +
+          // tslint:disable-next-line:max-line-length
+          '                    <p>Giá: ' + this.formatter.format(this.ticket.ticketPrice + (this.ticket.ticketPrice * this.ticket.ticketTypePrice) + this.ticket.plusBaggage + (this.ticket.ticketPrice * this.ticket.tax) - (this.ticket.ticketPrice * this.ticket.passengerTypePrice)) + '</p>',
+        showCancelButton: true,
+        confirmButtonText: '<i class="fa fa-trash-o"></i> Xóa',
+        confirmButtonColor: '#dc3545',
+        cancelButtonText: '<i class="fa fa-reply"></i> Trở về',
+        cancelButtonColor: '#0062D2'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.ticketService.deleteTicketById(this.idSelect).subscribe(() => {
+            this.toastr.success('Xóa vé thành công', 'Thông báo : ');
+          }, error => {
+            this.toastr.error('Xóa vé thất bại', 'Cảnh báo : ');
+          }, () => {
+            this.idSelect = null;
+            this.ticket = null;
+            this.getListTicket();
+          });
+        }
+      });
+    }
+  }
+
+  searchTicket() {
+    this.keySearch = this.formSearch.get('key').value;
+    this.filerType = this.formSearch.get('filter').value;
+    this.page = 0;
+    this.getListTicket();
+    this.toastr.success('Tìm kiếm thành công', 'Thông báo : ');
+  }
+
+  getPres(t: Ticket) {
     this.ticket = t;
   }
 
+  getTicketId(ticketId: number) {
+    this.err = !this.err;
+    if (this.err === false) {
+      this.idSelect = ticketId;
+
+    } else {
+      this.idSelect = null;
+    }
+  }
+
+  formatDate(date: string): string {
+    return this.datePipe.transform(date, 'dd/MM/yyyy');
+  }
   onEditHandler(): void {
-    if (this.ticketColor == null) {
-      this.toast.error('Vui lòng chọ trường muốn sửa!!!', 'Cảnh báo');
+    if (this.idSelect == null) {
+      this.toastr.error('Vui lòng chọ trường muốn sửa!!!', 'Cảnh báo');
     } else {
       const dialogRef = this.dialog.open(TicketEditComponent, {
         width: '600px',
@@ -61,8 +156,8 @@ export class TicketListComponent implements OnInit {
 
   //
   onPrintHandler(): void {
-    if (this.ticketColor == null) {
-      this.toast.error('Vui lòng chọ trường muốn sửa!!!', 'Cảnh báo');
+    if (this.idSelect == null) {
+      this.toastr.error('Vui lòng chọ trường muốn sửa!!!', 'Cảnh báo');
     } else {
       const dialogRef = this.dialog.open(TicketPrintComponent, {
         width: '900px',

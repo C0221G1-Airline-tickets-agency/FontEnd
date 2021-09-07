@@ -9,7 +9,7 @@ import {AppModule} from '../app.module';
 import {CommonClientModule} from '../common/common-client/common-client.module';
 import { TicketListComponent } from './component/management-ticket/ticket-list/ticket-list.component';
 import { TicketEditComponent } from './component/management-ticket/ticket-edit/ticket-edit.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from '@angular/forms';
 import { TicketPrintComponent } from './component/management-ticket/ticket-print/ticket-print.component';
 
 

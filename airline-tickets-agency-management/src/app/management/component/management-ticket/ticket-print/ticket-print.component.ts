@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {TicketService} from '../../../../service/ticket.service';
+import {TicketService} from '../../../../service/flight-ticket/ticket/ticket.service';
 import * as jspdf from 'jspdf';
 import * as html2canvas from 'html2canvas';
 import {element} from 'protractor';
