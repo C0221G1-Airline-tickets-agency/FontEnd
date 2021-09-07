@@ -1,0 +1,148 @@
+.text-center {
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 0 2px #5f6062;
+  background-color: #aaaaaa;
+}
+
+
+.select{
+  width: 100px;
+}
+.select-witch{
+  width: 150px!important;
+  height: 36px !important;
+}
+
+
+.icon{
+  padding: 10px 10px 0 0;
+}
+
+/*bảng*/
+
+table {
+  background-color: white;
+}
+.thead{
+  background-color: #fe8f83;
+  /*background-color: #cccccc;*/
+  /*background-color: #b09eef;*/
+  color: black;
+
+}
+th{
+  text-align: center;
+}
+
+.choose-row{
+  background-color: #f3b4ad;
+}
+
+.sub-main{
+  font-size: 14px;
+  box-shadow: 0 0 2px 2px #cccccc;
+  /*background-image: url("./image/half-opacity-pink-smallsize.png") ;*/
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: white;
+}
+
+i{
+  padding-bottom: 6px;
+}
+.pointer {cursor: pointer;}
+i:hover {
+  pointer-events: fill;
+}
+/*.search-form{*/
+/*    width: 50%;*/
+
+/*}*/
+
+.select-field{
+  height: 30px;
+  border-radius: 5px;
+
+}
+.option{
+  border-radius: 5px;
+}
+
+.input-search{
+  border-radius: 5px;
+  height: 30px;
+  outline: none;
+  /*padding-left: 15px;*/
+
+}
+
+/*button*/
+
+.btn{
+  min-width: 90px;
+  height: 38px;
+}
+
+/*.button-search{*/
+/*    margin-bottom: 5px;*/
+/*}*/
+
+.search-text{
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+
+.btn-delete{
+  background-color: #dc3545;
+  color: white;
+}
+.btn-delete:hover{
+  color: black;
+}
+.btn-edit {
+  background-color: #567FEA;
+  color: white;
+}
+
+.btn-edit:hover{
+  color: black;
+  background-color: rgba(86,127,234,0.8) ;
+}
+
+
+.btn-return{
+  background-color: #0062D2;
+  color: white;
+}
+
+
+.btn-print {
+  background-color: #18AEFF;
+  color: white;
+}
+
+.btn-print:hover{
+  color: black!important;
+}
+.btn-search {
+  background-color: #F58317;
+  color: white;
+
+}
+.select-field{
+  width: 25%;
+}
+
+.search{
+  width: 70%;
+}
+.selected {
+  background: #f3b4ad !important;
+  color: white;
+}
+td{
+  height: 46px!important;
+  text-align: center!important;
+}

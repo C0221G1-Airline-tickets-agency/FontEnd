@@ -3,4 +3,5 @@ export interface Location {
   cityName?: string;
   airportName?: string;
   areaCode?: string;
+
 }
