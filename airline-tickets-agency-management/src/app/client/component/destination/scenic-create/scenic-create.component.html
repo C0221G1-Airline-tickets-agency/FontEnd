@@ -1,0 +1,38 @@
+<div>
+  <div class="addScient"> <h5 style="padding-top: 10px">THÊM ĐỊA DANH</h5></div>
+  <div style="margin-bottom: -13px">
+    <form class="form-group" [formGroup]="scenicForm" (ngSubmit)="submit()">
+      <div class="row input-group">
+        <div class="col-4 folow-right">Tên địa danh :</div>
+        <div class="col-8">
+          <div class="d-flex align-items-center">
+            <input formControlName="scenicName" name="scenicName" class="form-control" type="text" value="Gia Lai">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row input-group">
+        <div class="col-4 folow-right">Mô tả :</div>
+        <div class="col-8">
+          <textarea formControlName="scenicDescription" name="scenicDescription" class="form-control" rows="3" type="text"></textarea>
+        </div>
+      </div>
+      <br>
+      <div class="row input-group">
+        <div class="col-4 folow-right pr-0">Chọn ảnh:</div>
+        <div class="col-8">
+          <input formControlName="scenicImage" name="scenicImage" class="btn pl-2 pr-2" type="text" style="background-color: #9fcdff" value="Chọn ảnh chính">
+<!--          <small style="font-weight: lighter; font-style: italic; margin-left: 10px">gia-lai.png</small>-->
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end mb-0 pb-0 mt-4">
+        <button class="mr-5 btn btn-success" type="submit"><i class="fa fa-check" aria-hidden="true"></i> Hoàn tất</button>
+        <button (click)="dialogRef.close(false)" class="btn btn-back" style="background: #005cbf;color: white;margin-right: 33px" type="button"><i class="icon-sidebar fa fa-reply "></i>Trở về</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+

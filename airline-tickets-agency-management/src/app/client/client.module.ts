@@ -10,16 +10,19 @@ import {ClientComponent} from './client/client.component';
 import {CommonClientModule} from '../common/common-client/common-client.module';
 import { DestinationCreateComponent } from './component/destination/destination-create/destination-create.component';
 import { DestinationUpdateComponent } from './component/destination/destination-update/destination-update.component';
+import { ScenicCreateComponent } from './component/destination/scenic-create/scenic-create.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
 @NgModule({
-  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, DestinationCreateComponent, DestinationUpdateComponent],
+  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, DestinationCreateComponent, DestinationUpdateComponent, ScenicCreateComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,
     ReactiveFormsModule,
-    CommonClientModule
+    CommonClientModule,
+    MatDialogModule
   ],
   bootstrap: [ClientComponent]
 })
