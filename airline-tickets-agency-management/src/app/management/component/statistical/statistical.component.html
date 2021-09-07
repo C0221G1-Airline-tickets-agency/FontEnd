@@ -1,11 +1,31 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div id="chart">
-  <apx-chart
-    [series]="chartOptions.series"
+<div id="chart" class="my-5">
+  <apx-chart *ngIf="isCircle"
+    [series]="chartOptions.seriesPie"
     [chart]="chartOptions.chart"
     [xaxis]="chartOptions.xaxis"
     [stroke]="chartOptions.stroke"
     [tooltip]="chartOptions.tooltip"
     [dataLabels]="chartOptions.dataLabels"
+  ></apx-chart>
+  <apx-chart *ngIf="isLine"
+    [series]="chartOptions.seriesLine"
+    [chart]="chartOptions.chart"
+    [xaxis]="chartOptions.xaxis"
+    [stroke]="chartOptions.stroke"
+    [tooltip]="chartOptions.tooltip"
+    [dataLabels]="chartOptions.dataLabels"
+  ></apx-chart>
+  <apx-chart *ngIf="isBar"
+    [series]="chartOptions.seriesBar"
+    [chart]="chartOptions.chart"
+    [dataLabels]="chartOptions.dataLabels"
+    [plotOptions]="chartOptions.plotOptions"
+    [yaxis]="chartOptions.yaxis"
+    [legend]="chartOptions.legend"
+    [fill]="chartOptions.fill"
+    [stroke]="chartOptions.stroke"
+    [tooltip]="chartOptions.tooltip"
+    [xaxis]="chartOptions.xaxis"
   ></apx-chart>
 </div>

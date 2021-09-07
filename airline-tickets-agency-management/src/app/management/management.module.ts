@@ -9,6 +9,7 @@ import { ManagementComponent } from './management/management.component';
 import {CommonClientModule} from '../common/common-client/common-client.module';
 import { StatisticalComponent } from './component/statistical/statistical.component';
 import {NgApexchartsModule} from 'ng-apexcharts';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -17,7 +18,9 @@ import {NgApexchartsModule} from 'ng-apexcharts';
     CommonModule,
     ManagementRoutingModule,
     CommonClientModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [ReportComponent, HomeComponent, ManagementComponent, StatisticalComponent],
   bootstrap: [ManagementComponent]
