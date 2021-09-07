@@ -1,19 +1,20 @@
-.select{
+.select {
   width: 100px;
 }
-.select-width{
+
+.select-width {
   width: 150px;
   height: 36px !important;
 }
 
-.select-field{
+.select-field {
   height: 30px;
   border-radius: 5px;
   width: 25%;
 }
 
 
-.icon{
+.icon {
   padding: 10px 10px 0 0;
 }
 
@@ -27,35 +28,41 @@
 table {
   background-color: white;
 }
-.thead{
+
+.thead {
   background-color: #fe8f83;
   color: black;
 
 }
 
-.choose-row{
+.choose-row {
   background-color: #f3b4ad;
 }
 
-.sub-main{
+.sub-main {
   background-repeat: no-repeat;
   background-size: cover;
   background-color: white;
 }
 
-i{
+i {
   padding-bottom: 6px;
 }
-.pointer {cursor: pointer;}
+
+.pointer {
+  cursor: pointer;
+}
+
 i:hover {
   pointer-events: fill;
 }
-.search-form{
+
+.search-form {
   width: 50%;
 
 }
 
-.input-search{
+.input-search {
   border-radius: 5px;
   height: 30px;
   outline: none;
@@ -65,14 +72,15 @@ i:hover {
 
 /*button*/
 
-.search-text{
+.search-text {
   margin-top: 2px;
   font-size: 16px;
 }
 
 
-.btn-delete{
+.btn-delete {
   background-color: #dc3545;
+  color: white;
 }
 
 .btn-edit {
@@ -80,7 +88,7 @@ i:hover {
   color: white;
 }
 
-.btn{
+.btn {
   min-width: 90px !important;
 }
 
@@ -93,15 +101,50 @@ i:hover {
   background-color: #F58317;
   color: white;
 }
-.btn-return{
+
+.btn-return {
   background-color: #0062D2;
   color: white;
 }
 
-.btn:hover{
+.btn:hover {
   color: black;
 }
 
-.search{
+.search {
   width: 70%;
+}
+
+@media (max-width: 995px) {
+  #nam-dep-trai-vu-tru1 {
+    padding-left: 60px;
+  }
+
+  #nam-dep-trai-vu-tru2 {
+    justify-content: normal !important;
+  }
+
+  #nam-dep-trai-vu-tru3 th:nth-child(4),
+  #nam-dep-trai-vu-tru3 th:nth-child(6),
+  #nam-dep-trai-vu-tru3 th:nth-child(7),
+  #nam-dep-trai-vu-tru3 td:nth-child(4),
+  #nam-dep-trai-vu-tru3 td:nth-child(6),
+  #nam-dep-trai-vu-tru3 td:nth-child(7)
+  {
+    display: none;
+  }
+}
+
+@media (max-width: 755px) {
+  #nam-dep-trai-vu-tru3 th:nth-child(4),
+  #nam-dep-trai-vu-tru3 th:nth-child(5),
+  #nam-dep-trai-vu-tru3 th:nth-child(6),
+  #nam-dep-trai-vu-tru3 th:nth-child(7),
+  #nam-dep-trai-vu-tru3 td:nth-child(4),
+  #nam-dep-trai-vu-tru3 td:nth-child(5) ,
+  #nam-dep-trai-vu-tru3 td:nth-child(6),
+  #nam-dep-trai-vu-tru3 td:nth-child(7)
+  {
+    display: none;
+  }
 }

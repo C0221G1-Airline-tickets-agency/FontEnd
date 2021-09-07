@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EmployeeService} from '../../../service/employee/employee.service';
 import {Employee} from '../../../model/employee';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee',
@@ -15,6 +16,7 @@ export class EmployeeComponent implements OnInit {
   isFail = false;
   pages: Array<any>;
   employeeIdChoice = 0;
+  employeeNameChoice = '';
   mggSearch = '';
   isRole = false;
 
@@ -30,6 +32,9 @@ export class EmployeeComponent implements OnInit {
         this.isFail = false;
         // @ts-ignore
         this.employees = data.content;
+        if (this.employees.length < 1) {
+          this.isFail = true;
+        }
         // @ts-ignore
         this.pages = new Array<any>(data.totalPages);
       }, error => {
@@ -62,16 +67,52 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  getEmployeeId(employeeId) {
-    this.employeeIdChoice = employeeId;
+  getEmployeeDelete(employeeId, employeeName) {
+    if (employeeId === this.employeeIdChoice) {
+      this.employeeIdChoice = 0;
+    } else {
+      this.employeeIdChoice = employeeId;
+      this.employeeNameChoice = employeeName;
+    }
   }
 
   deleteEmployee() {
-    this.sv.deleteEmployee(this.employeeIdChoice).subscribe(e => {
-      console.log('Xoá thành công');
-      this.getList();
-    }, error => {
-      console.log('Lỗi');
+    if (this.employeeIdChoice === 0) {
+      return;
+    }
+    Swal.fire({
+      title: 'Bạn có chắc chắn muốn xoá?',
+      html: '<span style="color: #dc3545">' + this.employeeNameChoice + '</span>',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#dc3545',
+      confirmButtonText: 'Xác nhận',
+      cancelButtonText: '&emsp;Huỷ&emsp;',
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.sv.deleteEmployee(this.employeeIdChoice).subscribe(e => {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Xoá thành công',
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.getList();
+          }, error => {
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Lỗi',
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.getList();
+          }
+        );
+      }
     });
   }
 
