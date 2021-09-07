@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h3 class="modal-title font-weight-bold" >Quay lại màn hình trang chủ</h3>
+  <button type="button" class="close" aria-hidden="true" (click)="closeDialog()">&times;</button>
+</div>
+<div class="modal-body">
+  <input hidden type="text" name="drugId" id="customerId">
+  <p>Bạn có chắc muốn quay lại màn hình trang chủ </p>
+  <p class="text-warning"><small>Hành đồng này có thể không thể hoàn lại</small></p>
+</div>
+<div class="modal-footer">
+  <button class=" btn btn-return button " style="font-size: 14px; width: 85px" type="button" [mat-dialog-close]="false"><i
+    class="fa fa-reply"></i> Trở về
+  </button>
+  <button class="mr-3 btn btn-danger button" style="font-size: 14px; width: 87px" [mat-dialog-close]="true"><i
+    class="fa fa-trash-o"></i> Đồng ý
+  </button>
+</div>
