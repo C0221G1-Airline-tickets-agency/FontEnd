@@ -1,6 +1,7 @@
 import {Component, OnInit, Pipe} from '@angular/core';
 import {News} from '../../../../model/news';
 import {NewsService} from '../../../../service/news.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-news-list',
@@ -14,6 +15,11 @@ export class NewsListComponent implements OnInit {
   page = 0;
   newsList: News[] = [];
   hotNews: News[] = [];
+  news: News = {};
+  newsIdChoice = 0;
+  newsNameChoice = '';
+
+
   constructor(private newsService: NewsService) {
   }
 
@@ -21,15 +27,15 @@ export class NewsListComponent implements OnInit {
     this.getAllNews();
     this.getHotNews();
   }
+
   getAllNews() {
     this.newsService.getAllNews(this.page).subscribe(newsList => {
       if (!newsList) {
         this.newsList = [];
       }
       this.newsList = newsList.content;
-      // this.pipe.transform('10',)
       this.pages = new Array<any>(newsList.totalPages);
-      console.log(this.newsList);
+
     });
   }
 
@@ -63,8 +69,48 @@ export class NewsListComponent implements OnInit {
         this.hotNews = [];
       }
       this.hotNews = hotNews;
-      console.log('this.hotNews');
-      console.log(this.hotNews);
+    });
+  }
+
+  addViews(id: number) {
+    this.newsService.updateViews(id).subscribe(() => {
+    });
+  }
+
+  deleteNews(newsId, newsName) {
+    Swal.fire({
+      title: 'Bạn có chắc chắn muốn xoá?',
+      html: '<span style="color: #dc3545">' + 'Tin tức có id : ' + newsId  + '<br>' + ' Tin tức có mã : ' + newsName + '</span>',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#dc3545',
+      confirmButtonText: 'Xác nhận',
+      cancelButtonText: '&emsp;Huỷ&emsp;',
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.newsService.deleteNews(newsId).subscribe(e => {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Xoá thành công',
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.getAllNews();
+          }, error => {
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Lỗi',
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.getAllNews();
+          }
+        );
+      }
     });
   }
 }

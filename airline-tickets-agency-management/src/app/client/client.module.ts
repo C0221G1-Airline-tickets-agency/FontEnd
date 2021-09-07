@@ -12,11 +12,12 @@ import { NewsListComponent } from './component/news/news-list/news-list.componen
 import { NewsDetailsComponent } from './component/news/news-details/news-details.component';
 import {AppModule} from '../app.module';
 import {TruncatePipe} from './component/news/news-list/TruncatePipe';
+import { NewsDeleteComponent } from './component/news/news-delete/news-delete.component';
 
 
 
 @NgModule({
-  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, NewsListComponent, NewsDetailsComponent, TruncatePipe ],
+  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, NewsListComponent, NewsDetailsComponent, TruncatePipe, NewsDeleteComponent ],
   imports: [
     CommonModule,
     ClientRoutingModule,

@@ -24,7 +24,10 @@ const routes: Routes = [
           path: 'news/news-list', component: NewsListComponent
         },
         {
-          path: 'news/news-details', component: NewsDetailsComponent
+          path: 'news/news-details/:id', component: NewsDetailsComponent
+        },
+        {
+          path: 'news/manipulation/:id', component: NewsManipulationComponent
         }
       ]
   }
