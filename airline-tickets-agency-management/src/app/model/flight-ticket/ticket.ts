@@ -1,5 +1,5 @@
+import {Flight} from "./flight";
 import {TicketStatus} from "./ticket-status";
-import {Flight} from "./Flight";
 
 export interface Ticket {
   ticketId?: number;
@@ -21,7 +21,8 @@ export interface Ticket {
   passengerPhone?: string;
   passengerIdCard?: string;
   passengerEmail?: string;
-  flight ?: Flight;
-  ticketStatus ?: TicketStatus;
+  flag?: boolean;
+  flight?: Flight;
+  ticketStatus?: TicketStatus;
   user?: String;
 }

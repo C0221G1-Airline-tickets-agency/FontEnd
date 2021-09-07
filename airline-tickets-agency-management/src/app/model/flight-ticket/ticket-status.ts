@@ -1,4 +1,4 @@
 export interface TicketStatus {
-  ticketStatusId: number;
-  ticketStatusName: string;
+  ticketStatusId?: number;
+  ticketStatusName?: string;
 }
