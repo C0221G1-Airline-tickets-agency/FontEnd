@@ -8,13 +8,15 @@ import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 
 import {ClientComponent} from './client/client.component';
 import {CommonClientModule} from '../common/common-client/common-client.module';
-import { DestinationListComponent } from './component/destination/destination-list/destination-list.component';
+import { HomeComponent } from './component/home/home/home.component';
+import { DestinationDeleteComponent } from './component/home/destination-delete/destination-delete.component';
 
 
 
 
 @NgModule({
-  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, DestinationListComponent],
+  // tslint:disable-next-line:max-line-length
+  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent , HomeComponent, DestinationDeleteComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,
