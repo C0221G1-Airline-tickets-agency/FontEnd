@@ -129,8 +129,7 @@ i:hover {
   #nam-dep-trai-vu-tru3 th:nth-child(7),
   #nam-dep-trai-vu-tru3 td:nth-child(4),
   #nam-dep-trai-vu-tru3 td:nth-child(6),
-  #nam-dep-trai-vu-tru3 td:nth-child(7)
-  {
+  #nam-dep-trai-vu-tru3 td:nth-child(7) {
     display: none;
   }
 }
@@ -141,10 +140,9 @@ i:hover {
   #nam-dep-trai-vu-tru3 th:nth-child(6),
   #nam-dep-trai-vu-tru3 th:nth-child(7),
   #nam-dep-trai-vu-tru3 td:nth-child(4),
-  #nam-dep-trai-vu-tru3 td:nth-child(5) ,
+  #nam-dep-trai-vu-tru3 td:nth-child(5),
   #nam-dep-trai-vu-tru3 td:nth-child(6),
-  #nam-dep-trai-vu-tru3 td:nth-child(7)
-  {
+  #nam-dep-trai-vu-tru3 td:nth-child(7) {
     display: none;
   }
 }

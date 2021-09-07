@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EmployeeService} from '../../../service/employee/employee.service';
 import {Employee} from '../../../model/employee';
 import Swal from 'sweetalert2';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee',
@@ -20,7 +21,7 @@ export class EmployeeComponent implements OnInit {
   mggSearch = '';
   isRole = false;
 
-  constructor(private sv: EmployeeService) {
+  constructor(private sv: EmployeeService, private toast: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -93,22 +94,10 @@ export class EmployeeComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.sv.deleteEmployee(this.employeeIdChoice).subscribe(e => {
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Xoá thành công',
-              showConfirmButton: false,
-              timer: 1500
-            });
+            this.toast.success('Xoá thành công', 'Thông báo');
             this.getList();
           }, error => {
-            Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: 'Lỗi',
-              showConfirmButton: false,
-              timer: 1500
-            });
+            this.toast.error('Lỗi', 'Thông báo');
             this.getList();
           }
         );
