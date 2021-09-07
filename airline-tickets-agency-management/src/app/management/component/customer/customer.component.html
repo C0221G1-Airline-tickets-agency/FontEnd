@@ -1,16 +1,16 @@
 <div class="d-flex flex-column ">
-  <h2 class="justify-content-center pb-2 mt-2">Quản lý khách hàng</h2>
+    <h2 class="justify-content-center pb-2 mt-2 " style="font-size: 25px">Quản lý khách hàng</h2>
   <div class="d-flex   justify-content-end mb-2">
     <label class="font-weight-bold search-text mr-4">Tìm kiếm theo </label>
-    <select class="select-field mr-4 ">
-      <option class="option">Họ tên</option>
-      <option class="option">Email</option>
-      <option class="option">Ngày sinh</option>
+    <select class="select-field mr-4 " [(ngModel)]="field">
+      <option class="option" value="name">Họ tên</option>
+      <option class="option" value="email">Email</option>
+      <option class="option" value="code">Ngày sinh</option>
     </select>
     <div>
-      <input type="text" placeholder="Tìm kiếm" style="border: 1px solid ; outline: none"
+      <input [(ngModel)]="search" type="text" placeholder="Tìm kiếm" style="border: 1px solid ; outline: none"
              class=" input-search select-width ">
-      <button class=" btn btn-search  ml-3"><i class=" fa fa-search "></i> Xem</button>
+      <button class=" btn btn-search  ml-3" (click)="searchCustomer()"><i class=" fa fa-search "></i> Xem</button>
     </div>
   </div>
 
@@ -18,7 +18,7 @@
 
 <div class="">
 
-  <table class="table table-striped   table-bordered">
+  <table  class="table table-striped   table-bordered">
     <thead class="thead">
     <tr>
       <th>STT</th>
@@ -31,29 +31,29 @@
 
     </tr>
     </thead>
-    <tbody *ngFor="let customer of listCustomer , let i =index" >
+    <tbody  *ngFor="let customer of listCustomer , let i =index" >
     <tr  (click)="sendToDialog (customer,i) "  (click)="showChoose(customer)" [class.selected] = "customer === customer1">
       <td>{{i +1}}</td>
       <td>{{customer.customerName}}</td>
-      <td>{{customer.customerCode}}</td>
+      <td>{{customer.customerBirthday | date: 'dd/MM/yyyy'}} </td>
       <td>{{customer.customerGender}}</td>
       <td>{{customer.customerEmail}}</td>
-      <td>{{customer.customerPhone}}</td>
+      <td>{{customer.customerPhone | phone }}</td>
+<!--      <td>{{customer.customerPhone | number: '4-3-3' }}</td>-->
     </tr>
 
     </tbody>
   </table>
+  <p style="font-size: 23px" *ngIf="message !== undefined">{{message}}</p>
 
 </div>
 
 <div class="d-flex justify-content-end pt-1 pb-2">
   <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="#">Trang trước</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
+    <ul class="pagination" >
+      <li *ngIf="page >0" class="page-item"><a class="page-link"  (click)="getPrevius()">Trang trước</a></li>
+      <li class="page-item"   ><a class="page-link" href="" (click)="setPage(page)">{{page}}</a></li>
+      <li *ngIf="page < pages.length-1" class="page-item"><a class="page-link" (click)="getNext()" >Trang sau</a></li>
     </ul>
   </nav>
 </div>

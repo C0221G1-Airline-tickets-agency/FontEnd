@@ -11,18 +11,21 @@ import { CustomerComponent } from './component/customer/customer.component';
 import { DeleteCustomerComponent } from './component/delete-customer/delete-customer.component';
 import {ToastrModule, ToastrService} from 'ngx-toastr';
 import {MatDialogModule} from '@angular/material/dialog';
+import {FormsModule} from '@angular/forms';
+import {CustomPipe} from './custom-pipe';
 
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ManagementRoutingModule,
-    CommonClientModule,
-    ToastrModule,
-    MatDialogModule
-  ],
-  declarations: [ReportComponent, HomeComponent, ManagementComponent, CustomerComponent, DeleteCustomerComponent],
+    imports: [
+        CommonModule,
+        ManagementRoutingModule,
+        CommonClientModule,
+        ToastrModule,
+        MatDialogModule,
+        FormsModule
+    ],
+  declarations: [ReportComponent, HomeComponent, ManagementComponent, CustomerComponent, DeleteCustomerComponent, CustomPipe],
   bootstrap: [ManagementComponent]
 })
 export class ManagementModule { }

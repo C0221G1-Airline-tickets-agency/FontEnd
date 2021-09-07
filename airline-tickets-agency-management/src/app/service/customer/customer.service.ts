@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Customer} from '../../model/customer/customer';
+import {Observable} from 'rxjs';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
+  private URL = 'http://localhost:8080/customer';
   listCustomer: Customer[] = [
     {customerID: 1,
     customerName: 'tam',
@@ -28,5 +31,17 @@ export class CustomerService {
       customerGender: 'nam'
     }
   ];
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
+  getListCustomer(page: number): Observable<any> {
+    return this.httpClient.get(this.URL + '/list' + '?page=' + page);
+
+  }
+
+  searchCustomer(page: number, field: any, search: any): Observable<any> {
+    return this.httpClient.get(this.URL + '/search' + '?page=' + page + '&field=' + field + '&search=' + search);
+  }
+
+  deleteCustomer(data: any): Observable<any> {
+    return this.httpClient.patch(this.URL + '/delete', data);
+  }
 }

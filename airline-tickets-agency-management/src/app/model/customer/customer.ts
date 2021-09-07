@@ -5,4 +5,6 @@ export interface Customer {
   customerEmail?: string;
   customerPhone?: string;
   customerGender?: string;
+  customerBirthday?: string;
+  customerNationality?: string;
 }

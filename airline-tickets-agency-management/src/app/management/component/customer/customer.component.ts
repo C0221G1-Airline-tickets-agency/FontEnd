@@ -14,17 +14,28 @@ export class CustomerComponent implements OnInit {
   listCustomer: Customer[] = [];
   customer1: Customer;
   customer: Customer;
+  page = 0;
+  pages: Array<number> ;
+  field = 'name';
+  search = '';
+  displayPages: number[] = [];
+  // tslint:disable-next-line:ban-types
+  message: String;
 
   constructor(private customerService: CustomerService,
               private dialog: MatDialog,
               ) {
   }
    getListCustomer() {
-    return this.customerService.listCustomer;
-  }
+     this.customerService.getListCustomer(this.page).subscribe(next => {
+       this.listCustomer = next.content;
+       this.pages = new Array(next.totalPages);
+     });
+   }
 
   ngOnInit(): void {
-    this.listCustomer = this.getListCustomer();
+    // @ts-ignore
+     this.getListCustomer();
   }
 
   showChoose(customer: Customer) {
@@ -42,8 +53,46 @@ export class CustomerComponent implements OnInit {
         data: this.customer1
       });
       dialog.afterClosed().subscribe(() => {
-
+        this.getListCustomer();
+        this.customer1 = null;
       });
     }
+  }
+
+  getPrevius() {
+    if (this.page === 0) {
+    } else {
+      this.page -= 1;
+      this.getListCustomer();
+    }
+  }
+
+  getNext() {
+    if (this.page === this.pages.length - 1 ) {
+      alert('dai');
+    } else {
+      this.page += 1;
+      this.getListCustomer();
+    }
+  }
+
+  searchCustomer() {
+    console.log('message' + this.message);
+    return this.customerService.searchCustomer(this.page, this.field, this.search).subscribe(next => {
+      console.log(next.content);
+      if (next.content.length === 0) {
+      this.message = ' không tìm thấy kết quả';
+      this.listCustomer = next.content;
+      } else {
+        this.listCustomer = next.content;
+        this.pages = new Array(next.totalPages);
+        this.message = undefined;
+      }
+    });
+  }
+
+  setPage(p) {
+    this.page = p;
+    this.getListCustomer();
   }
 }
