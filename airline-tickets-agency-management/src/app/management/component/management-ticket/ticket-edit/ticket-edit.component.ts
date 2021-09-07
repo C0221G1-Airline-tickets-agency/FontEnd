@@ -1,8 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {TicketService} from '../../../../service/ticket.service';
 import {Ticket} from '../../../../model/flight-ticket/ticket';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-ticket-edit',
@@ -18,7 +19,8 @@ export class TicketEditComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<TicketEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private ticketService: TicketService) {
+              private ticketService: TicketService,
+              private toastr: ToastrService) {
     this.getTicket();
   }
 
@@ -29,7 +31,8 @@ export class TicketEditComponent implements OnInit {
     this.editForm = new FormGroup({
       ticketId: new FormControl(this.data.ticketId),
       ticketCode: new FormControl(this.data.ticketCode),
-      passengerName: new FormControl(this.data.passengerName),
+      // tslint:disable-next-line:max-line-length
+      passengerName: new FormControl(this.data.passengerName, [Validators.required, Validators.pattern('[A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ][a-zàáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+(([ ][A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ][a-zàáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)|([ ][A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ]))')]),
       locationTo: new FormControl(this.data.flight.locationTo.cityName),
       locationFrom: new FormControl(this.data.flight.locationFrom.cityName),
       flightDate: new FormControl(this.data.flight.flightDate),
@@ -37,7 +40,7 @@ export class TicketEditComponent implements OnInit {
       price: new FormControl(this.money.toString().split('').reverse().reduce((prev, next, index) => {
         return ((index % 3) ? next : (next + ',')) + prev;
       })),
-      passengerEmail: new FormControl(this.data.passengerEmail),
+      passengerEmail: new FormControl(this.data.passengerEmail, [Validators.required, Validators.email]),
 
     });
   }
@@ -53,10 +56,13 @@ export class TicketEditComponent implements OnInit {
     this.data.passengerEmail = this.editForm.value.passengerEmail;
     this.ticket = this.data;
     this.ticketService.update(this.data.ticketId, this.ticket).subscribe(() => {
-      alert('thành công');
+      this.toastr.success('Cập nhật thành công!!!', 'Thông báo');
     }, e => {
-      alert('thất bại');
+      this.toastr.error('Cập nhật thất bại!!!', 'Cảnh báo');
     });
   }
 
+  err() {
+    this.toastr.error('Cập nhật thất bại!!!', 'Cảnh báo');
+  }
 }

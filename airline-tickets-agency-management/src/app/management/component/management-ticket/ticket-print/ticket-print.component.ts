@@ -21,7 +21,8 @@ export class TicketPrintComponent implements OnInit {
   baggage: number;
 
   constructor(public dialogRef: MatDialogRef<TicketPrintComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private toastr: ToastrService) {
     this.getGender();
     this.getBackGroup();
     this.getBaggage();
@@ -87,12 +88,12 @@ export class TicketPrintComponent implements OnInit {
       const imgHeight = canvas.height * 208 / canvas.width;
       doc.addImage(imgDta, 0, 0, 208, imgHeight);
       doc.save('image.pdf');
-      // this.toastr.success('In thành công!!!', 'Thông báo');
+      this.toastr.success('In thành công!!!', 'Thông báo');
     });
   }
 
   err() {
-    // this.toastr.error('In thất bại!!!', 'Cảnh báo');
+    this.toastr.error('In thất bại!!!', 'Cảnh báo');
   }
 
 }
