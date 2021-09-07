@@ -7,7 +7,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute} from '@angular/router';
 import Swal from 'sweetalert2';
 import {ToastrService} from 'ngx-toastr';
-import {Employee} from '../../../../model/employee';
 import {News} from '../../../../model/news';
 import {Category} from '../../../../model/category';
 import {NewsService} from '../../../../service/news.service';
@@ -23,21 +22,23 @@ export class NewsManipulationComponent implements OnInit {
   selectedImage: any = null;
   url: string;
   filePath: string | ArrayBuffer;
-  employee: Employee = {
-    employeeId: 1,
-    employeeName: 'Hoàng'
-  };
+  // employee = {
+  //   employeeId: 1,
+  //   employeeName: 'Hoàng'
+  // };
   news: News;
   formNews: FormGroup;
   categorys: Category[] = [];
   typeComponent = 'create';
+
   constructor(@Inject(AngularFireStorage) private storage: AngularFireStorage,
               @Inject(UploadFileService) private uploadFileService: UploadFileService,
               private fb: FormBuilder,
               private datePipe: DatePipe,
               public dialog: MatDialog,
               private route: ActivatedRoute,
-              private newsService: NewsService) { }
+              private newsService: NewsService) {
+  }
 
 
   ngOnInit(): void {
@@ -110,7 +111,7 @@ export class NewsManipulationComponent implements OnInit {
       newsWriteDay: [newsWriteDay, []],
       NewsViews: [0, []],
       flag: [true, []],
-      employee: [this.employee],
+      // employee: [this.employee],
       category: this.fb.group({
         categoryId: ['', [Validators.required]],
         categoryName: ['']
@@ -135,6 +136,7 @@ export class NewsManipulationComponent implements OnInit {
       ).subscribe();
     }
   }
+
   checkValidate(): boolean {
     if (this.newsContent.invalid) {
       this.alertError('Nội dung không hợp lệ');
@@ -142,14 +144,16 @@ export class NewsManipulationComponent implements OnInit {
     }
     return true;
   }
+
   alertError(reason) {
-    const  typeComponent = this.typeComponent === 'create' ? 'Tạo mới' : 'Chỉnh sửa';
+    const typeComponent = this.typeComponent === 'create' ? 'Tạo mới' : 'Chỉnh sửa';
     Swal.fire({
       icon: 'error',
-      title: typeComponent  + ' không thành công',
+      title: typeComponent + ' không thành công',
       text: reason,
     });
   }
+
   get currentDate() {
     return this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   }

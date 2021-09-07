@@ -12,5 +12,4 @@ export class EmployeeChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
