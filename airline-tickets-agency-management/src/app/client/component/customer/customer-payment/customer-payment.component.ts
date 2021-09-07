@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {DialogService} from '../../../../service/dialog.service';
 import {MatDialog} from '@angular/material/dialog';
 import {CustomerDialogCancelTicketComponent} from '../customer-dialog-cancel-ticket/customer-dialog-cancel-ticket.component';
+import {TicketCustomerDto} from '../../../../model/flight-ticket/TicketCustomerDto';
+import {TicketService} from '../../../../service/flight-ticket/ticket.service';
 
 declare let paypal: any;
 
@@ -12,12 +14,14 @@ declare let paypal: any;
 })
 export class CustomerPaymentComponent implements OnInit {
 
-  constructor(private matDialog: MatDialog) { }
+  constructor(private matDialog: MatDialog, private ticketService: TicketService) { }
+  listTicketCustomerBook: TicketCustomerDto[] = [];
+  index = 0;
 
   paypalConfig = {
     env: 'sandbox',
     client: {
-      sandbox: 'AbnnpqkZWFt3p_vsAq9MTYGktX4-6iq1LQVNQlSCVSFPxZ-wNFmL65aE0JGqu4E8a1nzUDX8XkP2amk6',
+      sandbox: 'AU4EoqiuH-TsGt-hAThGLirSuuR015MTKSdSScW2t_Tvb7H31WWaXbVGub1x2pjEdC9IEk4Jt0qAbuuZ',
       production: ''
     },
     style: {
@@ -33,13 +37,14 @@ export class CustomerPaymentComponent implements OnInit {
         payment: {
           transactions: [
             // {amount: {total: this.moneyPayPal, currency: 'USD'}}
-            {amount: {total: 1, currency: 'USD'}}
+            {amount: {total: 0.01, currency: 'USD'}}
           ]
         }
       });
     },
     onAuthorize: (data, actions) => {
       return actions.payment.execute().then((payment) => {
+        alert('thanh toán thành công');
         // // Do something when payment is successful.
         // this.voucherMoney = 0;
         // this.resultMsg = 'Thanh toán thành công';
@@ -72,6 +77,7 @@ export class CustomerPaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPaypPal();
+    this.getListTicketCustomerBook();
   }
 
   //#region Paypal
@@ -93,5 +99,31 @@ export class CustomerPaymentComponent implements OnInit {
   dialogCancel() {
     const dialog = this.matDialog.open(CustomerDialogCancelTicketComponent, {
     });
+  }
+
+  getListTicketCustomerBook() {
+    this.ticketService.getListTicketCustomerBook(1, this.index).subscribe(next => {
+      if (next == null) {
+        this.index = this.index - 5;
+        alert('lỗi');
+      } else {
+        this.listTicketCustomerBook = next;
+      }
+    });
+  }
+
+  nextPage() {
+    this.index = this.index + 5;
+    this.getListTicketCustomerBook();
+  }
+
+  previousPage() {
+    this.index = this.index - 5;
+    if (this.index < 0) {
+      alert('lỗi');
+      this.index = this.index + 5;
+    } else {
+      this.getListTicketCustomerBook();
+    }
   }
 }

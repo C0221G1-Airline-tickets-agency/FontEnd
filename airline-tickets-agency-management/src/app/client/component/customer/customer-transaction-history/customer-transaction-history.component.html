@@ -26,51 +26,15 @@
               <th>Tình trạng</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let ticket of listTicketTransaction, let i = index">
             <tr>
-              <td>1</td>
-              <td>Đà Nẵng</td>
-              <td>Hồ Chí Minh</td>
-              <td>10/05/2020</td>
-              <td>15/05/2020</td>
-              <td>1.500.000</td>
-              <td>Đã thanh toán </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Hồ Chí Minh</td>
-              <td>Đà Nẵng</td>
-              <td>10/05/2020</td>
-              <td>15/05/2020</td>
-              <td>1.500.000</td>
-              <td>Đã hủy </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Đà Nẵng</td>
-              <td>Hồ Chí Minh</td>
-              <td>10/05/2020</td>
-              <td>15/05/2020</td>
-              <td>1.500.000</td>
-              <td>Chờ thanh toán </td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Hà Nội</td>
-              <td>Hồ Chí Minh</td>
-              <td>10/05/2020</td>
-              <td>15/05/2020</td>
-              <td>1.500.000</td>
-              <td>Chờ thanh toán </td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Đà Nẵng</td>
-              <td>Hồ Chí Minh</td>
-              <td>10/05/2020</td>
-              <td>15/05/2020</td>
-              <td>1.500.000</td>
-              <td>Đã thanh toán </td>
+              <td>{{i+1+this.index}}</td>
+              <td>{{ticket.pointOfDeparture}}</td>
+              <td>{{ticket.destination}}</td>
+              <td>{{ticket.bookingDate}}</td>
+              <td>{{ticket.flightDate}}</td>
+              <td>{{ticket.priceSell}}</td>
+              <td>{{ticket.ticketStatusName}}</td>
             </tr>
             </tbody>
           </table>
@@ -80,13 +44,9 @@
         <div class="d-flex justify-content-end pt-1 pb-2">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">Trang Trước</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">...</a></li>
-              <li class="page-item"><a class="page-link" href="#">9</a></li>
-              <li class="page-item"><a class="page-link" href="#">10</a></li>
-              <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
+              <li class="page-item"><a class="page-link" (click)="previousPage()" >Trang Trước</a></li>
+              <li class="page-item"><a class="page-link" >{{this.index/5+1}}</a></li>
+              <li class="page-item"><a class="page-link" (click)="nextPage()" >Trang sau</a></li>
             </ul>
           </nav>
         </div>
