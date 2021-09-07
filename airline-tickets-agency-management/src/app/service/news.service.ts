@@ -28,7 +28,8 @@ export class NewsService {
     return  this.http.post<News>(API_URL + '/news', value);
   }
   update(value, id) {
-    return  this.http.put<News[]>(`${API_URL}/news/${id}`, value);
+    console.log(value);
+    return  this.http.put<News>(`${API_URL}/news/${id}`, value);
   }
   remove(id) {
     return this.http.delete<News[]>(`${API_URL}/news/${id}`);

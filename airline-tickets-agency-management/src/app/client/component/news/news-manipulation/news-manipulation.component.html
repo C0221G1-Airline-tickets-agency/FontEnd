@@ -2,7 +2,7 @@
   <div class="col-xl-9 mx-auto col-lg-9 col-md-12 col-sm-12">
     <div class="container container-new bg  position-relative ">
       <div class="row d-flex justify-content-center position-relative">
-        <h5 class="bg-danger text-light p-3 w-100 ">Thêm mới tin
+        <h5 class="bg-danger text-light p-3 w-100 ">{{typeComponent=== 'create'? 'Tạo mới' : 'Chỉnh sửa'}} tin
           tức</h5>
         <div class="container-fluid shadow" [formGroup]="formNews">
           <div class="">
@@ -28,7 +28,7 @@
             </div>
             <div class="form-row">
               <div class="form-group col-md-6 mb-3">
-                <label for="category" class="">Chọn danh mục :</label>
+                <label for="category" class="">Chọn danh mục <span>(<span style="color: red">*</span>)</span> :</label>
                 <select [ngClass]="category.invalid? 'is-invalid': 'is-valid'" class="custom-select" id="category"
                         (change)="changeCategory($event)" formGroupName="category" required>
                   <option value="">Chọn danh mục</option>
@@ -38,7 +38,7 @@
                 <div class="invalid-feedback" *ngIf="category.invalid">Danh mục không được để trống</div>
               </div>
               <div class=" form-group col-md-6 mb-3">
-                <label for="validatedCustomFile" class="">Thêm ảnh :</label>
+                <label for="validatedCustomFile" class="">Thêm ảnh <span>(<span style="color: red">*</span>)</span>  :</label>
                 <div class="custom-file">
                   <input type="file" [ngClass]="newsImageName?.errors? 'is-invalid': 'is-valid'"
                          (change)="showPreview($event)" class="custom-file-input"
@@ -51,7 +51,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="title">Tiêu đề</label>
+              <label for="title">Tiêu đề <span>(<span style="color: red">*</span>)</span> </label>
               <textarea rows="3" class="form-control" formControlName="newsTitle" id="title"
                         [ngClass]="newsTitle?.errors?'is-invalid': 'is-valid'"></textarea>
               <div class="invalid-feedback" *ngIf="newsTitle.hasError('required') && newsTitle.touched">Tiêu đề không
@@ -68,7 +68,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="content">Nội dung</label>
+              <label for="content">Nội dung <span>(<span style="color: red">*</span>)</span> </label>
               <textarea class="form-control" id="content" formControlName="newsContent"
                         rows="7" [ngClass]="newsContent?.errors?'is-invalid': 'is-valid'"></textarea>
               <div class="invalid-feedback" *ngIf="newsContent.hasError('required') && newsContent.touched">Nội dung

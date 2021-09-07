@@ -17,6 +17,9 @@ const routes: Routes = [
         },
         {
           path: 'news/manipulation', component: NewsManipulationComponent
+        },
+        {
+          path: 'news/manipulation/:id', component: NewsManipulationComponent
         }
       ]
   }
