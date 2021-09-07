@@ -8,15 +8,17 @@ import { ManagementComponent } from './management/management.component';
 import {AppModule} from '../app.module';
 import {CommonClientModule} from '../common/common-client/common-client.module';
 import { EmployeeComponent } from './component/employee/employee.component';
+import {FormsModule} from '@angular/forms';
 
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ManagementRoutingModule,
-    CommonClientModule,
-  ],
+    imports: [
+        CommonModule,
+        ManagementRoutingModule,
+        CommonClientModule,
+        FormsModule,
+    ],
   declarations: [ReportComponent, HomeComponent, ManagementComponent, EmployeeComponent],
   bootstrap: [ManagementComponent]
 })

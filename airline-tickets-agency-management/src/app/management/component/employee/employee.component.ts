@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EmployeeService} from '../../../service/employee/employee.service';
 import {Employee} from '../../../model/employee';
 
@@ -13,10 +13,10 @@ export class EmployeeComponent implements OnInit {
   valueSearch = '';
   page = 0;
   isFail = false;
-  pages: Array<number>;
-  employeeIdChoice = -1;
+  pages: Array<any>;
+  employeeIdChoice = 0;
   mggSearch = '';
-  isEmployeeCode = false;
+  isRole = false;
 
   constructor(private sv: EmployeeService) {
   }
@@ -26,10 +26,12 @@ export class EmployeeComponent implements OnInit {
   }
 
   getList() {
-    this.sv.getListEmployee(this.typeSearch, this.isEmployeeCode ? 'NV' + this.valueSearch : this.valueSearch, this.page).subscribe(e => {
+    this.sv.getListEmployee(this.typeSearch, this.valueSearch, this.page).subscribe(data => {
         this.isFail = false;
-        this.employees = e.content;
-        this.pages = new Array<any>(e.totalPages);
+        // @ts-ignore
+        this.employees = data.content;
+        // @ts-ignore
+        this.pages = new Array<any>(data.totalPages);
       }, error => {
         this.isFail = true;
         this.employees = [];
@@ -60,7 +62,7 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
-  getEmployeeId(employeeId: number) {
+  getEmployeeId(employeeId) {
     this.employeeIdChoice = employeeId;
   }
 
@@ -74,12 +76,12 @@ export class EmployeeComponent implements OnInit {
   }
 
   changeTypeSearch(typeSearch) {
-    this.isEmployeeCode = false;
+    this.isRole = false;
     this.mggSearch = '';
     this.typeSearch = typeSearch.value;
+    this.typeSearch === 'employee_code' ? this.valueSearch = 'NV' : this.valueSearch = '';
     switch (typeSearch.value) {
       case 'employee_code':
-        this.isEmployeeCode = true;
         break;
       case 'employee_name':
         break;
@@ -88,16 +90,19 @@ export class EmployeeComponent implements OnInit {
       case 'email':
         break;
       case 'name':
+        this.valueSearch = 'ROLE_ADMIN';
+        this.isRole = true;
         break;
     }
   }
 
   searchEmployee() {
     if (this.typeSearch === '') {
-      this.mggSearch = 'Vui lòng chọn loại tìm kiếm';
+      this.mggSearch = 'Vui lòng chọn tìm kiếm theo';
       return;
     }
     this.getList();
   }
+
 
 }
