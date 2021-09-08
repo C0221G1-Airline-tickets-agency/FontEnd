@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Flight} from '../../../../../model/flight-ticket/Flight';
 import {FlightService} from '../../../../../service/flight-ticket/flight.service';
 import {MatDialog} from '@angular/material/dialog';
-import {DialogDeleteComponent} from '../dialog-delete/dialog-delete.component';
 import {DialogService} from '../../../../../service/dialog.service';
+import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-flight-list',
@@ -16,18 +17,37 @@ export class FlightListComponent implements OnInit {
   selectedObj: Flight;
   flight: Flight;
   idFlight: number;
+  page = 0;
+  pages: Array<any>;
+  search: any;
+  selects: any;
+  notfound = false;
+  name: string;
+  totalPage: number;
+  Obj: null;
   constructor(private flightTicketService: FlightService,
               private matDialog: MatDialog,
-              private dialogService: DialogService) { }
+              private dialogService: DialogService,
+              private toast: ToastrService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getAll();
+
   }
 
 
   getAll() {
-    this.flightTicketService.getAllFlight().subscribe(res => {
-      this.flights = res;
+    this.flightTicketService.getAllFlight(this.page, this.search, this.selects).subscribe(res => {
+      this.flights = res.content;
+      console.log(this.flights.length);
+      if (this.flights.length === 0 ) {
+        this.notfound = true;
+      } else {
+        this.notfound = false;
+      }
+      this.pages = new Array<any>(res.totalPages);
+      this.totalPage = res.totalPages;
     });
   }
 
@@ -46,21 +66,63 @@ export class FlightListComponent implements OnInit {
   onSelect(flightObj: Flight) {
     this.selectedObj = flightObj;
   }
-
-
   deleteFlight() {
     if (this.idFlight == null) {
-
+        this.toast.warning('Bạn chưa chọn chuyến bay ');
     } else {
-      this.dialogService.openConfirm(this.idFlight).afterClosed().subscribe(res => {
+      for (let i = 0 ; i < this.flights.length ; i++) {
+          if (this.idFlight === this.flights[i].flightId) {
+            this.name = this.flights[i].flightCode;
+            break;
+          }
+      }
+      this.dialogService.openConfirm(this.name).afterClosed().subscribe(res => {
         if (res === true) {
           this.flightTicketService.getDeleteFlight(this.idFlight).subscribe(() => {
+            this.toast.success('Bạn đã xóa chuyến bay thành công');
             this.ngOnInit();
           });
         }
       });
 
     }
+  }
+  setPage(i: number) {
+    this.page = i;
+    this.getAll();
+  }
+
+  previous() {
+    if (this.page <= 0) {
+      this.toast.warning('Không tìm thấy trang.', 'Trang trước') ;
+    } else {
+      this.page = this.page - 1;
+      this.getAll();
+    }
+  }
+  next() {
+    if (this.page > this.pages.length - 2) {
+      this.toast.warning('Không tìm thấy trang.', 'Trang sau');
+    } else {
+      this.page = this.page + 1;
+      if (this.page > Math.floor(this.flights.length / 5) + 1) {
+        this.page = this.page - 1;
+        alert('Không tìm thấy trang');
+      }
+      this.getAll();
+    }
+  }
+
+  searchFlight() {
+      this.getAll();
+  }
+  backToMain() {
+    this.dialogService.openConfirm1().afterClosed().subscribe(res => {
+      if (res === true) {
+        this.router.navigateByUrl('/');
+      }
+    });
+
   }
 
 }
