@@ -1,4 +1,5 @@
 import {Employee} from './employee';
+import {Role} from './role';
 
 export interface User {
   userId: number;
@@ -7,4 +8,5 @@ export interface User {
   password: string;
   userCode: string;
   employee: Employee;
+  roles: Role[];
 }
