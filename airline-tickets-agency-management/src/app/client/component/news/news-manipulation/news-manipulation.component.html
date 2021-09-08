@@ -9,21 +9,27 @@
             <div class="form-row">
               <div class="col-md-4 mb-3">
                 <label for="nameEmployee">Tên người viết</label>
-                <input type="text" class="form-control is-valid" id="nameEmployee" readonly
+                <input type="text" class="form-control" (change)="checkNameEmployee()" [ngClass]="!checkNameEmployee()?'is-invalid': 'is-valid'" id="nameEmployee" readonly
                        value="{{employee.employeeName}}">
+                <div class="invalid-feedback" *ngIf="!checkNameEmployee()">{{typeComponent === 'create'? 'Thêm mới': 'Chỉnh sửa'}} không cho phép sửa đổi tên người viết
+                </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="codeFeedNews">Mã bài viết</label>
-                <input type="text" class="form-control is-valid" id="codeFeedNews" readonly
+                <input type="text" class="form-control is-valid" [ngClass]="!checkCodeFeedNews()?'is-invalid': 'is-valid'" id="codeFeedNews" readonly
                        formControlName="newsCode">
+                <div class="invalid-feedback" *ngIf="!checkCodeFeedNews()">Mã bài viết được tạo tự động không thể sửa
+                </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="dateWrites">Ngày viết </label>
                 <input type='date' id="dateWrites" class="form-control is-valid"
-                       formControlName="newsWriteDay" readonly>
+                       [ngClass]="!checkNewsWriteDay()?'is-invalid': 'is-valid'"   formControlName="newsWriteDay" readonly>
                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                      </span>
+                <div class="invalid-feedback" *ngIf="!checkNewsWriteDay()">Ngày viết được tạo tự động không thể sửa
+                </div>
               </div>
             </div>
             <div class="form-row">
@@ -33,7 +39,7 @@
                         (change)="changeCategory($event)" formGroupName="category" required>
                   <option value="">Chọn danh mục</option>
                   <option *ngFor="let category of categorys"
-                         [selected]="checkCategory(category.categoryId)?'selected':''" value="{{category.categoryId}}">{{category.categoryName}}</option>
+                          [selected]="checkCategory(category.categoryId)?'selected':''"  value="{{category.categoryId}}">{{category.categoryName}}</option>
                 </select>
                 <div class="invalid-feedback" *ngIf="category.invalid">Danh mục không được để trống</div>
               </div>
@@ -81,7 +87,7 @@
               </div>
               <div class="invalid-feedback" *ngIf="newsContent.hasError('maxlength') && newsContent.touched">Nội dung
                 không lớn
-                hơn 1200 ký tự
+                hơn 120.000 ký tự
               </div>
             </div>
           </div>
@@ -91,10 +97,10 @@
                 <button class="mr-4 btn btn-success button"
                         (click)="save()" type="submit"><i class="fa fa-check" aria-hidden="true"></i> Hoàn tất
                 </button>
-                <button class="mr-4 btn btn-primary button"
+                <button class="mr-4 btn btn-secondary button"
                         (click)="previewNews()" type="submit"><i class="fa fa-eye" aria-hidden="true"></i> Xem trước
                 </button>
-                <button class="mr-4 btn btn-back " type="button"><i
+                <button routerLink="/news/news-list"  class="mr-4 btn btn-back " type="button"><i
                   class="icon-sidebar fa fa-reply "></i>
                   Trở về
                 </button>
@@ -106,5 +112,3 @@
     </div>
   </div>
 </div>
-
-
