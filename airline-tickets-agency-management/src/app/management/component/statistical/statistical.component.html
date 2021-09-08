@@ -1,31 +1,139 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div id="chart" class="my-5">
-  <apx-chart *ngIf="isCircle"
-    [series]="chartOptions.seriesPie"
-    [chart]="chartOptions.chart"
-    [xaxis]="chartOptions.xaxis"
-    [stroke]="chartOptions.stroke"
-    [tooltip]="chartOptions.tooltip"
-    [dataLabels]="chartOptions.dataLabels"
-  ></apx-chart>
-  <apx-chart *ngIf="isLine"
-    [series]="chartOptions.seriesLine"
-    [chart]="chartOptions.chart"
-    [xaxis]="chartOptions.xaxis"
-    [stroke]="chartOptions.stroke"
-    [tooltip]="chartOptions.tooltip"
-    [dataLabels]="chartOptions.dataLabels"
-  ></apx-chart>
-  <apx-chart *ngIf="isBar"
-    [series]="chartOptions.seriesBar"
-    [chart]="chartOptions.chart"
-    [dataLabels]="chartOptions.dataLabels"
-    [plotOptions]="chartOptions.plotOptions"
-    [yaxis]="chartOptions.yaxis"
-    [legend]="chartOptions.legend"
-    [fill]="chartOptions.fill"
-    [stroke]="chartOptions.stroke"
-    [tooltip]="chartOptions.tooltip"
-    [xaxis]="chartOptions.xaxis"
-  ></apx-chart>
+<h1 class="d-flex justify-content-center">THỐNG KÊ</h1>
+<span *ngIf="isLine || isBar || isCircle">
+<div>
+  <p>- Thời gian 1: từ: <span>{{startDate1 | date:'dd/MM/yyyy'}}</span> đến: <span>{{endDate1 | date:'dd/MM/yyyy'}}</span></p>
+  <p>- Thời gian 2: từ: <span>{{startDate2 | date:'dd/MM/yyyy'}}</span> đến: <span>{{endDate2 | date:'dd/MM/yyyy'}}</span></p>
+</div>
+</span>
+<span *ngIf="isTopLine || isTopBar || isTopCircle">
+<div>
+  <p>- Thời gian: từ: <span>{{startDate1 | date:'dd/MM/yyyy'}}</span> đến: <span>{{endDate1 | date:'dd/MM/yyyy'}}</span></p>
+</div>
+</span>
+<div class="d-flex justify-content-center">
+  <div class="card">
+    <div class="card-body">
+       <span *ngIf="isLine || isBar">
+      <h5 class="d-flex justify-content-center">DOANH THU</h5>
+      <hr>
+      <div class="w">
+        <apx-chart *ngIf="isLine"
+                   [series]="chartOptions.seriesLine"
+                   [chart]="chartOptions.chart"
+                   [xaxis]="chartOptions.xaxis"
+                   [stroke]="chartOptions.stroke"
+                   [tooltip]="chartOptions.tooltip"
+                   [dataLabels]="chartOptions.dataLabels"
+        ></apx-chart>
+        <apx-chart *ngIf="isBar"
+                   [series]="chartOptions.seriesBar"
+                   [chart]="chartOptions.chart"
+                   [dataLabels]="chartOptions.dataLabels"
+                   [plotOptions]="chartOptions.plotOptions"
+                   [yaxis]="chartOptions.yaxis"
+                   [legend]="chartOptions.legend"
+                   [fill]="chartOptions.fill"
+                   [stroke]="chartOptions.stroke"
+                   [tooltip]="chartOptions.tooltip"
+                   [xaxis]="chartOptions.xaxis"
+        ></apx-chart>
+<!--        <apx-chart *ngIf="isTopBar"-->
+<!--                   [series]="chartOptions.seriesBarTop"-->
+<!--                   [chart]="chartOptions.chart"-->
+<!--                   [dataLabels]="chartOptions.dataLabels"-->
+<!--                   [stroke]="chartOptions.stroke"-->
+<!--                   [colors]="chartOptions.colors"-->
+<!--                   [title]="chartOptions.title"-->
+<!--                   [subtitle]="chartOptions.subtitle"-->
+<!--                   [plotOptions]="chartOptions.plotOptions"-->
+<!--                   [yaxis]="chartOptions.yaxis"-->
+<!--                   [xaxis]="chartOptions.xaxis"-->
+<!--                   [tooltip]="chartOptions.tooltip"-->
+<!--        ></apx-chart>-->
+<!--        <apx-chart *ngIf="isTopLine"-->
+<!--                   [series]="chartOptions.seriesLineTop"-->
+<!--                   [chart]="chartOptions.chart"-->
+<!--                   [xaxis]="chartOptions.xaxis"-->
+<!--                   [dataLabels]="chartOptions.dataLabels"-->
+<!--                   [grid]="chartOptions.grid"-->
+<!--                   [stroke]="chartOptions.stroke"-->
+<!--                   [title]="chartOptions.title"-->
+<!--        ></apx-chart>-->
+      </div>
+        <hr>
+         <div class="d-flex justify-content-center">
+        <div class="mx-2">Tuần 1: 32.000.000 VNĐ</div>
+        <div class="mx-2">Tuần 2: 43.000.000 VND</div>
+      </div>
+      </span>
+      <span *ngIf="isTopLine">
+          <hr>
+      <div class="mb-5 wLine">
+        <apx-chart *ngIf="isTopLine"
+                   [series]="chartOptions.seriesLineTop"
+                   [chart]="chartOptions.chart"
+                   [xaxis]="chartOptions.xaxis"
+                   [dataLabels]="chartOptions.dataLabels"
+                   [grid]="chartOptions.grid"
+                   [stroke]="chartOptions.stroke"
+                   [title]="chartOptions.title"
+        ></apx-chart>
+      </div>
+        <hr>
+        <br>
+      </span>
+      <span *ngIf="isTopBar">
+      <hr>
+      <div class="mb-3 w">
+        <apx-chart *ngIf="isTopBar"
+                   [series]="chartOptions.seriesBarTop"
+                   [chart]="chartOptions.chart"
+                   [dataLabels]="chartOptions.dataLabels"
+                   [stroke]="chartOptions.stroke"
+                   [colors]="chartOptions.colors"
+                   [title]="chartOptions.title"
+                   [subtitle]="chartOptions.subtitle"
+                   [plotOptions]="chartOptions.plotOptions"
+                   [yaxis]="chartOptions.yaxis"
+                   [xaxis]="chartOptions.xaxis"
+                   [tooltip]="chartOptions.tooltip"
+        ></apx-chart>
+      </div>
+        <br>
+        <hr>
+        <br>
+      </span>
+
+      <span *ngIf="isCircle || isTopCircle">
+      <div class="withCircle">
+        <apx-chart *ngIf="isCircle"
+                   [series]="chartOptions.seriesPie"
+                   [chart]="chartOptions.chart"
+                   [xaxis]="chartOptions.xaxis"
+                   [stroke]="chartOptions.stroke"
+                   [tooltip]="chartOptions.tooltip"
+                   [dataLabels]="chartOptions.dataLabels"
+        ></apx-chart>
+        <apx-chart *ngIf="isTopCircle"
+                   [series]="chartOptions.seriesCircleTop"
+                   [chart]="chartOptions.chart"
+                   [labels]="chartOptions.labelsCircle"
+                   [responsive]="chartOptions.responsive"
+        ></apx-chart>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <div class="mx-2">Tuần 1: 32.000.000 VNĐ</div>
+        <div class="mx-2">Tuần 2: 43.000.000 VND</div>
+      </div>
+         </span>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button class="btn-back btn m-3" type="button"><i class="fa fa-reply"></i> Quay lại</button>
+      <button class="btn-print btn m-3" type="button"><i class="fa fa-print" aria-hidden="true"></i> In báo
+        cáo
+      </button>
+    </div>
+  </div>
 </div>

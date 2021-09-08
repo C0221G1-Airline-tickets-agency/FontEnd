@@ -19,19 +19,13 @@ import {
   ApexGrid,
   ApexTitleSubtitle,
   ApexLegend,
-  ApexXAxis
+  ApexXAxis,
+  // Top
+  ApexTooltip
 } from 'ng-apexcharts';
 import {Report} from '../../../model/report';
 import {ReportService} from '../../../service/report/report.service';
 
-// export interface ChartOptions {
-//   series: ApexAxisChartSeries;
-//   chart: ApexChart;
-//   xaxis: ApexXAxis;
-//   stroke: ApexStroke;
-//   tooltip: ApexTooltip;
-//   dataLabels: ApexDataLabels;
-// }
 export interface ChartOptions {
   // bar
   seriesBar: ApexAxisChartSeries;
@@ -53,6 +47,16 @@ export interface ChartOptions {
   grid: ApexGrid;
   legend: ApexLegend;
   title: ApexTitleSubtitle;
+  // Top bar
+  seriesBarTop: ApexAxisChartSeries;
+  colors: string[];
+  subtitle: ApexTitleSubtitle;
+  // Top circle
+  seriesCircleTop: ApexNonAxisChartSeries;
+  labelsTopCircle: any;
+  labelsCircle: string[];
+  // Top Line
+  seriesLineTop: ApexAxisChartSeries;
 }
 
 @Component({
@@ -76,8 +80,15 @@ export class StatisticalComponent implements OnInit {
   isLine = false;
   isCircle = false;
   isBar = false;
+  isTopBar = false;
+  isTopCircle = false;
+  isTopLine = false;
+  week1 = 'Tuần 1';
+  week2 = 'Tuần 2';
+  isEmployee = false;
+  isAirline = false;
   categories = [
-    'day 1',
+    'Ngày 1',
     'Ngày 2',
     'ngày 3',
     'Ngày 4',
@@ -85,12 +96,17 @@ export class StatisticalComponent implements OnInit {
     'ngày 6',
     'Ngày 7'
   ];
+  topEmployee = 'Top 5 nhân viên Bán được nhiều vé nhất';
+  topAirline = 'Top 5 hãng hàng không bán được nhiều vé nhất';
 
   constructor(private reportService: ReportService) {
   }
 
   ngOnInit(): void {
+    // this.paintChartTypeLineTop();
     this.showChart();
+    // this.paintChartTypeTop();
+    // this.paintChartTypeLine();
   }
 
   showChart() {
@@ -109,7 +125,6 @@ export class StatisticalComponent implements OnInit {
           this.paintChartTypeLine();
           this.setChartLine1();
           this.setChartLine2();
-          this.setCategory();
           return;
         case 'bar':
           this.isBar = true;
@@ -118,9 +133,38 @@ export class StatisticalComponent implements OnInit {
           this.paintChartTypeBar();
           return;
         default:
+          this.isBar = false;
+          this.isLine = false;
+          this.isCircle = false;
           return;
       }
-      return;
+    }
+    if (this.typeReport === 'employee' || this.typeReport === 'airline') {
+      switch (this.typeChart) {
+        case 'bar':
+          this.isTopBar = true;
+          this.paintChartTypeBarTop();
+          this.setChartBarTop();
+          return;
+        case 'circle':
+          this.isTopCircle = true;
+          this.paintChartTypeCircleTop();
+          this.setChartCircleTop();
+          return;
+        case 'line':
+          this.isTopLine = true;
+          this.paintChartTypeLineTop();
+          this.setChartLineTop();
+          return;
+        default:
+          this.isTopCircle = false;
+          this.isTopLine = false;
+          this.isTopBar = false;
+          this.isBar = false;
+          this.isLine = false;
+          this.isCircle = false;
+          return;
+      }
     }
   }
 
@@ -136,7 +180,6 @@ export class StatisticalComponent implements OnInit {
         this.chartOptions.seriesLine[0].data.push(this.statisticalChart1[i].totalMoney);
       }
     });
-
   }
 
   setChartLine2() {
@@ -153,7 +196,6 @@ export class StatisticalComponent implements OnInit {
   }
 
   setCategory() {
-    console.log('Hello');
     let i;
     for (i = 0; i < this.categories.length; i++) {
       this.chartOptions.xaxis.categories.push(this.categories[i]);
@@ -165,11 +207,11 @@ export class StatisticalComponent implements OnInit {
       seriesLine: [
         {
           name: 'tuần 1',
-          data: []
+          data: [12000, 1000, 21000, 11000, 14000, 2000, 11000]
         },
         {
           name: 'tuần 2',
-          data: []
+          data: [3000, 1500, 21000, 16000, 15000, 10000, 11000, 16000]
         },
       ],
       chart: {
@@ -208,7 +250,15 @@ export class StatisticalComponent implements OnInit {
         labels: {
           trim: false
         },
-        categories: []
+        categories: [
+          'Ngày 1',
+          'Ngày 2',
+          'ngày 3',
+          'Ngày 4',
+          'Ngày 5',
+          'ngày 6',
+          'Ngày 7'
+        ]
       },
       tooltip: {
         y: [
@@ -274,16 +324,16 @@ export class StatisticalComponent implements OnInit {
     this.chartOptions = {
       seriesPie: [],
       chart: {
-        width: 380,
+        // width: 480,
         type: 'pie'
       },
-      labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+      labels: ['tuần 1', 'Tuần 2'],
       responsive: [
         {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200
+              // width: 200
             },
             legend: {
               position: 'bottom'
@@ -304,7 +354,7 @@ export class StatisticalComponent implements OnInit {
       for (i = 0; i < this.statisticalChart1.length; i++) {
         // @ts-ignore
         this.chartOptions.seriesBar[0].data.push(this.statisticalChart1[i].totalMoney);
-        this.chartOptions.seriesBar[0].name = 'tuần 1';
+        this.chartOptions.seriesBar[0].name = 'Thời gian 1';
       }
     });
   }
@@ -318,7 +368,7 @@ export class StatisticalComponent implements OnInit {
       for (i = 0; i < this.statisticalChart2.length; i++) {
         // @ts-ignore
         this.chartOptions.seriesBar[1].data.push(this.statisticalChart2[i].totalMoney);
-        this.chartOptions.seriesBar[1].name = 'tuần 2';
+        this.chartOptions.seriesBar[1].name = 'Thời gian 2';
       }
     });
   }
@@ -346,7 +396,7 @@ export class StatisticalComponent implements OnInit {
         }
       },
       dataLabels: {
-        enabled: true
+        enabled: false
       },
       stroke: {
         show: true,
@@ -364,21 +414,265 @@ export class StatisticalComponent implements OnInit {
           'Ngày 7'
         ]
       },
-      yaxis: {
-        title: {
-          text: 'Hello',
-        }
-      },
       fill: {
         opacity: 1
       },
       tooltip: {
         y: {
           formatter(val) {
-            return '$ ' + val + ' thousands';
+            return val + ' VND';
           }
         }
       }
+    };
+  }
+
+// Top bar
+  setChartBarTop() {
+    this.startDate1 = this.reportService.getParameterStartDate1();
+    this.endDate1 = this.reportService.getParameterEndDate1();
+    this.typeReport = this.reportService.getParameterTypeReport();
+    console.log(this.typeReport);
+    if (this.typeReport === 'employee') {
+      this.reportService.getTop5Employee(this.startDate1, this.endDate1).subscribe(chart1 => {
+        this.statisticalChart1 = chart1;
+        let i;
+        for (i = 0; i < this.statisticalChart1.length; i++) {
+          // @ts-ignore
+          this.chartOptions.seriesBarTop[0].data.push(this.statisticalChart1[i].quantity);
+          this.chartOptions.xaxis.categories.push(this.statisticalChart1[i].employeeName);
+        }
+      });
+      this.chartOptions.title.text = 'Top hãng nhân viên bán được nhiều vé nhất';
+    }
+    if (this.typeReport === 'airline') {
+      this.reportService.getTop5Airline(this.startDate1, this.endDate1).subscribe(chart1 => {
+        this.statisticalChart1 = chart1;
+        let i;
+        for (i = 0; i < this.statisticalChart1.length; i++) {
+          // @ts-ignore
+          this.chartOptions.seriesBarTop[0].data.push(this.statisticalChart1[i].quantity);
+          this.chartOptions.xaxis.categories.push(this.statisticalChart1[i].airlineName);
+        }
+      });
+      this.chartOptions.title.text = 'Top hãng máy bay bán được nhiều vé nhất';
+    }
+  }
+
+  paintChartTypeBarTop() {
+    this.chartOptions = {
+      seriesBarTop: [
+        {
+          data: []
+        }
+      ],
+      chart: {
+        type: 'bar',
+        // height: 400
+      },
+      plotOptions: {
+        bar: {
+          barHeight: '100%',
+          distributed: true,
+          horizontal: true,
+          dataLabels: {
+            position: 'bottom'
+          }
+        }
+      },
+      colors: [
+        '#33b2df',
+        '#546E7A',
+        '#d4526e',
+        '#13d8aa',
+        '#A5978B',
+        '#2b908f',
+        '#f9a3a4',
+        '#90ee7e',
+        '#f48024',
+        '#69d2e7'
+      ],
+      dataLabels: {
+        enabled: true,
+        textAnchor: 'start',
+        style: {
+          colors: ['#fff']
+        },
+        formatter(val, opt) {
+          return opt.w.globals.labels[opt.dataPointIndex] + ':  ' + val;
+        },
+        offsetX: 0,
+        dropShadow: {
+          enabled: true
+        }
+      },
+      stroke: {
+        width: 1,
+        colors: ['#fff']
+      },
+      xaxis: {
+        categories: []
+      },
+      yaxis: {
+        labels: {
+          show: false
+        }
+      },
+      title: {
+        text: '',
+        align: 'center',
+        floating: true
+      },
+      tooltip: {
+        theme: 'dark',
+        x: {
+          show: false
+        },
+        y: {
+          title: {
+            formatter() {
+              return '';
+            }
+          }
+        }
+      }
+    };
+  }
+
+// Top Circle
+  setChartCircleTop() {
+    this.startDate1 = this.reportService.getParameterStartDate1();
+    this.endDate1 = this.reportService.getParameterEndDate1();
+    this.typeReport = this.reportService.getParameterTypeReport();
+    if (this.typeReport === 'employee') {
+      this.reportService.getTop5Employee(this.startDate1, this.endDate1).subscribe(chart1 => {
+        this.statisticalChart1 = chart1;
+        let i;
+        for (i = 0; i < this.statisticalChart1.length; i++) {
+          // @ts-ignore
+          this.chartOptions.seriesCircleTop.push(Number(this.statisticalChart1[i].quantity));
+          this.chartOptions.labelsCircle.push(this.statisticalChart1[i].employeeName);
+        }
+      });
+    }
+    if (this.typeReport === 'airline') {
+      this.reportService.getTop5Airline(this.startDate1, this.endDate1).subscribe(chart1 => {
+        this.statisticalChart1 = chart1;
+        let i;
+        for (i = 0; i < this.statisticalChart1.length; i++) {
+          // @ts-ignore
+          this.chartOptions.seriesCircleTop.push(Number(this.statisticalChart1[i].quantity));
+          this.chartOptions.labelsCircle.push(this.statisticalChart1[i].airlineName);
+        }
+      });
+    }
+  }
+
+  paintChartTypeCircleTop() {
+    this.chartOptions = {
+      seriesCircleTop: [],
+      chart: {
+        // width: 380,
+        type: 'pie'
+      },
+      labelsCircle: [],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      ]
+    };
+  }
+
+  // Top Line
+  setChartLineTop() {
+    this.startDate1 = this.reportService.getParameterStartDate1();
+    this.endDate1 = this.reportService.getParameterEndDate1();
+    this.typeReport = this.reportService.getParameterTypeReport();
+    if (this.typeReport === 'employee') {
+      this.reportService.getTop5Employee(this.startDate1, this.endDate1).subscribe(chart1 => {
+        this.statisticalChart1 = chart1;
+        let i;
+        for (i = 0; i < this.statisticalChart1.length; i++) {
+          // @ts-ignore
+          this.chartOptions.seriesLineTop[i].name = (this.statisticalChart1[i].employeeName);
+          // @ts-ignore
+          this.chartOptions.seriesLineTop[i].data.push(Number(this.statisticalChart1[i].quantity));
+        }
+      });
+      this.chartOptions.title.text = this.topEmployee;
+    }
+    if (this.typeReport === 'airline') {
+      this.reportService.getTop5Airline(this.startDate1, this.endDate1).subscribe(chart1 => {
+        this.statisticalChart1 = chart1;
+        let i;
+        for (i = 0; i < this.statisticalChart1.length; i++) {
+          // @ts-ignore
+          this.chartOptions.seriesLineTop[i].name = (this.statisticalChart1[i].airlineName);
+          // @ts-ignore
+          this.chartOptions.seriesLineTop[i].data.push(Number(this.statisticalChart1[i].quantity));
+        }
+      });
+      this.chartOptions.title.text = this.topAirline;
+    }
+  }
+
+  paintChartTypeLineTop() {
+    this.chartOptions = {
+      seriesLineTop: [
+        {
+          name: '',
+          data: []
+        },
+        {
+          name: '',
+          data: []
+        },
+        {
+          name: '',
+          data: []
+        },
+        {
+          name: '',
+          data: []
+        },
+        {
+          name: '',
+          data: []
+        }
+      ],
+      chart: {
+        // height: 350,
+        type: 'line',
+        zoom: {
+          enabled: false
+        }
+      },
+      dataLabels: {
+        enabled: true
+      },
+      stroke: {
+        curve: 'straight'
+      },
+      title: {
+        text: '',
+        align: 'center',
+        floating: true
+      },
+      grid: {
+        row: {
+          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+          opacity: 0.5
+        }
+      },
     };
   }
 }

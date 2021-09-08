@@ -1,0 +1,26 @@
+/*#chart {*/
+/*  !*max-width: 650px;*!*/
+/*  !*margin: 35px auto;*!*/
+/*  width: 600p;*/
+/*}*/
+.btn-back {
+  background-color: #0062D2;
+  color: white;
+}
+
+.btn-print {
+  background-color: rgb(2, 114, 59);
+  color: white;
+}
+.w {
+  width: 850px;
+  height: 500px;
+}
+.wLine {
+  width: 850px;
+  height: 500px;
+}
+.withCircle {
+  width: 550px;
+  height: 400px;
+}

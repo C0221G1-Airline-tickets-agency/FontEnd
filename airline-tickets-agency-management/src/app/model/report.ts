@@ -4,4 +4,5 @@ export interface Report {
   customerName: string;
   employeeName: string;
   totalMoney: string;
+  quantity: string;
 }

@@ -32,6 +32,9 @@ export class ReportService {
   getTop5Employee(startDate: string, endDate: string): Observable<Report[]> {
     return this.http.get<Report[]>(`${API_URL}/api/reports/get-top-5-employee?startDate=` + startDate + '&endDate=' + endDate);
   }
+  getTop5Airline(startDate: string, endDate: string): Observable<Report[]> {
+    return this.http.get<Report[]>(`${API_URL}/api/reports/get-top-5-airline?startDate=` + startDate + '&endDate=' + endDate);
+  }
 
   setParameter(startDate1: string, endDate1: string, startDate2: string, endDate2: string, typeChart: string, typeReport: string) {
     this.startDate1 = startDate1;
