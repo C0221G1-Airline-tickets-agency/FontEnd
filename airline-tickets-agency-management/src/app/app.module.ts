@@ -11,25 +11,28 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {Overlay} from 'ngx-toastr';
+import {Overlay, ToastrModule} from 'ngx-toastr';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ManagementModule} from "./management/management.module";
 
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    MatDialogModule,
-    BrowserAnimationsModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        MatDialogModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        ToastrModule.forRoot(),
+        ManagementModule
+    ],
   providers: [FormBuilder, DatePipe, MatDialog, Overlay],
   bootstrap: [AppComponent]
 })
