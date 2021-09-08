@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {TicketService} from '../../../../service/ticket.service';
 import {Ticket} from '../../../../model/flight-ticket/ticket';
 import {ToastrService} from 'ngx-toastr';
+import {TicketService} from "../../../../service/flight-ticket/ticket/ticket.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-ticket-edit',
@@ -20,7 +21,8 @@ export class TicketEditComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<TicketEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private ticketService: TicketService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private datePipe: DatePipe) {
     this.getTicket();
   }
 
@@ -31,38 +33,43 @@ export class TicketEditComponent implements OnInit {
     this.editForm = new FormGroup({
       ticketId: new FormControl(this.data.ticketId),
       ticketCode: new FormControl(this.data.ticketCode),
-      // tslint:disable-next-line:max-line-length
       passengerName: new FormControl(this.data.passengerName, [Validators.required, Validators.pattern('[A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ][a-zàáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+(([ ][A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ][a-zàáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)|([ ][A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ]))')]),
       locationTo: new FormControl(this.data.flight.locationTo.cityName),
       locationFrom: new FormControl(this.data.flight.locationFrom.cityName),
-      flightDate: new FormControl(this.data.flight.flightDate),
+      flightDate: new FormControl(this.formatDate(this.data.flight.flightDate)),
       // tslint:disable-next-line:max-line-length
-      price: new FormControl(this.money.toString().split('').reverse().reduce((prev, next, index) => {
-        return ((index % 3) ? next : (next + ',')) + prev;
-      })),
+      // price: new FormControl(this.money.toString().split('').reverse().reduce((prev, next, index) => {
+      //       //   return ((index % 3) ? next : (next + ',')) + prev;
+      //       // })),
+      price: new FormControl(this.formatter.format(this.money)),
       passengerEmail: new FormControl(this.data.passengerEmail, [Validators.required, Validators.email]),
 
     });
   }
-
+  formatDate(date: string): string {
+    return this.datePipe.transform(date, 'dd/MM/yyyy')
+  }
+  formatter = new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'VND',
+  });
   onNoClick(): void {
     this.dialogRef.close();
   }
 
 
   update() {
-
     this.data.passengerName = this.editForm.value.passengerName;
     this.data.passengerEmail = this.editForm.value.passengerEmail;
     this.ticket = this.data;
     this.ticketService.update(this.data.ticketId, this.ticket).subscribe(() => {
-      this.toastr.success('Cập nhật thành công!!!', 'Thông báo');
+      this.toastr.success('Cập nhật thành công!!!', 'Thông báo :');
     }, e => {
-      this.toastr.error('Cập nhật thất bại!!!', 'Cảnh báo');
+      this.toastr.error('Cập nhật thất bại!!!', 'Cảnh báo :');
     });
   }
 
   err() {
-    this.toastr.error('Cập nhật thất bại!!!', 'Cảnh báo');
+    this.toastr.error('Cập nhật thất bại!!!', 'Cảnh báo :');
   }
 }

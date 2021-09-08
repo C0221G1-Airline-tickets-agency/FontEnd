@@ -19,10 +19,12 @@ import { DialogDeleteComponent } from './component/flight-ticket/flight-manageme
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { DialogReturnComponent } from './component/flight-ticket/flight-management/dialog-return/dialog-return.component';
+
+import {CustomCurrencyPipe} from './component/flight-ticket/flight-management/custom-currency.pipe';
+import {AirlineCreateComponent} from "./component/flight-ticket/flight-management/airline-create/airline-create.component";
+import {AirlineListComponent} from "./component/flight-ticket/flight-management/airline-list/airline-list.component";
 import {FlightCreateComponent} from "./component/flight-ticket/flight-management/flight-create/flight-create.component";
 import {FlightEditComponent} from "./component/flight-ticket/flight-management/flight-edit/flight-edit.component";
-import { AirlineCreateComponent } from './component/flight-ticket/flight-management/airline-create/airline-create.component';
-import { AirlineListComponent } from './component/flight-ticket/flight-management/airline-list/airline-list.component';
 
 
 
@@ -30,8 +32,10 @@ import { AirlineListComponent } from './component/flight-ticket/flight-managemen
 
 @NgModule({
 
-  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, FlightListComponent
-    , DialogDeleteComponent, BookingDetailsComponent, FlightCreateComponent,FlightEditComponent,PassengerInformationComponent, DialogReturnComponent, AirlineCreateComponent, AirlineListComponent],
+  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, FlightListComponent,AirlineCreateComponent,AirlineListComponent,
+
+    FlightEditComponent,FlightCreateComponent, DialogDeleteComponent, BookingDetailsComponent, PassengerInformationComponent, DialogReturnComponent,CustomCurrencyPipe],
+
 
     imports: [
         CommonModule,

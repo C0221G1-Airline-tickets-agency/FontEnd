@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Ticket} from "../../../model/flight-ticket/ticket";
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,8 @@ export class TicketService {
 
   deleteTicketById(id: number){
     return this.http.delete(this.API_TICKET+'/ticket-delete/'+id);
+  }
+  update(ticketId: number, ticket: Ticket): Observable<Ticket> {
+    return this.http.put<Ticket>(this.API_TICKET + '/ticket-edit/' + ticketId, ticket);
   }
 }

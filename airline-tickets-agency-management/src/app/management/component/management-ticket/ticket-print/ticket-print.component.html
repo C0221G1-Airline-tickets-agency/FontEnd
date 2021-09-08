@@ -3,8 +3,9 @@
     <div class="col">
       <div class="ticket-t">
         <div class="ticket-t-header"  [style]="{background:ticketBack}">
-<!--          <div><img  src="{{data.flight.airline.logo}}"></div>-->
-          <div style="height: 40px" ><h5 class="my-2" >{{data.flight.airline.airlineName}}</h5></div>
+          <div style="height: 40px" >
+            <h5 class="my-2" >{{data.flight.airline.airlineName}}</h5>
+          </div>
           <div><h5 class="my-2">Phòng vé C0221G1</h5></div>
         </div>
         <div class="ticket-t-content ">
@@ -33,9 +34,9 @@
                 </div>
                 <div style="padding-left: 20px">
                   <span class="font-weight-bold">Ngày bay:</span> <span
-                  class="text-primary"> {{data.flight.flightDate}}</span><br>
+                  class="text-primary"> {{data.flight.flightDate | date : 'dd/MM/yyyy'}}</span><br>
                   <span class="font-weight-bold">Điểm đến:</span> <span
-                  class="text-primary"> {{data.flight.locationTo.cityName}} ({{data.flight.locationTo.areaCode}})</span><br>
+                  class="text-primary"> {{data.flight.locationTo.cityName}}({{data.flight.locationTo.areaCode}})</span><br>
                     <span class="font-weight-bold">Giờ đến: </span> <span
                     class="text-primary pr-2"> {{data.flight.endTime}}</span><br>
                   <span class="font-weight-bold">Khoang hạng: </span> <span
@@ -45,7 +46,7 @@
             </div>
             <div class="col-3 pl-0">
               <div class="text-center m-1 my-border">
-                Gía trị thanh toán <br>
+                Giá trị thanh toán <br>
                 <span class="text-danger">{{money | currency: 'VND' : '' : '1.0-0'}}</span>&nbsp; &nbsp; VND
               </div>
             </div>
@@ -55,9 +56,9 @@
               <div class="font-weight-bold">Điện  Thoại</div>
               0905123123
             </div>
-            <div class="col-6 mt-4 border border-danger">
-              Vui lòng có mặt tại sân bay trước 90 phut. <br>
-              Mang theo giấy tờ tùy thân: CMT, họ chiếu, bằng lái,...
+            <div class="col-6 mt-4 border border-danger" style="background: #eae6e6">
+              Vui lòng có mặt tại sân bay trước 90 phút. <br>
+              Mang theo giấy tờ tùy thân: CMT, hộ chiếu, bằng lái,...
             </div>
             <div class="col-4 ">
               <div class="text-center font-weight-bold">Dịch vụ cộng thêm</div>
@@ -67,7 +68,6 @@
         </div>
         <div class="ticket-t-footer" [style]="{background:ticketBack}">
           <div><h5 class="m-0">Tổng đài: 1990000</h5></div>
-<!--          <div><h5 class="mb-0 ml-5 pl-5">HOTLINE: 0905000000</h5></div>-->
         </div>
 
       </div>

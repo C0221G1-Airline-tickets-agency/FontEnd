@@ -28,7 +28,6 @@ export class FlightListComponent implements OnInit {
   totalPage: number;
   Obj: null;
 
-
   constructor(private flightTicketService: FlightService,
               private matDialog: MatDialog,
               private dialogService: DialogService,
@@ -114,16 +113,14 @@ export class FlightListComponent implements OnInit {
       this.toast.warning('Không tìm thấy trang.', 'Trang sau');
     } else {
       this.page = this.page + 1;
-      if (this.page > Math.floor(this.flights.length / 5) + 1) {
-        this.page = this.page - 1;
-        alert('Không tìm thấy trang');
-      }
       this.getAll();
     }
   }
 
   searchFlight() {
+
     this.getAll();
+
   }
 
   backToMain() {
