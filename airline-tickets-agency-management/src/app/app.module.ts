@@ -16,6 +16,8 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {httpInterceptorProviders} from './service/auth/auth-interceptor';
 
 
 @NgModule({
@@ -30,8 +32,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    MatSnackBarModule
   ],
-  providers: [FormBuilder, DatePipe, MatDialog, Overlay],
+  providers: [FormBuilder, DatePipe, MatDialog, Overlay, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {
