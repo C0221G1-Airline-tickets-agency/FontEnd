@@ -1,6 +1,8 @@
+
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {News} from '../../../../model/news';
+
 
 @Component({
   selector: 'app-news-review',
@@ -9,13 +11,17 @@ import {News} from '../../../../model/news';
 })
 export class NewsReviewComponent implements OnInit {
 
+
   constructor(public dialogRef: MatDialogRef<NewsReviewComponent>,
               @Inject(MAT_DIALOG_DATA) public data: News) { }
 
+
   ngOnInit(): void {
-    this.getContent().innerHTML = this.data.newsContent;
+    this.getContent();
   }
   getContent() {
-    return document.getElementById('content');
+    document.getElementById('content').innerHTML = this.data.newsContent.toString();
+    console.log(this.data.newsContent);
+
   }
 }

@@ -8,7 +8,7 @@ export interface News {
   newsImage?;
   newsContent?;
   newsWriteDay?;
-  NewsViews?;
+  newsViews?;
   flag?;
   employee?: Employee;
   category?: Category;

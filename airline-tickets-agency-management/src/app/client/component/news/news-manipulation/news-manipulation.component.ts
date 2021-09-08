@@ -47,6 +47,7 @@ export class NewsManipulationComponent implements OnInit {
     this.initForm();
     this.getNews();
     this.getListCategory();
+
   }
 
   get category() {
@@ -77,6 +78,7 @@ export class NewsManipulationComponent implements OnInit {
     return this.formNews.get('newsWriteDay');
   }
 
+
   get newsId() {
     return this.formNews.get('newsId');
   }
@@ -88,6 +90,7 @@ export class NewsManipulationComponent implements OnInit {
   }
 
   showPreview(event: any) {
+
     const file = event.target.files[0];
     const fileType = file.type;
     const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'];
@@ -114,12 +117,12 @@ export class NewsManipulationComponent implements OnInit {
     const newsWriteDay = this.currentDate;
     this.formNews = this.fb.group({
       newsId: ['', []],
-      newsCode: [newsCode, []],
+      newsCode: [newsCode, [Validators.pattern(`^${newsCode}$`)]],
       newsTitle: ['', [Validators.required, Validators.minLength(66), Validators.maxLength(120)]],
       newsImage: ['', []],
       newsImageName: ['', [Validators.required]],
-      newsContent: ['', [Validators.required, Validators.minLength(666), Validators.maxLength(1200)]],
-      newsWriteDay: [newsWriteDay, []],
+      newsContent: ['', [Validators.required, Validators.minLength(666), Validators.maxLength(120000)]],
+      newsWriteDay: [newsWriteDay, [Validators.pattern(`^${newsWriteDay}$`)]],
       NewsViews: [0, []],
       flag: [true, []],
       employee: [this.employee],
@@ -181,6 +184,7 @@ export class NewsManipulationComponent implements OnInit {
       this.alertError('Nội dung không hợp lệ');
       return false;
     }
+
     if (this.newsTitle.invalid) {
       this.alertError('Tiêu đề không hợp lệ');
       return false;
@@ -191,6 +195,18 @@ export class NewsManipulationComponent implements OnInit {
     }
     if (this.category.invalid) {
       this.alertError('Thể loại không hợp lệ');
+      return false;
+    }
+    if (!this.checkCodeFeedNews()) {
+      this.alertError('Bạn đã chỉnh sửa mã bài viết');
+      return false;
+    }
+    if (!this.checkNewsWriteDay()) {
+      this.alertError('Bạn đã chỉnh sửa ngày viết');
+      return false;
+    }
+    if (!this.checkNameEmployee()) {
+      this.alertError('Bạn đã chỉnh sửa tên người viết');
       return false;
     }
     return true;
@@ -204,6 +220,7 @@ export class NewsManipulationComponent implements OnInit {
       text: reason,
     });
   }
+
 
   get currentDate() {
     return this.datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -224,14 +241,13 @@ export class NewsManipulationComponent implements OnInit {
         categoryId: null,
         categoryName: null
       });
-
     }
-    console.log(this.category);
   }
 
   previewNews() {
     const data = this.formNews.value;
-    console.log(data);
+    data.newsContent = this.newsContent.value.replace(/\n\r?/g, '<br />');
+    data.newsTitle = this.newsTitle.value.replace(/\n\r?/g, '<br />');
     const dialogRef = this.dialog.open(NewsReviewComponent, {
       width: '750px',
       autoFocus: false,
@@ -243,11 +259,11 @@ export class NewsManipulationComponent implements OnInit {
   }
 
   getNews(): void {
-
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
       this.newsService.getById(id)
         .subscribe((news) => {
+
           this.typeComponent = 'edit';
           this.news = news;
 
@@ -265,8 +281,19 @@ export class NewsManipulationComponent implements OnInit {
         });
     }
   }
-
   checkCategory(categoryId) {
     return categoryId === this.category.get('categoryId').value;
+  }
+
+  checkNameEmployee() {
+    return this.employee.employeeName === (document.getElementById('nameEmployee') as HTMLInputElement).value;
+  }
+
+  checkCodeFeedNews() {
+    return this.formNews.get('newsCode').valid;
+  }
+
+  checkNewsWriteDay() {
+    return this.formNews.get('newsWriteDay').valid;
   }
 }
