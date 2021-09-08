@@ -4,6 +4,7 @@ import {ReportComponent} from './component/report/report.component';
 import {ManagementComponent} from './management/management.component';
 
 
+
 const routes: Routes = [
   {
     path: '', component: ManagementComponent,
@@ -11,9 +12,13 @@ const routes: Routes = [
       [
         {
           path: 'report', component: ReportComponent
+        },
+        {
+          path: 'ticket',
+          loadChildren: () => import('./component/ticket/ticket.module').then(module => module.TicketModule)
         }
       ]
-  }
+  },
 ];
 
 @NgModule({
