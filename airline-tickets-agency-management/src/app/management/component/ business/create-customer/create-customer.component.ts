@@ -31,18 +31,18 @@ export class CreateCustomerComponent implements OnInit {
     ],
     customerEmail: [
       {type: 'required', message: 'Trường này không được để trống.'},
-      {type: 'minlength', message: 'Nhập tối thiểu 6 ký tự.'}
+      {type: 'email', message: 'Vui lòng nhập đúng định dạng.'}
     ],
     customerPhone: [
-      {type: 'required', message: 'Trường này không được để trống.'}
+      {type: 'required', message: 'Trường này không được để trống.'},
+      {type: 'pattern', message: 'Vui lòng nhập 10 chữ số'}
     ],
     customerGender: [
       {type: 'required', message: 'Trường này không được để trống.'}
     ],
     customerPassport: [
       {type: 'required', message: 'Trường này không được để trống.'},
-      {type: 'minlength', message: 'Nhập tối thiểu 6 ký tự.'},
-      {type: 'maxlength', message: 'Nhập tối đa 50 ký tự.'}
+      {type: 'pattern',message: 'Vui lòng nhập 9 chữ số'}
     ],
   }
 
@@ -55,9 +55,9 @@ export class CreateCustomerComponent implements OnInit {
         customerAddress: new FormControl('',Validators.required),
         customerBirthday: new FormControl('', [Validators.required]),
         customerGender: new FormControl(null,Validators.required),
-        customerEmail: new FormControl('',Validators.required),
-        customerPhone: new FormControl('', Validators.required),
-        customerPassport: new FormControl('',Validators.required)
+        customerEmail: new FormControl('',[Validators.required,Validators.email]),
+        customerPhone: new FormControl('', [Validators.required,Validators.pattern('^[0-9]{10}$')]),
+        customerPassport: new FormControl('',[Validators.required,Validators.pattern('^[0-9]{9}$')])
       }
     );
   }

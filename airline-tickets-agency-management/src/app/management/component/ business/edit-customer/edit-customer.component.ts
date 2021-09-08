@@ -30,12 +30,12 @@ export class EditCustomerComponent implements OnInit {
           customerId: new FormControl(this.customer.customerId),
           customerCode: new FormControl(this.customer.customerCode),
           customerName: new FormControl(this.customer.customerName, [Validators.required, Validators.minLength(6)]),
-          customerAddress: new FormControl(this.customer.customerAddress,Validators.required),
-          customerBirthday: new FormControl(this.customer.customerBirthday, [Validators.required]),
-          customerGender: new FormControl(this.customer.customerGender,Validators.required),
-          customerEmail: new FormControl(this.customer.customerEmail,Validators.required),
-          customerPhone: new FormControl(this.customer.customerPhone, Validators.required),
-          customerPassport: new FormControl(this.customer.customerPassport,Validators.required)
+          customerAddress: new FormControl('',Validators.required),
+          customerBirthday: new FormControl('', [Validators.required]),
+          customerGender: new FormControl(null,Validators.required),
+          customerEmail: new FormControl('',[Validators.required,Validators.email]),
+          customerPhone: new FormControl('', [Validators.required,Validators.pattern('^[0-9]{10}$')]),
+          customerPassport: new FormControl('',[Validators.required,Validators.pattern('^[0-9]{9}$')])
         }
       );
     });
@@ -56,18 +56,18 @@ export class EditCustomerComponent implements OnInit {
     ],
     customerEmail: [
       {type: 'required', message: 'Trường này không được để trống.'},
-      {type: 'minlength', message: 'Nhập tối thiểu 6 ký tự.'}
+      {type: 'email', message: 'Vui lòng nhập đúng định dạng.'}
     ],
     customerPhone: [
-      {type: 'required', message: 'Trường này không được để trống.'}
+      {type: 'required', message: 'Trường này không được để trống.'},
+      {type: 'pattern', message: 'Vui lòng nhập 10 chữ số'}
     ],
     customerGender: [
       {type: 'required', message: 'Trường này không được để trống.'}
     ],
     customerPassport: [
       {type: 'required', message: 'Trường này không được để trống.'},
-      {type: 'minlength', message: 'Nhập tối thiểu 6 ký tự.'},
-      {type: 'maxlength', message: 'Nhập tối đa 50 ký tự.'}
+      {type: 'pattern',message: 'Vui lòng nhập 9 chữ số'}
     ],
   }
 
