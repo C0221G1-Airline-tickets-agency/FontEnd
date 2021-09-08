@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Flight} from '../../../../../model/flight-ticket/Flight';
-import {FlightService} from '../../../../../service/flight-ticket/flight.service';
+import {FlightService} from '../../../../../service/flight-ticket/flight/flight.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogService} from '../../../../../service/dialog.service';
 import {ToastrService} from 'ngx-toastr';
@@ -25,6 +25,7 @@ export class FlightListComponent implements OnInit {
   name: string;
   totalPage: number;
   Obj: null;
+  arr:Array<any> = [1,2,3];
   constructor(private flightTicketService: FlightService,
               private matDialog: MatDialog,
               private dialogService: DialogService,
@@ -87,6 +88,9 @@ export class FlightListComponent implements OnInit {
 
     }
   }
+  indexPaginationChage(value: number) {
+    this.page = value;
+  }
   setPage(i: number) {
     this.page = i;
     this.getAll();
@@ -105,15 +109,14 @@ export class FlightListComponent implements OnInit {
       this.toast.warning('Không tìm thấy trang.', 'Trang sau');
     } else {
       this.page = this.page + 1;
-      if (this.page > Math.floor(this.flights.length / 5) + 1) {
-        this.page = this.page - 1;
-        alert('Không tìm thấy trang');
-      }
       this.getAll();
     }
   }
 
   searchFlight() {
+    if(this.selects == ''){
+      return this.toast.warning('Bạn chưa lựa chọn ','Tìm kiếm')
+    }
       this.getAll();
   }
   backToMain() {

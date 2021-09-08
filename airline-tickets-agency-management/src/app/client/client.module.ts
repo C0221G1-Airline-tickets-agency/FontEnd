@@ -16,13 +16,14 @@ import { FlightListComponent } from './component/flight-ticket/flight-management
 import { DialogDeleteComponent } from './component/flight-ticket/flight-management/dialog-delete/dialog-delete.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogReturnComponent } from './component/flight-ticket/flight-management/dialog-return/dialog-return.component';
+import {CustomCurrencyPipe} from './component/flight-ticket/flight-management/custom-currency.pipe';
 
 
 
 
 @NgModule({
   declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, FlightListComponent
-    , DialogDeleteComponent, BookingDetailsComponent, PassengerInformationComponent, DialogReturnComponent],
+    , DialogDeleteComponent, BookingDetailsComponent, PassengerInformationComponent, DialogReturnComponent,CustomCurrencyPipe],
 
     imports: [
         CommonModule,

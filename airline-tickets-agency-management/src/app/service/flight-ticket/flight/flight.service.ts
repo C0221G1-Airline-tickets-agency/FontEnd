@@ -21,6 +21,8 @@ export class FlightService {
       return this.http.get(this.FLIGHT_API + '?page=' + page + '&airlineName=' + search);
     } else if (select === 'departureTime') {
       return this.http.get(this.FLIGHT_API + '?page=' + page + '&departureTime=' + search);
+    }else if(select === 'flightDate') {
+      return this.http.get(this.FLIGHT_API + '?page=' + page + '&flightDate=' + search);
     } else {
       return this.http.get(this.FLIGHT_API + '?page=' + page);
     }
