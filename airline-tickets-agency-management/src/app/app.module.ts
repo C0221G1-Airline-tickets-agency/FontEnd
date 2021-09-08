@@ -29,7 +29,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatDialogModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ToastrModule
+    ToastrModule.forRoot()
   ],
   providers: [FormBuilder, DatePipe, MatDialog, Overlay],
   bootstrap: [AppComponent]
