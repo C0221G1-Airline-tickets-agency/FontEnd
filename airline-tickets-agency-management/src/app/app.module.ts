@@ -30,8 +30,8 @@ import {ManagementModule} from './management/management.module';
     MatDialogModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ToastrModule,
-    ManagementModule
+    ManagementModule,
+    ToastrModule.forRoot()
   ],
   providers: [FormBuilder, DatePipe, MatDialog, Overlay],
   bootstrap: [AppComponent]

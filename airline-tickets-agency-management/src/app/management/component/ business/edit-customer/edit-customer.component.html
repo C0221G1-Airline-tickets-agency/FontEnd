@@ -14,7 +14,7 @@
             <span>Mã khách hàng <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input formControlName="customerCode" class="form-control" type="text" readonly>
+            <input formControlName="customerCode" name="customerCode" class="form-control" type="text" readonly>
           </div>
         </div>
         <br>
@@ -23,7 +23,7 @@
           <span>Họ và tên <label>(*)</label></span>
         </div>
         <div class="col-8">
-          <input formControlName="customerName" class="form-control" type="text">
+          <input formControlName="customerName" name="customerName" class="form-control" type="text">
           <small>
             <div class="text-danger" *ngFor="let validation of validationMessage.customerName">
               <div class="text-danger">
@@ -41,7 +41,7 @@
             <span>Địa chỉ <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input formControlName="customerName" class="form-control" type="text">
+            <input formControlName="customerAddress" name="customerAddress" class="form-control" type="text">
             <small>
               <div class="text-danger" *ngFor="let validation of validationMessage.customerAddress">
                 <div class="text-danger">
@@ -59,7 +59,7 @@
             <span>Ngày sinh <label>(*)</label></span>
           </div>
           <div class="col-4">
-            <input type="date" formControlName="customerBirthday" class="form-control">
+            <input type="date" formControlName="customerBirthday" name="customerBirthday" class="form-control">
             <small>
               <div class="text-danger" *ngFor="let validation of validationMessage.customerBirthday">
                 <div class="text-danger">
@@ -77,7 +77,7 @@
             <span>Giới tính <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <select formControlName="customerGender" [compareWith]="compareFn" class="form-control">
+            <select formControlName="customerGender" name="customerGender" [compareWith]="compareFn" class="form-control">
               <option value="Nam">Nam</option>
               <option value="Nữ">Nữ</option>
             </select>
@@ -98,7 +98,7 @@
             <span>Email <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input formControlName="customerEmail" class="form-control" type="email">
+            <input formControlName="customerEmail" name="customerEmail" class="form-control" type="email">
             <small>
               <div class="text-danger" *ngFor="let validation of validationMessage.customerEmail">
                 <div class="text-danger">
@@ -116,7 +116,7 @@
             <span>Điện thoại <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input formControlName="customerPhone" class="form-control" type="text">
+            <input formControlName="customerPhone" name="customerPhone" class="form-control" type="text">
             <small>
               <div class="text-danger" *ngFor="let validation of validationMessage.customerPhone">
                 <div class="text-danger">
@@ -134,7 +134,7 @@
             <span>CMND-passport <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input formControlName="customerPassport" class="form-control" type="text">
+            <input formControlName="customerPassport" name="customerPassport" class="form-control" type="text">
             <small>
               <div class="text-danger" *ngFor="let validation of validationMessage.customerPassport">
                 <div class="text-danger">

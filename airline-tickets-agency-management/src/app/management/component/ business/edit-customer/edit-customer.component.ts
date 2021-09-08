@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {CustomerService} from '../../../../service/customer/customer.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customer} from '../../../../model/customer/customer';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-customer',
@@ -14,13 +15,31 @@ export class EditCustomerComponent implements OnInit {
   customer: Customer;
   idCustomer: any;
   constructor(private customerService: CustomerService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private toast: ToastrService,
+              private router: Router) {
     this.activatedRoute.paramMap.subscribe((paramMap:ParamMap)=>{
       this.idCustomer = paramMap.get('id');
+      console.log(this.idCustomer);
     });
     this.customerService.findById(this.idCustomer).subscribe(data =>{
       this.customer = data;
+      // this.customerForm.patchValue(this.customer);
+      // console.log(this.customerForm);
+      this.customerForm = new FormGroup({
+          customerId: new FormControl(this.customer.customerId),
+          customerCode: new FormControl(this.customer.customerCode),
+          customerName: new FormControl(this.customer.customerName, [Validators.required, Validators.minLength(6)]),
+          customerAddress: new FormControl(this.customer.customerAddress,Validators.required),
+          customerBirthday: new FormControl(this.customer.customerBirthday, [Validators.required]),
+          customerGender: new FormControl(this.customer.customerGender,Validators.required),
+          customerEmail: new FormControl(this.customer.customerEmail,Validators.required),
+          customerPhone: new FormControl(this.customer.customerPhone, Validators.required),
+          customerPassport: new FormControl(this.customer.customerPassport,Validators.required)
+        }
+      );
     });
+
 
   }
 
@@ -53,20 +72,11 @@ export class EditCustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.validate()
+
   }
   validate(): void {
-    this.customerForm.patchValue(this.customer);
-    this.customerForm = new FormGroup({
-        customerName: new FormControl('', [Validators.required, Validators.minLength(6)]),
-        customerAddress: new FormControl('',Validators.required),
-        customerBirthday: new FormControl('', [Validators.required]),
-        customerGender: new FormControl('',Validators.required),
-        customerEmail: new FormControl('',Validators.required),
-        customerPhone: new FormControl('', Validators.required),
-        customerPassport: new FormControl('',Validators.required)
-      }
-    );
+
+
   };
 
   compareFn(c1: any, c2: any): boolean {
@@ -77,10 +87,11 @@ export class EditCustomerComponent implements OnInit {
   editCustomer(){
     this.customer = this.customerForm.value;
     this.customerService.updateCustomer(this.idCustomer,this.customer).subscribe(()=>{
-      alert("Thành công");
+      this.toast.success("Sửa hoàn tất!!!");
+      this.router.navigateByUrl("/management/customer");
     },
       error => {
-      alert("Thất bại");
+     this.toast.error("Các trường phải đúng định dạng.")
       })
   }
 }

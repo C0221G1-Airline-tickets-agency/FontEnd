@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customer} from '../../../../model/customer/customer';
 import {CustomerService} from '../../../../service/customer/customer.service';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 // import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -14,7 +15,7 @@ export class CreateCustomerComponent implements OnInit {
   customerForm: FormGroup;
   customer: Customer;
   constructor(private customerService: CustomerService,
-              private router: Router,
+              private router: Router,private toast: ToastrService
               ) { };
 
   validationMessage = {
@@ -53,7 +54,7 @@ export class CreateCustomerComponent implements OnInit {
         customerName: new FormControl('', [Validators.required, Validators.minLength(6)]),
         customerAddress: new FormControl('',Validators.required),
         customerBirthday: new FormControl('', [Validators.required]),
-        customerGender: new FormControl('',Validators.required),
+        customerGender: new FormControl(null,Validators.required),
         customerEmail: new FormControl('',Validators.required),
         customerPhone: new FormControl('', Validators.required),
         customerPassport: new FormControl('',Validators.required)
@@ -63,13 +64,11 @@ export class CreateCustomerComponent implements OnInit {
   createCustomer(){
     this.customer = this.customerForm.value;
     this.customerService.saveCustomer(this.customer).subscribe(()=>{
-      // this.toast.success("Thêm mới thành công")
-      alert("Thành công")
-      window.location.reload()
+      this.toast.success("Thêm mới thành công")
+      window.location.reload();
     },
       e=>{
-      // this.toast.error("Các trường * không được để trống,dữ liệu phải đúng định dạng.")
-        alert("Thất bại")
+      this.toast.error("Các trường * không được để trống,dữ liệu phải đúng định dạng.")
       });
   }
 
