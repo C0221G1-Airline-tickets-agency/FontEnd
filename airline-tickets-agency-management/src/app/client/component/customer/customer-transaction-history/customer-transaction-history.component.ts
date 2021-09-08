@@ -12,7 +12,7 @@ export class CustomerTransactionHistoryComponent implements OnInit {
   listTicketTransaction: TicketCustomerDto[] = [];
   index = 0;
 
-  constructor(private ticketService: TicketService) {
+  constructor(private ticketService: TicketService, private toast: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -23,7 +23,7 @@ export class CustomerTransactionHistoryComponent implements OnInit {
     this.ticketService.getListTicketCustomerTransaction(1, this.index).subscribe(next => {
       if (next == null) {
         this.index = this.index - 5;
-        alert('lỗi');
+        this.toast.warning('Không có dữ liệu', 'Thông báo');
       } else {
         this.listTicketTransaction = next;
       }
@@ -38,7 +38,7 @@ export class CustomerTransactionHistoryComponent implements OnInit {
   previousPage() {
     this.index = this.index - 5;
     if (this.index < 0) {
-      alert('lỗi');
+      this.toast.warning('Không có dữ liệu', 'Thông báo');
       this.index = this.index + 5;
     } else {
       this.getListTicketCustomerTransaction();

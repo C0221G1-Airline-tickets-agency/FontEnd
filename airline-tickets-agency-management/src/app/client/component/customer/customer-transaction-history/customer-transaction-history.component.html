@@ -31,9 +31,9 @@
               <td>{{i+1+this.index}}</td>
               <td>{{ticket.pointOfDeparture}}</td>
               <td>{{ticket.destination}}</td>
-              <td>{{ticket.bookingDate}}</td>
-              <td>{{ticket.flightDate}}</td>
-              <td>{{ticket.priceSell}}</td>
+              <td>{{ticket.bookingDate | date: 'dd'}}-{{ticket.flightDate | date:'MM'}}-{{ticket.flightDate | date: 'yyyy'}}</td>
+              <td>{{ticket.flightDate | date: 'dd'}}-{{ticket.flightDate | date:'MM'}}-{{ticket.flightDate | date: 'yyyy'}}</td>
+              <td class="text-center">{{ticket.priceSell | number}}</td>
               <td>{{ticket.ticketStatusName}}</td>
             </tr>
             </tbody>

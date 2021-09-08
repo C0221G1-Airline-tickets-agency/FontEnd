@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {TicketCustomerDto} from '../../model/flight-ticket/TicketCustomerDto';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,12 @@ export class TicketService {
     return this.http.delete(this.TICKET_API + '/update-ticket-cancel?id=' + id);
   }
 
-  updateTicketPaid(id: number): Observable<any> {
+  updateTicketPaid(id: string): Observable<any> {
     return this.http.delete(this.TICKET_API + '/update-ticket-paid?id=' + id);
+  }
+
+  sendMailInformation(email: string, listTicket: TicketCustomerDto[]): Observable<any> {
+    const listTest = {ticketMailDtoList: listTicket, email};
+    return this.http.post(this.TICKET_API + '/email/send', listTest);
   }
 }

@@ -29,15 +29,15 @@
             </thead>
             <tbody *ngFor="let ticket of listTicketCustomerBook, let i = index">
             <tr>
-              <td>{{i+1}}</td>
+              <td style="width: 100px">{{i+1+index}}</td>
               <td>{{ticket.ticketCode}}</td>
               <td>{{ticket.pointOfDeparture}}</td>
               <td>{{ticket.destination}}</td>
               <td>{{ticket.bookingDate}}</td>
               <td>{{ticket.flightDate}}</td>
-              <td>{{ticket.priceSell}}</td>
-              <td class="text-center btnCancel" (click)="dialogCancel()">Hủy</td>
-              <td class="text-center"><input type="checkbox" checked></td>
+              <td class="text-center">{{ticket.priceSell | number}}</td>
+              <td class="text-center btnCancel" (click)="dialogCancel(ticket.ticketId,ticket.ticketCode,ticket.priceSell)">Hủy</td>
+              <td class="text-center"><input type="checkbox" [value]="ticket.ticketId" [checked]="listTicketIdPayment.includes(ticket.ticketId.toString())" (change)="getListTicketId($event,ticket.ticketId,ticket.priceSell,ticket)"></td>
             </tr>
             </tbody>
           </table>
@@ -47,14 +47,14 @@
         <div class="d-flex justify-content-end pt-1 pb-2">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
-              <li class="page-item"><a class="page-link" (click)="nextPage()">Trang Trước</a></li>
-              <li class="page-item"><a class="page-link" >{{index/5+1}}</a></li>
-              <li class="page-item"><a class="page-link" (click)="previousPage()">Trang sau</a></li>
+              <li class="page-item"><a class="page-link" (click)="previousPage()" >Trang Trước</a></li>
+              <li class="page-item"><a class="page-link" >{{this.index/5+1}}</a></li>
+              <li class="page-item"><a class="page-link" (click)="nextPage()" >Trang sau</a></li>
             </ul>
           </nav>
         </div>
         <div class="row justify-content-end mr-1">
-          <span id="myPaypalButton"></span>
+          <span id="myPaypalButton" ></span>
         </div>
         <div class="row my-3"></div>
       </div>
