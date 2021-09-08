@@ -25,8 +25,9 @@
         <div class="row input-group">
           <div class="col-2 folow-right pr-0">Chọn ảnh chính :</div>
           <div class="col-10">
-            <input formControlName="destinationImage" name="destinationImage" class="btn pl-2 pr-2" type="text" style="background-color: #9fcdff" value="Chọn ảnh chính">
-            <small style="font-weight: lighter; font-style: italic; margin-left: 10px">gia-lai.png</small>
+            <input id="image-main" class="form-control-file" type="file" (change)="showPreview($event)">
+            <div class="mt-1" [hidden]="url==''"><img [src]="url" style="width: 120px;height: 80px"></div>
+            <div style="color: red">{{messageValidUrl}}</div>
           </div>
         </div>
         <br>

@@ -1,7 +1,8 @@
 <div>
-  <div class="addScient"> <h5 style="padding-top: 10px">THÊM ĐỊA DANH</h5></div>
+  <div class="addScient"> <h5 style="padding-top: 10px">CHỈNH SỬA ĐỊA DANH</h5></div>
   <div style="margin-bottom: -13px">
     <form class="form-group" [formGroup]="scenicForm" (ngSubmit)="submit()">
+      <input hidden formControlName="scenicId" name="scenicId" type="text">
       <div class="row input-group">
         <div class="col-4 folow-right">Tên địa danh :</div>
         <div class="col-8">
@@ -22,6 +23,7 @@
         <div class="col-4 folow-right pr-0">Chọn ảnh:</div>
         <div class="col-8">
           <input name="scenicImage" style="margin-left: -12px;" class="btn form-control-file" type="file" (change)="showPreview($event)">
+          <div class="mt-1" [hidden]="url==''"><img [src]="url" style="width: 100px;height: 60px"></div>
         </div>
       </div>
 
@@ -32,6 +34,7 @@
     </form>
   </div>
 </div>
+
 
 
 
