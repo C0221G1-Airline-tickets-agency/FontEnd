@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TicketListComponent } from './ticket-list.component';
+import { DialogReturnComponent } from './dialog-return.component';
 
-describe('TicketListComponent', () => {
-  let component: TicketListComponent;
-  let fixture: ComponentFixture<TicketListComponent>;
+describe('DialogReturnComponent', () => {
+  let component: DialogReturnComponent;
+  let fixture: ComponentFixture<DialogReturnComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TicketListComponent ]
+      declarations: [ DialogReturnComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TicketListComponent);
+    fixture = TestBed.createComponent(DialogReturnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

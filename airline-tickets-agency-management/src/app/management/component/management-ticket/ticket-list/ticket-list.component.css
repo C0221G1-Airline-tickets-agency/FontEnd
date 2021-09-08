@@ -146,3 +146,6 @@ td{
   height: 46px!important;
   text-align: center!important;
 }
+.swal2-html-container{
+  margin: 0!important;
+}

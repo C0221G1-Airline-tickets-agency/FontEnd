@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
-import * as jspdf from 'jspdf';
 import * as html2canvas from 'html2canvas';
 import {element} from 'protractor';
 import jsPDF from 'jspdf';
@@ -15,7 +14,6 @@ import {ToastrService} from 'ngx-toastr';
 export class TicketPrintComponent implements OnInit {
   title = 'in';
   gender: string;
-  // tslint:disable-next-line:max-line-length
   money = this.data.ticketPrice + (this.data.tax * this.data.ticketPrice) + (this.data.ticketPrice * this.data.ticketTypePrice) - (this.data.ticketPrice * this.data.passengerTypePrice) + this.data.plusBaggage;
   ticketBack: string;
   baggage: number;
@@ -36,12 +34,11 @@ export class TicketPrintComponent implements OnInit {
   }
 
   getGender() {
-    if (this.data.passengerGender === 'nam') {
+    if (this.data.passengerGender === 'Nam') {
       this.gender = 'Ông';
     } else {
       this.gender = 'Bà';
     }
-
   }
 
   getBaggage() {
@@ -74,26 +71,28 @@ export class TicketPrintComponent implements OnInit {
       case 'Mekong Airline':
         this.ticketBack = '#1a375f';
         break;
-
     }
   }
 
   in() {
     const e = document.getElementById('ve');
     // @ts-ignore
+    var img = new Image();
+    img.src = this.data.flight.airline.logo;
+    // @ts-ignore
     html2canvas(e).then((canvas) => {
       const imgDta = canvas.toDataURL('image/png');
-      // @ts-ignore
       const doc = new jsPDF();
       const imgHeight = canvas.height * 208 / canvas.width;
-      doc.addImage(imgDta, 0, 0, 208, imgHeight);
-      doc.save('image.pdf');
-      this.toastr.success('In thành công!!!', 'Thông báo');
+      // @ts-ignore
+      doc.addImage(imgDta, 5, 10, 208, imgHeight);
+      doc.save('Vé-'+ this.data.ticketCode+'.pdf');
+      this.toastr.success('In thành công!!!', 'Thông báo :');
     });
   }
 
   err() {
-    this.toastr.error('In thất bại!!!', 'Cảnh báo');
+    this.toastr.error('In thất bại!!!', 'Cảnh báo :');
   }
 
 }
