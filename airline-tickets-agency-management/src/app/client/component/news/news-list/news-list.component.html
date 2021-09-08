@@ -87,9 +87,7 @@
               </div>
               <div class="news-feed-text">
 <!--                <p>views : {{item.newsViews}}</p>-->
-                <h5 data-toggle="modal"
-
-                    data-target=".bd-example-modal-lg">{{item.newsTitle}}</h5>
+                <h5 [routerLink]="['/news/news-details',item.newsId]">{{item.newsTitle}}</h5>
                 <!--                <span>{{item.newsContent}}<br></span>-->
                 <span> {{ item.newsContent | limitToPipe :  100 }}</span>
                 <div class="d-flex flex-row justify-content-between align-items-center mt-2">
@@ -143,7 +141,7 @@
               </div>
               <div class="col-md-8">
                 <div class="news-feed-text">
-                  <h6>{{hot.newsTitle}} </h6>
+                  <h6 [routerLink]="['/news/news-details',hot.newsId] ">{{hot.newsTitle}} </h6>
                   <div class="d-flex flex-row justify-content-between align-items-center mt-2">
                     <div class="d-flex creator-profile">
                       <div class="d-flex flex-column ml-2">
