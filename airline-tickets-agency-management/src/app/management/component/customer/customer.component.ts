@@ -4,6 +4,7 @@ import {Customer} from '../../../model/customer/customer';
 import {ToastrService} from 'ngx-toastr';
 import {DeleteCustomerComponent} from '../delete-customer/delete-customer.component';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-customer',
@@ -24,6 +25,7 @@ export class CustomerComponent implements OnInit {
 
   constructor(private customerService: CustomerService,
               private dialog: MatDialog,
+              private toast: ToastrService
               ) {
   }
    getListCustomer() {
@@ -58,12 +60,41 @@ export class CustomerComponent implements OnInit {
       });
     }
   }
+  deleteCustomer() {
+    if (this.customer1 === undefined) {
+      this.toast.warning('Bạn chưa chọn khách hàng', 'Thông báo');
+    } else {
+      Swal.fire({
+        title: 'Bạn có chắc chắn muốn xoá?',
+        html: '<span style="color: #dc3545">' + this.customer1.customerName + '</span>',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#dc3545',
+        confirmButtonText: 'Xác nhận',
+        cancelButtonText: '&emsp;Huỷ&emsp;',
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.customerService.deleteCustomer(this.customer1).subscribe(e => {
+              this.toast.success('Xoá thành công', 'Thông báo');
+              this.getListCustomer();
+            }, error => {
+              this.toast.error('Lỗi', 'Thông báo');
+              this.getListCustomer();
+            }
+          );
+        }
+        this.customer1 = undefined;
+      });
+    }
+  }
 
   getPrevius() {
     if (this.page === 0) {
     } else {
       this.page -= 1;
-      this.getListCustomer();
+      this.searchCustomer();
     }
   }
 
@@ -72,7 +103,7 @@ export class CustomerComponent implements OnInit {
       alert('dai');
     } else {
       this.page += 1;
-      this.getListCustomer();
+      this.searchCustomer();
     }
   }
 
