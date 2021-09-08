@@ -30,12 +30,12 @@ export class EditCustomerComponent implements OnInit {
           customerId: new FormControl(this.customer.customerId),
           customerCode: new FormControl(this.customer.customerCode),
           customerName: new FormControl(this.customer.customerName, [Validators.required, Validators.minLength(6)]),
-          customerAddress: new FormControl('',Validators.required),
-          customerBirthday: new FormControl('', [Validators.required]),
-          customerGender: new FormControl(null,Validators.required),
-          customerEmail: new FormControl('',[Validators.required,Validators.email]),
-          customerPhone: new FormControl('', [Validators.required,Validators.pattern('^[0-9]{10}$')]),
-          customerPassport: new FormControl('',[Validators.required,Validators.pattern('^[0-9]{9}$')])
+          customerAddress: new FormControl(this.customer.customerAddress,Validators.required),
+          customerBirthday: new FormControl(this.customer.customerBirthday, [Validators.required]),
+          customerGender: new FormControl(this.customer.customerGender,Validators.required),
+          customerEmail: new FormControl(this.customer.customerEmail,[Validators.required,Validators.email]),
+          customerPhone: new FormControl(this.customer.customerPhone, [Validators.required,Validators.pattern('^[0-9]{10}$')]),
+          customerPassport: new FormControl(this.customer.customerPassport,[Validators.required,Validators.pattern('^[0-9]{9}$')])
         }
       );
     });
