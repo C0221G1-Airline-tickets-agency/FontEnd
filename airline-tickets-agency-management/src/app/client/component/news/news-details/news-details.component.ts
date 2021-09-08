@@ -11,7 +11,7 @@ import {Category} from '../../../../model/category';
   styleUrls: ['./news-details.component.css']
 })
 export class NewsDetailsComponent implements OnInit {
-  item: News = {};
+  item!: News;
   idDetails = 0;
   hotNews: News[] = [];
   category: Category = {};
@@ -23,6 +23,7 @@ export class NewsDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getDetails();
     this.getHotNews();
+
   }
 
   getDetails() {
@@ -32,8 +33,7 @@ export class NewsDetailsComponent implements OnInit {
       console.log(this.idDetails);
       this.newsService.getById(this.idDetails).subscribe(next => {
         this.item = next;
-        console.log('next');
-        console.log(next);
+        this.getIdContent().innerHTML = this.item.newsContent;
       });
     });
   }
@@ -45,5 +45,9 @@ export class NewsDetailsComponent implements OnInit {
       }
       this.hotNews = hotNews;
     });
+  }
+
+  getIdContent() {
+    return document.getElementById('content');
   }
 }

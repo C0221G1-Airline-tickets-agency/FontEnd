@@ -1,67 +1,23 @@
+<div class="col-xl-9 mx-auto col-lg-9 col-md-12 col-sm-12">
 
-<!--<div class=" row content">-->
-<!--  <div id="carouselExampleCaptions" class="carousel slide d-flex justify-content-center" data-ride="carousel "-->
-<!--       style="">-->
-<!--    <ol class="carousel-indicators">-->
-<!--      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>-->
-<!--      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>-->
-<!--      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>-->
-<!--    </ol>-->
-<!--    <div class="carousel-inner">-->
-<!--      <div class="carousel-item active">-->
-<!--        <img src="../../../../../assets/img-news/qc2ps.jpg" class="d-block  img-fluid "-->
-<!--             style="width: 1755px!important; height: 250px!important;">-->
-<!--        <div class="carousel-caption d-none d-md-block">-->
-<!--          <h5>C0221G-1 </h5>-->
-
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="carousel-item">-->
-<!--        <img src="../../../../../assets/img-news/qc1.png" class="d-block " alt="..."-->
-<!--             style="width: 1755px!important; height: 250px!important;">-->
-<!--        <div class="carousel-caption d-none d-md-block">-->
-<!--          <h5>C0221G-1</h5>-->
-
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="carousel-item">-->
-<!--        <img src="../../../../../assets/img-news/qc5.jpg" class="d-block " alt="..."-->
-<!--             style="width: 1755px!important; height: 250px!important;">-->
-<!--        <div class="carousel-caption d-none d-md-block">-->
-<!--          <h5>C0221G-1</h5>-->
-
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">-->
-<!--      <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-<!--      <span class="sr-only">Previous</span>-->
-<!--    </a>-->
-<!--    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">-->
-<!--      <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-<!--      <span class="sr-only">Next</span>-->
-<!--    </a>-->
-<!--  </div>-->
-<!--</div>-->
-<div class="">
   <div class="row ">
     <div class="ml-3"><h4 style="font-weight: bold; margin-right: 120px">Tin liên quan</h4></div>
   </div>
   <div class=" d-none d-flex  ">
     <hr>
-    <div class="row d-block mx-0" style="width: 100%"  *ngFor="let hot of hotNews ">
-      <div class="ml-3">
+    <div class="row d-block mx-0" style="width: 100%" *ngFor="let hot of hotNews ">
+      <div class="">
         <div class="row shadow news-card p-3 ml-1 mr-1 mb-2 bg-white ">
           <div class="col-md-4 px-0">
             <div class="feed-image"><img class="news-feed-image rounded img-fluid img-responsive"
-                                         src="../../../../../assets/img-news/{{hot.newsImage}}.jpg" alt=""></div>
+                                         src="{{hot.newsImage}}" alt=""></div>
           </div>
           <div class="col-md-8">
             <div class="news-feed-text">
-              <a [routerLink]="['/news/news-details',hot.newsId]">{{hot.newsTitle}}</a>
+              <a [routerLink]="['/news/news-details',hot.newsId]">{{hot.newsTitle  | limitToPipe :  66}}</a>
               <div class="d-flex flex-row justify-content-between align-items-center mt-2">
                 <div class="d-flex creator-profile">
-                  <div class="d-flex flex-column ml-2"><span class="date" >{{hot.newsWriteDay}}</span>
+                  <div class="d-flex flex-column ml-2"><span class="date">{{hot.newsWriteDay}}</span>
                   </div>
                 </div>
               </div>
@@ -72,102 +28,47 @@
       </div>
     </div>
   </div>
-</div>
 
 
-<div style="background: white; margin-top: 15px">
-  <div>
-    <div class=" d-flex justify-content-center">
-      <div class="col-sm-15 col-md-10 col-lg-10 py-0 pl-3 pr-1">
-        <div id="featured" class=" slide carousel-fade" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="card bg-dark text-white" style="margin-top: 50px "><img class="card-img img-fluid"
-                                                        src="../../../../../assets/img-news/{{item.newsImage}}.jpg" alt="">
-                <div class="card-img-overlay d-flex ">
-                  <div href="" class="align-self-end">
-                    <span class="" style="color: white;background: #e54744; font-size: 110%;">{{item.category.categoryName}}</span>
-                    <br>
-                    <h4 class="card-title" style="color: white; background: #448eff">{{item.newsTitle}}</h4>
+  <div style="background: white; margin-top: 15px">
+    <div>
+      <div class=" d-flex justify-content-center">
+        <div class="col-sm-15 col-md-10 col-lg-10 py-0 pl-3 pr-1">
+          <div id="featured" class=" slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="card bg-dark text-white" style="margin-top: 50px "><img class="card-img img-fluid"
+                                                                                    src="{{item.newsImage}}" alt="">
+                  <div class="card-img-overlay d-flex ">
+                    <div href="" class="align-self-end">
+                    <span class=""
+                          style="color: white;background: #e54744; font-size: 110%;">{{item.category.categoryName}}</span>
+                      <br>
+                      <h4 class="card-title" style="color: white; background: #448eff">{{item.newsTitle}}</h4>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <!--  header chi tiết tin      -->
+
+        <!--  body chi tiết tin      -->
       </div>
-      <!--  header chi tiết tin      -->
 
-      <!--  body chi tiết tin      -->
-    </div>
+      <div class="row  justify-content-center">
 
-    <div class="row  justify-content-center">
-
-      <div class="col-sm-15 col-md-10 col-lg-10 py-0 pl-3 pr-1">
-        <small class="my-2" style="font-weight: 900">{{item.employee.employeeName}} | {{item.newsWriteDay}}</small>
-        <p>
-          {{item.newsContent}}
-          <br>
-          ----------------------------------------------------------------------
-          <br>
-          Như vậy trong 24h giờ qua số ca nhiễm ghi nhận trong nước tăng 1.296 ca. Tại TP. Hồ
-          Chí Minh tăng 667 ca, Bình Dương tăng 501 ca, Đồng Nai giảm 181 ca, Long An tăng 67
-          Tính từ 18h ngày 24/8 đến 18h ngày 25/8, trên Hệ thống Quốc gia quản lý ca bệnh
-          COVID-19 ghi nhận 12.096 ca nhiễm mới, trong đó 3 ca nhập cảnh và 12.093 ca ghi nhận
-          trong nước.<br>
-
-          Cụ thể, tại TP. Hồ Chí Minh (5.294 ), Bình Dương (4.129), Đồng Nai (618), Long An
-          (460), Tiền Giang (319), Đà Nẵng (162), Khánh Hòa (150), Tây Ninh (119), Bình Thuận
-          (106), Hà Nội (96), Nghệ An (95), Đồng Tháp (93), Cần Thơ (90), Bà Rịa - Vũng Tàu
-          (75), An Giang (50), Đắk Lắk (40), Cà Mau (28), Phú Yên (27), Trà Vinh (24), Kiên
-          Giang (23), Bình Định (18), Hà Tĩnh (15), Quảng Nam (9), Bạc Liêu (7), Bình Phước
-          (7), Ninh Thuận (6), Vĩnh Long (5), Đắk Nông (5), Sơn La (4), Hậu Giang (4), Sóc
-          Trăng (4), Thanh Hóa (3), Bắc Ninh (3), Thái Bình (2), Quảng Ngãi (2), Quảng Bình
-          (1) trong đó có 7.321 ca trong cộng đồng.<br>
-
-          Như vậy trong 24h giờ qua số ca nhiễm ghi nhận trong nước tăng 1.296 ca. Tại TP. Hồ
-          Chí Minh tăng 667 ca, Bình Dương tăng 501 ca, Đồng Nai giảm 181 ca, Long An tăng 67
-          Tính từ 18h ngày 24/8 đến 18h ngày 25/8, trên Hệ thống Quốc gia quản lý ca bệnh
-          COVID-19 ghi nhận 12.096 ca nhiễm mới, trong đó 3 ca nhập cảnh và 12.093 ca ghi nhận
-          trong nước.<br>
-
-          Cụ thể, tại TP. Hồ Chí Minh (5.294 ), Bình Dương (4.129), Đồng Nai (618), Long An
-          (460), Tiền Giang (319), Đà Nẵng (162), Khánh Hòa (150), Tây Ninh (119), Bình Thuận
-          (106), Hà Nội (96), Nghệ An (95), Đồng Tháp (93), Cần Thơ (90), Bà Rịa - Vũng Tàu
-          (75), An Giang (50), Đắk Lắk (40), Cà Mau (28), Phú Yên (27), Trà Vinh (24), Kiên
-          Giang (23), Bình Định (18), Hà Tĩnh (15), Quảng Nam (9), Bạc Liêu (7), Bình Phước
-          (7), Ninh Thuận (6), Vĩnh Long (5), Đắk Nông (5), Sơn La (4), Hậu Giang (4), Sóc
-          Trăng (4), Thanh Hóa (3), Bắc Ninh (3), Thái Bình (2), Quảng Ngãi (2), Quảng Bình
-          (1) trong đó có 7.321 ca trong cộng đồng.<br>
-
-          Như vậy trong 24h giờ qua số ca nhiễm ghi nhận trong nước tăng 1.296 ca. Tại TP. Hồ
-          Chí Minh tăng 667 ca, Bình Dương tăng 501 ca, Đồng Nai giảm 181 ca, Long An tăng 67
-          ca, Tiền Giang tăng 226 ca.<br>
-          Như vậy trong 24h giờ qua số ca nhiễm ghi nhận trong nước tăng 1.296 ca. Tại TP. Hồ
-          Chí Minh tăng 667 ca, Bình Dương tăng 501 ca, Đồng Nai giảm 181 ca, Long An tăng 67
-          Tính từ 18h ngày 24/8 đến 18h ngày 25/8, trên Hệ thống Quốc gia quản lý ca bệnh
-          COVID-19 ghi nhận 12.096 ca nhiễm mới, trong đó 3 ca nhập cảnh và 12.093 ca ghi nhận
-          trong nước.<br>
-
-          Cụ thể, tại TP. Hồ Chí Minh (5.294 ), Bình Dương (4.129), Đồng Nai (618), Long An
-          (460), Tiền Giang (319), Đà Nẵng (162), Khánh Hòa (150), Tây Ninh (119), Bình Thuận
-          (106), Hà Nội (96), Nghệ An (95), Đồng Tháp (93), Cần Thơ (90), Bà Rịa - Vũng Tàu
-          (75), An Giang (50), Đắk Lắk (40), Cà Mau (28), Phú Yên (27), Trà Vinh (24), Kiên
-          Giang (23), Bình Định (18), Hà Tĩnh (15), Quảng Nam (9), Bạc Liêu (7), Bình Phước
-          (7), Ninh Thuận (6), Vĩnh Long (5), Đắk Nông (5), Sơn La (4), Hậu Giang (4), Sóc
-          Trăng (4), Thanh Hóa (3), Bắc Ninh (3), Thái Bình (2), Quảng Ngãi (2), Quảng Bình
-          (1) trong đó có 7.321 ca trong cộng đồng.<br>
-
-          Như vậy trong 24h giờ qua số ca nhiễm ghi nhận trong nước tăng 1.296 ca. Tại TP. Hồ
-          Chí Minh tăng 667 ca, Bình Dương tăng 501 ca, Đồng Nai giảm 181 ca, Long An tăng 67
-          ca, Tiền Giang tăng 226 ca.<br>
-        </p>
-
+        <div class="col-sm-15 col-md-10 col-lg-10 py-0 pl-3 pr-1">
+          <small class="my-2" style="font-weight: 900">{{item.employee.employeeName}} | {{item.newsWriteDay}}</small>
+          <p id="content">
+            {{item.newsContent}}
+          </p>
+        </div>
       </div>
     </div>
   </div>
+  <br>
+  <br>
+
 </div>
-<br>
-<br>
-
-

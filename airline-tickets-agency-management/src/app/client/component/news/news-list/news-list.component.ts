@@ -80,7 +80,7 @@ export class NewsListComponent implements OnInit {
   deleteNews(newsId, newsName) {
     Swal.fire({
       title: 'Bạn có chắc chắn muốn xoá?',
-      html: '<span style="color: #dc3545">' + 'Tin tức có id : ' + newsId  + '<br>' + ' Tin tức có mã : ' + newsName + '</span>',
+      html: '<span style="color: #dc3545">' + 'Tin tức có id : ' + newsId + '<br>' + ' Tin tức có mã : ' + newsName + '</span>',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -113,4 +113,5 @@ export class NewsListComponent implements OnInit {
       }
     });
   }
+
 }

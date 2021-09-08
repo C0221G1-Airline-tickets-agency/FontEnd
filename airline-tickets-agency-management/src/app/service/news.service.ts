@@ -1,16 +1,22 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+
+import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
 import {Observable} from 'rxjs';
 import {News} from '../model/news';
 import {Category} from '../model/category';
 import {environment} from '../../environments/environment';
 
+
+
+import {TokenStorageService} from './auth/token-storage.service';
 const API_URL = `${environment.apiUrl}`;
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
+
 
 
   constructor(private http: HttpClient) {
@@ -36,10 +42,6 @@ export class NewsService {
     return this.http.post<News>(API_URL + '/news', value);
   }
 
-  update(value, id) {
-    return this.http.put<News[]>(`${API_URL}/news/${id}`, value);
-  }
-
   remove(id) {
     return this.http.delete<News[]>(`${API_URL}/news/${id}`);
   }
@@ -62,5 +64,8 @@ export class NewsService {
 
   deleteNews(newsId: number) {
     return this.http.delete(`${API_URL}/news/news-delete/${newsId}`);
+  }
+  update(value, id) {
+    return  this.http.put<News>(`${API_URL}/news/${id}`, value);
   }
 }

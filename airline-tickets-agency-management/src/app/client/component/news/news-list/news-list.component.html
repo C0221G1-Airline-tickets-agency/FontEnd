@@ -1,47 +1,3 @@
-<!--<div class=" row content">-->
-<!--  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel "-->
-<!--       style="margin-top: -20px; margin-left: 120px!important;">-->
-<!--    <ol class="carousel-indicators">-->
-<!--      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>-->
-<!--      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>-->
-<!--      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>-->
-<!--    </ol>-->
-<!--    <div class="carousel-inner">-->
-<!--      <div class="carousel-item active">-->
-<!--        <img src="../../../../../assets/img-news/qc3.jpg" class="d-block w-100" alt="..."-->
-<!--             style="width: 1150px!important; height: 250px!important;">-->
-<!--        <div class="carousel-caption d-none d-md-block">-->
-<!--          <h5>C0221G-1 </h5>-->
-
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="carousel-item">-->
-<!--        <img src="../../../../../assets/img-news/qc2.jpg" class="d-block w-100" alt="..."-->
-<!--             style="width: 1150px!important; height: 250px!important;">-->
-<!--        <div class="carousel-caption d-none d-md-block">-->
-<!--          <h5>C0221G-1</h5>-->
-
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="carousel-item">-->
-<!--        <img src="../../../../../assets/img-news/qc5.jpg" class="d-block w-100" alt="..."-->
-<!--             style="width: 1150px!important; height: 250px!important;">-->
-<!--        <div class="carousel-caption d-none d-md-block">-->
-<!--          <h5>C0221G-1</h5>-->
-
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">-->
-<!--      <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-<!--      <span class="sr-only">Previous</span>-->
-<!--    </a>-->
-<!--    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">-->
-<!--      <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-<!--      <span class="sr-only">Next</span>-->
-<!--    </a>-->
-<!--  </div>-->
-<!--</div>-->
 
 <!--tin tức-->
 
@@ -56,12 +12,14 @@
             Tin tức
           </div>
         </div>
-        <button id="addNews" class="btn  position-absolute"
-                style="top: 0px; right: 35%; background:#e54744; color: white;">Thêm mới
-        </button>
       </div>
 
       <div class="col-md-8">
+        <div class="position-absolute "  style="top: 0px; right: 0" >
+          <button class="btn  " routerLink="/news/manipulation"
+                  style="background:#e54744; color: white;">Thêm mới
+          </button>
+        </div>
         <div class="row " style="height: 40px">
         </div>
 
@@ -69,7 +27,7 @@
           <div class="row shadow position-relative news-card p-3 ml-1 mb-2 bg-white">
             <div class="col-md-4">
               <div class="feed-image"><img class="news-feed-image rounded img-fluid img-responsive"
-                                           src="../../../../../assets/img-news/{{item.newsImage}}.jpg" alt=""></div>
+                                           src="{{item.newsImage}}" alt=""></div>
             </div>
             <div class="col-md-8 position-relative">
               <!-- Example single danger button -->
@@ -80,7 +38,7 @@
                      aria-hidden="true"></i>
                 </a>
                 <div class="dropdown-menu ">
-                  <a class="dropdown-item" href="#"> <i class="fa fa-edit text-warning"></i> Sửa</a>
+                  <a class="dropdown-item" [routerLink]="['/news/manipulation',item.newsId]"> <i class="fa fa-edit text-warning" ></i> Sửa</a>
                   <a class="dropdown-item" data-toggle="modal"
                      (click)="deleteNews(item.newsId , item.newsCode)"> <i class="fa fa-trash text-danger"></i> Xóa</a>
                 </div>
@@ -137,7 +95,7 @@
             <div class="row shadow news-card p-3 ml-1 mr-1 mb-2 bg-white ">
               <div class="col-md-4 px-0">
                 <div class="feed-image"><img class="news-feed-image rounded img-fluid img-responsive"
-                                             src="../../../../../assets/img-news/{{hot.newsImage}}.jpg" alt=""></div>
+                                             src="{{hot.newsImage}}" alt=""></div>
               </div>
               <div class="col-md-8">
                 <div class="news-feed-text">
