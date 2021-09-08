@@ -1,5 +1,11 @@
 export interface SignupRequest {
   username?: string;
-  email?: string;
   password?: string;
+  phone?: string;
+  name?: string;
+  birthday?: string;
+  address?: string;
+  gender?: string;
+  nationality?: string;
+  passport?: string;
 }
