@@ -13,6 +13,9 @@ export class NewsReviewComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: News) { }
 
   ngOnInit(): void {
+    this.getContent().innerHTML = this.data.newsContent;
   }
-
+  getContent() {
+    return document.getElementById('content');
+  }
 }

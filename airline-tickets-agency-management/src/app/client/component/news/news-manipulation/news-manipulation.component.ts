@@ -265,4 +265,8 @@ export class NewsManipulationComponent implements OnInit {
         });
     }
   }
+
+  checkCategory(categoryId) {
+    return categoryId === this.category.get('categoryId').value;
+  }
 }
