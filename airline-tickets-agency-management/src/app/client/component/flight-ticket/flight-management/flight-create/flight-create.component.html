@@ -71,7 +71,8 @@
           </div>
           <div class="col-4">
             <input type="time" class="form-control" formControlName="departureTime">
-            <div class="alert alert-danger" *ngIf="!flightForm.get('timeGroup').get('departureTime').valid && (flightForm.get('timeGroup').get('departureTime').dirty || flightForm.get('timeGroup').get('departureTime').touched)">
+            <div class="alert alert-danger"
+                 *ngIf="!flightForm.get('timeGroup').get('departureTime').valid && (flightForm.get('timeGroup').get('departureTime').dirty || flightForm.get('timeGroup').get('departureTime').touched)">
 
               <div [hidden]="!flightForm.get('timeGroup').get('departureTime').hasError('required')">
                 <p style="color: red">Giờ khởi hành không được để trống</p>
@@ -98,26 +99,26 @@
           </div>
           <div class="col-4">
             <input type="time" class="form-control" formControlName="endTime">
-            <div class="alert alert-danger" *ngIf="!flightForm.get('timeGroup').get('endTime').valid && (flightForm.get('timeGroup').get('endTime').dirty|| flightForm.get('timeGroup').get('endTime').touched )" >
-              <div [hidden]="!flightForm.hasError('comparisonTime',  ['timeGroup']) && flightForm.get('timeGroup').touched ">
-                <p style="color: red">Giờ đến phải lớn hơn giờ khởi hành</p>
-              </div>
+            <div class="alert alert-danger"
+                 *ngIf="!flightForm.get('timeGroup').get('endTime').valid && ( flightForm.get('timeGroup').get('endTime').dirty||flightForm.get('timeGroup').get('endTime').touched )">
+
               <div [hidden]="!flightForm.get('timeGroup').get('endTime').hasError('pattern')">
                 <p style="color: red">Giờ đến phải đúng định dạng HH:ss</p>
               </div>
               <div [hidden]="!flightForm.get('timeGroup').get('endTime').hasError('required')">
                 <p style="color: red">Giờ khởi hành không được để trống</p>
               </div>
+              <!--              <div-->
+              <!--                [hidden]="!flightForm.hasError('comparisonTime',  ['timeGroup'])&& flightForm.get('timeGroup').touched ">-->
+              <!--                <p style="color: red">Giờ đến phải lớn hơn giờ khởi hành</p>-->
+              <!--              </div>-->
+
+            </div>
+            <div class="alert alert-danger"
+                 *ngIf="flightForm.controls.timeGroup.hasError('comparisonTime')&& flightForm.controls.timeGroup.get('endTime').touched ">
+              <p style="color: red">Giờ đến phải lớn hơn giờ khởi hành</p>
             </div>
 
-            <!--          <div  class="alert alert-danger" role="alert" *ngIf="!endTime.valid && (endTime.dirty || endTime.touched)">-->
-            <!--            <div [hidden]="!endTime.errors.pattern">-->
-            <!--              <p style="color: red"> Giờ đến phải đúng định dạng HH:ss </p>-->
-            <!--            </div>-->
-            <!--            <div [hidden]="!endTime.errors.required">-->
-            <!--              <p style="color: red">Giờ đến không được để trống</p>-->
-            <!--            </div>-->
-            <!--          </div>-->
           </div>
         </div>
       </div>
@@ -131,21 +132,23 @@
             <select class="form-control" formControlName="locationTo">
               <option *ngFor="let location of locations" [ngValue]="location">{{location.cityName}}</option>
             </select>
-            <div class="alert alert-danger" *ngIf="!flightForm.get('locationGroup').get('locationTo').valid && (flightForm.get('locationGroup').get('locationTo').dirty || flightForm.get('locationGroup').get('locationTo').touched)" >
-              <div [hidden]="!flightForm.get('locationGroup').get('locationTo').hasError('required')">
-                <p style="color: red">Điểm đi  không được để trống</p>
+            <div class="alert alert-danger"
+                 *ngIf="!flightForm.get('locationGroup').get('locationTo').valid && (flightForm.get('locationGroup').get('locationTo').dirty || flightForm.get('locationGroup').get('locationTo').touched)">
+              <div *ngIf="flightForm.get('locationGroup').get('locationTo').hasError('required')">
+                <p style="color: red">Điểm đi không được để trống</p>
               </div>
             </div>
-
-            <!--            <div class="alert alert-danger" role="alert"-->
-            <!--                 *ngIf="!locationTo.valid && (locationTo.dirty || locationTo.touched)">-->
-            <!--              <div [hidden]="!locationTo.errors.required">-->
-            <!--                <p style="color: red">Điểm đi không được để trống</p>-->
-            <!--              </div>-->
-            <!--            </div>-->
-
           </div>
+
+          <!--            <div class="alert alert-danger" role="alert"-->
+          <!--                 *ngIf="!locationTo.valid && (locationTo.dirty || locationTo.touched)">-->
+          <!--              <div [hidden]="!locationTo.errors.required">-->
+          <!--                <p style="color: red">Điểm đi không được để trống</p>-->
+          <!--              </div>-->
+          <!--            </div>-->
+
         </div>
+
         <br>
 
         <div class="row input-group">
@@ -156,26 +159,31 @@
             <select class="form-control" formControlName="locationFrom">
               <option *ngFor="let location of locations" [ngValue]="location">{{location.cityName}}</option>
             </select>
-            <div class="alert alert-danger" *ngIf="!flightForm.get('locationGroup').get('locationFrom').valid && (flightForm.get('locationGroup').get('locationFrom').dirty || flightForm.get('locationGroup').get('locationFrom').touched)">
-              <div [hidden]="!flightForm.get('locationGroup').get('locationFrom').hasError('required')">
+            <div class="alert alert-danger"
+                 *ngIf="!flightForm.get('locationGroup').get('locationFrom').valid && (flightForm.get('locationGroup').get('locationFrom').dirty || flightForm.get('locationGroup').get('locationFrom').touched)">
+              <div *ngIf="flightForm.get('locationGroup').get('locationFrom').hasError('required')">
                 <p style="color: red">Điểm đến không được để trống</p>
               </div>
-              <div [hidden]="!flightForm.hasError('comparisonLocation',  ['locationGroup']) && flightForm.get('locationGroup').touched ">
-                <p style="color: red">Điểm đến không được trùng với điểm đi</p>
-              </div>
             </div>
-
-
-            <!--            <div class="alert alert-danger" role="alert"-->
-            <!--                 *ngIf="!locationFrom.valid && (locationFrom.dirty || locationFrom.touched)">-->
-            <!--              <div [hidden]="!locationFrom.errors.required">-->
-            <!--                <p style="color: red">Điểm đến không được để trống</p>-->
-            <!--              </div>-->
-            <!--            </div>-->
-
+            <div class="alert alert-danger"
+                 *ngIf="flightForm.hasError('comparisonLocation',  ['locationGroup']) && flightForm.get('locationGroup').touched ">
+              <p style="color: red">Điểm đến không được trùng với điểm đi</p>
+            </div>
           </div>
+
+
+
+          <!--            <div class="alert alert-danger" role="alert"-->
+          <!--                 *ngIf="!locationFrom.valid && (locationFrom.dirty || locationFrom.touched)">-->
+          <!--              <div [hidden]="!locationFrom.errors.required">-->
+          <!--                <p style="color: red">Điểm đến không được để trống</p>-->
+          <!--              </div>-->
+          <!--            </div>-->
+
         </div>
       </div>
+      <!--        </div>-->
+      <!--      </div>-->
       <br>
       <div class="row input-group">
         <div class="col-3 folow-right">
@@ -198,7 +206,7 @@
           Thêm
         </button>
         <button class="btn btn-back" style="background: #005cbf;color: white;margin-right: 94px"
-                type="button">
+                type="button" routerLink="/flight-management">
           <i class="icon-sidebar fa fa-reply "></i>
           Trở về
         </button>
@@ -206,7 +214,6 @@
     </form>
   </fieldset>
 </div>
-
 
 
 

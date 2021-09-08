@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {Location} from "../../../model/location";
-import {Airline} from "../../../model/airline";
-import {LocationService} from "../../../service/location.service";
-import {AirlineService} from "../../../service/airline.service";
+import {Airline} from "../../../../../model/flight-ticket/airline";
+import {Flight} from "../../../../../model/flight-ticket/flight";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Flight} from "../../../model/flight";
-import {FlightService} from "../../../service/flight.service";
-import {comparisonLocation, comparisonTime, gte} from "../../../gte.validator";
+import {FlightService} from "../../../../../service/flight-ticket/flight/flight.service";
+
+import {AirlineService} from "../../../../../service/flight-ticket/airline/airline.service";
+import {comparisonLocation, comparisonTime, gte} from "../gte";
+import {LocationService} from "../../../../../service/flight-ticket/location/location.service";
+import {Location} from "../../../../../model/flight-ticket/location";
+import {ToastrService} from "ngx-toastr";
+
 
 
 @Component({
@@ -19,6 +22,7 @@ export class FlightCreateComponent implements OnInit {
   airlines: Airline [] = [];
   flightObj: Flight;
   flightObj1: Flight;
+  error : string;
   // flightId: number;
   // flightCode: string;
   // flightDate: string;
@@ -62,7 +66,7 @@ export class FlightCreateComponent implements OnInit {
   private flightS: Flight;
 
 
-  constructor(private flightService: FlightService, private locationService: LocationService, private airlineService: AirlineService) {
+  constructor(private flightService: FlightService, private locationService: LocationService, private airlineService: AirlineService,private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -86,20 +90,34 @@ export class FlightCreateComponent implements OnInit {
   submit() {
     const flightObj1 = this.flightForm.value;
 
-    const flightS: Flight =  {
-      flightId : flightObj1.flightId,
-      flightCode : flightObj1.flightCode,
-      flightDate : flightObj1.flightDate,
-      departureTime : flightObj1.timeGroup.departureTime,
-      endTime : flightObj1.timeGroup.endTime,
-      flightPrice : flightObj1.flightPrice,
-      airline : flightObj1.airline,
-      locationTo : flightObj1.locationGroup.locationTo,
-      locationFrom : flightObj1.locationGroup.locationFrom
+    const flightS: Flight = {
+      flightId: flightObj1.flightId,
+      flightCode: flightObj1.flightCode,
+      flightDate: flightObj1.flightDate,
+      departureTime: flightObj1.timeGroup.departureTime,
+      endTime: flightObj1.timeGroup.endTime,
+      flightPrice: flightObj1.flightPrice,
+      airline: flightObj1.airline,
+      locationTo: flightObj1.locationGroup.locationTo,
+      locationFrom: flightObj1.locationGroup.locationFrom
     }
     console.log(flightS);
     this.flightObj = flightS;
-    this.flightService.saveFlight(this.flightObj).subscribe();
+    this.flightService.saveFlight(this.flightObj).subscribe(next => {
+      if (next != null) {
+        this.error = next[0].defaultMessage;
+        this.toastr.error(this.error, '', {
+          timeOut: 2000,
+          progressBar: false
+        });
+      } else {
+        this.toastr.success('Thêm chuyến bay thành công ', '', {
+          timeOut: 2000,
+          progressBar: false
+        });
+      }
+      this.flightForm.reset();
+    })
   }
 
 
