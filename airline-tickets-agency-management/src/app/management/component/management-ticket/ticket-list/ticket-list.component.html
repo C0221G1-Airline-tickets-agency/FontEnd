@@ -4,20 +4,20 @@
     <div class="col-9">
       <form [formGroup]="formSearch" (ngSubmit)="searchTicket()">
         <div class="d-flex justify-content-end">
-          <div class="col-4 px-0 d-flex justify-content-end pl-3">
+          <div class="col-4 px-0 d-flex justify-content-end pl-2">
             <label class="search-text">Tìm kiếm theo</label>
           </div>
-          <div class="col-3 px-0 pl-3">
-            <select class="form-control" formControlName="filter" (change)="changeFilter()">
+          <div class="col-3 px-0 pl-2">
+            <select  class="form-control" formControlName="filter" (change)="changeFilter()">
               <option value="0">Tên người đi</option>
               <option value="1">Mã đặt chỗ</option>
               <option value="2">Tuyến bay</option>
               <option value="3">Ngày đi</option>
             </select>
           </div>
-          <div class="col-3 px-0 pl-3 mr-1">
+          <div class="col-3 px-0 pl-2">
             <input id="inputSearch" [type]="formSearch.get('filter').value == 3 ? 'date': 'text'"
-                   placeholder="Tìm kiếm..." style="border: 1px solid ; outline: none"
+                   placeholder="Tìm kiếm..." style="border: 1px solid ; outline: none;"
                    class="form-control" formControlName="key">
           </div>
           <div class="col-2 px-0 d-flex justify-content-end">
@@ -47,15 +47,15 @@
           <td colspan="6" style="color:red;text-align: center">Không có dữ liệu</td>
         </tr>
       </ng-container>
-        <tr *ngFor="let t of tickets, let i = index" (click)="getTicketId(t.ticketId, t)"
-            [class.selected]="t.ticketId === idSelect">
-          <td>{{i + 1}}</td>
-          <td>{{t.passengerName}}</td>
-          <td>{{t.ticketCode}}</td>
-          <td>{{t.flight.locationFrom.cityName + " - " + t.flight.locationTo.cityName}} </td>
-          <td>{{t.flight.flightDate | date : "dd/MM/yyyy"}}</td>
-          <td>{{t.ticketPrice + (t.ticketPrice * t.ticketTypePrice) + t.plusBaggage + (t.ticketPrice * t.tax) - (t.ticketPrice * t.passengerTypePrice) | currency : "VND" : ""}}</td>
-        </tr>
+      <tr *ngFor="let t of tickets, let i = index" (click)="getTicketId(t.ticketId, t)"
+          [class.selected]="t.ticketId === idSelect">
+        <td>{{i + 1}}</td>
+        <td>{{t.passengerName}}</td>
+        <td>{{t.ticketCode}}</td>
+        <td>{{t.flight.locationFrom.cityName + " - " + t.flight.locationTo.cityName}} </td>
+        <td>{{t.flight.flightDate | date : "dd/MM/yyyy"}}</td>
+        <td>{{t.ticketPrice + (t.ticketPrice * t.ticketTypePrice) + t.plusBaggage + (t.ticketPrice * t.tax) - (t.ticketPrice * t.passengerTypePrice) | currency : "VND" : ""}}</td>
+      </tr>
       </tbody>
     </table>
   </div>
@@ -83,4 +83,3 @@
     </div>
   </div>
 </div>
-
