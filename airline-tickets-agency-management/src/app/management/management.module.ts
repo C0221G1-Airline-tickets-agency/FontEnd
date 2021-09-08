@@ -13,17 +13,19 @@ import {ToastrModule, ToastrService} from 'ngx-toastr';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CreateCustomerComponent } from './component/ business/create-customer/create-customer.component';
 import { EditCustomerComponent } from './component/ business/edit-customer/edit-customer.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ManagementRoutingModule,
-    CommonClientModule,
-    ToastrModule,
-    MatDialogModule
-  ],
+    imports: [
+        CommonModule,
+        ManagementRoutingModule,
+        CommonClientModule,
+        ToastrModule,
+        MatDialogModule,
+        ReactiveFormsModule
+    ],
   declarations: [ReportComponent, HomeComponent, ManagementComponent, CustomerComponent, DeleteCustomerComponent, CreateCustomerComponent, EditCustomerComponent],
   bootstrap: [ManagementComponent]
 })

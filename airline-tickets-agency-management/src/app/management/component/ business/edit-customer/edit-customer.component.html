@@ -8,26 +8,49 @@
         khách
         hàng</h2></legend>
       <br>
-      <form action="" class="form-group col-12">
+      <form action="" [formGroup]="customerForm" (ngSubmit)="editCustomer()" #formGroupRef="ngForm" class="form-group col-12">
         <div class="row input-group">
           <div class="col-3 folow-right">
             <span>Mã khách hàng <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <div class="d-flex align-items-center">
-              <input readonly class="form-control" type="text" value="KH0012">
-            </div>
+            <input formControlName="customerCode" class="form-control" type="text" readonly>
           </div>
         </div>
         <br>
         <div class="row input-group">
+        <div class="col-3 folow-right">
+          <span>Họ và tên <label>(*)</label></span>
+        </div>
+        <div class="col-8">
+          <input formControlName="customerName" class="form-control" type="text">
+          <small>
+            <div class="text-danger" *ngFor="let validation of validationMessage.customerName">
+              <div class="text-danger">
+                <div class="error-message"
+                     *ngIf="customerForm.get('customerName').hasError(validation.type) && (customerForm.get('customerName').dirty || customerForm.get('customerName').touched || formGroupRef.submitted)">
+                  {{validation.message}}</div>
+              </div>
+            </div>
+          </small>
+        </div>
+      </div>
+        <br>
+        <div class="row input-group">
           <div class="col-3 folow-right">
-            <span>Họ và tên <label>(*)</label></span>
+            <span>Địa chỉ <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input class="form-control" type="text" value="Đặng Anh Toàn">
-            <small style="color: red">Tên  không được để trống. (*)</small><br>
-            <small style="color: red">Không ít hơn 4 ký tự. (*)</small>
+            <input formControlName="customerName" class="form-control" type="text">
+            <small>
+              <div class="text-danger" *ngFor="let validation of validationMessage.customerAddress">
+                <div class="text-danger">
+                  <div class="error-message"
+                       *ngIf="customerForm.get('customerAddress').hasError(validation.type) && (customerForm.get('customerAddress').dirty || customerForm.get('customerAddress').touched || formGroupRef.submitted)">
+                    {{validation.message}}</div>
+                </div>
+              </div>
+            </small>
           </div>
         </div>
         <br>
@@ -36,8 +59,16 @@
             <span>Ngày sinh <label>(*)</label></span>
           </div>
           <div class="col-4">
-            <input type="date" class="form-control" value="2015-05-06">
-            <small style="color: red">Ngày sinh không được để trống. (*)</small>
+            <input type="date" formControlName="customerBirthday" class="form-control">
+            <small>
+              <div class="text-danger" *ngFor="let validation of validationMessage.customerBirthday">
+                <div class="text-danger">
+                  <div class="error-message"
+                       *ngIf="customerForm.get('customerBirthday').hasError(validation.type) && (customerForm.get('customerBirthday').dirty || customerForm.get('customerBirthday').touched || formGroupRef.submitted)">
+                    {{validation.message}}</div>
+                </div>
+              </div>
+            </small>
           </div>
         </div>
         <br>
@@ -46,10 +77,19 @@
             <span>Giới tính <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <select class="form-control">
-              <option>Nam</option>
-              <option>Nữ</option>
+            <select formControlName="customerGender" [compareWith]="compareFn" class="form-control">
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
             </select>
+            <small>
+              <div class="text-danger" *ngFor="let validation of validationMessage.customerGender">
+                <div class="text-danger">
+                  <div class="error-message"
+                       *ngIf="customerForm.get('customerGender').hasError(validation.type) && (customerForm.get('customerGender').dirty || customerForm.get('customerGender').touched || formGroupRef.submitted)">
+                    {{validation.message}}</div>
+                </div>
+              </div>
+            </small>
           </div>
         </div>
         <br>
@@ -58,9 +98,16 @@
             <span>Email <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input class="form-control" type="email" value="danganhtoan@gmail.com">
-            <small style="color: red">Email không được để trống. (*)</small><br>
-            <small style="color: red">Vui lòng nhập đúng định dạng (*)</small>
+            <input formControlName="customerEmail" class="form-control" type="email">
+            <small>
+              <div class="text-danger" *ngFor="let validation of validationMessage.customerEmail">
+                <div class="text-danger">
+                  <div class="error-message"
+                       *ngIf="customerForm.get('customerEmail').hasError(validation.type) && (customerForm.get('customerEmail').dirty || customerForm.get('customerEmail').touched || formGroupRef.submitted)">
+                    {{validation.message}}</div>
+                </div>
+              </div>
+            </small>
           </div>
         </div>
         <br>
@@ -69,9 +116,16 @@
             <span>Điện thoại <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input class="form-control" type="text" value="0905111113">
-            <small style="color: red">Điện thoại không được để trống. (*)</small><br>
-            <small style="color: red">Vui lòng nhập đúng định dạng. (*)</small>
+            <input formControlName="customerPhone" class="form-control" type="text">
+            <small>
+              <div class="text-danger" *ngFor="let validation of validationMessage.customerPhone">
+                <div class="text-danger">
+                  <div class="error-message"
+                       *ngIf="customerForm.get('customerPhone').hasError(validation.type) && (customerForm.get('customerPhone').dirty || customerForm.get('customerPhone').touched || formGroupRef.submitted)">
+                    {{validation.message}}</div>
+                </div>
+              </div>
+            </small>
           </div>
         </div>
         <br>
@@ -80,10 +134,17 @@
             <span>CMND-passport <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input class="form-control" type="text" value="334879255">
-            <small style="color: red">CMND không được để trống. (*)</small><br>
-            <small style="color: red">Vui lòng nhập đúng định dạng. (*)</small><br>
-            <button class="btn btn-success mt-3" type="button"><i class="fa fa-check" aria-hidden="true"></i> Hoàn tất
+            <input formControlName="customerPassport" class="form-control" type="text">
+            <small>
+              <div class="text-danger" *ngFor="let validation of validationMessage.customerPassport">
+                <div class="text-danger">
+                  <div class="error-message"
+                       *ngIf="customerForm.get('customerPassport').hasError(validation.type) && (customerForm.get('customerPassport').dirty || customerForm.get('customerPassport').touched || formGroupRef.submitted)">
+                    {{validation.message}}</div>
+                </div>
+              </div>
+            </small>
+            <button class="btn btn-success mt-3" type="submit"><i class="fa fa-check" aria-hidden="true"></i> Hoàn tất
             </button>
           </div>
         </div>

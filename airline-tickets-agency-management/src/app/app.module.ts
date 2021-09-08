@@ -16,6 +16,7 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ManagementModule} from './management/management.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatDialogModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ToastrModule
+    ToastrModule,
+    ManagementModule
   ],
   providers: [FormBuilder, DatePipe, MatDialog, Overlay],
   bootstrap: [AppComponent]

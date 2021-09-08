@@ -14,21 +14,23 @@ export class CustomerComponent implements OnInit {
   listCustomer: Customer[] = [];
   customer1: Customer;
   customer: Customer;
+  idEdit: number;
 
   constructor(private customerService: CustomerService,
               private dialog: MatDialog,
               ) {
   }
-   getListCustomer() {
-    return this.customerService.listCustomer;
-  }
+  //  getListCustomer() {
+  //   return this.customerService.listCustomer;
+  // }
 
   ngOnInit(): void {
-    this.listCustomer = this.getListCustomer();
+    // this.listCustomer = this.getListCustomer();
   }
 
   showChoose(customer: Customer) {
     this.customer1 = customer;
+    this.idEdit = this.customer1.customerID;
   }
 
   sendToDialog(customer: Customer, i: number) {
