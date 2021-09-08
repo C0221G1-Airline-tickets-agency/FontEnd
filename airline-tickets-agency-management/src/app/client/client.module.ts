@@ -8,6 +8,7 @@ import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 
 import {ClientComponent} from './client/client.component';
 import {CommonClientModule} from '../common/common-client/common-client.module';
+import {httpInterceptorProviders} from '../service/auth/auth-interceptor';
 
 
 
@@ -19,6 +20,7 @@ import {CommonClientModule} from '../common/common-client/common-client.module';
     ReactiveFormsModule,
     CommonClientModule
   ],
-  bootstrap: [ClientComponent]
+  bootstrap: [ClientComponent],
+  providers: []
 })
 export class ClientModule { }

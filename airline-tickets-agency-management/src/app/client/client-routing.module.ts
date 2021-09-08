@@ -5,6 +5,7 @@ import {ManagementComponent} from '../management/management/management.component
 import {ReportComponent} from '../management/component/report/report.component';
 import {ClientComponent} from './client/client.component';
 import {HomeComponent} from './component/home/home.component';
+import {AdminAuthService} from '../service/auth/admin-auth.service';
 
 
 const routes: Routes = [
@@ -16,7 +17,10 @@ const routes: Routes = [
           path: '', component: HomeComponent
         },
         {
-          path: 'news/manipulation', component: NewsManipulationComponent
+          path: 'news/manipulation', component: NewsManipulationComponent, canActivate: [AdminAuthService],
+        },
+        {
+          path: 'news/manipulation/:id', component: NewsManipulationComponent
         }
       ]
   }
