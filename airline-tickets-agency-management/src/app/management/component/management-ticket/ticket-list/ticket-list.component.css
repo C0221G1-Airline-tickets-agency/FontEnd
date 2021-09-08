@@ -31,12 +31,16 @@ table {
   color: black;
 
 }
+th{
+  text-align: center;
+}
 
 .choose-row{
   background-color: #f3b4ad;
 }
 
 .sub-main{
+  font-size: 14px;
   box-shadow: 0 0 2px 2px #cccccc;
   /*background-image: url("./image/half-opacity-pink-smallsize.png") ;*/
   background-repeat: no-repeat;
@@ -77,7 +81,7 @@ i:hover {
 
 .btn{
   min-width: 90px;
-  height: 36px;
+  height: 38px;
 }
 
 /*.button-search{*/
@@ -137,4 +141,11 @@ i:hover {
 .selected {
   background: #f3b4ad !important;
   color: white;
+}
+td{
+  height: 46px!important;
+  text-align: center!important;
+}
+.swal2-html-container{
+  margin: 0!important;
 }
