@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {Flight} from "../../../model/flight-ticket/flight";
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +32,20 @@ export class FlightService {
   getDeleteFlight(id: number): Observable<any> {
     return this.http.delete(this.FLIGHT_API + '/' + id);
   }
+
+  //Hieu
+
+  findFlightById(id: number): Observable<Flight> {
+    return this.http.get<Flight>(`${this.FLIGHT_API +'-find'}/${id}`)
+  }
+  saveFlight(flight: Flight): Observable<Flight> {
+    return this.http.post<Flight>(this.FLIGHT_API +'/create', flight)
+  }
+  updateFlight(id: number, flight: Flight): Observable<Flight> {
+    return this.http.put<Flight>(`${this.FLIGHT_API + '/update'}/${id}`, flight)
+  }
+
+
+
+
 }

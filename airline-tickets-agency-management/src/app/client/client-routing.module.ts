@@ -7,6 +7,10 @@ import {HomeComponent} from './component/home/home.component';
 import {FlightListComponent} from './component/flight-ticket/flight-management/flight-list/flight-list.component';
 import { BookingDetailsComponent } from './component/flight-ticket/buy-ticket/booking-details/booking-details.component';
 import { PassengerInformationComponent } from './component/flight-ticket/buy-ticket/passenger-information/passenger-information.component';
+import {FlightCreateComponent} from "./component/flight-ticket/flight-management/flight-create/flight-create.component";
+import {FlightEditComponent} from "./component/flight-ticket/flight-management/flight-edit/flight-edit.component";
+import {AirlineListComponent} from "./component/flight-ticket/flight-management/airline-list/airline-list.component";
+import {AirlineCreateComponent} from "./component/flight-ticket/flight-management/airline-create/airline-create.component";
 
 
 
@@ -30,6 +34,18 @@ const routes: Routes = [
         },
         {
           path: 'passenger-information', component: PassengerInformationComponent
+        },
+        {
+          path: 'flight-management/flight-management-create', component: FlightCreateComponent
+        },
+        {
+          path: 'flight-management-update', component: FlightEditComponent
+        },
+        {
+          path: 'airline-list', component: AirlineListComponent
+        },
+        {
+          path: 'airline-list/airline-create', component: AirlineCreateComponent
         }
       ]
   }
