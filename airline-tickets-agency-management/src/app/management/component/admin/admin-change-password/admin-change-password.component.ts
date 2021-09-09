@@ -51,8 +51,6 @@ export class AdminChangePasswordComponent implements OnInit {
     console.log('old password = ' + oldPassword);
     console.log('new password = ' + newPassword);
     console.log('confirm  new password = ' + newPassword);
-
-
     this.checkValidate(oldPassword);
     if (oldPassword === '') {
       this.toast.warning('Chưa nhập mật khẩu', 'Chú ý !');
@@ -73,8 +71,10 @@ export class AdminChangePasswordComponent implements OnInit {
                 this.employeeService.updatePassword(this.id, this.password).subscribe(data => {
                   this.closeDialog();
                   this.toast.success(data.msg, 'Chú ý !');
+                  console.log(data);
                 }, error => {
                   this.toast.warning(error.error.msg, 'Chú ý !');
+                  console.log(error);
                 });
               } else {
                 this.toast.warning('Mật khẩu không trùng khớp', 'Chú ý');

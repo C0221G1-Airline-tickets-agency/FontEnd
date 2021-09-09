@@ -7,30 +7,30 @@
     <div *ngIf="isAdmin== false" style="color: red"> <b>(Không có dữ liệu phù hợp) </b> </div>
     <div class="row" style="height:100% ; width: auto" *ngIf="isAdmin == true">
       <div class="col-lg-6 pl-5">
-        <table  class="table " style="height: 100% ; width: 100% ">
+        <table  class="table" style="height: 100% ; width: 100% ">
           <tr>
-            <td>Họ và tên</td>
-            <td>{{admin.employee.employeeName}}</td>
+            <td> <u>Họ và tên: </u></td>
+            <td style="text-align: right" >{{admin.employee.employeeName | uppercase}} </td>
           </tr>
           <tr>
-            <td>Ngày Sinh</td>
-            <td>{{admin.employee.employeeBirthday}}</td>
+            <td> <u>Ngày Sinh: </u></td>
+            <td style="text-align: right" >{{admin.employee.employeeBirthday | date:"dd-MM-yyyy"}} </td>
           </tr>
           <tr>
-            <td>Địa chỉ</td>
-            <td>{{admin.employee.employeeAddress}}</td>
+            <td> <u>Địa chỉ: </u></td>
+            <td style="text-align: right" >{{admin.employee.employeeAddress}}</td>
           </tr>
           <tr>
-            <td>Email</td>
-            <td>email@admin</td>
+            <td> <u> Email: </u></td>
+            <td style="text-align: right" >email@admin</td>
           </tr>
           <tr>
-            <td>Giới tính</td>
-            <td>{{admin.employee.employeeGender}}</td>
+            <td> <u> Giới tính:</u></td>
+            <td style="text-align: right"  >{{admin.employee.employeeGender}}</td>
           </tr>
           <tr>
-            <td>Điện thoại</td>
-            <td>{{admin.employee.employeePhoneNumber}}</td>
+            <td> <u>Điện thoại: </u></td>
+            <td style="text-align: right" >{{admin.employee.employeePhoneNumber}}</td>
           </tr>
         </table>
       </div>
