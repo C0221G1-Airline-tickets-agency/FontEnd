@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {EmployeeService} from '../../../service/employee/employee.service';
 import {Employee} from '../../../model/employee';
+import {EmployeeChangePasswordComponent} from '../employee-change-password/employee-change-password.component';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class EmployeeInformationComponent implements OnInit {
   birthday: string;
   address: string;
   phone: string;
-  startDate: string;
+  email: string;
+  image: string;
   account = {
     email: 'haudepgai@gmail.com',
     accountId: 1
@@ -28,8 +30,11 @@ export class EmployeeInformationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Tạo localStorage data
     localStorage.setItem('account', JSON.stringify(this.account));
+    // Lấy data từ localStorage
     this.employeeId = JSON.parse(localStorage.getItem('account')).accountId;
+    this.email = JSON.parse(localStorage.getItem('account')).email;
     this.getEmployees();
   }
 
@@ -40,9 +45,12 @@ export class EmployeeInformationComponent implements OnInit {
       this.code = e.employeeCode;
       this.birthday = e.employeeBirthday;
       this.address = e.employeeAddress;
-      this.phone = e.employeePhone;
-      this.startDate = e.employeeStartDate;
-      console.log(this.id);
+      this.phone = e.employeePhoneNumber;
+      this.image = e.employeeImage;
     });
+  }
+
+  openDialogChangePassword() {
+    this.dialog.open(EmployeeChangePasswordComponent);
   }
 }

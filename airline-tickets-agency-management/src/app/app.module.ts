@@ -11,7 +11,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {Overlay} from 'ngx-toastr';
+import {Overlay, ToastrModule} from 'ngx-toastr';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
@@ -28,7 +28,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     MatDialogModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [FormBuilder, DatePipe, MatDialog, Overlay],
   bootstrap: [AppComponent]

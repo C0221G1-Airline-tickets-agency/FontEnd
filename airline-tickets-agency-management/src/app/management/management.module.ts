@@ -9,15 +9,17 @@ import {AppModule} from '../app.module';
 import {CommonClientModule} from '../common/common-client/common-client.module';
 import { EmployeeInformationComponent } from './component/employee-information/employee-information.component';
 import { EmployeeChangePasswordComponent } from './component/employee-change-password/employee-change-password.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ManagementRoutingModule,
-    CommonClientModule,
-  ],
+    imports: [
+        CommonModule,
+        ManagementRoutingModule,
+        CommonClientModule,
+        ReactiveFormsModule,
+    ],
   declarations: [ReportComponent, HomeComponent, ManagementComponent, EmployeeInformationComponent, EmployeeChangePasswordComponent],
   bootstrap: [ManagementComponent]
 })

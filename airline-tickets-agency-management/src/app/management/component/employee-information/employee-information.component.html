@@ -62,25 +62,24 @@
       <br>
       <div class="row input-group ml-5">
         <div class="col-4">
-          <span>Ngày bắt đầu làm:</span>
+          <span>Email:</span>
         </div>
         <div class="col-8">
           <div class="d-flex ml-5">
-            <span>{{startDate}}</span>
+            <span>{{email}}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="form-group col-4">
-      <div class="row">
-        <img style="border-radius: 150px" height="200px" width="200px"
-             src="https://firebasestorage.googleapis.com/v0/b/c0221g1-sprint-1.appspot.com/o/24-08-2021045951PM238371399_889457545302563_5618427108971239849_n.jpg?alt=media&token=810ce116-b288-479e-9032-b0b9719b2016" alt="">
+      <div class="row" style="border-radius: 150px" height="200px" width="200px">
+        <img src="{{image}}" alt="" style="border-radius: 150px" height="200px" width="200px">
       </div>
       <br>
       <br>
       <div class="row mb-2" style="margin-left: 30px">
         <button data-toggle="modal" data-target="#exampleModal1" class="btn btn-success"
-                type="button">
+                type="button" (click)="openDialogChangePassword()">
           Đổi mật khẩu
         </button>
       </div>
