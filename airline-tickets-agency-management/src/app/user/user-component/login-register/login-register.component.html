@@ -54,36 +54,56 @@
       <form [formGroup]="formRegister" (ngSubmit)="onSubmitRegister()">
         <div class="to-div-input">
           <input type="text" class="to-input-box" formControlName="username" placeholder="Tên Đăng Nhập(*)" required>
-          <small class="to-error-text" *ngIf="formRegister.get('username')?.hasError('required')
-                  && formRegister.get('username')?.touched">Không được để trống!</small>
-          <small class="to-error-text" *ngIf="formRegister.get('username')?.hasError('minlength')
-                  && formRegister.get('username')?.touched">Tên đăng nhập ít nhất 5 ký tự</small>
+          <div *ngFor="let validation of validation_messages.username">
+            <small class="text-danger"
+                   *ngIf="formRegister.get('username').hasError(validation.type) && formRegister.get('username').touched">
+              {{validation.message}}</small>
+          </div>
+<!--          <small class="to-error-text" *ngIf="formRegister.get('username')?.hasError('required')-->
+<!--                  && formRegister.get('username')?.touched">Không được để trống!</small>-->
+<!--          <small class="to-error-text" *ngIf="formRegister.get('username')?.hasError('minlength')-->
+<!--                  && formRegister.get('username')?.touched">Tên đăng nhập ít nhất 5 ký tự</small>-->
         </div>
         <div class="to-div-input">
           <input type="password" class="to-input-box" formControlName="password" placeholder="Mật Khẩu(*)" required>
-          <small class="to-error-text" *ngIf="formRegister.get('password')?.hasError('required')
-                  && formRegister.get('password')?.touched">Không được để trống!</small>
-          <small class="to-error-text" *ngIf="formRegister.get('password')?.hasError('minlength')
-                  && formRegister.get('password')?.touched">Mật khẩu ít nhất 5 ký tự</small>
+          <div *ngFor="let validation of validation_messages.password">
+            <small class="text-danger"
+                   *ngIf="formRegister.get('password').hasError(validation.type) && formRegister.get('password').touched">
+              {{validation.message}}</small>
+          </div>
+<!--          <small class="to-error-text" *ngIf="formRegister.get('password')?.hasError('required')-->
+<!--                  && formRegister.get('password')?.touched">Không được để trống!</small>-->
+<!--          <small class="to-error-text" *ngIf="formRegister.get('password')?.hasError('minlength')-->
+<!--                  && formRegister.get('password')?.touched">Mật khẩu ít nhất 5 ký tự</small>-->
         </div>
         <div class="to-div-input">
           <input type="text" class="to-input-box" formControlName="phone" placeholder="Số Điện Thoại(*)" required>
-          <small class="to-error-text" *ngIf="formRegister.get('phone')?.hasError('required')
-                  && formRegister.get('phone')?.touched">Không được để trống!</small>
+          <div *ngFor="let validation of validation_messages.phone">
+            <small class="text-danger"
+                   *ngIf="formRegister.get('phone').hasError(validation.type) && formRegister.get('phone').touched">
+              {{validation.message}}</small>
+          </div>
+<!--          <small class="to-error-text" *ngIf="formRegister.get('phone')?.hasError('required')-->
+<!--                  && formRegister.get('phone')?.touched">Không được để trống!</small>-->
         </div>
         <div class="to-div-input">
           <input type="text" class="to-input-box" formControlName="name" placeholder="Họ Và Tên" required>
+          <div *ngFor="let validation of validation_messages.name">
+            <small class="text-danger"
+                   *ngIf="formRegister.get('name').hasError(validation.type) && formRegister.get('name').touched">
+              {{validation.message}}</small>
+          </div>
 <!--          <small class="to-error-text" *ngIf="formRegister.get('fullName')?.hasError('required')-->
 <!--                  && formRegister.get('fullName')?.touched">Không được để trống!</small>-->
         </div>
         <div class="to-div-input" style="font-size: 13px; text-align: center; justify-content: center">
           <label >Ngày Sinh</label>
-          <input type="date" class="to-input-box" formControlName="birthday" placeholder="Ngày sinh" required>
+          <input type="date" class="to-input-box" formControlName="birthday" placeholder="Ngày sinh">
           <!--          <small class="to-error-text" *ngIf="formRegister.get('fullName')?.hasError('required')-->
           <!--                  && formRegister.get('fullName')?.touched">Không được để trống!</small>-->
         </div>
         <div class="to-div-input">
-          <input type="text" class="to-input-box" formControlName="address" placeholder="Địa Chỉ" required>
+          <input type="text" class="to-input-box" formControlName="address" placeholder="Địa Chỉ">
           <!--          <small class="to-error-text" *ngIf="formRegister.get('fullName')?.hasError('required')-->
           <!--                  && formRegister.get('fullName')?.touched">Không được để trống!</small>-->
         </div>
@@ -352,8 +372,13 @@
         </div>
         <div class="to-div-input">
           <input type="text" class="to-input-box" formControlName="passport" placeholder="Số Hộ Chiếu / CMND(*)" required>
-          <small class="to-error-text" *ngIf="formRegister.get('passport')?.hasError('required')
-                  && formRegister.get('passport')?.touched">Không được để trống!</small>
+          <div *ngFor="let validation of validation_messages.passport">
+            <small class="text-danger"
+                   *ngIf="formRegister.get('passport').hasError(validation.type) && formRegister.get('passport').touched">
+              {{validation.message}}</small>
+          </div>
+<!--          <small class="to-error-text" *ngIf="formRegister.get('passport')?.hasError('required')-->
+<!--                  && formRegister.get('passport')?.touched">Không được để trống!</small>-->
         </div>
         <button type="submit" class="to-sign-submit" style="margin-top: 20px;margin-bottom: 10px">Đăng ký
         </button>

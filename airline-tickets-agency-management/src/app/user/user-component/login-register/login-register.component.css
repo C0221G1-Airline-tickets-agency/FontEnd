@@ -1,7 +1,7 @@
 .to-card {
   /*position: absolute;*/
-  border-radius: 10px;
-  width: 350px;
+  border-radius: 50px;
+  width: 400px;
   height: 750px;
   overflow: hidden;
   perspective: 1000px;

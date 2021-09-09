@@ -22,6 +22,31 @@ export class LoginRegisterComponent implements OnInit {
   formRegister: FormGroup;
   signupRequest: SignupRequest;
 
+  validation_messages = {
+    'username':[
+      {type: 'required',message: 'Email không được để trống!'},
+      {type: 'pattern', message: 'Email không đúng định dạng'}
+    ],
+    'password':[
+      {type: 'required',message: 'Mật khẩu không được để trống!'},
+      {type:'minLength',message: 'Mật khẩu phải nhiều hơn 6 ký tự!'},
+      {type:'maxLength',message: 'Mật khẩu phải ít hơn 20 ký tự!'}
+    ],
+    'phone':[
+      {type: 'required',message: 'Số điện thoại không được để trống!'},
+      {type: 'pattern',message: 'Số điện thoại không đúng định dạng!'}
+    ],
+    'name':[
+      {type: 'required',message: 'Họ và tên không được để trống!'},
+      {type:'minLength',message: 'Họ và tên phải nhiều hơn 10 ký tự!'},
+      {type:'maxLength',message: 'Họ và tên phải ít hơn 50 ký tự!'}
+    ],
+    'passport':[
+      {type: 'required',message: 'Passport không được để trống!'},
+      {type: 'pattern',message: 'Passport phải có 12 chữ số!'}
+    ],
+  };
+
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService,
               private toastr: ToastrService) {
     this.formSignin = new FormGroup({
@@ -35,15 +60,15 @@ export class LoginRegisterComponent implements OnInit {
     }
 
     this.formRegister = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      phone: new FormControl(),
-      name: new FormControl(),
+      username: new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
+      phone: new FormControl('',[Validators.required, Validators.pattern('[- +()0-9]+')]),
+      name: new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(50)]),
       birthday: new FormControl(),
       address: new FormControl(),
       gender: new FormControl(),
       nationality: new FormControl(),
-      passport: new FormControl(),
+      passport: new FormControl('',[Validators.required, Validators.pattern('^[0-9]{12}$')]),
     });
   }
 
