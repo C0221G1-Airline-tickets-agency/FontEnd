@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Flight} from '../../../../../model/flight-ticket/Flight';
-import {FlightService} from '../../../../../service/flight-ticket/flight.service';
+import {FlightService} from '../../../../../service/flight-ticket/flight/flight.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogService} from '../../../../../service/dialog.service';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
+import {FlightEditComponent} from "../flight-edit/flight-edit.component";
 
 @Component({
   selector: 'app-flight-list',
@@ -16,6 +17,7 @@ export class FlightListComponent implements OnInit {
   error = true;
   selectedObj: Flight;
   flight: Flight;
+  flightEdit: Flight;
   idFlight: number;
   page = 0;
   pages: Array<any>;
@@ -25,11 +27,14 @@ export class FlightListComponent implements OnInit {
   name: string;
   totalPage: number;
   Obj: null;
+
   constructor(private flightTicketService: FlightService,
               private matDialog: MatDialog,
               private dialogService: DialogService,
               private toast: ToastrService,
-              private router: Router) { }
+              private router: Router
+  ) {
+  }
 
   ngOnInit(): void {
     this.getAll();
@@ -41,7 +46,7 @@ export class FlightListComponent implements OnInit {
     this.flightTicketService.getAllFlight(this.page, this.search, this.selects).subscribe(res => {
       this.flights = res.content;
       console.log(this.flights.length);
-      if (this.flights.length === 0 ) {
+      if (this.flights.length === 0) {
         this.notfound = true;
       } else {
         this.notfound = false;
@@ -66,15 +71,16 @@ export class FlightListComponent implements OnInit {
   onSelect(flightObj: Flight) {
     this.selectedObj = flightObj;
   }
+
   deleteFlight() {
     if (this.idFlight == null) {
-        this.toast.warning('Bạn chưa chọn chuyến bay ');
+      this.toast.warning('Bạn chưa chọn chuyến bay ');
     } else {
-      for (let i = 0 ; i < this.flights.length ; i++) {
-          if (this.idFlight === this.flights[i].flightId) {
-            this.name = this.flights[i].flightCode;
-            break;
-          }
+      for (let i = 0; i < this.flights.length; i++) {
+        if (this.idFlight === this.flights[i].flightId) {
+          this.name = this.flights[i].flightCode;
+          break;
+        }
       }
       this.dialogService.openConfirm(this.name).afterClosed().subscribe(res => {
         if (res === true) {
@@ -87,6 +93,7 @@ export class FlightListComponent implements OnInit {
 
     }
   }
+
   setPage(i: number) {
     this.page = i;
     this.getAll();
@@ -94,28 +101,28 @@ export class FlightListComponent implements OnInit {
 
   previous() {
     if (this.page <= 0) {
-      this.toast.warning('Không tìm thấy trang.', 'Trang trước') ;
+      this.toast.warning('Không tìm thấy trang.', 'Trang trước');
     } else {
       this.page = this.page - 1;
       this.getAll();
     }
   }
+
   next() {
     if (this.page > this.pages.length - 2) {
       this.toast.warning('Không tìm thấy trang.', 'Trang sau');
     } else {
       this.page = this.page + 1;
-      if (this.page > Math.floor(this.flights.length / 5) + 1) {
-        this.page = this.page - 1;
-        alert('Không tìm thấy trang');
-      }
       this.getAll();
     }
   }
 
   searchFlight() {
-      this.getAll();
+
+    this.getAll();
+
   }
+
   backToMain() {
     this.dialogService.openConfirm1().afterClosed().subscribe(res => {
       if (res === true) {
@@ -125,4 +132,32 @@ export class FlightListComponent implements OnInit {
 
   }
 
+  onEditHandler() {
+    console.log(this.idFlight);
+
+    if (this.idFlight == null) {
+      this.toast.warning('Bạn chưa chọn chuyến bay ');
+    } else {
+      this.flightTicketService.findFlightById(this.idFlight).subscribe(next => {
+        this.flightEdit = next;
+        this.edit();
+      });
+    }
+  }
+
+  edit(){
+    const dialogRef = this.matDialog.open(FlightEditComponent, {
+      width: '1000px',
+      height : '1000px',
+      data: this.flightEdit
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        this.ngOnInit();
+      }
+    })
+
+  }
 }
