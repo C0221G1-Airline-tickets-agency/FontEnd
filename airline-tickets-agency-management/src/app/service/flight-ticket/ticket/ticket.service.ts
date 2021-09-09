@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Ticket} from "../../../model/flight-ticket/ticket";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,5 +22,8 @@ export class TicketService {
   }
   update(ticketId: number, ticket: Ticket): Observable<Ticket> {
     return this.http.put<Ticket>(this.API_TICKET + '/ticket-edit/' + ticketId, ticket);
+  }
+  findTicketById(id: number): Observable<any>{
+    return this.http.get<any>(`${this.API_TICKET}/${id}`);
   }
 }
