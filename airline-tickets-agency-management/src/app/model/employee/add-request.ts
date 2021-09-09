@@ -1,4 +1,4 @@
-export interface Employee {
+export interface AddRequest {
   employeeId?: number;
   employeeCode?: string;
   employeeName?: string;
@@ -7,6 +7,11 @@ export interface Employee {
   employeePhoneNumber?: string;
   employeeAddress?: string;
   employeeImage?: string;
-  account?: string;
+  username?: string;
+  password?: string;
   role?: string;
+  isEnabled?: boolean;
+  flag?: boolean;
+  userCode?: string;
+
 }

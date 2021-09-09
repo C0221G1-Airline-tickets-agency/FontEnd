@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/api',
-  firebaseConfig : {
-    apiKey: 'AIzaSyDQz2L2R0Q4W4sEh_JuVkG_GpvECIxLWaY',
-    authDomain: 'c0221g1-spring-2.firebaseapp.com',
-    projectId: 'c0221g1-spring-2',
-    storageBucket: 'c0221g1-spring-2.appspot.com',
-    messagingSenderId: '596292637755',
-    appId: '1:596292637755:web:4b5bd91ca3c7c70eee781e',
-    measurementId: 'G-9CD4NTTM4V'
+  firebaseConfig: {
+    apiKey: 'AIzaSyCVwqCVLq-CaTTI1LSWv2scfxiQBW3BTR0',
+    authDomain: 'c0221g1-sprint-1.firebaseapp.com',
+    projectId: 'c0221g1-sprint-1',
+    storageBucket: 'c0221g1-sprint-1.appspot.com',
+    messagingSenderId: '715441488032',
+    appId: '1:715441488032:web:b456dbe6d355f2037609c5',
+    measurementId: 'G-KMKE359PPV'
   }
 };
 

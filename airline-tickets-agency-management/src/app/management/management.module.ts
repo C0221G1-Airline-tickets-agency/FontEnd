@@ -10,6 +10,7 @@ import {CommonClientModule} from '../common/common-client/common-client.module';
 import { EmployeeComponent } from './component/employee/employee.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AddEmployeeComponent } from './component/employee/add-employee/add-employee.component';
+import { UpdateEmployeeComponent } from './component/employee/update-employee/update-employee.component';
 
 
 
@@ -21,10 +22,11 @@ import { AddEmployeeComponent } from './component/employee/add-employee/add-empl
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [ReportComponent, HomeComponent, ManagementComponent, EmployeeComponent, AddEmployeeComponent],
-  exports: [
-    AddEmployeeComponent
-  ],
+  declarations: [ReportComponent, HomeComponent, ManagementComponent, EmployeeComponent, AddEmployeeComponent, UpdateEmployeeComponent],
+    exports: [
+        AddEmployeeComponent,
+        UpdateEmployeeComponent
+    ],
   bootstrap: [ManagementComponent]
 })
 export class ManagementModule { }

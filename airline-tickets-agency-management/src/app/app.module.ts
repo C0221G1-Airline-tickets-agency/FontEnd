@@ -17,6 +17,7 @@ import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ManagementModule} from "./management/management.module";
+import {CommonClientModule} from "./common/common-client/common-client.module";
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {ManagementModule} from "./management/management.module";
         BrowserAnimationsModule,
         HttpClientModule,
         ToastrModule.forRoot(),
-        ManagementModule
+        ManagementModule,
+        CommonClientModule
     ],
   providers: [FormBuilder, DatePipe, MatDialog, Overlay],
   bootstrap: [AppComponent]

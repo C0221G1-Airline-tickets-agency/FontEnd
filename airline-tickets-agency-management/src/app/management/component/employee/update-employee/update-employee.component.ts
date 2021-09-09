@@ -1,24 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {EmployeeService} from "../../../../service/employee/employee.service";
-import {Router} from "@angular/router";
-import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {formatDate} from "@angular/common";
-import {UserRole} from "../../../../model/account/role";
+import {EmployeeService} from "../../../../service/employee/employee.service";
 import {UserService} from "../../../../service/user/user.service";
 import {UserRoleService} from "../../../../service/user/user-role.service";
+import {AngularFireStorage} from "@angular/fire/storage";
+import {Router} from "@angular/router";
+import {Employee} from "../../../../model/employee";
+import {AddRequest} from "../../../../model/employee/add-request";
 
 @Component({
-  selector: 'app-add-employee',
-  templateUrl: './add-employee.component.html',
-  styleUrls: ['./add-employee.component.css']
+  selector: 'app-update-employee',
+  templateUrl: './update-employee.component.html',
+  styleUrls: ['./update-employee.component.css']
 })
-export class AddEmployeeComponent implements OnInit {
+export class UpdateEmployeeComponent implements OnInit {
+
   employeeForm: FormGroup;
-  userForm: FormGroup;
-  userRoles: [UserRole];
-  selectedUserRole: UserRole;
+  employee: AddRequest;
+  selectedId: number = 4;
   selectedImage: string[];
   urlImage: string[] = [];
 
@@ -27,40 +28,49 @@ export class AddEmployeeComponent implements OnInit {
               private userRoleService: UserRoleService,
               private storage: AngularFireStorage,
               private router: Router) {
-    this.createEmployeeForm();
+    this.getEmployee();
   }
 
   ngOnInit(): void {
+  }
 
-    // this.getAllRoleUser();
+  getEmployee() {
+    this.employeeService.getEmployee(this.selectedId).subscribe(data => {
+      this.employee = data;
+      this.createEmployeeForm();
+    }, error => {
+      alert('Kiểm tra lại danh sách nhân viên');
+    });
   }
 
   createEmployeeForm() {
     this.employeeForm = new FormGroup({
-      employeeCode: new FormControl(''),
-      employeeName: new FormControl(''),
-      employeeBirthday: new FormControl(''),
-      employeeGender: new FormControl(''),
-      employeePhone: new FormControl(''),
-      employeeAddress: new FormControl(''),
-      employeeImage: new FormControl(''),
-      username: new FormControl(''),
-      password: new FormControl(''),
-      role: new FormControl('')
+      employeeCode1: new FormControl(this.employee.employeeCode),
+      employeeName1: new FormControl(this.employee.employeeName),
+      employeeBirthday1: new FormControl(this.employee.employeeBirthday),
+      employeeGender1: new FormControl(this.employee.employeeGender),
+      employeePhone1: new FormControl(this.employee.employeePhoneNumber),
+      employeeAddress1: new FormControl(this.employee.employeeAddress),
+      employeeImage1: new FormControl(this.employee.employeeImage),
+      username1: new FormControl(this.employee.username),
+      password1: new FormControl(this.employee.password),
+      role1: new FormControl(this.employee.role)
     });
   }
 
   saveEmployee() {
-    this.employeeService.addEmployee(this.employeeForm.value).subscribe(() => {
-      alert('Tạo nhân viên thành công');
+    this.employeeService.updateEmployee(this.employeeForm.value, this.selectedId).subscribe(() => {
+      alert('Đã chỉnh sửa thành công nhân viên');
     }, error => {
-      alert('Tạo nhân viên thất bại');
+      alert('Chỉnh sửa thất bại');
     });
   }
 
   submit() {
     // this.saveUser();
-    this.saveEmployee();
+    if (confirm("Bạn có muốn chỉnh sửa nhân viên này không?")){
+      this.saveEmployee();
+    }
   }
 
   uploadFile(imageFile) {
@@ -94,12 +104,6 @@ export class AddEmployeeComponent implements OnInit {
   getCurrentDateTime(): string {
     return formatDate(new Date(), 'dd-MM-yyyyhhmmssa', 'en-US');
   }
-
-  // getAllRoleUser() {
-  //   this.userRoleService.getAllUserRole().subscribe(userRoleList => {
-  //     this.userRoles = userRoleList;
-  //   });
-  // }
 
   backToList() {
     this.router.navigateByUrl('/employee')

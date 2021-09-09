@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Employee} from '../../model/employee';
+import {AddRequest} from "../../model/employee/add-request";
 
 
 @Injectable({
@@ -22,7 +23,16 @@ export class EmployeeService {
     return this.http.get(`${this.URl}/delete/${employeeId}`);
   }
 
-  addEmployee(employee: Employee) {
-    return this.http.post<Employee>(this.API_URL + '/add-employee', employee);
+  getEmployee(employeeId: number): Observable<Employee> {
+    return this.http.get<Employee>(this.API_URL + '/find/' + employeeId);
+  }
+
+  addEmployee(addRequest: AddRequest) {
+    console.log(addRequest);
+    return this.http.post<Employee>(this.API_URL + '/add-employee', addRequest);
+  }
+
+  updateEmployee(addRequest: AddRequest, employeeId: number) {
+    return this.http.put(this.API_URL + '/update-employee', addRequest)
   }
 }

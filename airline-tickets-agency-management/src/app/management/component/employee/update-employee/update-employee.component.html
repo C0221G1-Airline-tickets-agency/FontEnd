@@ -4,7 +4,7 @@
     <!--        nơi đổ dữ liệu router-outlet              -->
 
     <fieldset class="scheduler-border" style="background: white;box-shadow: 0 0 2px 2px #cccccc;">
-      <legend class="scheduler-border text-center" style="background: #e54744"><h2>Thêm mới nhân viên</h2></legend>
+      <legend class="scheduler-border text-center" style="background: #e54744"><h2>Chỉnh sửa nhân viên</h2></legend>
       <br>
       <form action="" class="form-group col-12" [formGroup]="employeeForm">
         <div class="row input-group">
@@ -13,7 +13,7 @@
           </div>
           <div class="col-8">
             <div class="d-flex align-items-center">
-              <input class="form-control" type="text" formControlName="employeeCode">
+              <input readonly class="form-control" type="text" formControlName="employeeCode1">
             </div>
 <!--            <small *ngIf="" style="color: red">Trường này không được để trống. (*)</small>-->
           </div>
@@ -24,7 +24,7 @@
             <span>Họ và tên <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input class="form-control" type="text" formControlName="employeeName">
+            <input class="form-control" type="text" formControlName="employeeName1">
 <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
           </div>
         </div>
@@ -34,7 +34,7 @@
             <span>Ngày sinh <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input type="date" class="form-control" style="width: 100%" formControlName="employeeBirthday">
+            <input type="date" class="form-control" style="width: 100%" formControlName="employeeBirthday1">
 <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
           </div>
         </div>
@@ -44,7 +44,7 @@
             <span>Giới tính <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <select class="form-control" formControlName="employeeGender">
+            <select class="form-control" formControlName="employeeGender1">
               <option value="nam">Nam</option>
               <option value="nữ">Nữ</option>
             </select>
@@ -57,7 +57,7 @@
             <span>Điện thoại <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input class="form-control" type="text" formControlName="employeePhone">
+            <input class="form-control" type="text" formControlName="employeePhone1">
 <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
           </div>
         </div>
@@ -67,7 +67,7 @@
             <span>Địa chỉ <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input class="form-control" type="text" formControlName="employeeAddress">
+            <input class="form-control" type="text" formControlName="employeeAddress1">
 <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
           </div>
         </div>
@@ -77,7 +77,7 @@
             <span>Ảnh đại diện <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input id="img" formControlName="employeeImage" type="file" (change)="showPreview($event)">
+            <input id="img" formControlName="employeeImage1" type="file" (change)="showPreview($event)">
           </div>
         </div>
         <br>
@@ -86,7 +86,7 @@
             <span>Tài khoản <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input class="form-control" type="text" formControlName="username">
+            <input readonly class="form-control" type="text" formControlName="username1">
 <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
           </div>
         </div>
@@ -96,7 +96,7 @@
             <span>Mật khẩu <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input class="form-control" type="password" formControlName="password">
+            <input class="form-control" type="password" formControlName="password1">
 <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
           </div>
         </div>
@@ -106,7 +106,7 @@
             <span>Phân quyền <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <select class="form-control" formControlName="role">
+            <select class="form-control" formControlName="role1">
               <option value="ADMIN">ADMIN</option>
               <option value="MODERATOR">MODERATOR</option>
             </select>
@@ -117,7 +117,7 @@
 
       <div class="d-flex justify-content-end pb-3">
         <button class="mr-3 btn btn-success" type="button" (click)="submit()"><i class="fa fa-check"
-                                                              aria-hidden="true"></i> Hoàn
+                                                                                 aria-hidden="true"></i> Hoàn
           tất
         </button>
         <button class="mr-3 btn btn-back" style="background: #005cbf;color: white;margin-right: 47px"
