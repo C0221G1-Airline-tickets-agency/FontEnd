@@ -13,18 +13,22 @@ import { DestinationUpdateComponent } from './component/destination/destination-
 import { ScenicCreateComponent } from './component/destination/scenic-create/scenic-create.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ScenicEditComponent } from './component/destination/scenic-edit/scenic-edit.component';
+import { DialogConfirmComponent } from './component/destination/dialog-confirm/dialog-confirm.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
 @NgModule({
-  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, DestinationCreateComponent, DestinationUpdateComponent, ScenicCreateComponent, ScenicEditComponent],
+  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, DestinationCreateComponent,
+    DestinationUpdateComponent, ScenicCreateComponent, ScenicEditComponent, DialogConfirmComponent],
     imports: [
         CommonModule,
         ClientRoutingModule,
         ReactiveFormsModule,
         CommonClientModule,
         MatDialogModule,
-        FormsModule
+        FormsModule,
+        MatSnackBarModule
     ],
   bootstrap: [ClientComponent]
 })

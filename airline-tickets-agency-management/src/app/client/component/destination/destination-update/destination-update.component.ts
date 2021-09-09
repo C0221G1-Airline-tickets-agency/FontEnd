@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Destiation} from '../../../../model/destination/destiation';
 import {Scenic} from '../../../../model/destination/scenic';
 import {MatDialog} from '@angular/material/dialog';
@@ -9,6 +9,8 @@ import {formatDate} from '@angular/common';
 import {ScenicCreateComponent} from '../scenic-create/scenic-create.component';
 import {finalize} from 'rxjs/operators';
 import {ScenicEditComponent} from '../scenic-edit/scenic-edit.component';
+import {DialogConfirmComponent} from '../dialog-confirm/dialog-confirm.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-destination-update',
@@ -16,10 +18,12 @@ import {ScenicEditComponent} from '../scenic-edit/scenic-edit.component';
   styleUrls: ['./destination-update.component.css']
 })
 export class DestinationUpdateComponent implements OnInit {
+  regex = '^[a-zA-Z àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰ' +
+    'ẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]*$';
   destinationForm: FormGroup = new FormGroup({
     destinationId: new FormControl(),
-    destinationName: new FormControl(),
-    destinationDescription: new FormControl(),
+    destinationName: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(this.regex)]),
+    destinationDescription: new FormControl('', [Validators.required, Validators.maxLength(200), Validators.minLength(10)]),
     destinationImage: new FormControl(),
   });
   destination: Destiation;
@@ -28,9 +32,13 @@ export class DestinationUpdateComponent implements OnInit {
   desinationId = 12;
   url = '';
   scenic: Scenic;
+  messageUnique = '';
+  messageEmptyScenic = '';
+  messageErrors: string[] = [];
   constructor(public dialog: MatDialog,
               public destinationService: DestinationService,
-              @Inject(AngularFireStorage) private storage: AngularFireStorage) { }
+              @Inject(AngularFireStorage) private storage: AngularFireStorage,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getDestination(this.desinationId);
@@ -66,6 +74,7 @@ export class DestinationUpdateComponent implements OnInit {
   }
 
   submit() {
+    if (this.destinationForm.invalid) { return; }
     if (this.selectedImage != null) {
       const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
       const fileRef = this.storage.ref(nameImg);
@@ -79,6 +88,11 @@ export class DestinationUpdateComponent implements OnInit {
               if (next.status) {
                 this.listScenics = [];
                 this.destinationForm.reset();
+                this.openSnackBar(next.msg);
+              } else {
+                this.messageErrors = next.errors;
+                this.messageUnique = next.msgUnique;
+                this.messageEmptyScenic = next.msgEmptyScenic;
               }
             });
           });
@@ -91,12 +105,17 @@ export class DestinationUpdateComponent implements OnInit {
         if (next.status) {
           this.listScenics = [];
           this.destinationForm.reset();
+          this.openSnackBar(next.msg);
+        } else {
+          this.messageErrors = next.errors;
+          this.messageUnique = next.msgUnique;
+          this.messageEmptyScenic = next.msgEmptyScenic;
         }
       });
     }
   }
 
-  onAddDestinationHandler() {
+  onAddScenicHandler() {
     const dialogRef = this.dialog.open(ScenicCreateComponent, {
       width: '665px'
     });
@@ -132,6 +151,38 @@ export class DestinationUpdateComponent implements OnInit {
           this.getScenic(this.desinationId);
         });
       }
+    });
+  }
+
+  onUpdateDestinationHandler() {
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.submit();
+      }
+    });
+  }
+
+  delConfirm(scenicId: number) {
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      width: '300px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.delScenic(scenicId);
+      }
+    });
+  }
+  openSnackBar(msg: string) {
+    this.snackBar.open(msg , null, {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['snack-bar']
     });
   }
 }

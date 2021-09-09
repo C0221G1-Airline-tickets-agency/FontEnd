@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Destiation} from '../../../../model/destination/destiation';
 import {MatDialog} from '@angular/material/dialog';
 import {ScenicCreateComponent} from '../scenic-create/scenic-create.component';
@@ -9,6 +9,9 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {UploadFileService} from '../../../../service/upload-file.service';
 import {formatDate} from '@angular/common';
 import {finalize} from 'rxjs/operators';
+import {stringify} from 'querystring';
+import {DialogConfirmComponent} from '../dialog-confirm/dialog-confirm.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-destination-create',
@@ -16,9 +19,11 @@ import {finalize} from 'rxjs/operators';
   styleUrls: ['./destination-create.component.css']
 })
 export class DestinationCreateComponent implements OnInit {
+  regex = '^[a-zA-Z àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰ' +
+    'ẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]*$';
   destinationForm: FormGroup = new FormGroup({
-    destinationName: new FormControl(),
-    destinationDescription: new FormControl(),
+    destinationName: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(this.regex)]),
+    destinationDescription: new FormControl('', [Validators.required, Validators.maxLength(200), Validators.minLength(10)]),
     destinationImage: new FormControl(),
   });
   destination: Destiation;
@@ -26,14 +31,19 @@ export class DestinationCreateComponent implements OnInit {
   selectedImage: any = null;
   url = '';
   messageValidUrl = '';
+  messageErrors: string[] = [];
+  messageUnique = '';
+  messageEmptyScenic = '';
   constructor(public dialog: MatDialog,
               public destinationService: DestinationService,
-              @Inject(AngularFireStorage) private storage: AngularFireStorage) { }
+              @Inject(AngularFireStorage) private storage: AngularFireStorage,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
   submit() {
+    if (this.destinationForm.invalid) { return; }
     if (this.selectedImage != null) {
       const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
       const fileRef = this.storage.ref(nameImg);
@@ -47,6 +57,11 @@ export class DestinationCreateComponent implements OnInit {
               if (next.status) {
                 this.listScenics = [];
                 this.destinationForm.reset();
+                this.openSnackBar(next.msg);
+              } else {
+                this.messageErrors = next.errors;
+                this.messageUnique = next.msgUnique;
+                this.messageEmptyScenic = next.msgEmptyScenic;
               }
             });
           });
@@ -57,7 +72,7 @@ export class DestinationCreateComponent implements OnInit {
     }
   }
 
-  onAddDestinationHandler() {
+  onAddScenicHandler() {
     const dialogRef = this.dialog.open(ScenicCreateComponent, {
       width: '665px'
     });
@@ -88,5 +103,37 @@ export class DestinationCreateComponent implements OnInit {
   }
   getCurrentDateTime(): string {
     return formatDate(new Date(), 'dd-MM-yyyyhhmmssa', 'en-US');
+  }
+
+  onAddDestinationHandler() {
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.submit();
+      }
+    });
+  }
+
+  onDelScenicConfirm(i: number) {
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.delScenic(i);
+      }
+    });
+  }
+  openSnackBar(msg: string) {
+    this.snackBar.open(msg , null, {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['snack-bar']
+    });
   }
 }

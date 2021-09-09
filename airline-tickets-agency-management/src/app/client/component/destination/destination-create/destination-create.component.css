@@ -651,6 +651,11 @@ legend h1 {
   font-size: large;
   padding-top: 15px
 }
+::ng-deep .snack-bar {
+  background: green !important;
+  color: white;
+  width: auto;
+}
 
 
 
