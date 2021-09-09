@@ -11,13 +11,14 @@ export class BookingDetailsComponent implements OnInit {
   ticket: Ticket;
 
   constructor(private ticketService: TicketService) {
-    this.viewTicket(1);
+    this.viewTicket(7);
   }
 
   ngOnInit(): void {
   }
   viewTicket(id: number){
     return this.ticketService.findTicketById(id).subscribe( ticket => {
+      console.log(ticket);
       this.ticket = ticket;
     });
   }

@@ -29,7 +29,7 @@ const routes: Routes = [
           path: 'booking-details', component: BookingDetailsComponent
         },
         {
-          path: 'passenger-information', component: PassengerInformationComponent
+          path: 'passenger-information/:id', component: PassengerInformationComponent
         }
       ]
   }
