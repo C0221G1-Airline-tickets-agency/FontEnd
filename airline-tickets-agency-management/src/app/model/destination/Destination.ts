@@ -5,5 +5,5 @@ export class Destination {
   destinationName: string;
   destinationDescription: string;
   destinationImage: string;
-  scenic: Scenic;
+  scenics: Scenic[];
 }

@@ -8,20 +8,25 @@ import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 
 import {ClientComponent} from './client/client.component';
 import {CommonClientModule} from '../common/common-client/common-client.module';
-import { HomeComponent } from './component/home/home/home.component';
-import { DestinationDeleteComponent } from './component/home/destination-delete/destination-delete.component';
+import {DestinationDeleteComponent} from './component/destination-delete/destination-delete.component';
+import {HomeComponent} from './component/home/home.component';
+import { DestinationDetailComponent } from './component/destination-detail/destination-detail.component';
+import {ToastrModule} from 'ngx-toastr';
+
+
 
 
 
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent , HomeComponent, DestinationDeleteComponent],
+  declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent , DestinationDeleteComponent, HomeComponent, DestinationDetailComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,
     ReactiveFormsModule,
-    CommonClientModule
+    CommonClientModule,
+    ToastrModule.forRoot()
   ],
   bootstrap: [ClientComponent]
 })

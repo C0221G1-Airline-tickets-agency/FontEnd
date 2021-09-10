@@ -1,6 +1,9 @@
+import {Destination} from './Destination';
+
 export class Scenic {
-  ScenicId: number;
-  ScenicName: string;
-  ScenicDescription: string;
-  ScenicImage: string;
+  scenicId: number;
+  scenicName: string;
+  scenicDescription: string;
+  scenicImage: string;
+  destination: Destination;
 }
