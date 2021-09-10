@@ -1,5 +1,6 @@
 import {Airline} from './Airline';
 import {Location} from './Location';
+
 export interface Flight {
   flightId?: number;
   flightCode?: string;
@@ -9,6 +10,6 @@ export interface Flight {
   flightPrice: number;
   flag?: boolean;
   airline?: Airline;
-  locationTo?: Location ;
+  locationTo?: Location;
   locationFrom?: Location;
 }

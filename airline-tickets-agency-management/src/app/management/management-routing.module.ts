@@ -6,6 +6,7 @@ import {TicketListComponent} from "./component/management-ticket/ticket-list/tic
 
 
 
+
 const routes: Routes = [
   {
     path: '', component: ManagementComponent,
