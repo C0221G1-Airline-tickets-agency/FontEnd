@@ -29,7 +29,7 @@ export class DestinationUpdateComponent implements OnInit {
   destination: Destiation;
   listScenics: Scenic[] = [];
   selectedImage: any = null;
-  desinationId = 12;
+  desinationId = 29;
   url = '';
   scenic: Scenic;
   messageUnique = '';

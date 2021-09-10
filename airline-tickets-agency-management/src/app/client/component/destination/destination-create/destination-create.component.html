@@ -46,7 +46,7 @@
           <div class="col-2 folow-right">Bài viết :</div>
           <div class="col-8">
             <input (click)="onAddScenicHandler()" class="btn" type="button" style="background-color: #9fcdff" value="Thêm bài viết">
-            <div style="color: red">{{messageEmptyScenic}}</div>
+            <div [hidden]="listScenics.length>0" style="color: red">{{messageEmptyScenic}}</div>
           </div>
         </div>
 
