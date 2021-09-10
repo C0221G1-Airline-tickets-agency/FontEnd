@@ -45,7 +45,7 @@
         </div>
         <div class="ticket-input-right">
           <input type="text" class="form-control ticket-normal" (click)="clickHidden(1)"
-                 placeholder="Chọn ngày" [value]="departureTime | date:'dd/MM/yyyy'"
+                 placeholder="Chọn ngày" [value]="startDay | date:'dd/MM/yyyy'"
                  readonly>
           <div class="ticket-title" style="left: 30px">Ngày đi</div>
         </div>
@@ -85,11 +85,11 @@
           <div class="row pt-1">
             <div class="col-12 mx-3">
               Ngày đi:
-              <input type="date" class="form-control mx-0" [min]="departureTime" [(ngModel)]="departureTime" [placeholder]="departureTime">
+              <input type="date" class="form-control mx-0" [min]="startDay" [(ngModel)]="startDay" [placeholder]="startDay">
             </div>
             <div class="col-12 mx-3 {{isTwoWay? 'd-block': 'd-none'}}">
               Ngày về:
-              <input type="date" class="form-control mx-0" [min]="departureTime" [(ngModel)]="endTime">
+              <input type="date" class="form-control mx-0" [min]="startDay" [(ngModel)]="endDay">
             </div>
           </div>
           <hr>
@@ -114,7 +114,7 @@
           <div class="ticket-input-right">
             <input type="text" class="form-control ticket-normal" (click)="clickHidden(1)"
                    placeholder="Ngày về"
-                   [value]="endTime | date:'dd/MM/yyyy'" readonly>
+                   [value]="endDay | date:'dd/MM/yyyy'" readonly>
             <div class="ticket-title" style="left: 30px">Ngày về</div>
           </div>
         </div>
@@ -140,7 +140,7 @@
 
         <!-- ------------------------------------------ HÀNH KHÁCH   ---------------------------------------------------- -->
 
-        <div class="bg-light showHidden" style="z-index: 1200">
+        <div class="bg-light showHidden" style="z-index: 1200; height: 200px">
           <div class="row" style="padding-top: 20px">
             <div class="col">
               <img src="../../../../assets/img/nguoiLon.svg" alt="#" style="padding-left: 29px"><span
@@ -160,7 +160,6 @@
               <img src="../../../../assets/img/baby.svg" alt="#" style="padding-left: 23px"><span
               style="padding-left: 16px!important;">Trẻ em</span>
               <div class="info-person" style=" position: absolute;top: 20px;left: 75px;">
-                <small>2-11 tuổi</small>
               </div>
             </div>
             <div class="col">
@@ -169,20 +168,7 @@
               <a class="btn" (click)="addPassenger('children')"><i class="fa fa-plus" aria-hidden="true"></i></a>
             </div>
           </div>
-          <div class="row" style="padding-top: 25px">
-            <div class="col">
-              <img src="../../../../assets/img/babySmall.svg" alt="#" style="padding-left: 25px"><span
-              style="padding-left: 17px!important;">Em bé</span>
-              <div class="info-person" style=" position: absolute;top: 20px;left: 75px;">
-                <small>Dưới 2 tuổi</small>
-              </div>
-            </div>
-            <div class="col">
-              <a class="btn" (click)="subPassenger('baby')"><i class="fa fa-minus" aria-hidden="true"></i></a>
-              <span class="text-danger px-3"> {{baby}} </span>
-              <a class="btn" (click)="addPassenger('baby')"><i class="fa fa-plus" aria-hidden="true"></i></a>
-            </div>
-          </div>
+
           <hr>
           <div class="row" style="margin-top: -8px">
             <div class="col">
