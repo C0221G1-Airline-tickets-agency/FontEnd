@@ -98,7 +98,7 @@ export class TicketListComponent implements OnInit {
       } else {
         this.toastr.error('Không tìm thấy dữ liệu !', 'Cảnh báo : ');
       }
-    }, 50);
+    }, 100);
 
   }
 
@@ -148,9 +148,9 @@ export class TicketListComponent implements OnInit {
           '                    <p style="text-align: left">Giá: ' + this.formatter.format(this.ticket.ticketPrice + (this.ticket.ticketPrice * this.ticket.ticketTypePrice) + this.ticket.plusBaggage + (this.ticket.ticketPrice * this.ticket.tax) - (this.ticket.ticketPrice * this.ticket.passengerTypePrice)) +
           '</p></div><hr>',
         showCancelButton: true,
-        confirmButtonText: 'Xác nhận',
+        confirmButtonText: '<i class="fa fa-trash-o"></i> Xác nhận',
         confirmButtonColor: '#3085d6',
-        cancelButtonText: '&emsp;Huỷ&emsp;',
+        cancelButtonText: '<i class="fa fa-reply"></i> Trở về',
         cancelButtonColor: '#dc3545',
         reverseButtons: true,
       }).then((result) => {
@@ -181,11 +181,23 @@ export class TicketListComponent implements OnInit {
   }
 
   onInputHandler() {
-    this.router.navigateByUrl("");
+    this.router.navigateByUrl("/flight-management");
   }
 
   onReturnHandler() {
-    this.router.navigateByUrl("");
+    Swal.fire({
+      titleText:'Trở về',
+      text:'Bạn có chắc muốn trở về màn hình trang chủ?',
+      showCancelButton: true,
+      confirmButtonText: '<i class="fa fa-check"></i> Xác nhận',
+      confirmButtonColor: '#3085d6',
+      cancelButtonText: '<i class="fa fa-reply"></i> Trở về ',
+      cancelButtonColor: '#dc3545',
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigateByUrl("");
+      }
+    })
   }
-
 }
