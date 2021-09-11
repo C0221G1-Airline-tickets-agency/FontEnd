@@ -28,6 +28,7 @@ export class EmployeeComponent implements OnInit {
     this.getList();
   }
 
+
   getList() {
     this.sv.getListEmployee(this.typeSearch, this.valueSearch, this.page).subscribe(data => {
         this.isFail = false;
@@ -79,6 +80,7 @@ export class EmployeeComponent implements OnInit {
 
   deleteEmployee() {
     if (this.employeeIdChoice === 0) {
+      alert('chọn đi bạn ơi!! chớ ai biết xoá cái chi mà xoá');
       return;
     }
     Swal.fire({
@@ -95,9 +97,11 @@ export class EmployeeComponent implements OnInit {
       if (result.isConfirmed) {
         this.sv.deleteEmployee(this.employeeIdChoice).subscribe(e => {
             this.toast.success('Xoá thành công', 'Thông báo');
+            this.employeeIdChoice = 0;
             this.getList();
           }, error => {
             this.toast.error('Lỗi', 'Thông báo');
+            this.employeeIdChoice = 0;
             this.getList();
           }
         );
@@ -117,7 +121,7 @@ export class EmployeeComponent implements OnInit {
         break;
       case 'employee_birth':
         break;
-      case 'email':
+      case 'user_name':
         break;
       case 'name':
         this.valueSearch = 'ROLE_ADMIN';
