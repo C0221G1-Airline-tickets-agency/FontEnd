@@ -1,0 +1,41 @@
+input {
+  height: 25px;
+  border: 1px solid;
+}
+select {
+  border: 1px solid;
+}
+.btn-delete{
+  background-color: #dc3545;
+}
+
+.btn-edit {
+  background-color: #F58317;
+  color: white;
+}
+
+.btn{
+  min-width: 90px !important;
+}
+
+.btn-search {
+  background-color: #18AEFF;
+  color: white;
+}
+
+.btn-print {
+  background-color: #F58317;
+  color: white;
+}
+.btn-return{
+  background-color: #0062D2;
+  color: white;
+}
+
+.btn:hover{
+  color: black;
+}
+
+.search{
+  width: 70%;
+}

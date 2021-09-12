@@ -10,4 +10,6 @@ export interface SearchFlightDto {
   ticketType?;
   passengerType?;
   price?;
+  logo?;
+  ticketId: number;
 }

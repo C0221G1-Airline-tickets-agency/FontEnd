@@ -2,8 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import Swal from 'sweetalert2';
 import {formatDate} from '@angular/common';
 import {SearchFlightDto} from '../../../../../model/flight-ticket/searchFlightDto';
-import {Location} from '../../../../../model/flight-ticket/location';
-import {SearchFlightService} from '../../../../../service/flight-ticket/search-flight.service';
+import {Location} from '../../../../../model/flight-ticket/Location';
+import {SearchFlightService} from '../../../../../service/flight-ticket/search-flight/search-flight.service';
+import {TicketService} from '../../../../../service/flight-ticket/ticket/ticket.service';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-flight-list',
@@ -13,67 +15,126 @@ import {SearchFlightService} from '../../../../../service/flight-ticket/search-f
 export class FlightListComponent implements OnInit {
   // search flight
   searchFlightList: SearchFlightDto[] = [];
-  searchSuccess = false;
+  flightGoList: SearchFlightDto[] = [];
+  flightReturnList: SearchFlightDto[] = [];
+  searchGoSuccess = false;
+  searchReturnSuccess = false;
+  searched = false;
+  orderBy = 'ticketId';
   // end search flight
   ticketShow;
   index = 0;
   isTwoWay = 1;
-  daySearch;
 // information Ticket
   locationTo: Location;
   locationToCity = '';
   locationFrom: Location;
   locationFromCity = '';
-  flightDate: Date;
-  endTime = '';
+  flightDate;
+  returnDate;
   adults = 0;
   children = 0;
   passengerType1;
   passengerType2;
   baby = 0;
   locationSelected = false;
-  currentDate;
+  weekdays = [];
+  weekdaysGo = [];
+  weekdaysReturn = [];
+  dates = [];
+  datesGo = [];
+  datesReturn = [];
 //   informartion search flight
   locationFromSearch: Location;
   locationToSearch: Location;
-  flightDateSearch: Date;
+  flightGoDateSearch: Date;
+  flightReturnDateSearch: Date;
+  // Ticket detail
+  ticketDetailId: number;
+  clickedButtonDetail = false;
   // Chức năng
   locationList: Location[];
 
-  constructor(private searchFlightService: SearchFlightService) {
+  constructor(private searchFlightService: SearchFlightService,
+              private ticketService: TicketService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.getAllLocations();
   }
-
-  //#region effect ticket
-  getDayNow(day) {
-    switch (day) {
+  getDay(day) {
+    const y = 24 * 60 * 60 * 1000;
+    const x = day.getTime();
+    this.dates = [x - 3 * y, x - 2 * y, x - y, x, x + y, x + 2 * y, x + 3 * y];
+    switch (day.getDay()) {
       case 1:
-        this.currentDate = 'Thứ 2';
+        this.weekdays = ['Thứ 6', 'Thứ 7', 'Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5'];
         break;
       case 2:
-        this.currentDate = 'Thứ 3';
+        this.weekdays = ['Thứ 7', 'Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6'];
         break;
       case 3:
-        this.currentDate = 'Thứ 4';
+        this.weekdays = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
         break;
       case 4:
-        this.currentDate = 'Thứ 5';
+        this.weekdays = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
+
         break;
       case 5:
-        this.currentDate = 'Thứ 6';
+        this.weekdays = ['Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật', 'Thứ 2'];
+
         break;
       case 6:
-        this.currentDate = 'Thứ 7';
+        this.weekdays = ['Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật', 'Thứ 2', 'Thứ 3'];
         break;
       case 0:
-        this.currentDate = 'Chủ nhật';
+        this.weekdays = ['Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4'];
         break;
     }
   }
-
+  // CHANGE DAY
+  changeDayGo(order) {
+   this.flightDate = new Date(this.datesGo[order]);
+   const day = this.flightDate.getDate();
+   const month = this.flightDate.getMonth() + 1;
+   const year = this.flightDate.getFullYear();
+   const date = year + '-' + month + '-' + day;
+    this.searchFlightService.searchFlight(this.locationFrom.locationId, this.locationTo.locationId, date, this.passengerType1, this.passengerType2, this.orderBy).subscribe((searchFlightList: SearchFlightDto[]) => {
+      this.flightGoList = searchFlightList;
+      this.flightGoDateSearch = new Date(date);
+      this.flightDate = date;
+      this.getDay(new Date(this.flightGoDateSearch));
+      this.weekdaysGo = this.weekdays;
+      this.datesGo = this.dates;
+      if (searchFlightList == null) {
+        this.searchGoSuccess = false;
+      } else {
+        this.searchGoSuccess = true;
+      }
+    });
+  }
+  changeDayReturn(order) {
+    this.returnDate = new Date(this.datesReturn[order]);
+    const day = this.returnDate.getDate();
+    const month = this.returnDate.getMonth() + 1;
+    const year = this.returnDate.getFullYear();
+    const date = year + '-' + month + '-' + day;
+    this.searchFlightService.searchFlight(this.locationTo.locationId, this.locationFrom.locationId, date, this.passengerType1, this.passengerType2, this.orderBy).subscribe((searchFlightList: SearchFlightDto[]) => {
+      this.flightReturnList = searchFlightList;
+      this.flightReturnDateSearch = new Date(date);
+      this.returnDate = date;
+      this.getDay(new Date(this.flightReturnDateSearch));
+      this.weekdaysReturn = this.weekdays;
+      this.datesReturn = this.dates;
+      if (searchFlightList == null) {
+        this.searchReturnSuccess = false;
+      } else {
+        this.searchReturnSuccess = true;
+      }
+    });
+  }
+  //#region effect ticket
   clickHidden(num: number) {
     this.ticketShow = document.getElementsByClassName('showHidden');
     // ------------------------------ Click HIDDEN / SHOW ---------------------------------------
@@ -118,6 +179,9 @@ export class FlightListComponent implements OnInit {
       this.locationToCity = location.cityName;
       this.locationSelected = false;
     }
+  }
+  formatDate(event) {
+    this.returnDate = new Date(event);
   }
 
 //#region GET QUANTITY PASSENGER
@@ -172,9 +236,12 @@ export class FlightListComponent implements OnInit {
   }
 
 //#endregion
-
+// #getOrderBy
+  changeOrderBy(orderBy) {
+    this.orderBy = orderBy;
+  }
   getSearchTicket() {
-    if ((this.isTwoWay && (!this.locationTo || !this.locationFrom || !this.endTime)) ||
+    if ((this.isTwoWay && (!this.locationTo || !this.locationFrom || !this.returnDate)) ||
       (!this.isTwoWay && (!this.locationTo || !this.locationFrom)) || (this.adults == 0 && this.children == 0)) {
       Swal.fire({
         icon: 'error',
@@ -194,17 +261,43 @@ export class FlightListComponent implements OnInit {
         this.passengerType1 = 'trẻ em';
         this.passengerType2 = 'trẻ em';
       }
-      this.searchFlightService.searchFlight(this.locationFrom.locationId, this.locationTo.locationId, this.flightDate, this.passengerType1, this.passengerType2).subscribe((searchFlightList: SearchFlightDto[]) => {
-        this.searchFlightList = searchFlightList;
-      });
       this.locationFromSearch = this.locationFrom;
       this.locationToSearch = this.locationTo;
-      this.flightDateSearch = this.flightDate;
-      this.daySearch = (new Date(this.flightDateSearch));
-      this.getDayNow(this.daySearch.getDay());
-      this.searchSuccess = true;
+      this.searchFlightService.searchFlight(this.locationFrom.locationId, this.locationTo.locationId, this.flightDate, this.passengerType1, this.passengerType2, this.orderBy).subscribe((searchFlightList: SearchFlightDto[]) => {
+        this.flightGoList = searchFlightList;
+        this.flightGoDateSearch = this.flightDate;
+        this.getDay(new Date(this.flightGoDateSearch));
+        this.weekdaysGo = this.weekdays;
+        this.datesGo = this.dates;
+        if (searchFlightList == null) {
+          this.searchGoSuccess = false;
+        } else {
+          this.searchGoSuccess = true;
+        }
+      });
+      if (this.isTwoWay) {
+        this.searchFlightService.searchFlight(this.locationTo.locationId, this.locationFrom.locationId, this.returnDate, this.passengerType1, this.passengerType2, this.orderBy).subscribe((searchFlightList: SearchFlightDto[]) => {
+          this.flightReturnList = searchFlightList;
+          this.flightReturnDateSearch = this.returnDate;
+          this.getDay(new Date(this.flightReturnDateSearch));
+          this.weekdaysReturn = this.weekdays;
+          this.datesReturn = this.dates;
+          if (searchFlightList == null) {
+            this.searchReturnSuccess = false;
+          } else {
+            this.searchReturnSuccess = true;
+          }
+        });
+      }
+      this.searched = true;
     }
   }
-
-
+  ticketDetail(ticketId): void {
+      this.ticketDetailId = ticketId;
+      if (this.clickedButtonDetail) {
+        this.clickedButtonDetail = false;
+      } else {
+        this.clickedButtonDetail = true;
+      }
+  }
 }

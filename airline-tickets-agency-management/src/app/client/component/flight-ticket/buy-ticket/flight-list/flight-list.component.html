@@ -2,25 +2,32 @@
   <div class="row">
     <div class="col-lg-8 col-xs-12 mt-3">
       <div class="col-lg-12 d-flex justify-content-end">
-        <div class="flight-list w-100">
-          <div class="flight-list-go" *ngIf="searchSuccess">
+        <div class="flight-list w-100" *ngIf="searched">
+          <div class="flight-list-go">
             <div class="departure-summary pl-3">
-              <h5>{{locationFromSearch.cityName}} ({{locationFromSearch.areaCode}}) <i class="fa fa-fighter-jet"></i> {{locationToSearch.cityName}} ({{locationToSearch.areaCode}})</h5>
-              <p class="text-grey">{{currentDate}} - Ngày {{flightDateSearch}}</p>
+              <h5>{{locationFromSearch.cityName}} ({{locationFromSearch.areaCode}}) <i
+                class="fa fa-fighter-jet"></i> {{locationToSearch.cityName}} ({{locationToSearch.areaCode}})</h5>
+              <p class="text-grey">{{weekdaysGo[3]}} - Ngày {{datesGo[3] | date:'dd/MM/yyyy'}}</p>
             </div>
             <div class="days mt-3">
               <div class="btn-group d-flex align-items-center" role="group" aria-label="Basic example">
-                <button type="button" class="btn text-grey">Chủ nhật <br> 29/08/2021</button>
-                <button type="button" class="btn text-grey">Thứ 2 <br> 30/08/2021</button>
-                <button type="button" class="btn text-grey">Thứ 3 <br> 31/08/2021</button>
-                <button type="button" class="btn date-chosen">Thứ 4 <br> {{daySearch}}</button>
-                <button type="button" class="btn text-grey">Thứ 5 <br> 02/09/2021</button>
-                <button type="button" class="btn text-grey">Thứ 6 <br> 03/09/2021</button>
-                <button type="button" class="btn text-grey">Thứ 7 <br> 04/09/2021</button>
-
+                <button type="button" class="btn text-grey" (click)="changeDayGo(0)">{{weekdaysGo[0]}}
+                  <br> {{ datesGo[0] | date:'dd/MM/yyyy'}}</button>
+                <button type="button" class="btn text-grey" (click)="changeDayGo(1)">{{weekdaysGo[1]}}
+                  <br> {{ datesGo[1] | date:'dd/MM/yyyy'}}</button>
+                <button type="button" class="btn text-grey" (click)="changeDayGo(2)">{{weekdaysGo[2]}}
+                  <br> {{ datesGo[2] | date:'dd/MM/yyyy'}}</button>
+                <button type="button" class="btn date-chosen" (click)="changeDayGo(3)">{{weekdaysGo[3]}}
+                  <br> {{datesGo[3] | date:'dd/MM/yyyy' }}</button>
+                <button type="button" class="btn text-grey" (click)="changeDayGo(4)">{{weekdaysGo[4]}}
+                  <br> {{ datesGo[4] | date:'dd/MM/yyyy'}}</button>
+                <button type="button" class="btn text-grey" (click)="changeDayGo(5)">{{weekdaysGo[5]}}
+                  <br> {{ datesGo[5] | date:'dd/MM/yyyy'}}</button>
+                <button type="button" class="btn text-grey" (click)="changeDayGo(6)">{{weekdaysGo[6]}}
+                  <br> {{ datesGo[6] | date:'dd/MM/yyyy'}}</button>
               </div>
             </div>
-            <div class="mt-3 flight-list-table">
+            <div class="mt-3 flight-list-table" *ngIf="searchGoSuccess">
               <table class="table table-list">
                 <thead>
                 <tr class>
@@ -32,41 +39,93 @@
                   <th>Đặt vé</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr *ngFor="let flight of searchFlightList">
-                  <td style="text-align: left; padding-left: 20px">
+                <tbody *ngFor="let flight of flightGoList">
+                <tr>
+                  <td style="text-align: left; padding-left: 20px"><img src="{{flight.logo}}">
                     {{flight.airlineName}}
                   </td>
                   <td>{{flight.flightCode}}</td>
                   <td>{{flight.departureTime}} - {{flight.endTime}}</td>
-                  <td class="price">{{flight.price}}</td>
+                  <td class="price">{{flight.price | number: '.0'}}</td>
                   <td class="d-flex justify-content-around" style="border: hidden">
-                    <button class="btn-detail">Chi tiết</button>
+                    <button class="btn-detail" (click)="ticketDetail(flight.ticketId)">Chi tiết</button>
                   </td>
                   <td><input type="radio"></td>
+                </tr>
+                <tr *ngIf="flight.ticketId == ticketDetailId && clickedButtonDetail">
+                  <td colspan="6">
+                    <div class="d-block">
+                      <div class="d-flex align-items-center">
+                        <p style="color: #F58317" class="mr-2"><i class="fa fa-plane"></i></p>
+                        <p class="mr-2">Số hiệu chuyến bay: </p><p
+                        style="color: #dc3545">{{flight.flightCode}}</p>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <span style="color: #dc3545" class="mr-2"><i class="fa fa-play-circle"></i></span>
+                        <span> Khởi hành: </span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <span>{{flight.departureTime}}, {{flight.flightDate}} (Giờ địa phương)</span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <p>{{locationFrom.cityName}} - Sân bay {{locationFrom.airportName}}</p>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <span style="color: darkgreen" class="mr-2"><i class="fa fa-map-marker"></i></span>
+                        <span> Đến:</span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <span>{{flight.endTime}}, {{flight.flightDate}} (Giờ địa phương)
+                        </span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <p>{{locationTo.cityName}} - Sân bay {{locationTo.airportName}}</p>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 </tbody>
               </table>
             </div>
+            <div class="mt-3" style="background: white" *ngIf="!searchGoSuccess">
+              <div class="d-flex justify-content-center pt-3">
+                <img src="../../../../assets/img/not-found-flight.png" width="240px" height="140px">
+              </div>
+              <br>
+              <div class="d-flex justify-content-center">
+                <p class="font-weight-bold">Không tìm thấy chuyến bay hoặc đã hết chỗ</p>
+              </div>
+              <div class="d-flex justify-content-center">
+                <small class="text-grey pb-3">Vui lòng chọn ngày bay hoặc hãng bay khác</small>
+              </div>
+            </div>
           </div>
-          <div class="flight-list-return">
+          <div class="flight-list-return" *ngIf="isTwoWay">
             <div class="departure-summary pl-3">
-              <h5>Hà Nội (HAN) <i class="fa fa-fighter-jet"></i> TP HCM (SGN)</h5>
-              <p class="text-grey">Thứ 4 - Ngày 01/09/2021</p>
+              <h5>{{locationToSearch.cityName}} ({{locationToSearch.areaCode}}) <i
+                class="fa fa-fighter-jet"></i> {{locationFromSearch.cityName}} ({{locationFromSearch.areaCode}})</h5>
+              <p class="text-grey">{{weekdays[3]}} - Ngày {{datesReturn[3] | date:'dd/MM/yyyy'}}</p>
             </div>
             <div class="days mt-3">
               <div class="btn-group d-flex align-items-center" role="group" aria-label="Basic example">
-                <button type="button" class="btn text-grey">Chủ nhật <br> 29/08/2021</button>
-                <button type="button" class="btn text-grey">Thứ 2 <br> 30/08/2021</button>
-                <button type="button" class="btn text-grey">Thứ 3 <br> 31/08/2021</button>
-                <button type="button" class="btn date-chosen">Thứ 4 <br> 01/09/2021</button>
-                <button type="button" class="btn text-grey">Thứ 5 <br> 02/09/2021</button>
-                <button type="button" class="btn text-grey">Thứ 6 <br> 03/09/2021</button>
-                <button type="button" class="btn text-grey">Thứ 7 <br> 04/09/2021</button>
+                <button type="button" class="btn text-grey" (click)="changeDayReturn(0)">{{weekdaysReturn[0]}}
+                  <br> {{ datesReturn[0] | date:'dd/MM/yyyy'}}</button>
+                <button type="button" class="btn text-grey" (click)="changeDayReturn(1)">{{weekdaysReturn[1]}}
+                  <br> {{ datesReturn[1] | date:'dd/MM/yyyy'}}</button>
+                <button type="button" class="btn text-grey" (click)="changeDayReturn(2)">{{weekdaysReturn[2]}}
+                  <br> {{ datesReturn[2] | date:'dd/MM/yyyy'}}</button>
+                <button type="button" class="btn date-chosen" (click)="changeDayReturn(3)">{{weekdaysReturn[3]}}
+                  <br> {{datesReturn[3] | date:'dd/MM/yyyy' }}</button>
+                <button type="button" class="btn text-grey" (click)="changeDayReturn(4)">{{weekdaysReturn[4]}}
+                  <br> {{ datesReturn[4] | date:'dd/MM/yyyy'}}</button>
+                <button type="button" class="btn text-grey" (click)="changeDayReturn(5)">{{weekdaysReturn[5]}}
+                  <br> {{ datesReturn[5] | date:'dd/MM/yyyy'}}</button>
+                <button type="button" class="btn text-grey" (click)="changeDayReturn(6)">{{weekdaysReturn[6]}}
+                  <br> {{ datesReturn[6] | date:'dd/MM/yyyy'}}</button>
 
               </div>
             </div>
-            <div class="mt-3 flight-list-table">
+            <div class="mt-3 flight-list-table" *ngIf="searchReturnSuccess">
               <table class="table table-list">
                 <thead>
                 <tr class>
@@ -78,31 +137,65 @@
                   <th>Đặt vé</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody  *ngFor="let flight of flightReturnList">
                 <tr>
-                  <td style="text-align: left; padding-left: 20px">
-                    VietJet Air
+                  <td style="text-align: left; padding-left: 20px"><img src="{{flight.logo}}">
+                    {{flight.airlineName}}
                   </td>
-                  <td>VJ203</td>
-                  <td>19:30 - 21:35</td>
-                  <td class="price">1,750.000</td>
+                  <td>{{flight.flightCode}}</td>
+                  <td>{{flight.departureTime}} - {{flight.endTime}}</td>
+                  <td class="price">{{flight.price | number: '.0'}}</td>
                   <td class="d-flex justify-content-around" style="border: hidden">
-                    <button class="btn-detail">Chi tiết</button>
+                    <button class="btn-detail" (click)="ticketDetail(flight.ticketId)">Chi tiết</button>
                   </td>
                   <td><input type="radio"></td>
                 </tr>
-                <tr>
-                  <td style="text-align: left; padding-left: 20px">  Vietnam Airlines</td>
-                  <td>VN6017</td>
-                  <td>16:25 - 18:10</td>
-                  <td class="price">2,500.000</td>
-                  <td class="d-flex justify-content-around">
-                    <button class="btn-detail">Chi tiết</button>
+                <tr *ngIf="flight.ticketId == ticketDetailId && clickedButtonDetail">
+                  <td colspan="6">
+                    <div class="d-block">
+                      <div class="d-flex align-items-center">
+                        <p style="color: #F58317" class="mr-2"><i class="fa fa-plane"></i></p>
+                        <p class="mr-2">Số hiệu chuyến bay: </p><p
+                        style="color: #dc3545">{{flight.flightCode}}</p>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <span style="color: #dc3545" class="mr-2"><i class="fa fa-play-circle"></i></span>
+                        <span> Khởi hành: </span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <span>{{flight.departureTime}}, {{flight.flightDate}} (Giờ địa phương)</span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <p>{{locationTo.cityName}} - Sân bay {{locationTo.airportName}}</p>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <span style="color: darkgreen" class="mr-2"><i class="fa fa-map-marker"></i></span>
+                        <span> Đến:</span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <span>{{flight.endTime}}, {{flight.flightDate}} (Giờ địa phương)
+                        </span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <p>{{locationFrom.cityName}} - Sân bay {{locationFrom.airportName}}</p>
+                      </div>
+                    </div>
                   </td>
-                  <td><input type="radio"></td>
                 </tr>
                 </tbody>
               </table>
+            </div>
+            <div class="mt-3" style="background: white" *ngIf="!searchReturnSuccess">
+              <div class="d-flex justify-content-center pt-3">
+                <img src="../../../../assets/img/not-found-flight.png" width="240px" height="140px">
+              </div>
+              <br>
+              <div class="d-flex justify-content-center">
+                <p class="font-weight-bold">Không tìm thấy chuyến bay hoặc đã hết chỗ</p>
+              </div>
+              <div class="d-flex justify-content-center">
+                <small class="text-grey pb-3">Vui lòng chọn ngày bay hoặc hãng bay khác</small>
+              </div>
             </div>
           </div>
           <div class="mt-5 mb-3 d-flex justify-content-end">
@@ -116,13 +209,17 @@
         <div class="search-ticket-top">
           <div class="text-white ml-3"><p class="font-weight-bold">Sắp xếp</p></div>
           <div class="text-white mx-3 pl-3 p-1" style="border: 1px solid white; border-radius: 5px">
-            <input type="radio" name="search-type" checked> Đề xuất <br>
-            <input type="radio" name="search-type"> Giá (Thấp đến cao) <br>
-            <input type="radio" name="search-type"> Thời gian khởi hành <br>
-            <input type="radio" name="search-type"> Hãng hàng không
+            <input type="radio" name="search-type" value="ticketId" [(ngModel)]="orderBy"
+                   (change)="changeOrderBy($event.target.value)" checked> Đề xuất <br>
+            <input type="radio" name="search-type" value="price" [(ngModel)]="orderBy"
+                   (change)="changeOrderBy($event.target.value)"> Giá (Thấp đến cao) <br>
+            <input type="radio" name="search-type" value="departureTime" [(ngModel)]="orderBy"
+                   (change)="changeOrderBy($event.target.value)"> Thời gian khởi hành <br>
+            <input type="radio" name="search-type" value="airlineName" [(ngModel)]="orderBy"
+                   (change)="changeOrderBy($event.target.value)"> Hãng hàng không
           </div>
         </div>
-        <div class="plane-ticket">
+        <div class="plane-ticket mt-2">
           <h4 class="text-center text-white">Đặt vé máy bay</h4>
           <div class="text-white list-inline ticket-radio">
             <input type="radio" name="choose-ticket" (click)="chooseTicket(1)" [checked]="isTwoWay"> Khứ hồi
@@ -146,7 +243,8 @@
             <div class="bg-light showHidden" style="z-index: 690; height: 300px;">
               <div class="row pt-1">
                 <div class="col pl-2 pr-1">
-                  <input type="text" class="form-control" placeholder="Điểm khởi hành" [value]="locationFromCity" readonly>
+                  <input type="text" class="form-control" placeholder="Điểm khởi hành" [value]="locationFromCity"
+                         readonly>
                 </div>
                 <div class="col pr-2 pl-1">
                   <input type="text" class="form-control ml-0" placeholder="Điểm đến" [value]="locationToCity" readonly>
@@ -164,8 +262,8 @@
               <hr>
               <div class="row" style="margin-top: -8px">
                 <div class="col d-flex justify-content-end">
-                  <a href="#" class="btn btn-secondary person mr-1" (click)="clickHidden(0)">Thoát</a>
-                  <a href="#" class="btn btn-warning person" (click)="clickHidden(1)">Đi tiếp</a>
+                  <button class="btn btn-secondary person mr-1" (click)="clickHidden(0)">Thoát</button>
+                  <button class="btn btn-warning person" (click)="clickHidden(1)">Đi tiếp</button>
                 </div>
               </div>
             </div>
@@ -177,19 +275,19 @@
               <div class="row pt-1">
                 <div class="col-12 mx-3">
                   Ngày đi:
-                  <input type="date" class="form-control mx-0" [min]="flightDate" [(ngModel)]="flightDate" [placeholder]="flightDate">
+                  <input type="date" class="form-control mx-0" [min]="flightDate" [(ngModel)]="flightDate ">
                 </div>
                 <div class="col-12 mx-3 {{isTwoWay? 'd-block': 'd-none'}}">
                   Ngày về:
-                  <input type="date" class="form-control mx-0" [min]="flightDate" [(ngModel)]="endTime">
+                  <input type="date" class="form-control mx-0" [min]="flightDate" [(ngModel)]="returnDate">
                 </div>
               </div>
               <hr>
 
               <div class="row" style="margin-top: -10px">
                 <div class="col">
-                  <a href="#" class="btn btn-secondary person mr-1" (click)="clickHidden(1)">Thoát</a>
-                  <a href="#" class="btn btn-warning person" (click)="clickHidden(2)">Đi tiếp</a>
+                  <button class="btn btn-secondary person mr-1" (click)="clickHidden(1)">Thoát</button>
+                  <button class="btn btn-warning person" (click)="clickHidden(2)">Đi tiếp</button>
                 </div>
               </div>
             </div>
@@ -204,9 +302,9 @@
                 <div class="ticket-icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
               </div>
               <div class="ticket-input-right">
-                <input type="date" class="form-control ticket-normal" (click)="clickHidden(1)"
-                       placeholder="Ngày về"
-                       [value]="endTime | date:'dd/MM/yyyy'" readonly>
+                <input type="text" class="form-control ticket-normal" (click)="clickHidden(1)"
+                       placeholder="Chọn ngày"
+                       [value]="returnDate | date:'dd/MM/yyyy'" readonly>
                 <div class="ticket-title" style="left: 30px">Ngày về</div>
               </div>
             </div>
@@ -238,7 +336,6 @@
                   <img src="../../../../assets/img/nguoiLon.svg" alt="#" style="padding-left: 29px"><span
                   style="padding-left: 20px">Người lớn</span>
                   <div class="info-person" style=" position: absolute;top: 25px;left: 72px;">
-                    <small>12 tuổi trở lên</small>
                   </div>
                 </div>
                 <div class="col">
@@ -252,7 +349,6 @@
                   <img src="../../../../assets/img/baby.svg" alt="#" style="padding-left: 23px"><span
                   style="padding-left: 16px!important;">Trẻ em</span>
                   <div class="info-person" style=" position: absolute;top: 20px;left: 75px;">
-                    <small>2-11 tuổi</small>
                   </div>
                 </div>
                 <div class="col">
@@ -264,8 +360,8 @@
               <hr>
               <div class="row" style="margin-top: -8px">
                 <div class="col">
-                  <a href="#" class="btn btn-secondary person mr-1" (click)="clickHidden(2)">Thoát</a>
-                  <a href="#" class="btn btn-warning person" (click)="clickHidden(3)">Đi tiếp</a>
+                  <button class="btn btn-secondary person mr-1" (click)="clickHidden(2)">Thoát</button>
+                  <button class="btn btn-warning person" (click)="clickHidden(3)">Đi tiếp</button>
                 </div>
               </div>
 
@@ -273,7 +369,8 @@
           </div>
           <button (click)="getSearchTicket()" class="btn btn-warning findPlan">Tìm
             chuyến
-            bay</button>
+            bay
+          </button>
         </div>
       </div>
     </div>

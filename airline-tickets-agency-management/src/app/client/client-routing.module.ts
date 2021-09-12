@@ -6,6 +6,7 @@ import {ReportComponent} from '../management/component/report/report.component';
 import {ClientComponent} from './client/client.component';
 import {HomeComponent} from './component/home/home.component';
 import {FlightListComponent} from './component/flight-ticket/buy-ticket/flight-list/flight-list.component';
+import {CustomerChangePasswordComponent} from './component/customer/customer-change-password/customer-change-password.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,9 @@ const routes: Routes = [
         },
         {
           path: 'search-flight', component: FlightListComponent
+        },
+        {
+          path: 'customer', component: CustomerChangePasswordComponent
         }
       ]
   }
