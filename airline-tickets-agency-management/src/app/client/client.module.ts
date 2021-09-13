@@ -10,6 +10,14 @@ import {ClientComponent} from './client/client.component';
 import {CommonClientModule} from '../common/common-client/common-client.module';
 import {NewsListComponent} from './component/news/news-list/news-list.component';
 import {NewsDetailsComponent} from './component/news/news-details/news-details.component';
+import {DestinationCreateComponent} from './component/destination/destination-create/destination-create.component';
+import {DestinationUpdateComponent} from './component/destination/destination-update/destination-update.component';
+import {ScenicCreateComponent} from './component/destination/scenic-create/scenic-create.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {ScenicEditComponent} from './component/destination/scenic-edit/scenic-edit.component';
+import {DialogConfirmComponent} from './component/destination/dialog-confirm/dialog-confirm.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {LazyLoadImageModule} from 'ng-lazyload-image';
 
 import {TruncatePipe} from './component/news/news-list/TruncatePipe';
 import {NewsDeleteComponent} from './component/news/news-delete/news-delete.component';
@@ -25,16 +33,20 @@ import {ToastrModule} from 'ngx-toastr';
     NewsDetailsComponent, TruncatePipe, NewsDeleteComponent,
     NewsManipulationComponent, NewsReviewComponent, ClientComponent,
     DestinationDeleteComponent, HomeComponent,
-    DestinationDetailComponent],
+    DestinationDetailComponent, DestinationCreateComponent,
+    DestinationUpdateComponent, ScenicCreateComponent,
+    ScenicEditComponent, DialogConfirmComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,
     ReactiveFormsModule,
     CommonClientModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    LazyLoadImageModule
   ],
   bootstrap: [ClientComponent]
-
 })
 export class ClientModule {
 }

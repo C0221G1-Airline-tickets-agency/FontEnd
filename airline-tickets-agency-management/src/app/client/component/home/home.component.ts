@@ -257,7 +257,7 @@ export class HomeComponent implements OnInit {
               timer: 1500
             });
             if (this.check) {
-              this.page = this.pages.length - 2;
+              this.page = this.pages.length - 1;
             }
             this.showDestination();
           }, error => {
@@ -274,5 +274,6 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
 
 }

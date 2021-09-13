@@ -10,6 +10,7 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ClientModule} from './client/client.module';
 
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {httpInterceptorProviders} from './service/auth/auth-interceptor';

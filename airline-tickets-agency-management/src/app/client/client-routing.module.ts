@@ -13,6 +13,8 @@ import {NewsListComponent} from './component/news/news-list/news-list.component'
 import {NewsDetailsComponent} from './component/news/news-details/news-details.component';
 
 import {AdminAuthService} from '../service/auth/admin-auth.service';
+import {DestinationCreateComponent} from './component/destination/destination-create/destination-create.component';
+import {DestinationUpdateComponent} from './component/destination/destination-update/destination-update.component';
 
 
 const routes: Routes = [
@@ -38,7 +40,12 @@ const routes: Routes = [
         },
         {
           path: 'destination/detail/:id', component: DestinationDetailComponent
-
+        },
+        {
+          path: 'destination/create-destination', component: DestinationCreateComponent
+        },
+        {
+          path: 'destination/edit-destination/:id', component: DestinationUpdateComponent
         }
       ]
   }
