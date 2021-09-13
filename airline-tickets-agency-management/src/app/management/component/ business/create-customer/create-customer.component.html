@@ -1,0 +1,151 @@
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12" style="">
+  <div class="right-content " style="width: 850px">
+
+    <!--        nơi đổ dữ liệu router-outlet              -->
+
+    <fieldset class="scheduler-border" style="background: white;box-shadow: 0 0 2px 2px #cccccc;">
+      <legend class="scheduler-border text-center" style="background: #e54744"><h2>Thêm mới khách hàng</h2></legend>
+      <br>
+      <form action="" [formGroup]="customerForm" (ngSubmit)="createCustomer()" #formGroupRef="ngForm" class="form-group col-12">
+        <div class="row input-group">
+        <div class="col-3 folow-right">
+          <span>Họ và tên <label>(*)</label></span>
+        </div>
+        <div class="col-8">
+          <input formControlName="customerName" class="form-control" type="text">
+          <small>
+            <div class="text-danger" *ngFor="let validation of validationMessage.customerName">
+              <div class="text-danger">
+                <div class="error-message"
+                     *ngIf="customerForm.get('customerName').hasError(validation.type) && (customerForm.get('customerName').dirty || customerForm.get('customerName').touched || formGroupRef.submitted)">
+                  {{validation.message}}</div>
+              </div>
+            </div>
+          </small>
+        </div>
+      </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Địa chỉ <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <input formControlName="customerAddress" class="form-control" type="text">
+            <small>
+              <div class="text-danger" *ngFor="let validation of validationMessage.customerAddress">
+                <div class="text-danger">
+                  <div class="error-message"
+                       *ngIf="customerForm.get('customerAddress').hasError(validation.type) && (customerForm.get('customerAddress').dirty || customerForm.get('customerAddress').touched || formGroupRef.submitted)">
+                    {{validation.message}}</div>
+                </div>
+              </div>
+            </small>
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Ngày sinh <label>(*)</label></span>
+          </div>
+          <div class="col-4">
+            <input type="date" formControlName="customerBirthday" class="form-control">
+            <small>
+              <div class="text-danger" *ngFor="let validation of validationMessage.customerBirthday">
+                <div class="text-danger">
+                  <div class="error-message"
+                       *ngIf="customerForm.get('customerBirthday').hasError(validation.type) && (customerForm.get('customerBirthday').dirty || customerForm.get('customerBirthday').touched || formGroupRef.submitted)">
+                    {{validation.message}}</div>
+                </div>
+              </div>
+            </small>
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Giới tính <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <select formControlName="customerGender" class="form-control">
+              <option hidden selected [value]="null">--Vui lòng chọn giới tính--</option>
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+            </select>
+            <small>
+              <div class="text-danger" *ngFor="let validation of validationMessage.customerGender">
+                <div class="text-danger">
+                  <div class="error-message"
+                       *ngIf="customerForm.get('customerGender').hasError(validation.type) && (customerForm.get('customerGender').dirty || customerForm.get('customerGender').touched || formGroupRef.submitted)">
+                    {{validation.message}}</div>
+                </div>
+              </div>
+            </small>
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Email <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <input formControlName="customerEmail" class="form-control" type="email">
+            <small>
+              <div class="text-danger" *ngFor="let validation of validationMessage.customerEmail">
+                <div class="text-danger">
+                  <div class="error-message"
+                       *ngIf="customerForm.get('customerEmail').hasError(validation.type) && (customerForm.get('customerEmail').dirty || customerForm.get('customerEmail').touched || formGroupRef.submitted)">
+                    {{validation.message}}</div>
+                </div>
+              </div>
+              <div style="color: red">{{msgEmail}}</div>
+            </small>
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Điện thoại <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <input formControlName="customerPhone" class="form-control" type="text">
+            <small>
+              <div class="text-danger" *ngFor="let validation of validationMessage.customerPhone">
+                <div class="text-danger">
+                  <div class="error-message"
+                       *ngIf="customerForm.get('customerPhone').hasError(validation.type) && (customerForm.get('customerPhone').dirty || customerForm.get('customerPhone').touched || formGroupRef.submitted)">
+                    {{validation.message}}</div>
+                </div>
+              </div>
+
+            </small>
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>CMND-passport <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <input formControlName="customerPassport" class="form-control" type="text">
+            <small>
+              <div class="text-danger" *ngFor="let validation of validationMessage.customerPassport">
+                <div class="text-danger">
+                  <div class="error-message"
+                       *ngIf="customerForm.get('customerPassport').hasError(validation.type) && (customerForm.get('customerPassport').dirty || customerForm.get('customerPassport').touched || formGroupRef.submitted)">
+                    {{validation.message}}</div>
+                </div>
+              </div>
+              <div style="color: red">{{msgPassport}}</div>
+            </small>
+            <button class="btn btn-success mt-3"  type="submit"><i class="fa fa-check" aria-hidden="true"></i> Thêm
+            </button>
+          </div>
+        </div>
+      </form>
+      <div class="d-flex justify-content-start pb-3">
+
+      </div>
+    </fieldset>
+
+  </div>
+</div>
