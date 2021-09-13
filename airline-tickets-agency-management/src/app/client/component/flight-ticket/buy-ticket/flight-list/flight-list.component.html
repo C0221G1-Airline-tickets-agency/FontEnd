@@ -36,22 +36,29 @@
                   <th>Giờ</th>
                   <th>Giá (VND)</th>
                   <th>Chi tiết</th>
+                  <th>Số lượng vé</th>
                   <th>Đặt vé</th>
                 </tr>
                 </thead>
                 <tbody *ngFor="let flight of flightGoList">
                 <tr>
-                  <td style="text-align: left; padding-left: 20px"><img src="{{flight.logo}}">
+                  <td style="text-align: left; padding-left: 25px"><img width="25px" src="{{flight.logo}}">
                     {{flight.airlineName}}
                   </td>
                   <td>{{flight.flightCode}}</td>
                   <td>{{flight.departureTime}} - {{flight.endTime}}</td>
                   <td class="price">{{flight.price | number: '.0'}}</td>
-                  <td class="d-flex justify-content-around" style="border: hidden">
+                  <td class="d-flex justify-content-center" style="border: hidden">
                     <button class="btn-detail" (click)="ticketDetail(flight.ticketId)">Chi tiết</button>
                   </td>
                   <td>
-                  <button style="border-radius: 50%; height: 15px; width: 15px" [ngStyle]="{'background-image': flight.ticketId == ticketGoId ? chosenGo:''}" (click)="changeTicketGo(flight.ticketId)"></button>
+                    <select (change)="getTicketNumber(flight.ticketId, $event.target.value)">
+                      <option>0</option>
+                      <option  *ngFor="let i of createListId(flight.lengthListId)" [value]= "i">{{i}}</option>
+                    </select>
+                  </td>
+                  <td>
+                  <button style="border-radius: 50%; height: 15px; width: 15px" [ngStyle]="{'background-image': checkChosen(flight.ticketId) ? changeColor(flight.ticketId):''}" (click)="addTicketId(flight.ticketId, flight.listId)"></button>
                   </td>
                 </tr>
                 <tr *ngIf="flight.ticketId == ticketDetailId && clickedButtonDetail">
@@ -89,8 +96,12 @@
                         <span>{{flight.ticketType}} - Vé {{flight.passengerType}}</span>
                       </div>
                       <div class="d-flex align-items-center">
+                        <span class="mr-2">Số ghế {{flight.chairName}} </span>
+                        <a href="https://bitly.com.vn/wm6xbd" target="_blank"> Xem chi tiết tại đây </a>
+                      </div>
+                      <div class="d-flex align-items-center">
                         <span class="mr-2">Được khai thác bởi {{flight.airlineName}} </span>
-                        <img src="{{flight.logo}}">
+                        <img width="25px" src="{{flight.logo}}">
                       </div>
                     </div>
                   </td>
@@ -109,9 +120,6 @@
               <div class="d-flex justify-content-center">
                 <small class="text-grey pb-3">Vui lòng chọn ngày bay hoặc hãng bay khác</small>
               </div>
-            </div>
-            <div class="mt-5 mb-3 d-flex justify-content-end">
-              <button class="btn-confirm" (click)="buyTicketGo()">Xác nhận</button>
             </div>
           </div>
           <div class="flight-list-return" *ngIf="isTwoWay">
@@ -136,7 +144,6 @@
                   <br> {{ datesReturn[5] | date:'dd/MM/yyyy'}}</button>
                 <button type="button" class="btn text-grey" (click)="changeDayReturn(6)">{{weekdaysReturn[6]}}
                   <br> {{ datesReturn[6] | date:'dd/MM/yyyy'}}</button>
-
               </div>
             </div>
             <div class="mt-3 flight-list-table" *ngIf="searchReturnSuccess">
@@ -148,12 +155,13 @@
                   <th>Giờ</th>
                   <th>Giá (VND)</th>
                   <th>Chi tiết</th>
+                  <th>Số lượng vé</th>
                   <th>Đặt vé</th>
                 </tr>
                 </thead>
                 <tbody *ngFor="let flight of flightReturnList">
                 <tr>
-                  <td style="text-align: left; padding-left: 20px"><img src="{{flight.logo}}">
+                  <td style="text-align: left; padding-left: 20px"><img width="25px" src="{{flight.logo}}">
                     {{flight.airlineName}}
                   </td>
                   <td>{{flight.flightCode}}</td>
@@ -162,7 +170,14 @@
                   <td class="d-flex justify-content-around" style="border: hidden">
                     <button class="btn-detail" (click)="ticketDetail(flight.ticketId)">Chi tiết</button>
                   </td>
-                  <td><button style="border-radius: 50%; height: 15px; width: 15px" [ngStyle]="{'background-image': flight.ticketId == ticketReturnId ? chosenReturn:''}" (click)="changeTicketReturn(flight.ticketId)"></button>
+                  <td>
+                    <select (change)="getTicketNumber(flight.ticketId, $event.target.value)">
+                      <option>0</option>
+                      <option  *ngFor="let i of createListId(flight.lengthListId)" [value]= "i">{{i}}</option>
+                    </select>
+                  </td>
+                  <td>
+                  <td><button style="border-radius: 50%; height: 15px; width: 15px" [ngStyle]="{'background-image': checkChosen(flight.ticketId) ? changeColor(flight.ticketId):''}" (click)="addTicketId(flight.ticketId, flight.listId)"></button>
                   </td>
                 </tr>
                 <tr *ngIf="flight.ticketId == ticketDetailId && clickedButtonDetail">
@@ -200,8 +215,12 @@
                         <span>{{flight.ticketType}} - Vé {{flight.passengerType}}</span>
                       </div>
                       <div class="d-flex align-items-center">
+                        <span class="mr-2">Số ghế {{flight.chairName}} </span>
+                        <a href="https://bitly.com.vn/wm6xbd" target="_blank"> Xem chi tiết tại đây </a>
+                      </div>
+                      <div class="d-flex align-items-center">
                         <span class="mr-2">Được khai thác bởi {{flight.airlineName}} </span>
-                        <img src="{{flight.logo}}">
+                        <img width="20px" src="{{flight.logo}}">
                       </div>
                     </div>
                   </td>
@@ -221,9 +240,9 @@
                 <small class="text-grey pb-3">Vui lòng chọn ngày bay hoặc hãng bay khác</small>
               </div>
             </div>
-            <div class="mt-5 mb-3 d-flex justify-content-end">
-              <button class="btn-confirm" (click)="buyTicketReturn()">Xác nhận</button>
-            </div>
+          </div>
+          <div class="mt-5 mb-3 d-flex justify-content-end">
+            <button class="btn-confirm" (click)="buyTicket()">Xác nhận</button>
           </div>
         </div>
       </div>

@@ -6,6 +6,10 @@ import {Location} from '../../../../../model/flight-ticket/Location';
 import {SearchFlightService} from '../../../../../service/flight-ticket/search-flight/search-flight.service';
 import {TicketService} from '../../../../../service/flight-ticket/ticket/ticket.service';
 import {MatDialog} from '@angular/material/dialog';
+import {TicketNumber} from "../../../../../model/flight-ticket/ticketNumber";
+import {TicketArrayId} from "../../../../../model/flight-ticket/ticketArrayId";
+import {BookingDetailComponent} from "../booking-details/booking-detail.component";
+
 
 @Component({
   selector: 'app-flight-list',
@@ -54,11 +58,12 @@ export class FlightListComponent implements OnInit {
   ticketDetailId: number;
   clickedButtonDetail = false;
   // buy ticket
-  chosenGo = '';
-  chosenReturn = '';
-  chosenTicket = false;
-  ticketGoId = '';
-  ticketReturnId = '';
+  added = false;
+  listTicketArrayId = [];
+  listTicketId = [];
+  ticketId = '';
+  ticketNumberList: TicketNumber[];
+  ticketArrayIdList: TicketArrayId[];
   // Chức năng
   locationList: Location[];
 
@@ -72,6 +77,7 @@ export class FlightListComponent implements OnInit {
     this.getAllLocations();
 
   }
+
   getDay(day) {
     const y = 24 * 60 * 60 * 1000;
     const x = day.getTime();
@@ -102,13 +108,14 @@ export class FlightListComponent implements OnInit {
         break;
     }
   }
+
   // CHANGE DAY
   changeDayGo(order) {
-   this.flightDate = new Date(this.datesGo[order]);
-   const day = this.flightDate.getDate();
-   const month = this.flightDate.getMonth() + 1;
-   const year = this.flightDate.getFullYear();
-   const date = year + '-' + month + '-' + day;
+    this.flightDate = new Date(this.datesGo[order]);
+    const day = this.flightDate.getDate();
+    const month = this.flightDate.getMonth() + 1;
+    const year = this.flightDate.getFullYear();
+    const date = year + '-' + month + '-' + day;
     this.searchFlightService.searchFlight(this.locationFrom.locationId, this.locationTo.locationId, date, this.passengerType1, this.passengerType2, this.orderBy).subscribe((searchFlightList: SearchFlightDto[]) => {
       this.flightGoList = searchFlightList;
       this.flightGoDateSearch = new Date(date);
@@ -123,6 +130,7 @@ export class FlightListComponent implements OnInit {
       }
     });
   }
+
   changeDayReturn(order) {
     this.returnDate = new Date(this.datesReturn[order]);
     const day = this.returnDate.getDate();
@@ -143,6 +151,7 @@ export class FlightListComponent implements OnInit {
       }
     });
   }
+
   //#region effect ticket
   clickHidden(num: number) {
     this.ticketShow = document.getElementsByClassName('showHidden');
@@ -189,6 +198,7 @@ export class FlightListComponent implements OnInit {
       this.locationSelected = false;
     }
   }
+
   formatDate(event) {
     this.returnDate = new Date(event);
   }
@@ -241,26 +251,54 @@ export class FlightListComponent implements OnInit {
   changeOrderBy(orderBy) {
     this.orderBy = orderBy;
   }
-  changeTicketGo(id) {
-    if (this.ticketGoId == id) {
-      this.ticketGoId = '';
-      this.chosenGo = '';
-    } else {
-      this.ticketGoId = id;
-      this.chosenGo = 'linear-gradient(\n' +
-        '6.71deg, #F9A51A 2.28%, #FBB612 27.93%, #FBF300 86.9%';
+
+  checkChosen(id) {
+    if (this.listTicketArrayId.length == 0) {
+      return false;
     }
-  }
-  changeTicketReturn(id) {
-    if (this.ticketReturnId == id) {
-      this.ticketReturnId = '';
-      this.chosenReturn = '';
-    } else {
-      this.ticketReturnId = id;
-      this.chosenReturn = 'linear-gradient(\n' +
-        '6.71deg, #F9A51A 2.28%, #FBB612 27.93%, #FBF300 86.9%';
+    for (const ticketId of this.listTicketArrayId) {
+      if (id === ticketId) {
+        this.added = true;
+        break;
+      }
+      this.added = false;
     }
+    return this.added;
   }
+
+  changeColor(id) {
+    let color = '';
+    if (this.checkChosen(id)) {
+      color = 'linear-gradient(6.71deg, #F9A51A 2.28%, #FBB612 27.93%, #FBF300 86.9%)';
+    } else {
+      color = '';
+    }
+    if (this.listTicketArrayId.length == 0) {
+      color = '';
+    }
+    return color;
+  }
+
+  addTicketId(ticketId, ticketArrayId) {
+    const couple: TicketArrayId = {ticketId, ticketArrayId};
+    if (!this.checkChosen(ticketId)) {
+      this.listTicketArrayId.push(ticketId);
+      if (this.ticketArrayIdList == null) {this.ticketArrayIdList = [couple];
+      } else { this.ticketArrayIdList.push(couple); }
+      this.changeColor(ticketId);
+    } else {
+      for (let i = 0; i < this.listTicketArrayId.length; i++) {
+        if (this.listTicketArrayId[i] == ticketId) {
+          this.listTicketArrayId.splice(i, 1);
+          this.ticketArrayIdList.splice(i, 1);
+        }
+      }
+      this.changeColor(ticketId);
+    }
+    console.log(this.listTicketArrayId);
+    console.log(this.ticketArrayIdList);
+  }
+
   getSearchTicket() {
     if ((this.isTwoWay && (!this.locationTo || !this.locationFrom || !this.returnDate || !this.flightDate)) ||
       (!this.isTwoWay && (!this.locationTo || !this.locationFrom || !this.flightDate)) || (this.adults == 0 && this.children == 0)) {
@@ -313,34 +351,72 @@ export class FlightListComponent implements OnInit {
       this.searched = true;
     }
   }
+
   ticketDetail(ticketId): void {
-    if ( this.ticketDetailId == ticketId) {
-        this.clickedButtonDetail = !this.clickedButtonDetail;
-      } else {
-      this.ticketDetailId = ticketId;
-        this.clickedButtonDetail = true;
-      }
-  }
-  buyTicketGo() {
-    if (this.ticketGoId == '') {
-      Swal.fire({
-        icon: 'error',
-        title: 'Chưa chọn vé đi',
-        text: 'Vui lòng chọn vé!'
-      });
+    if (this.ticketDetailId == ticketId) {
+      this.clickedButtonDetail = !this.clickedButtonDetail;
     } else {
-      alert('Mua thoi');
+      this.ticketDetailId = ticketId;
+      this.clickedButtonDetail = true;
     }
   }
-  buyTicketReturn() {
-    if (this.ticketReturnId == '') {
+
+  createListId(length) {
+    const ids: number[] = [];
+    for (let i = 1; i <= length; i++) {
+      ids.push(i);
+    }
+    return ids;
+  }
+
+  getTicketNumber(ticketId, ticketNumber) {
+    const couple: TicketNumber = {ticketId, ticketNumber};
+    if (this.ticketNumberList == null) {
+      this.ticketNumberList = [couple];
+    }
+    for (let i = 0; i < this.ticketNumberList.length; i++) {
+      if (ticketId == this.ticketNumberList[i].ticketId) {
+        this.ticketNumberList.splice(i, 1);
+      }
+    }
+    this.ticketNumberList.push(couple);
+    console.log(this.ticketNumberList);
+  }
+
+  buyTicket() {
+    if (this.ticketArrayIdList == null) {
       Swal.fire({
         icon: 'error',
-        title: 'Chưa chọn vé về',
+        title: 'Chưa chọn vé',
         text: 'Vui lòng chọn vé!'
       });
+    } else if (this.ticketNumberList == null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Chưa chọn số lượng vé',
+        text: 'Vui lòng chọn số lượng vé!'
+      });
     } else {
-      alert('Mua thoi');
+      for (let i = 0; i < this.ticketArrayIdList.length; i++) {
+        for (let j = 0; j < this.ticketNumberList.length; j++) {
+          if (this.ticketArrayIdList[i].ticketId == this.ticketNumberList[j].ticketId) {
+            const list = this.ticketArrayIdList[i].ticketArrayId;
+            const listId = list.split(',');
+            for (let k = 0; k < this.ticketNumberList[i].ticketNumber; k++) {
+              this.listTicketId.push(listId[k]);
+            }
+          }
+        }
+      }
+      const dialogRef = this.dialog.open(BookingDetailComponent, {
+        width: '500px',
+        height: '300px',
+        data: {data1: this.listTicketId}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        window.location.href = 'http://localhost:4200/customer/payment';
+      });
     }
   }
 }

@@ -12,4 +12,7 @@ export interface SearchFlightDto {
   price?;
   logo?;
   ticketId: number;
+  chairName?;
+  listId?;
+  lengthListId;
 }
