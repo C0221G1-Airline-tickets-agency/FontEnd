@@ -5,6 +5,7 @@ import {ManagementComponent} from './management/management.component';
 import {EmployeeComponent} from './component/employee/list-delete-employee/employee.component';
 import {AddEmployeeComponent} from './component/employee/add-employee/add-employee.component';
 import {UpdateEmployeeComponent} from './component/employee/update-employee/update-employee.component';
+import {EmployeeInformationComponent} from './component/employee-information/employee-information.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,10 @@ const routes: Routes = [
         },
         {
           path: 'employee/update/:id', component: UpdateEmployeeComponent
-        }
+        },
+        {
+          path: 'employee-information', component: EmployeeInformationComponent
+        },
       ]
   }
 ];

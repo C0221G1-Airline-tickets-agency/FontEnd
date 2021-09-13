@@ -7,4 +7,7 @@ export interface Employee {
   employeePhoneNumber?: string;
   account?: string;
   role?: string;
+  employeeImage?: string;
+  employeeAddress?: string;
 }
+

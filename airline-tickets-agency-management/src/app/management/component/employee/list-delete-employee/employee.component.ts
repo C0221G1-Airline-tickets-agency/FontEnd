@@ -22,6 +22,7 @@ export class EmployeeComponent implements OnInit {
   isRole = false;
   isLoading = true;
   flag = false;
+  employeeIdRole = 0;
 
   constructor(private sv: EmployeeService, private toast: ToastrService, private elementRef: ElementRef) {
   }
@@ -100,6 +101,10 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee() {
+    if (this.employeeIdChoice === this.employeeIdRole) {
+      this.toast.error('Lỗi', 'Thông báo');
+      return;
+    }
     Swal.fire({
       title: 'Bạn có chắc chắn muốn xoá?',
       html: '<span style="color: #dc3545">' + this.employeeNameChoice + '</span>',
