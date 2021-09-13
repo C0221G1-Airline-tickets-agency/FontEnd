@@ -31,7 +31,6 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     // this.getAllRoleUser();
   }
 
@@ -41,7 +40,7 @@ export class AddEmployeeComponent implements OnInit {
       employeeName: new FormControl(''),
       employeeBirthday: new FormControl(''),
       employeeGender: new FormControl(''),
-      employeePhone: new FormControl(''),
+      employeePhoneNumber: new FormControl(''),
       employeeAddress: new FormControl(''),
       employeeImage: new FormControl(''),
       username: new FormControl(''),
@@ -53,6 +52,7 @@ export class AddEmployeeComponent implements OnInit {
   saveEmployee() {
     this.employeeService.addEmployee(this.employeeForm.value).subscribe(() => {
       alert('Tạo nhân viên thành công');
+      this.backToList();
     }, error => {
       alert('Tạo nhân viên thất bại');
     });

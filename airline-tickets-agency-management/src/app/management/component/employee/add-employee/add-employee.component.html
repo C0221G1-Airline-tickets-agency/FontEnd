@@ -45,8 +45,10 @@
           </div>
           <div class="col-8">
             <select class="form-control" formControlName="employeeGender">
-              <option value="nam">Nam</option>
-              <option value="nữ">Nữ</option>
+              <option disabled value="" selected>Chọn</option>
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+              <option value="Khác">Khác</option>
             </select>
             <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
           </div>
@@ -57,7 +59,7 @@
             <span>Điện thoại <label>(*)</label></span>
           </div>
           <div class="col-8">
-            <input class="form-control" type="text" formControlName="employeePhone">
+            <input class="form-control" type="text" formControlName="employeePhoneNumber">
             <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
           </div>
         </div>
@@ -107,8 +109,9 @@
           </div>
           <div class="col-8">
             <select class="form-control" formControlName="role">
-              <option value="ROLE_ADMIN">ADMIN</option>
+              <option selected value="">Chọn</option>
               <option value="ROLE_MODERATOR">MODERATOR</option>
+              <option value="ROLE_ADMIN">ADMIN</option>
             </select>
             <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
           </div>
