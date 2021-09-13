@@ -1,0 +1,167 @@
+*{
+  font-size: 14px;
+}
+
+/*.main{*/
+/*  background-image: url("./image/half-opacity-pink-smallsize.png");*/
+/*}*/
+
+.select{
+  width: 100px;
+}
+.select-witch{
+  width: 150px;
+  height: 36px !important;
+}
+
+.icon{
+  padding: 10px 10px 0 0;
+}
+
+#content {
+  box-shadow: 0 0 2px 2px #cccccc;
+  width: 100%;
+}
+
+/*bảng*/
+
+table {
+  background-color: white;
+}
+.thead{
+  background-color: #fe8f83;
+  /*background-color: #cccccc;*/
+  /*background-color: #b09eef;*/
+  color: black;
+
+}
+
+.choose-row{
+  background-color: #f3b4ad;
+}
+
+.sub-main{
+  /*background-image: url("./image/half-opacity-pink-smallsize.png") ;*/
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: white;
+}
+
+i{
+  padding-bottom: 6px;
+}
+.pointer {cursor: pointer;}
+i:hover {
+  pointer-events: fill;
+}
+.search-form{
+  width: 50%;
+
+}
+
+.select-field{
+  height: 30px;
+  border-radius: 5px;
+
+}
+.option{
+  border-radius: 5px;
+}
+
+.input-search{
+  border-radius: 5px;
+  height: 30px;
+  outline: none;
+  padding-left: 15px;
+
+}
+
+/*button*/
+
+.button-search{
+  margin-bottom: 5px;
+}
+
+.search-text{
+  margin-top: 2px;
+  font-size: 16px;
+}
+
+
+.btn-delete{
+  background-color: #dc3545;
+}
+
+.btn-edit {
+  background-color: #567FEA;
+}
+
+.btn-edit:hover{
+  color: white;
+  background-color: rgba(86,127,234,0.8) ;
+}
+
+.btn{
+  min-width: 90px;
+}
+
+.btn-return{
+  background-color: #0062D2;
+  color: white;
+}
+
+
+.btn-print {
+  background-color: #18AEFF;
+  color: white;
+}
+
+.btn-print:hover{
+  color: white;
+}
+.btn-search {
+  background-color: #F58317;
+  color: white;
+
+}
+
+.select-field{
+  width: 25%;
+}
+
+.search{
+  width: 70%;
+}
+
+.imgPaypal{
+  width: 60px;
+  height: 25px;
+}
+.btnPaypal{
+  border: solid #fe8f83 1.3px;
+}
+.btn:hover{
+  color: black !important;
+  border: black solid 1.3px !important;
+}
+
+.title-header{
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.btnCancel{
+  color: dodgerblue;
+}
+.huy-hover:hover{
+  cursor: pointer;
+}
+.btnCancel:hover{
+  color: darkblue;
+  text-decoration-line: underline;
+}
+a{
+  cursor: pointer;
+}
+
+

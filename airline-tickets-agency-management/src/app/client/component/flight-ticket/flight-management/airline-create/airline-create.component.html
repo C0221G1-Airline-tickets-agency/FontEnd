@@ -1,0 +1,27 @@
+<div class="container">
+  <h2 style="text-align: center">Thông tin hãng bay</h2>
+  <form [formGroup]="formCreateAirline" (ngSubmit)="save()">
+    <div class="mt-5 row form-group">
+      <div class="col-2" style="font-weight: bold;font-size: 17px">
+        <label for="logo" class="mr-3">Ảnh Logo Hãng bay <span style="color: red">*</span></label>
+      </div>
+      <div class="col-10">
+        <input id="logo" type="file" class="form-control-file" (change)="showPreview($event)">
+      </div>
+    </div>
+    <div class="form-group row mt-3">
+      <div class="col-2">
+        <label>Tên Hãng bay <span style="color: red">*</span></label>
+      </div>
+      <div class="col-4">
+        <input type="text" class="form-control" formControlName="airlineName">
+      </div>
+    </div>
+    <div class="d-flex mt-3">
+      <button class="btn btn-primary mr-5" type="submit">Thêm</button>
+      <button class="btn btn-dark" [routerLink]="['/airline/list']">Hủy</button>
+    </div>
+  </form>
+
+</div>
+

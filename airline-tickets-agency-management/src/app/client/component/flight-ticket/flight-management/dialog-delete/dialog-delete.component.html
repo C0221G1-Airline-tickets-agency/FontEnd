@@ -1,0 +1,38 @@
+<div class="modal-header">
+  <h3 class="modal-title font-weight-bold" >Xóa chuyến bay</h3>
+  <button type="button" class="close" aria-hidden="true" (click)="closeDialog()">&times;</button>
+</div>
+<div class="modal-body">
+  <input hidden type="text" name="drugId" id="customerId">
+  <p>Bạn có chắc muốn xóa chuyến bay : <span class="text-danger font-weight-bold">{{data.message}}</span></p>
+  <p class="text-warning"><small>Hành đồng này có thể không thể hoàn lại</small></p>
+</div>
+<div class="modal-footer">
+  <button class=" btn btn-return button " style="font-size: 14px; width: 85px" type="button" [mat-dialog-close]="false"><i
+    class="fa fa-reply"></i> Trở về
+  </button>
+  <button class="mr-3 btn btn-danger button" style="font-size: 14px; width: 85px" [mat-dialog-close]="true"><i
+    class="fa fa-trash-o"></i> Xóa
+  </button>
+</div>
+
+<!--<div class="dialog-modal " style="height: 250px">-->
+<!--  <div class="modal-header">-->
+<!--    <h3 class="modal-title font-weight-bold" >Xóa Chuyến Bay</h3>-->
+<!--    <button type="button" class="close" aria-hidden="true">&times;</button>-->
+<!--  </div>-->
+<!--  <div class="modal-body" >-->
+<!--    <input hidden type="text" name="drugId">-->
+<!--    <p>Bạn có chắc muốn xóa chuyến bay: <span class="text-danger font-weight-bold">{{data.message}}</span></p>-->
+<!--    <p class="text-warning"><small>Hành đồng này có thể không thể hoàn lại</small></p>-->
+<!--  </div>-->
+<!--  <div class="modal-footer">-->
+<!--    <button class=" btn btn-return  " style="font-size: 14px; width: 85px" type="button" [mat-dialog-close]="false"><i-->
+<!--      class="fa fa-reply"></i> Trở về-->
+<!--    </button>-->
+<!--    <button class="mr-3 btn btn-danger " style="font-size: 14px; width: 85px" [mat-dialog-close]="true"><i-->
+<!--      class="fa fa-trash-o"></i> Xóa-->
+<!--    </button>-->
+<!--  </div>-->
+<!--</div>-->
+
