@@ -26,12 +26,15 @@
               <th>Tình trạng</th>
             </tr>
             </thead>
+            <tr *ngIf="listTicketTransaction.length == 0">
+            <td colspan="7" style="color: red; text-align: center">Không có dữ liệu</td>
+            </tr>
             <tbody *ngFor="let ticket of listTicketTransaction, let i = index">
             <tr>
               <td>{{i+1+this.index}}</td>
               <td>{{ticket.pointOfDeparture}}</td>
               <td>{{ticket.destination}}</td>
-              <td>{{ticket.bookingDate | date: 'dd'}}-{{ticket.flightDate | date:'MM'}}-{{ticket.flightDate | date: 'yyyy'}}</td>
+              <td>{{ticket.bookingDate | date: 'dd'}}-{{ticket.bookingDate | date:'MM'}}-{{ticket.bookingDate | date: 'yyyy'}}</td>
               <td>{{ticket.flightDate | date: 'dd'}}-{{ticket.flightDate | date:'MM'}}-{{ticket.flightDate | date: 'yyyy'}}</td>
               <td class="text-center">{{ticket.priceSell | number}}</td>
               <td>{{ticket.ticketStatusName}}</td>

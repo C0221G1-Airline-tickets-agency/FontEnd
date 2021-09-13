@@ -153,9 +153,15 @@ i:hover {
 .btnCancel{
   color: dodgerblue;
 }
+.huy-hover:hover{
+  cursor: pointer;
+}
 .btnCancel:hover{
   color: darkblue;
   text-decoration-line: underline;
+}
+a{
+  cursor: pointer;
 }
 
 

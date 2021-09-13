@@ -43,8 +43,8 @@ export class CustomerPaymentComponent implements OnInit {
         {
           payment: {
             transactions: [
-              // {amount: {total: (this.totalPayment / 23000).toFixed(2), currency: 'USD'}},
-              {amount: {total: 0.01, currency: 'USD'}},
+              {amount: {total: (this.totalPayment / 23000).toFixed(2), currency: 'USD'}},
+              // {amount: {total: 0.01, currency: 'USD'}},
             ]
           }
         });
@@ -66,32 +66,6 @@ export class CustomerPaymentComponent implements OnInit {
         this.totalPayment = 0;
         this.listTicketPayment = [];
         this.listTicketIdPayment = [];
-        // window.location.reload();
-        // // Do something when payment is successful.
-        // this.voucherMoney = 0;
-        // this.resultMsg = 'Thanh toán thành công';
-        //
-        // localStorage.removeItem(CART_KEY);
-        // this.showMessageSuccess();
-        // // Xóa Voucher
-        // this.cartService.removeVoucher(this.voucherListIdUsed.toString()).subscribe(success => {
-        //   console.log("ok");
-        // }, error => {
-        //   console.log("error");
-        // });
-        // // Send email.
-        // let list = [];
-        // console.log(this.drugCartListShow);
-        // this.drugCartListShow.forEach(e => {
-        //   list.push(e.drugId, e.count)
-        // });
-        // console.log(list.toString());
-        // this.cartService.sendEmail(this.user.accountName, this.user.email, list.toString()).subscribe(e => {
-        //   console.log('ok');
-        // }, error => {
-        //   console.log('error');
-        // });
-        // this.drugCartListShow = [];
       });
     }, onError: err => {
       this.toast.warning('Chưa chọn vé thanh toán', 'Thông báo');
@@ -121,22 +95,17 @@ export class CustomerPaymentComponent implements OnInit {
     });
   }
 
-  dialogCancel(ticketId: number, ticketCode: string, ticketPriceSell: number) {
-    // const dialog = this.matDialog.open(CustomerDialogCancelTicketComponent, {
-    //   data: {ticketId, ticketCode}
-    // });
-    // dialog.afterClosed().subscribe(() => {
-    //   this.getListTicketCustomerBook();
-    // });
+  dialogCancel(ticketId: number, ticketCode: string, ticketPriceSell: number, pointOfDeparture: string, destination: string) {
     Swal.fire({
-      title: 'Bạn có chắc chắn muốn xoá?',
-      html: '<span style="color: #dc3545">' + ticketCode + '</span>',
+      title: 'Bạn có chắc muốn hủy vé: ',
+      // tslint:disable-next-line:max-line-length
+      html: '<p style="color: #dc3545; text-align: left; margin-left: 130px">' + 'Mã vé:  ' + ticketCode + '</p>' + '<p style="color: #dc3545; text-align: left; margin-left: 130px" >' + 'Nơi đi:  ' + pointOfDeparture + '</p>' + '<p style="color: #dc3545; text-align: left; margin-left: 130px" >' + 'Nơi đến:  ' + destination + '</p>',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#dc3545',
-      confirmButtonText: 'Xác nhận',
-      cancelButtonText: '&emsp;Huỷ&emsp;',
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: '&emsp;Hủy&emsp;',
+      cancelButtonText: '&emsp;Trở về&emsp;',
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
@@ -148,7 +117,7 @@ export class CustomerPaymentComponent implements OnInit {
           this.getListTicketCustomerBookFinish();
           // window.location.reload();
         }, error => {
-          this.toast.error('Hủy thất bại', 'Thông báo');
+          this.toast.error('Hủy vé thất bại', 'Thông báo');
         });
       }
     });
@@ -188,7 +157,6 @@ export class CustomerPaymentComponent implements OnInit {
   }
 
   getListTicketId(e: any, ticketId: number, priceSale: number, ticket: TicketCustomerDto) {
-
     if (e.target.checked) {
       console.log(ticketId + 'checked');
       this.listTicketIdPayment.push(String(ticketId));

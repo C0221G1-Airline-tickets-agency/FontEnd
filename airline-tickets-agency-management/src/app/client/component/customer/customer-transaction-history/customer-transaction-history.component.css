@@ -150,3 +150,6 @@ i:hover {
   font-weight: bold;
 }
 
+a{
+  cursor: pointer;
+}
