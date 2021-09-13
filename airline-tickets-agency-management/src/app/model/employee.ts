@@ -1,4 +1,12 @@
 export interface Employee {
-  employeeId;
-  employeeName;
+  employeeId?: number;
+  employeeCode?: string;
+  employeeName?: string;
+  employeeBirthday?: string;
+  employeeGender?: string;
+  employeePhoneNumber?: string;
+  employeeAddress?: string;
+  employeeImage?: string;
+  account?: string;
+  role?: string;
 }

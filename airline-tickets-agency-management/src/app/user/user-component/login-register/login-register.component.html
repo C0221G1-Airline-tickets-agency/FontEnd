@@ -9,13 +9,13 @@
           <input type="email" formControlName="username" class="to-input-box" placeholder="Email"
                  required>
           <small class="to-error-text" *ngIf="formSignin.get('username')?.hasError('required')
-                        && formSignin.get('username')?.touched">Không được để trống!!!
+                        && formSignin.get('username')?.touched">Email Không được để trống!!!
           </small>
         </div>
         <div class="to-div-input">
           <input type="password" formControlName="password" class="to-input-box" placeholder="Mật Khẩu" required>
           <small class="to-error-text" *ngIf="formSignin.get('password')?.hasError('required')
-                        && formSignin.get('password')?.touched">Không được để trống!!!
+                        && formSignin.get('password')?.touched">Mật khẩu không được để trống!!!
           </small>
         </div>
         <input type="checkbox"><span style="color: black">Nhớ tài khoản</span>
@@ -53,7 +53,7 @@
       <h2 style="color: black">Đăng Ký</h2>
       <form [formGroup]="formRegister" (ngSubmit)="onSubmitRegister()">
         <div class="to-div-input">
-          <input type="text" class="to-input-box" formControlName="username" placeholder="Tên Đăng Nhập(*)" required>
+          <input type="text" class="to-input-box" formControlName="username" placeholder="Email(*)" required>
           <div *ngFor="let validation of validation_messages.username">
             <small class="text-danger"
                    *ngIf="formRegister.get('username').hasError(validation.type) && formRegister.get('username').touched">
@@ -98,7 +98,7 @@
         </div>
         <div class="to-div-input" style="font-size: 13px; text-align: center; justify-content: center">
           <label >Ngày Sinh</label>
-          <input type="date" class="to-input-box" formControlName="birthday" placeholder="Ngày sinh">
+          <input type="date" class="to-input-box" id="birthday" formControlName="birthday" placeholder="Ngày sinh">
           <!--          <small class="to-error-text" *ngIf="formRegister.get('fullName')?.hasError('required')-->
           <!--                  && formRegister.get('fullName')?.touched">Không được để trống!</small>-->
         </div>
@@ -110,7 +110,7 @@
         <div class="to-div-input" style="font-size: 13px; text-align: center; justify-content: center">
           <label for="gender">Giới Tính</label>
           <br>
-          <select id="gender" formControlName="gender" style="width: 100%; text-align: center; justify-content: center">
+          <select id="gender" class="form-control" formControlName="gender" style="width: 100%; text-align: center; justify-content: center">
             <option value="" selected disabled hidden>Chọn Giới Tính</option>
             <option value="Nam">Nam</option>
             <option value="Nữ">Nữ</option>
@@ -120,8 +120,8 @@
         <div class="to-div-input" style="font-size: 13px; text-align: center; justify-content: center">
           <label for="nationality">Quốc tịch</label>
           <br>
-          <select id="nationality" style="width: 100%; text-align: center; justify-content: center" formControlName="nationality">
-            <option value="" selected disabled hidden>Chọn Quốc Tịch</option>
+          <select id="nationality" class="form-control" style="width: 100%; text-align: center; justify-content: center" formControlName="nationality">
+            <option value="" selected>Chọn Quốc Tịch</option>
             <option value="Afganistan">Afghanistan</option>
             <option value="Albania">Albania</option>
             <option value="Algeria">Algeria</option>
@@ -397,4 +397,14 @@
   </div>
 
 </div>
-<!--//test commit-->
+
+<script>
+  function validateForm(event) {
+    let dateOfBirthFieldValue = document.getElementById("birthday").value;
+    let bday = new Date(dateOfBirthFieldValue);
+    let todayDate = new Date();
+    let timeDiff = Math.abs(todayDate.getTime() - bday.getTime());
+    let diffyears = Math.ceil(timeDiff / (1000 * 3600 * 24)/365);
+    return diffyears > 18;
+  }
+</script>

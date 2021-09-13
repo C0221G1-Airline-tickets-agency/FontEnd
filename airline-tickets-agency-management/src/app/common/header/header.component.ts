@@ -20,6 +20,9 @@ export class HeaderComponent implements OnInit {
   private roles: string[];
   isLoggedIn = false;
   username: string;
+  private showAdminBoard: boolean;
+  private showModeratorBoard: boolean;
+  private showUserBoard: boolean;
 
   constructor(private router: Router,
               private route: ActivatedRoute, private dialog: MatDialog,
@@ -33,10 +36,15 @@ export class HeaderComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
-      // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-      this.username = user.customer.customerName;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.showUserBoard = this.roles.includes('ROLE_USER');
 
+      if (this.showAdminBoard || this.showModeratorBoard) {
+        this.username = user.employee.employeeName;
+      } else if (this.showUserBoard) {
+        this.username = user.customer.customerName;
+      }
       // @ts-ignore
       // tslint:disable-next-line:triple-equals
       this.ismod = (this.roles == 'ROLE_MODERATOR' || this.roles == 'ROLE_ADMIN')

@@ -1,9 +1,11 @@
-import {Role} from './role';
+import {UserRole} from './role';
+import {Employee} from "../employee";
 
-export interface Account {
+export interface User {
   id?: number;
   userName?: string;
   userCode?: string;
   password?: string;
-  roles?: Role[];
+  roles?: UserRole[];
+  employee?: Employee[];
 }

@@ -6,15 +6,34 @@
              style=" filter:  brightness(1.25) ;" alt="">
       </div>
       <span class="account">
-        <div class="account-name" *ngIf="!isLoggedIn">
-          <a type="button" (click)="openDialogLogin()">Đăng ký / Đăng nhập</a>
-        </div>
-        <div class="account-login" *ngIf="isLoggedIn">
-          <span>Xin chào, {{username}} | &nbsp;</span>
-             <a type="button">Quản lí tài khoản | &nbsp;</a>
-          <a type="button" (click)="logout()">Đăng xuất</a>
+         <ul class="my-nav-account">
+           <div class="account-name" *ngIf="!isLoggedIn">
+                  <li>
+                   <a type="button" class="header-btn" (click)="openDialogLogin()">Đăng ký / Đăng nhập</a>
+                  </li>
 
         </div>
+    <div class="account-login" *ngIf="isLoggedIn">
+      <span class="font-weight-bold">Xin chào, {{username}} &nbsp; |</span>
+        <li>  <a type="button" class="header-btn" href="#"> &nbsp; Quản lí tài khoản </a></li>
+      |
+        <li> <a type="button" class="header-btn" (click)="logout()">Đăng xuất</a></li>
+        </div>
+         </ul>
+
+<!--      </ul>-->
+<!--        <div class="account-name" *ngIf="!isLoggedIn">-->
+<!--          <a type="button" class="header-btn" (click)="openDialogLogin()">Đăng ký / Đăng nhập</a>-->
+<!--        </div>-->
+<!--        <div class="account-login" *ngIf="isLoggedIn">-->
+<!--          <span>Xin chào, {{username}} | &nbsp;</span>-->
+<!--             <a type="button" class="header-btn" href="#">Quản lí tài khoản | &nbsp;</a>-->
+<!--          <a type="button" class="header-btn" (click)="logout()">Đăng xuất</a>-->
+
+<!--        </div>-->
+
+
+
           <!--          <input type="button" class="pr-4 align-content-center" style="padding-left: 30px; min-width: 174px"-->
           <!--                 [value]="accountName" (click)="getDropDown()" readonly>-->
           <!--            <a class="pr-4 align-content-center"-->

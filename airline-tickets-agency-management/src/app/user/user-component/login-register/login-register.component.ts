@@ -47,6 +47,7 @@ export class LoginRegisterComponent implements OnInit {
     ],
   };
 
+
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService,
               private toastr: ToastrService) {
     this.formSignin = new FormGroup({
@@ -66,8 +67,8 @@ export class LoginRegisterComponent implements OnInit {
       name: new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(50)]),
       birthday: new FormControl(),
       address: new FormControl(),
-      gender: new FormControl(),
-      nationality: new FormControl(),
+      gender: new FormControl(''),
+      nationality: new FormControl(''),
       passport: new FormControl('',[Validators.required, Validators.pattern('^[0-9]{12}$')]),
     });
   }
