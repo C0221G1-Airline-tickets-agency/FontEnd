@@ -49,7 +49,7 @@
       </ng-container>
       <tr *ngFor="let t of tickets, let i = index" (click)="getTicketId(t.ticketId, t)"
           [class.selected]="t.ticketId === idSelect">
-        <td>{{i + 1}}</td>
+        <td>{{i + 1 + page*5}}</td>
         <td style="text-align: left; padding-left: 20px">{{t.passengerName}}</td>
         <td>{{t.ticketCode}}</td>
         <td>{{t.flight.locationFrom.cityName + " - " + t.flight.locationTo.cityName}} </td>
