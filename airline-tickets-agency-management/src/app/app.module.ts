@@ -5,9 +5,7 @@ import {AppComponent} from './app.component';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-
 import {Overlay, ToastrModule} from 'ngx-toastr';
-
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
@@ -29,7 +27,6 @@ import {AdminAuthService} from './service/auth/admin-auth.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     MatDialogModule,
     BrowserAnimationsModule,
-
     HttpClientModule,
     ToastrModule.forRoot(),
     MatSnackBarModule

@@ -5,6 +5,9 @@ import {ManagementComponent} from '../management/management/management.component
 import {ReportComponent} from '../management/component/report/report.component';
 import {ClientComponent} from './client/client.component';
 import {HomeComponent} from './component/home/home.component';
+import {DestinationDetailComponent} from './component/destination-detail/destination-detail.component';
+
+import {TestComponent} from './component/test/test.component';
 
 import {NewsListComponent} from './component/news/news-list/news-list.component';
 import {NewsDetailsComponent} from './component/news/news-details/news-details.component';
@@ -21,6 +24,7 @@ const routes: Routes = [
           path: '', component: HomeComponent
         },
         {
+
           path: 'news/news-list', component: NewsListComponent
         },
         {
@@ -31,6 +35,10 @@ const routes: Routes = [
         },
         {
           path: 'news/manipulation/:id', component: NewsManipulationComponent, canActivate: [AdminAuthService]
+        },
+        {
+          path: 'destination/detail/:id', component: DestinationDetailComponent
+
         }
       ]
   }

@@ -1,0 +1,326 @@
+.plane-ticket {
+  width: 380px;
+  height: 400px;
+  padding-top: 30px;
+  background: rgba(255, 56, 53, 0.81);
+  position: absolute;
+  top: 110px;
+  right: 10%;
+  border-radius: 10px;
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.2);
+  z-index: 600;
+}
+
+/*Edit input*/
+.plane-ticket input {
+  margin: 10px 0 0 18px;
+  width: 90%;
+  height: 48px;
+  font-weight: 500;
+  font-size: 15px;
+  background: white;
+}
+
+.plane-ticket .ticket-input-left,
+.plane-ticket .ticket-input-right {
+  position: relative;
+}
+
+.plane-ticket .ticket-input-left .ticket-icon {
+  font-size: 20px;
+  position: absolute;
+  top: 20px;
+  left: 30px;
+}
+
+.plane-ticket .ticket-title {
+  color: #7C848B;
+  font-size: 12px;
+  position: absolute;
+  top: 12px;
+  left: 55px;
+}
+
+.plane-ticket .ticket-normal {
+  padding-top: 15px;
+}
+
+.plane-ticket input.ticket-normal {
+  border-radius: 5px;
+}
+
+.plane-ticket .ticket-input-left input {
+  width: 100%;
+  padding-left: 32px;
+  border-radius: unset;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.plane-ticket .ticket-input-right input {
+  width: 80%;
+  border-radius: unset;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.plane-ticket .ticket-radio input {
+  margin-top: 20px;
+  width: 17px;
+  height: 17px;
+}
+
+/*CHOOSE Passenger*/
+.plane-ticket .ticket-element {
+  position: relative;
+}
+
+.plane-ticket .showHidden {
+  width: 350px;
+  height: 270px;
+  border-radius: 5px;
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 16px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+.plane-ticket .col:last-child {
+  font-size: 25px;
+  padding-right: 50px;
+  text-align: end;
+}
+
+.plane-ticket table td a {
+  color: black;
+}
+
+.plane-ticket table td:first-child {
+  padding-left: 30px;
+}
+
+.plane-ticket table td:last-child {
+  font-weight: bold;
+}
+
+/*button Tìm chuyến bay*/
+.plane-ticket .findPlan {
+  position: absolute;
+  bottom: 45px;
+  left: 120px;
+  z-index: -100;
+}
+.choose-location:hover {
+  background: #e3e3e3;
+}
+/*#endregion*/
+
+/*#region Top 10 cheapest flights*/
+.flights-10 {
+  height: auto;
+  /*background:  #f3b4ad;*/
+  /*background: linear-gradient( #f3b4ad, #EF9A9A);*/
+}
+
+.flights-10 .flight {
+  margin: 0;
+  width: 20%;
+  height: 180px;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+}
+
+.flights-10 .flight .flight-content .flight-center {
+  font-weight: 500;
+  position: absolute;
+  top: 43px;
+  left: 38%;
+}
+.flight:hover {
+  margin: 10px 0;
+  background: rgba(57, 57, 57, 0.5);
+  color: white;
+}
+
+.flight:hover .location {
+  color: white;
+}
+.flight:hover img {
+  filter: drop-shadow(0 0 8px yellow);
+}
+/*#endregion*/
+
+/*#region SCROLL*/
+.scroll::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: white;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #567FEA;
+  border-radius: 20px;
+  border: 3px solid white;
+}
+
+.scroll {
+  overflow: auto;
+
+}
+
+.outer {
+  overflow-y: auto;
+  height: 150px;
+  width: 100%;
+
+}
+
+
+.outer th {
+
+  text-align: left;
+  top: 0;
+  position: sticky;
+  background-color: #567FEA;
+}
+
+/*#endregion*/
+@media (max-width: 1005px) {
+  .flights-10 .flight {
+    width: 25%;
+  }
+
+  .flights-10 .flight .flight-content .flight-center {
+    left: 33%;
+  }
+}
+
+@media (max-width: 775px) {
+  .flights-10 .flight {
+    width: 33.33%;
+  }
+
+  .flights-10 .flight .flight-content .flight-center {
+    left: 35%;
+  }
+}
+
+@media (max-width: 550px) {
+  .carousel-indicators {
+    margin-bottom: 10px !important;
+  }
+  .plane-ticket {
+    height: 300px!important;
+  }
+  .plane-ticket h4 {
+    margin-bottom: -10px;
+  }
+  .plane-ticket .findPlan {
+    top: 15px!important;
+  }
+  .flights-10 .flight {
+    width: 50%;
+  }
+
+  .flights-10 .flight .flight-content .flight-center {
+    left: 40%;
+  }
+}
+
+@media (max-width: 930px) {
+  .home-content {
+    position: relative;
+    height: 100%;
+  }
+
+
+  .plane-ticket {
+    width: 100%;
+    padding: 0 20% 30px;
+    position: unset;
+    float: left;
+    clear: left;
+    z-index: 200;
+  }
+
+  .plane-ticket .showHidden {
+    margin-left: 18px;
+    bottom: 0px;
+    left: 0px;
+  }
+
+  .plane-ticket .findPlan {
+    position: relative;
+    top: 25px;
+    left: 30%;
+    z-index: 10;
+  }
+
+  .flights-10 .flight {
+    box-sizing: border-box;
+  }
+}
+
+/*#region MY-CART*/
+.my-card {
+  width: 100%;
+  height: 40%;
+  margin-top: 20px;
+  position: relative;
+}
+
+.my-card img {
+  width: 100%;
+  height: 100%;
+  padding-left: 20px;
+}
+
+.my-card .my-card-title {/* <<<<<<<<<<<<<<<<<<<<< */
+  color: white;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 20px;
+  background: red;
+  display: inline;
+  border-radius: 2px;
+  position: relative;
+}
+
+.my-card .my-card-title-3 {
+  width: 59px;
+  height: 59px;
+  padding-left: 20px;
+  position: absolute;
+  top: 2px;
+  left: -38px;
+}
+
+.my-card .my-card-title-2 {
+  width: 100px;
+  height: 20px;
+  padding-left: 20px;
+  position: absolute;
+  top: 0;
+  right: -1px;
+}
+.my-card-titles {
+  position: absolute;
+  top: -1.5px;
+  left: 0px;
+}
+.my-card .my-card-title-1 img {
+  width: 100%;
+  height: 100%;
+  padding-left: 20px;
+  border-radius: 4px;
+}
+.buttonDeleteEdit{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+
+}
