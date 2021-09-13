@@ -34,16 +34,6 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
-  // tslint:disable-next-line:use-lifecycle-interface
-  ngAfterViewInit() {
-    this.elementRef.nativeElement.querySelector('my-element')
-      .addEventListener('click', this.onClick.bind(this));
-  }
-
-  onClick(event) {
-    console.log(event);
-  }
-
 
   getList() {
     this.sv.getListEmployee(this.typeSearch, this.valueSearch, this.page).subscribe(data => {
