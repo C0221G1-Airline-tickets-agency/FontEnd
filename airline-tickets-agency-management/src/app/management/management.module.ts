@@ -11,7 +11,6 @@ import {HomeComponent} from '../client/component/home/home.component';
 
 
 
-
 @NgModule({
   imports: [
     CommonModule,

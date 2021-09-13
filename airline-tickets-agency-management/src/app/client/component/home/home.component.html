@@ -41,7 +41,7 @@
     <div class="d-flex justify-content-end" *ngIf="destinations.length != 0">
       <nav aria-label="Page navigation example">
         <ul class="pagination">
-          <li class="page-item"><a class="page-link" (click)="previous()">Trước</a></li>
+          <li class="page-item"><a class="page-link" *ngIf="pages.length>0" (click)="previous()">Trước</a></li>
           <li class="page-item" *ngFor="let p of pages; let i=index"><a class="page-link" (click)="setPage(i)"
                                                                         [style]="(page ==i) ? 'background: #63B8FF; color: white': ''">{{i + 1}}</a>
           </li>
