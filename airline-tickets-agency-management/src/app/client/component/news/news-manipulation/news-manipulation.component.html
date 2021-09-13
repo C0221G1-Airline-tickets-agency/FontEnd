@@ -58,7 +58,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="title">Tiêu đề <span>(<span style="color: red">*</span>)</span> </label>
+              <label  for="title">Tiêu đề <span>(<span style="color: red">*</span>)</span> </label>
               <textarea rows="3" class="form-control" formControlName="newsTitle" id="title"
                         [ngClass]="newsTitle?.errors?'is-invalid': 'is-valid'"></textarea>
               <div class="invalid-feedback" *ngIf="newsTitle.hasError('required') && newsTitle.touched">Tiêu đề không
@@ -84,7 +84,7 @@
               </div>
               <div class="invalid-feedback" *ngIf="newsContent.hasError('minlength') && newsContent.touched">Nội dung
                 không nhỏ
-                hơn 66 ký tự
+                hơn 666 ký tự
               </div>
               <div class="invalid-feedback" *ngIf="newsContent.hasError('maxlength') && newsContent.touched">Nội dung
                 không lớn
