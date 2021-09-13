@@ -26,8 +26,8 @@
   <div class=" d-flex justify-content-center">
 
     <div class="col-sm-15 col-md-10 col-lg-10 py-0 pl-3 pr-1">
-      <small class="my-2"><span>{{data.employee.employeeName}}</span>|<span>{{data.newsWriteDay}}</span></small>
-      <p id="content">
+      <small class="my-2"><strong>{{data.employee.employeeName}}</strong> | <span>{{data.newsWriteDay | date :'dd/MM/yyyy'}}</span></small>
+      <p id="content" [innerHTML] = "data.newsContent">
 {{data.newsContent}}
 
       </p>

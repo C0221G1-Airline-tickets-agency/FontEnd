@@ -28,10 +28,9 @@ const routes: Routes = [
         },
         {
           path: 'news/manipulation', component: NewsManipulationComponent, canActivate: [AdminAuthService]
-
         },
         {
-          path: 'news/manipulation/:id', component: NewsManipulationComponent
+          path: 'news/manipulation/:id', component: NewsManipulationComponent, canActivate: [AdminAuthService]
         }
       ]
   }
