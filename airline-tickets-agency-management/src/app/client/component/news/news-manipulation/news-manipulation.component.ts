@@ -233,20 +233,8 @@ export class NewsManipulationComponent implements OnInit {
   }
 
   checkValidate(): boolean {
-    if (this.newsContent.invalid) {
-      this.alertError('Nội dung không hợp lệ');
-      return false;
-    }
-    if (this.newsTitle.invalid) {
-      this.alertError('Tiêu đề không hợp lệ');
-      return false;
-    }
-    if (this.newsImageName.invalid) {
-      this.alertError('Hình ảnh không hợp lệ');
-      return false;
-    }
-    if (this.category.invalid) {
-      this.alertError('Thể loại không hợp lệ');
+    if (!this.checkNameEmployee()) {
+      this.alertError('Bạn đã chỉnh sửa tên người viết');
       return false;
     }
     if (!this.checkCodeFeedNews()) {
@@ -257,8 +245,21 @@ export class NewsManipulationComponent implements OnInit {
       this.alertError('Bạn đã chỉnh sửa ngày viết');
       return false;
     }
-    if (!this.checkNameEmployee()) {
-      this.alertError('Bạn đã chỉnh sửa tên người viết');
+    if (this.category.invalid) {
+      this.alertError('Thể loại không hợp lệ');
+      return false;
+    }
+    if (this.newsImageName.invalid) {
+      this.alertError('Hình ảnh không hợp lệ');
+      return false;
+    }
+    if (this.newsContent.invalid) {
+      this.alertError('Nội dung không hợp lệ');
+      return false;
+    }
+
+    if (this.newsTitle.invalid) {
+      this.alertError('Tiêu đề không hợp lệ');
       return false;
     }
     return true;
