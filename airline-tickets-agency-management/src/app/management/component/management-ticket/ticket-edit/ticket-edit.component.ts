@@ -38,10 +38,6 @@ export class TicketEditComponent implements OnInit {
       locationTo: new FormControl(this.data.flight.locationTo.cityName),
       locationFrom: new FormControl(this.data.flight.locationFrom.cityName),
       flightDate: new FormControl(this.formatDate(this.data.flight.flightDate)),
-      // tslint:disable-next-line:max-line-length
-      // price: new FormControl(this.money.toString().split('').reverse().reduce((prev, next, index) => {
-      //       //   return ((index % 3) ? next : (next + ',')) + prev;
-      //       // })),
       price: new FormControl(this.formatter.format(this.money)),
       passengerEmail: new FormControl(this.data.passengerEmail, [Validators.required, Validators.email]),
 
@@ -54,6 +50,7 @@ export class TicketEditComponent implements OnInit {
     style: 'currency',
     currency: 'VND',
   });
+
   onNoClick(): void {
     this.dialogRef.close();
   }
