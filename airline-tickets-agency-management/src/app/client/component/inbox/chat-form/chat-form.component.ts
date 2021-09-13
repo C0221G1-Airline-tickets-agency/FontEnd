@@ -20,11 +20,14 @@ export class ChatFormComponent implements OnInit {
   }
 
   sendMessage(){
-    this.afAuth.authState.subscribe(auth=>{
-      const roomname='room_'+auth.displayName;
-      this.auth.sendMessage(this.msg,roomname);
-      this.msg='';
-    })
+      if(this.msg!= null){
+          this.afAuth.authState.subscribe(auth=>{
+              const roomname='room_'+auth.displayName;
+              this.auth.sendMessage(this.msg,roomname);
+              this.msg='';
+          })
+      }
+
   }
 
   handleKeyDow(event) {

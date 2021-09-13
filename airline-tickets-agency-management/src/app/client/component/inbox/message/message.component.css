@@ -10,6 +10,7 @@
   text-align: right;
   height: fit-content;
   overflow-wrap: break-word;
+
 }
 
 .left-msg{
@@ -23,6 +24,7 @@
   color: #fff;
   text-align: left;
   overflow-wrap: break-word;
+
 }
 
 .box{

@@ -18,8 +18,11 @@ export class ManageChatFormComponent implements OnInit {
   }
 
   sendMessage(){
-    this.auth.sendMessageByAdmin(this.msg,this.roomname);
-    this.msg='';
+    if(this.msg != null){
+      this.auth.sendMessageByAdmin(this.msg,this.roomname);
+      this.msg='';
+    }
+
   }
 
   handleKeyDow(event) {

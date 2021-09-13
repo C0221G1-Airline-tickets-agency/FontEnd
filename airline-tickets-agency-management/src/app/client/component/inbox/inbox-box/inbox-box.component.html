@@ -1,6 +1,17 @@
 <div class="chat-room">
   <div class="heading-inbox">
-    <h5>Đồng hành cùng mỗi chuyến bay</h5>
+    <div class="chatbox-top">
+      <div class="chatbox-avatar">
+        <img  src="../../../../../assets/img/admin.png" />
+      </div>
+      <div class="chat-partner-name">
+        <span class="status online"></span>
+        <h4 style="margin-left: 55px;margin-top: 10px" >Nhắn tin với quản trị viên</h4>
+      </div>
+      <div class="chatbox-icons">
+
+      </div>
+    </div>
     <span class="close-inbox" ><i (click)="closeBox()" class="fa fa-times-circle-o"></i></span>
   </div>
   <app-signup [ngStyle]="{'display':flat?'none':'block'}" (control)="takeControl($event)"></app-signup>
