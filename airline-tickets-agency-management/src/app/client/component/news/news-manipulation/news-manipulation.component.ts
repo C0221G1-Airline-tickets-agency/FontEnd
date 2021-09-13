@@ -89,7 +89,6 @@ export class NewsManipulationComponent implements OnInit {
   }
 
   showPreview(event: any) {
-
     const file = event.target.files[0];
     const fileType = file.type;
     const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'];
@@ -134,7 +133,7 @@ export class NewsManipulationComponent implements OnInit {
 
   save() {
     if (this.checkValidate()) {
-      const t = Swal.fire({
+      Swal.fire({
         title: 'Đang gửi dữ liệu',
         text: 'Vui lòng chờ ...',
         imageUrl: '../../../../../assets/img/spin.gif',
@@ -271,6 +270,7 @@ export class NewsManipulationComponent implements OnInit {
         });
     }
   }
+
   checkCategory(categoryId) {
     return categoryId === this.category.get('categoryId').value;
   }

@@ -14,7 +14,7 @@ export class NewsDetailsComponent implements OnInit {
   item!: News;
   idDetails = 0;
   hotNews: News[] = [];
-  category: Category = {};
+
 
   constructor(private activatedRoute: ActivatedRoute,
               private newsService: NewsService) {
@@ -23,14 +23,12 @@ export class NewsDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getDetails();
     this.getHotNews();
-
+    console.log(this.item);
   }
 
   getDetails() {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.idDetails = +paramMap.get('id');
-      console.log('this.idDetails');
-      console.log(this.idDetails);
       this.newsService.getById(this.idDetails).subscribe(next => {
         this.item = next;
         this.getIdContent().innerHTML = this.item.newsContent;
