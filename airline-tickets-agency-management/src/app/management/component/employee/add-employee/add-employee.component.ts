@@ -8,6 +8,7 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {Router} from '@angular/router';
 import {finalize} from 'rxjs/operators';
 import {formatDate} from '@angular/common';
+import {AddRequest} from '../../../../model/employee/add-request';
 
 @Component({
   selector: 'app-add-employee',
@@ -16,11 +17,8 @@ import {formatDate} from '@angular/common';
 })
 export class AddEmployeeComponent implements OnInit {
   employeeForm: FormGroup;
-  userForm: FormGroup;
-  userRoles: [UserRole];
-  selectedUserRole: UserRole;
-  selectedImage: string[];
-  urlImage: string[] = [];
+  selectedImage: any;
+  addRequest: AddRequest;
 
   constructor(private employeeService: EmployeeService,
               private userService: UserService,
@@ -50,45 +48,27 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   saveEmployee() {
-    this.employeeService.addEmployee(this.employeeForm.value).subscribe(() => {
-      alert('Tạo nhân viên thành công');
-      this.backToList();
-    }, error => {
-      alert('Tạo nhân viên thất bại');
-    });
-  }
-
-  submit() {
-    // this.saveUser();
-    this.saveEmployee();
-  }
-
-  uploadFile(imageFile) {
-    const nameImg = this.getCurrentDateTime() + imageFile.name;
+    const nameImg = this.getCurrentDateTime() + this.selectedImage?.name;
     const fileRef = this.storage.ref(nameImg);
-    this.storage.upload(nameImg, imageFile).snapshotChanges().pipe(
+    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
       finalize(() => {
+        console.log(4);
         fileRef.getDownloadURL().subscribe((url) => {
-          console.log(url);
-          this.urlImage.push(url);
+          console.log(5);
+          this.addRequest = this.employeeForm.value;
+          this.addRequest.employeeImage = url;
+          this.employeeService.addEmployee(this.addRequest).subscribe(() => {
+            this.router.navigateByUrl('/management/employee');
+          }, error => {
+            alert('lỗi');
+          });
         });
       })
     ).subscribe();
   }
 
   showPreview(event) {
-    this.selectedImage = [];
-    const files = event.target.files;
-    if (files) {
-      for (const file of files) {
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.selectedImage.push(e.target.result);
-        };
-        reader.readAsDataURL(file);
-        this.uploadFile(file);
-      }
-    }
+    this.selectedImage = event.target.files[0];
   }
 
   getCurrentDateTime(): string {
