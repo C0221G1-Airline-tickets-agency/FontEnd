@@ -115,8 +115,9 @@ export class FlightCreateComponent implements OnInit {
           timeOut: 2000,
           progressBar: false
         });
+        this.flightForm.reset();
       }
-      this.flightForm.reset();
+
     })
   }
 
