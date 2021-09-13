@@ -21,8 +21,8 @@ export class CustomerService {
     return this.http.post<Customer>(API_URL + '/create', customer);
   }
 
-  updateCustomer(id: number, data: Customer): Observable<Customer>{
-    return this.http.put<Customer>(`${API_URL}/update/${id}`,data)
+  updateCustomer(id: number, customerDto: Customer): Observable<Customer>{
+    return this.http.put<Customer>(`${API_URL}/update/${id}`,customerDto)
   }
 
   findById(id: number): Observable<Customer> {

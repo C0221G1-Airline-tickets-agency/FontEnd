@@ -5,6 +5,7 @@ import {ToastrService} from 'ngx-toastr';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import {DeleteCustomerComponent} from '../delete-customer/delete-customer.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-customer',
@@ -13,7 +14,7 @@ import {DeleteCustomerComponent} from '../delete-customer/delete-customer.compon
 })
 export class CustomerComponent implements OnInit {
   listCustomer: Customer[] = [];
-  customer1: Customer;
+  customer1: Customer ;
   customer: Customer;
   idEdit: any;
   page = 0;
@@ -27,7 +28,8 @@ export class CustomerComponent implements OnInit {
 
   constructor(private customerService: CustomerService,
               private dialog: MatDialog,
-              private toast: ToastrService
+              private toast: ToastrService,
+              private router: Router
               ) {
   }
 
@@ -136,5 +138,14 @@ export class CustomerComponent implements OnInit {
   getId(customerID: number) {
     // this.idEdit = customerID;
     // console.log(this.idEdit);
+  }
+
+  edit() {
+    if (this.customer1 == undefined){
+      this.toast.warning("Vui lòng chọn khách hàng.","Thông báo!!!")
+    }else {
+      this.router.navigate(['/management/edit-customer',this.idEdit]);
+    }
+
   }
 }

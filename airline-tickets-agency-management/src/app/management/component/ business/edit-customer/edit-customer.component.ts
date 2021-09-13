@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CustomerService} from '../../../../service/customer/customer.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customer} from '../../../../model/customer/customer';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -14,13 +14,15 @@ export class EditCustomerComponent implements OnInit {
   customerForm: FormGroup;
   customer: Customer;
   idCustomer: any;
+  msgEmail = "";
+  msgPassport = "";
+  msgDate = "";
   constructor(private customerService: CustomerService,
               private activatedRoute: ActivatedRoute,
               private toast: ToastrService,
               private router: Router) {
     this.activatedRoute.paramMap.subscribe((paramMap:ParamMap)=>{
       this.idCustomer = paramMap.get('id');
-      console.log(this.idCustomer);
     });
     this.customerService.findById(this.idCustomer).subscribe(data =>{
       this.customer = data;
@@ -29,13 +31,13 @@ export class EditCustomerComponent implements OnInit {
       this.customerForm = new FormGroup({
           customerId: new FormControl(this.customer.customerId),
           customerCode: new FormControl(this.customer.customerCode),
-          customerName: new FormControl(this.customer.customerName, [Validators.required, Validators.minLength(6)]),
+          customerName: new FormControl(this.customer.customerName, [Validators.required, Validators.minLength(6),Validators.maxLength(20)]),
           customerAddress: new FormControl(this.customer.customerAddress,Validators.required),
-          customerBirthday: new FormControl(this.customer.customerBirthday, [Validators.required]),
+          customerBirthday: new FormControl(this.customer.customerBirthday, [Validators.required,,this.validAge]),
           customerGender: new FormControl(this.customer.customerGender,Validators.required),
           customerEmail: new FormControl(this.customer.customerEmail,[Validators.required,Validators.email]),
-          customerPhone: new FormControl(this.customer.customerPhone, [Validators.required,Validators.pattern('^[0-9]{10}$')]),
-          customerPassport: new FormControl(this.customer.customerPassport,[Validators.required,Validators.pattern('^[0-9]{9}$')])
+          customerPhone: new FormControl(this.customer.customerPhone, [Validators.required,Validators.pattern(/^[0-9]{10}$/)]),
+          customerPassport: new FormControl(this.customer.customerPassport,[Validators.required,Validators.pattern(/^[0-9]{9}$|^[0-9]{12}$/)])
         }
       );
     });
@@ -46,28 +48,30 @@ export class EditCustomerComponent implements OnInit {
   validationMessage = {
     customerName: [
       {type: 'required', message: 'Tên không được để trống'},
-      {type: 'minlength',message: 'Nhập tối thiểu 6 ký tự'}
+      {type: 'minlength',message: 'Tên tối thiểu 6 ký tự'},
+      {type: 'maxlength',message: 'Tên tối đa 20 ký tự'}
     ],
     customerAddress:[
-      {type: 'required', message: 'Tên không được để trống'},
+      {type: 'required', message: 'Địa chỉ không được để trống'},
     ],
     customerBirthday:[
-      {type: 'required', message: 'Tên không được để trống'},
+      {type: 'required', message: 'Ngày sinh không được để trống'},
+      {type: 'validAge', message: 'Tuổi phải lớn hơn 18'}
     ],
     customerEmail: [
-      {type: 'required', message: 'Trường này không được để trống.'},
+      {type: 'required', message: 'Email không được để trống.'},
       {type: 'email', message: 'Vui lòng nhập đúng định dạng.'}
     ],
     customerPhone: [
-      {type: 'required', message: 'Trường này không được để trống.'},
+      {type: 'required', message: 'Điện thoại không được để trống.'},
       {type: 'pattern', message: 'Vui lòng nhập 10 chữ số'}
     ],
     customerGender: [
-      {type: 'required', message: 'Trường này không được để trống.'}
+      {type: 'required', message: 'Vui lòng chọn giới tính.'}
     ],
     customerPassport: [
-      {type: 'required', message: 'Trường này không được để trống.'},
-      {type: 'pattern',message: 'Vui lòng nhập 9 chữ số'}
+      {type: 'required', message: 'Passport không được để trống.'},
+      {type: 'pattern',message: 'Vui lòng nhập 9 hoặc 12 chữ số'}
     ],
   }
 
@@ -86,12 +90,40 @@ export class EditCustomerComponent implements OnInit {
 
   editCustomer(){
     this.customer = this.customerForm.value;
-    this.customerService.updateCustomer(this.idCustomer,this.customer).subscribe(()=>{
-      this.toast.success("Sửa hoàn tất!!!");
-      this.router.navigateByUrl("/management/customer");
+    this.customerService.updateCustomer(this.idCustomer,this.customer).subscribe(data=>{
+        console.log(data);
+        // @ts-ignore
+        if(data.status == false){
+          // @ts-ignore
+          this.msgEmail = data.msgEmail;
+          // @ts-ignore
+          this.msgPassport = data.msgPassport;
+          // @ts-ignore
+          this.msgDate = data.msgDate;
+          this.toast.error("Vui lòng kiểm tra lại dữ liệu nhập vào!!!Các trường * không được để trống hoặc chưa đúng định dạng!!!","Thông báo");
+        }else {
+          this.toast.success("Sửa thành công","Thông báo");
+          this.router.navigateByUrl("/management/customer")
+        }
     },
       error => {
-     this.toast.error("Các trường phải đúng định dạng.")
+     this.toast.error("Các trường phải đúng định dạng.","Thông báo")
       })
+  }
+
+  validAge(control: AbstractControl) {
+    const date = control.value;
+    const today = new Date();
+    const birthDate = new Date(date);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age < 18) {
+      return {'validAge': true};
+    } else {
+      return null;
+    }
   }
 }

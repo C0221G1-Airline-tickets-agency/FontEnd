@@ -8,7 +8,7 @@
         khách
         hàng</h2></legend>
       <br>
-      <form action="" [formGroup]="customerForm" (ngSubmit)="editCustomer()" #formGroupRef="ngForm" class="form-group col-12">
+      <form *ngIf="customerForm" action="" [formGroup]="customerForm" (ngSubmit)="editCustomer()" #formGroupRef="ngForm" class="form-group col-12">
         <div class="row input-group">
           <div class="col-3 folow-right">
             <span>Mã khách hàng <label>(*)</label></span>
@@ -107,6 +107,7 @@
                     {{validation.message}}</div>
                 </div>
               </div>
+              <div style="color: red">{{msgEmail}}</div>
             </small>
           </div>
         </div>
@@ -143,8 +144,9 @@
                     {{validation.message}}</div>
                 </div>
               </div>
+              <div style="color: red">{{msgPassport}}</div>
             </small>
-            <button class="btn btn-success mt-3" [disabled]="customerForm.invalid" type="submit"><i class="fa fa-check" aria-hidden="true"></i> Hoàn tất
+            <button class="btn btn-success mt-3"  type="submit"><i class="fa fa-check" aria-hidden="true"></i> Sửa
             </button>
           </div>
         </div>
@@ -154,3 +156,4 @@
 
   </div>
 </div>
+
