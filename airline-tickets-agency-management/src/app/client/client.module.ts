@@ -34,7 +34,19 @@ import {DestinationDeleteComponent} from './component/destination-delete/destina
 import {HomeComponent} from './component/home/home.component';
 import {DestinationDetailComponent} from './component/destination-detail/destination-detail.component';
 import {ToastrModule} from 'ngx-toastr';
-
+import { CustomerPaymentComponent } from './component/customer/customer-payment/customer-payment.component';
+import { CustomerTransactionHistoryComponent } from './component/customer/customer-transaction-history/customer-transaction-history.component';
+import { BookingDetailsComponent } from './component/flight-ticket/buy-ticket/booking-details/booking-details.component';
+import { PassengerInformationComponent } from './component/flight-ticket/buy-ticket/passenger-information/passenger-information.component';
+import { FlightListComponent } from './component/flight-ticket/flight-management/flight-list/flight-list.component';
+import { DialogDeleteComponent } from './component/flight-ticket/flight-management/dialog-delete/dialog-delete.component';
+import { DialogReturnComponent } from './component/flight-ticket/flight-management/dialog-return/dialog-return.component';
+import {CustomCurrencyPipe} from './component/flight-ticket/flight-management/custom-currency.pipe';
+import {AirlineCreateComponent} from "./component/flight-ticket/flight-management/airline-create/airline-create.component";
+import {AirlineListComponent} from "./component/flight-ticket/flight-management/airline-list/airline-list.component";
+import {FlightCreateComponent} from "./component/flight-ticket/flight-management/flight-create/flight-create.component";
+import {FlightEditComponent} from "./component/flight-ticket/flight-management/flight-edit/flight-edit.component";
+import { CustomerChangePasswordComponent } from './component/customer/customer-change-password/customer-change-password.component';
 
 @NgModule({
   declarations: [NewsListComponent,
@@ -48,7 +60,12 @@ import {ToastrModule} from 'ngx-toastr';
     InboxBoxComponent, MessageComponent, SignupComponent,
     ListRoomComponent, ManageChatRoomComponent,
     ManageChatFormComponent, ManageFeedComponent,
-    ManageMessageComponent],
+    ManageMessageComponent,
+    FlightListComponent,AirlineCreateComponent,AirlineListComponent,
+    FlightEditComponent,FlightCreateComponent, DialogDeleteComponent, BookingDetailsComponent,
+    PassengerInformationComponent, DialogReturnComponent,CustomCurrencyPipe,
+    CustomerTransactionHistoryComponent,CustomerPaymentComponent, CustomerChangePasswordComponent],
+
   imports: [
     CommonModule,
     ClientRoutingModule,

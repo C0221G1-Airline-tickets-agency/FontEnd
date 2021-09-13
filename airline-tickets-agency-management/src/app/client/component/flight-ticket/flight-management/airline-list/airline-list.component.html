@@ -1,0 +1,18 @@
+<h2>Danh sách Hãng bay</h2>
+<a routerLink = "airline-create"> Thêm hãng bay</a>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>STT</th>
+    <th>Tên Hãng Bay</th>
+    <th>Logo</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let airline of airlines ;index as i ">
+    <td>{{i+1}}</td>
+    <td>{{airline.airlineName}}</td>
+    <td>{{airline.logo}}</td>
+  </tr>
+  </tbody>
+</table>

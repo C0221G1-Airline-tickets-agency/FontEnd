@@ -15,7 +15,6 @@ import {httpInterceptorProviders} from './service/auth/auth-interceptor';
 import {AdminAuthService} from './service/auth/admin-auth.service';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
-import {ManagementModule} from './management/management.module';
 
 
 @NgModule({
@@ -31,10 +30,8 @@ import {ManagementModule} from './management/management.module';
     HttpClientModule,
     ToastrModule.forRoot(),
     MatSnackBarModule,
-    // AngularFireModule,
     AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    ManagementModule,
+    AngularFireAuthModule
   ],
   providers: [FormBuilder, DatePipe, MatDialog, Overlay, httpInterceptorProviders, AdminAuthService],
 

@@ -15,6 +15,19 @@ import {AdminAuthService} from '../service/auth/admin-auth.service';
 import {DestinationCreateComponent} from './component/destination/destination-create/destination-create.component';
 import {DestinationUpdateComponent} from './component/destination/destination-update/destination-update.component';
 import {ManageChatRoomComponent} from "./component/adminInbox/manage-chat-room/manage-chat-room.component";
+import {FlightListComponent} from './component/flight-ticket/flight-management/flight-list/flight-list.component';
+import {BookingDetailsComponent} from './component/flight-ticket/buy-ticket/booking-details/booking-details.component';
+import {PassengerInformationComponent} from './component/flight-ticket/buy-ticket/passenger-information/passenger-information.component';
+import {FlightCreateComponent} from './component/flight-ticket/flight-management/flight-create/flight-create.component';
+import {FlightEditComponent} from './component/flight-ticket/flight-management/flight-edit/flight-edit.component';
+import {AirlineListComponent} from './component/flight-ticket/flight-management/airline-list/airline-list.component';
+import {AirlineCreateComponent} from './component/flight-ticket/flight-management/airline-create/airline-create.component';
+
+// tslint:disable-next-line:max-line-length
+import {CustomerTransactionHistoryComponent} from './component/customer/customer-transaction-history/customer-transaction-history.component';
+import {CustomerPaymentComponent} from './component/customer/customer-payment/customer-payment.component';
+import {CustomerChangePasswordComponent} from './component/customer/customer-change-password/customer-change-password.component';
+
 
 
 const routes: Routes = [
@@ -26,7 +39,6 @@ const routes: Routes = [
           path: '', component: HomeComponent
         },
         {
-
           path: 'news/news-list', component: NewsListComponent
         },
         {
@@ -47,7 +59,45 @@ const routes: Routes = [
         {
           path: 'destination/edit-destination/:id', component: DestinationUpdateComponent
         },
-        {path:'roomAdmin',component:ManageChatRoomComponent},
+        {
+          path:'roomAdmin',component:ManageChatRoomComponent},
+
+        {
+          path: 'customer/transaction-history', component: CustomerTransactionHistoryComponent
+        },
+        {
+          path: 'customer/payment', component: CustomerPaymentComponent
+        },
+        {
+          path: 'flight-management', component: FlightListComponent,
+        },
+        {
+
+          path: 'booking-details', component: BookingDetailsComponent
+        },
+        {
+
+          path: 'passenger-information/:id', component: PassengerInformationComponent
+        },
+
+        {
+          path: 'passenger-information', component: PassengerInformationComponent
+        },
+        {
+          path: 'flight-management/flight-management-create', component: FlightCreateComponent
+        },
+        {
+          path: 'flight-management-update', component: FlightEditComponent
+        },
+        {
+          path: 'airline-list', component: AirlineListComponent
+        },
+        {
+          path: 'airline-list/airline-create', component: AirlineCreateComponent
+        },
+        {
+          path: 'customer/change-password',component: CustomerChangePasswordComponent
+        }
       ]
   },
 
