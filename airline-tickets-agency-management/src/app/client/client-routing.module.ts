@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {NewsManipulationComponent} from './component/news/news-manipulation/news-manipulation.component';
-import {ManagementComponent} from '../management/management/management.component';
-import {ReportComponent} from '../management/component/report/report.component';
+
 import {ClientComponent} from './client/client.component';
 import {HomeComponent} from './component/home/home.component';
 import {DestinationDetailComponent} from './component/destination-detail/destination-detail.component';
@@ -15,6 +14,7 @@ import {NewsDetailsComponent} from './component/news/news-details/news-details.c
 import {AdminAuthService} from '../service/auth/admin-auth.service';
 import {DestinationCreateComponent} from './component/destination/destination-create/destination-create.component';
 import {DestinationUpdateComponent} from './component/destination/destination-update/destination-update.component';
+import {ManageChatRoomComponent} from "./component/adminInbox/manage-chat-room/manage-chat-room.component";
 
 
 const routes: Routes = [
@@ -46,9 +46,11 @@ const routes: Routes = [
         },
         {
           path: 'destination/edit-destination/:id', component: DestinationUpdateComponent
-        }
+        },
+        {path:'roomAdmin',component:ManageChatRoomComponent},
       ]
-  }
+  },
+
 ];
 
 @NgModule({

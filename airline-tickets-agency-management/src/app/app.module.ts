@@ -15,6 +15,8 @@ import {ClientModule} from './client/client.module';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {httpInterceptorProviders} from './service/auth/auth-interceptor';
 import {AdminAuthService} from './service/auth/admin-auth.service';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 
 
 
@@ -30,7 +32,10 @@ import {AdminAuthService} from './service/auth/admin-auth.service';
     BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    MatSnackBarModule
+    MatSnackBarModule,
+    // AngularFireModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
   ],
   providers: [FormBuilder, DatePipe, MatDialog, Overlay, httpInterceptorProviders, AdminAuthService],
 

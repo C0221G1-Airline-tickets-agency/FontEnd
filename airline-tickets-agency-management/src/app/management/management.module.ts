@@ -5,10 +5,7 @@ import { ManagementRoutingModule } from './management-routing.module';
 import { ReportComponent } from './component/report/report.component';
 
 import { ManagementComponent } from './management/management.component';
-import {AppModule} from '../app.module';
 import {CommonClientModule} from '../common/common-client/common-client.module';
-import {HomeComponent} from '../client/component/home/home.component';
-
 import {FormsModule} from '@angular/forms';
 
 @NgModule({
@@ -18,7 +15,7 @@ import {FormsModule} from '@angular/forms';
         CommonClientModule,
         FormsModule,
     ],
-  declarations: [ReportComponent , ManagementComponent],
+  declarations: [ReportComponent, ManagementComponent],
   bootstrap: [ManagementComponent]
 })
 export class ManagementModule { }

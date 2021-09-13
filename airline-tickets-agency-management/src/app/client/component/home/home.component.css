@@ -1,3 +1,4 @@
+
 .plane-ticket {
   width: 380px;
   height: 400px;
@@ -318,9 +319,32 @@
   padding-left: 20px;
   border-radius: 4px;
 }
-.buttonDeleteEdit{
+.buttonDeleteEdit {
   position: absolute;
   top: 0px;
   right: 0px;
-
+}
+.open-button {
+  background-color: #555;
+  color: white;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 80px;
+  height: 80px;
+  border-radius: 80px;
+}
+.open-button1 {
+  background-color: #555;
+  color: white;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  border-radius: 20px;
+}
+.open-button2 {
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  z-index: 1000;
 }

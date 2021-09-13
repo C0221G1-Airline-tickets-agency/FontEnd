@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!--    điểm đến của hấp dẫn-->
 <div style="margin-top: -25px">
   <div class="home-content">
@@ -265,5 +266,13 @@
 
   <hr>
   <hr>
+</div>
+<!--chat-->
+<div class=" open-button2">
+  <app-inbox-box [ngStyle]="{'display':displayFlat?'none':'block'}" class="open-button1"
+                 (closeFlat)="closeBox($event)"></app-inbox-box>
+  <button [ngStyle]="{'display':displayFlat?'block':'none'}" class="btn open-button" id="iconChat"
+          (click)="controlInbox()" style="background: #e54744"><span><i
+    class="fa fa-3x fa-comments" aria-hidden="true"></i></span></button>
 </div>
 

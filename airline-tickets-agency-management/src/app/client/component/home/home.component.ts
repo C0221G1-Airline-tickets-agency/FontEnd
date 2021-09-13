@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
   destination: Destination[] = [];
   change: number;
   check = false;
-
+  displayFlat: boolean= true;
   constructor(private ticketHomeService: TicketHomeService,
               private router: Router,
               private destinationService: DestinationService, private dialog: MatDialog,
@@ -275,5 +275,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
+
+  controlInbox() {
+    if(this.displayFlat){
+      this.displayFlat=false;
+    }else {
+      this.displayFlat=true;
+    }
+  }
+  closeBox(e:boolean) {
+    this.displayFlat=e;
+  }
 
 }
