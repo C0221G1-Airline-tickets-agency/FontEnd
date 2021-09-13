@@ -23,6 +23,7 @@ import {AirlineCreateComponent} from "./component/flight-ticket/flight-managemen
 import {AirlineListComponent} from "./component/flight-ticket/flight-management/airline-list/airline-list.component";
 import {FlightCreateComponent} from "./component/flight-ticket/flight-management/flight-create/flight-create.component";
 import {FlightEditComponent} from "./component/flight-ticket/flight-management/flight-edit/flight-edit.component";
+import { CustomerChangePasswordComponent } from './component/customer/customer-change-password/customer-change-password.component';
 
 
 
@@ -32,7 +33,7 @@ import {FlightEditComponent} from "./component/flight-ticket/flight-management/f
   declarations: [NewsManipulationComponent, NewsReviewComponent, ClientComponent, FlightListComponent,AirlineCreateComponent,AirlineListComponent,
 
     FlightEditComponent,FlightCreateComponent, DialogDeleteComponent, BookingDetailsComponent, PassengerInformationComponent, DialogReturnComponent,CustomCurrencyPipe,
-    CustomerTransactionHistoryComponent,CustomerPaymentComponent ],
+    CustomerTransactionHistoryComponent,CustomerPaymentComponent, CustomerChangePasswordComponent ],
 
 
     imports: [

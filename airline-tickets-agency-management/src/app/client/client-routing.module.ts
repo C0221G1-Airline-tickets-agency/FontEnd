@@ -15,6 +15,7 @@ import {AirlineCreateComponent} from './component/flight-ticket/flight-managemen
 // tslint:disable-next-line:max-line-length
 import {CustomerTransactionHistoryComponent} from './component/customer/customer-transaction-history/customer-transaction-history.component';
 import {CustomerPaymentComponent} from './component/customer/customer-payment/customer-payment.component';
+import {CustomerChangePasswordComponent} from './component/customer/customer-change-password/customer-change-password.component';
 
 
 const routes: Routes = [
@@ -60,6 +61,9 @@ const routes: Routes = [
         },
         {
           path: 'airline-list/airline-create', component: AirlineCreateComponent
+        },
+        {
+          path: 'customer/change-password',component: CustomerChangePasswordComponent
         }
       ]
   }
