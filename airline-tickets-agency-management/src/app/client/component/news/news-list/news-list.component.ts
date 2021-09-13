@@ -16,8 +16,7 @@ export class NewsListComponent implements OnInit {
   newsList: News[] = [];
   hotNews: News[] = [];
   news: News = {};
-  newsIdChoice = 0;
-  newsNameChoice = '';
+  checkDelete = false;
 
 
   constructor(private newsService: NewsService) {
@@ -33,9 +32,9 @@ export class NewsListComponent implements OnInit {
       if (!newsList) {
         this.newsList = [];
       }
+      newsList.numberOfElements === 1 ? this.checkDelete = true : this.checkDelete = false;
       this.newsList = newsList.content;
       this.pages = new Array<any>(newsList.totalPages);
-
     });
   }
 
@@ -55,8 +54,8 @@ export class NewsListComponent implements OnInit {
   }
 
   next() {
-    if (this.page > this.pages.length - 1) {
-      this.page = this.pages.length - 1;
+    if (this.page > this.pages.length - 2) {
+      // this.page = this.pages.length - 1;
     } else {
       this.page = this.page + 1;
       this.getAllNews();
@@ -98,12 +97,16 @@ export class NewsListComponent implements OnInit {
               showConfirmButton: false,
               timer: 1500
             });
+            if (this.checkDelete) {
+              this.page = this.pages.length - 2;
+            }
             this.getAllNews();
           }, error => {
             Swal.fire({
               position: 'center',
               icon: 'error',
               title: 'Lỗi',
+              html: '<span>' + 'Tin tức có id : ' + newsId + ' hiện tại  không khả dụng ' + '</span>',
               showConfirmButton: false,
               timer: 1500
             });
@@ -113,5 +116,4 @@ export class NewsListComponent implements OnInit {
       }
     });
   }
-
 }

@@ -26,7 +26,7 @@
         <div *ngFor="let item of newsList">
           <div class="row shadow position-relative news-card p-3 ml-1 mb-2 bg-white">
             <div class="col-md-4">
-              <div class="feed-image"><img class="news-feed-image rounded img-fluid img-responsive"
+              <div class="feed-image"><img  style="width: 170px ; height: 130px" class="news-feed-image rounded img-fluid img-responsive"
                                            src="{{item.newsImage}}" alt=""></div>
             </div>
             <div class="col-md-8 position-relative">
@@ -45,7 +45,7 @@
               </div>
               <div class="news-feed-text">
 <!--                <p>views : {{item.newsViews}}</p>-->
-                <h5 [routerLink]="['/news/news-details',item.newsId]">{{item.newsTitle}}</h5>
+                <a [routerLink]="['/news/news-details',item.newsId]"><h5 style="color: black">{{item.newsTitle}}</h5></a>
                 <!--                <span>{{item.newsContent}}<br></span>-->
                 <span> {{ item.newsContent | limitToPipe :  100 }}</span>
                 <div class="d-flex flex-row justify-content-between align-items-center mt-2">
@@ -73,11 +73,11 @@
           <div class="d-flex justify-content-end" *ngIf="newsList.length != 0">
             <nav aria-label="Page navigation example">
               <ul class="pagination">
-                <li class="page-item"><a class="page-link" (click)="previous()">Trước</a></li>
+                <li class="page-item"><a class="page-link" (click)="previous()">Trang trước</a></li>
                 <li class="page-item" *ngFor="let p of pages; let i=index"><a class="page-link" (click)="setPage(i)"
                                                                               [style]="((i <=  page + 1 && i >= page - 1) ? (i == page? 'background: #567FEA; color: white; display:block': 'display: block'): 'display: none ')">{{i + 1}}</a>
                 </li>
-                <li class="page-item"><a class="page-link" (click)="next()">Sau</a></li>
+                <li class="page-item"><a class="page-link" (click)="next()">Trang sau</a></li>
               </ul>
             </nav>
           </div>
@@ -94,12 +94,12 @@
           <div class="ml-3" *ngFor="let hot of hotNews">
             <div class="row shadow news-card p-3 ml-1 mr-1 mb-2 bg-white ">
               <div class="col-md-4 px-0">
-                <div class="feed-image"><img class="news-feed-image rounded img-fluid img-responsive"
+                <div class="feed-image"><img  style="width: 100px ; height: 80px" class="news-feed-image rounded img-fluid img-responsive"
                                              src="{{hot.newsImage}}" alt=""></div>
               </div>
               <div class="col-md-8">
                 <div class="news-feed-text">
-                  <h6 [routerLink]="['/news/news-details',hot.newsId] ">{{hot.newsTitle}} </h6>
+                  <a [routerLink]="['/news/news-details',hot.newsId] "><h5 style="color: black">{{hot.newsTitle | limitToPipe :  60}}</h5> </a>
                   <div class="d-flex flex-row justify-content-between align-items-center mt-2">
                     <div class="d-flex creator-profile">
                       <div class="d-flex flex-column ml-2">
