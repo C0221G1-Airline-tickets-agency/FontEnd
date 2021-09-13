@@ -8,3 +8,13 @@
   color: white;
   text-align: center;
 }
+::ng-deep .snack-bar-invalid {
+  background: white !important;
+  color: red;
+  width: auto;
+}
+::ng-deep .snack-bar {
+  background: green !important;
+  color: white;
+  width: auto;
+}

@@ -656,7 +656,11 @@ legend h1 {
   color: white;
   width: auto;
 }
-
+::ng-deep .snack-bar-invalid {
+  background: white !important;
+  color: red;
+  width: auto;
+}
 
 
 

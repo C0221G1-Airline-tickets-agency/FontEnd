@@ -24,7 +24,7 @@ const routes: Routes = [
           path: 'destination/create-destination', component: DestinationCreateComponent
         },
         {
-          path: 'destination/edit-destination', component: DestinationUpdateComponent
+          path: 'destination/edit-destination/:id', component: DestinationUpdateComponent
         }
       ]
   }

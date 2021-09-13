@@ -65,7 +65,7 @@ export class ScenicEditComponent implements OnInit {
     return formatDate(new Date(), 'dd-MM-yyyyhhmmssa', 'en-US');
   }
   submit() {
-    if (this.scenicForm.invalid) { return; }
+    if (this.scenicForm.invalid) { return this.openSnackBarInvalid ('Có lỗi xãy ra, xin vui lòng nhập lại!!!'); }
     if (this.selectedImage != null) {
       const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
       const fileRef = this.storage.ref(nameImg);
@@ -103,6 +103,14 @@ export class ScenicEditComponent implements OnInit {
       horizontalPosition: 'right',
       verticalPosition: 'top',
       panelClass: ['snack-bar']
+    });
+  }
+  openSnackBarInvalid(msg: string) {
+    this.snackBar.open(msg , null, {
+      duration: 4000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['snack-bar-invalid']
     });
   }
 }

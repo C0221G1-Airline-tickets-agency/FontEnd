@@ -15,6 +15,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ScenicEditComponent } from './component/destination/scenic-edit/scenic-edit.component';
 import { DialogConfirmComponent } from './component/destination/dialog-confirm/dialog-confirm.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {LazyLoadImageModule} from 'ng-lazyload-image';
 
 
 
@@ -28,7 +29,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         CommonClientModule,
         MatDialogModule,
         FormsModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        LazyLoadImageModule
     ],
   bootstrap: [ClientComponent]
 })

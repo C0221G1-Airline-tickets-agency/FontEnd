@@ -43,7 +43,7 @@ export class DestinationCreateComponent implements OnInit {
   }
 
   submit() {
-    if (this.destinationForm.invalid) { return; }
+    if (this.destinationForm.invalid) { return this.openSnackBarInvalid ('Có lỗi xãy ra, xin vui lòng nhập lại!!!'); }
     if (this.selectedImage != null) {
       const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
       const fileRef = this.storage.ref(nameImg);
@@ -57,6 +57,10 @@ export class DestinationCreateComponent implements OnInit {
               if (next.status) {
                 this.listScenics = [];
                 this.destinationForm.reset();
+                this.messageValidUrl = '';
+                this.messageErrors = [];
+                this.messageUnique = '';
+                this.messageEmptyScenic = '';
                 this.openSnackBar(next.msg);
               } else {
                 this.messageErrors = next.errors;
@@ -134,6 +138,14 @@ export class DestinationCreateComponent implements OnInit {
       horizontalPosition: 'right',
       verticalPosition: 'top',
       panelClass: ['snack-bar']
+    });
+  }
+  openSnackBarInvalid(msg: string) {
+    this.snackBar.open(msg , null, {
+      duration: 4000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['snack-bar-invalid']
     });
   }
 }

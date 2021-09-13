@@ -11,6 +11,7 @@ import {finalize} from 'rxjs/operators';
 import {ScenicEditComponent} from '../scenic-edit/scenic-edit.component';
 import {DialogConfirmComponent} from '../dialog-confirm/dialog-confirm.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
   selector: 'app-destination-update',
@@ -29,7 +30,7 @@ export class DestinationUpdateComponent implements OnInit {
   destination: Destiation;
   listScenics: Scenic[] = [];
   selectedImage: any = null;
-  desinationId = 29;
+  desinationId: number;
   url = '';
   scenic: Scenic;
   messageUnique = '';
@@ -38,7 +39,14 @@ export class DestinationUpdateComponent implements OnInit {
   constructor(public dialog: MatDialog,
               public destinationService: DestinationService,
               @Inject(AngularFireStorage) private storage: AngularFireStorage,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      const id = paramMap.get('id');
+      console.log(id);
+      this.desinationId = parseInt(id);
+    });
+  }
 
   ngOnInit(): void {
     this.getDestination(this.desinationId);
@@ -74,7 +82,7 @@ export class DestinationUpdateComponent implements OnInit {
   }
 
   submit() {
-    if (this.destinationForm.invalid) { return; }
+    if (this.destinationForm.invalid) { return this.openSnackBarInvalid ('Có lỗi xãy ra, xin vui lòng nhập lại!!!'); }
     if (this.selectedImage != null) {
       const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
       const fileRef = this.storage.ref(nameImg);
@@ -88,6 +96,9 @@ export class DestinationUpdateComponent implements OnInit {
               if (next.status) {
                 this.listScenics = [];
                 this.destinationForm.reset();
+                this.messageErrors = [];
+                this.messageUnique = '';
+                this.messageEmptyScenic = '';
                 this.openSnackBar(next.msg);
               } else {
                 this.messageErrors = next.errors;
@@ -105,6 +116,9 @@ export class DestinationUpdateComponent implements OnInit {
         if (next.status) {
           this.listScenics = [];
           this.destinationForm.reset();
+          this.messageErrors = [];
+          this.messageUnique = '';
+          this.messageEmptyScenic = '';
           this.openSnackBar(next.msg);
         } else {
           this.messageErrors = next.errors;
@@ -183,6 +197,14 @@ export class DestinationUpdateComponent implements OnInit {
       horizontalPosition: 'right',
       verticalPosition: 'top',
       panelClass: ['snack-bar']
+    });
+  }
+  openSnackBarInvalid(msg: string) {
+    this.snackBar.open(msg , null, {
+      duration: 4000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['snack-bar-invalid']
     });
   }
 }

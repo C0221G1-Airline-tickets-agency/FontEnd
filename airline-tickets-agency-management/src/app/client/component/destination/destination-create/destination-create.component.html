@@ -63,7 +63,7 @@
                 <tr *ngFor="let scenic of listScenics; index as i">
                   <td class="p-1">{{i+1}}</td>
                   <td class="p-1">{{scenic.scenicName}}</td>
-                  <td (click)="onDelScenicConfirm(i)" class="p-1 text-danger">Xóa</td>
+                  <td (click)="onDelScenicConfirm(i)" class="p-1 text-danger" style="cursor: pointer">Xóa</td>
                 </tr>
               </table>
             </div>
@@ -72,7 +72,7 @@
 
         <div class="d-flex justify-content-end pb-3">
           <button (click)="onAddDestinationHandler()" class="mr-5 btn btn-success" type="submit"><i class="fa fa-check" aria-hidden="true"></i> Hoàn tất</button>
-         <a href="/"><button class="btn btn-back" style="background: #005cbf;color: white;margin-right: 33px" type="button"><i class="icon-sidebar fa fa-reply "></i>Trở về</button></a>
+         <a href="/"><button class="btn btn-back" style="background: #005cbf;color: white;margin-right: 33px" type="button"><i class="icon-sidebar fa fa-reply "></i> Trở về</button></a>
         </div>
       </form>
 
