@@ -9,6 +9,7 @@ import {DatePipe} from "@angular/common";
 import Swal from "sweetalert2";
 import {TicketService} from "../../../../service/flight-ticket/ticket/ticket.service";
 import {Router} from "@angular/router";
+import {timeout} from "rxjs/operators";
 
 
 @Component({
@@ -31,8 +32,8 @@ export class TicketListComponent implements OnInit {
               private dialog: MatDialog,
               private fb: FormBuilder,
               private datePipe: DatePipe,
-              private toastr : ToastrService,
-             private router: Router) {
+              private toastr: ToastrService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -92,15 +93,22 @@ export class TicketListComponent implements OnInit {
     this.filerType = this.formSearch.get('filter').value;
     this.page = 0;
     this.getListTicket();
-    this.toastr.success('Tìm kiếm thành công','Thông báo : ')
+    setTimeout(() => {
+      if (this.tickets.length > 0) {
+        this.toastr.success('Tìm kiếm thành công', 'Thông báo : ')
+      } else {
+        this.toastr.error('Không tìm thấy dữ liệu !', 'Cảnh báo : ');
+      }
+    }, 100);
+
   }
 
 
   getTicketId(ticketId: number, t: Ticket) {
-    if(this.idSelect == ticketId ){
+    if (this.idSelect == ticketId) {
       this.idSelect = null;
       this.ticket = null;
-    }else {
+    } else {
       this.idSelect = ticketId;
       this.ticket = t;
     }
@@ -115,9 +123,9 @@ export class TicketListComponent implements OnInit {
     currency: 'VND',
   });
 
-  onEditHandler(){
+  onEditHandler() {
     if (this.ticket == null) {
-      this.toastr.error('Bạn chưa chọn vé','Cảnh báo :')
+      this.toastr.error('Bạn chưa chọn vé', 'Cảnh báo :')
     } else {
       const dialogRef = this.dialog.open(TicketEditComponent, {
         width: '600px',
@@ -125,32 +133,36 @@ export class TicketListComponent implements OnInit {
       });
     }
   }
+
   onDeleteHandler() {
     if (this.idSelect == null) {
-      this.toastr.error('Bạn chưa chọn vé','Cảnh báo : ')
+      this.toastr.error('Bạn chưa chọn vé', 'Cảnh báo : ')
     } else {
       Swal.fire({
-        title: 'Xóa vé ?',
-        width:400,
-        heightAuto:true,
+        title: '<div class="scheduler-border d-flex justify-content-center align-items-center" style="background: #e54744;height: 50px;color: white">' +
+          '  <h2>Xóa vé ?</h2>' +
+          '</div>',
+        width: 400,
+        heightAuto: true,
         html: '<hr><div style="text-align: left; padding-left: 30px; font-size: 14px"><p style="color: red;">Bạn có chắc chắn muốn xóa vé có :</p>\n' +
-          '                    <p>Mã đặt chỗ: ' + this.ticket.chairName + '&emsp;&emsp;&emsp;&emsp;Họ tên: ' + this.ticket.passengerName + '</p>\n' +
+          '                    <p>Mã đặt chỗ: ' + this.ticket.chairName+'</p>\n' +
+          '                    <p>Họ và tên: ' + this.ticket.passengerName+'</p>\n' +
           '                    <p>Chuyến bay: ' + this.ticket.flight.locationFrom.cityName + ' - ' + this.ticket.flight.locationTo.cityName + '</p>\n' +
           '                    <p>Ngày: ' + this.formatDate(this.ticket.flight.flightDate) + '</p>\n' +
-          '                    <p style="text-align: left">Giá: ' + this.formatter.format(this.ticket.ticketPrice+(this.ticket.ticketPrice*this.ticket.ticketTypePrice)+this.ticket.plusBaggage+(this.ticket.ticketPrice*this.ticket.tax)-(this.ticket.ticketPrice*this.ticket.passengerTypePrice))+
+          '                    <p style="text-align: left">Giá: ' + this.formatter.format(this.ticket.ticketPrice + (this.ticket.ticketPrice * this.ticket.ticketTypePrice) + this.ticket.plusBaggage + (this.ticket.ticketPrice * this.ticket.tax) - (this.ticket.ticketPrice * this.ticket.passengerTypePrice)) +
           '</p></div><hr>',
         showCancelButton: true,
-        confirmButtonText: 'Xác nhận',
+        confirmButtonText: '<i class="fa fa-trash-o"></i> Xác nhận',
         confirmButtonColor: '#3085d6',
-        cancelButtonText: '&emsp;Huỷ&emsp;',
+        cancelButtonText: '<i class="fa fa-reply"></i> Trở về',
         cancelButtonColor: '#dc3545',
         reverseButtons: true,
       }).then((result) => {
         if (result.isConfirmed) {
           this.ticketService.deleteTicketById(this.idSelect).subscribe(() => {
-            this.toastr.success('Xóa vé thành công','Thông báo : ')
+            this.toastr.success('Xóa vé thành công', 'Thông báo : ', { timeOut: 2000 })
           }, error => {
-            this.toastr.error('Xóa vé thất bại','Cảnh báo : ')
+            this.toastr.error('Xóa vé thất bại', 'Cảnh báo : ')
           }, () => {
             this.idSelect = null;
             this.ticket = null;
@@ -163,7 +175,7 @@ export class TicketListComponent implements OnInit {
 
   onPrintHandler(): void {
     if (this.ticket == null) {
-      this.toastr.error('Bạn chưa chọn vé','Cảnh báo :')
+      this.toastr.error('Bạn chưa chọn vé', 'Cảnh báo :')
     } else {
       const dialogRef = this.dialog.open(TicketPrintComponent, {
         width: '900px',
@@ -173,11 +185,23 @@ export class TicketListComponent implements OnInit {
   }
 
   onInputHandler() {
-    this.router.navigateByUrl("");
+    this.router.navigateByUrl("/flight-management");
   }
 
   onReturnHandler() {
-    this.router.navigateByUrl("");
+    Swal.fire({
+      icon: 'question',
+      text:'Bạn có chắc muốn trở về màn hình trang chủ?',
+      showCancelButton: true,
+      confirmButtonText: '<i class="fa fa-check"></i> Xác nhận',
+      confirmButtonColor: '#3085d6',
+      cancelButtonText: '<i class="fa fa-reply"></i> Trở về ',
+      cancelButtonColor: '#dc3545',
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigateByUrl("");
+      }
+    })
   }
-
 }
