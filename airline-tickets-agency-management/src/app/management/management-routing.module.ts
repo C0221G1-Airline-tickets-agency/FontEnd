@@ -2,6 +2,9 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {ReportComponent} from './component/report/report.component';
 import {ManagementComponent} from './management/management.component';
+import {TicketListComponent} from "./component/management-ticket/ticket-list/ticket-list.component";
+
+
 
 
 const routes: Routes = [
@@ -11,9 +14,12 @@ const routes: Routes = [
       [
         {
           path: 'report', component: ReportComponent
-        }
+        },
+        {
+          path: 'ticket/list', component: TicketListComponent
+        },
       ]
-  }
+  },
 ];
 
 @NgModule({

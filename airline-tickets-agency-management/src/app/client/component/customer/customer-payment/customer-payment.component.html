@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-3 col-lg-3">
+    <app-side-bar></app-side-bar>
+  </div>
+  <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12">
+    <div class="right-content w-100">
+
+      <!--        nơi đổ dữ liệu router-outlet              -->
+
+      <div id="content" class="container-fluid mb-5 sub-main ">
+        <div class="pt-4 mb-4 text-center">
+          <h2 class="pb-2 title-header">Thanh toán </h2>
+        </div>
+
+        <div class="" style="overflow-x: auto">
+          <table class="table table-striped   table-bordered">
+            <thead class="thead">
+            <tr>
+              <th>STT</th>
+              <th>Mã vé</th>
+              <th>Nơi đi</th>
+              <th>Nơi đến</th>
+              <th>Ngày đặt</th>
+              <th>Ngày bay</th>
+              <th>Giá (VND)</th>
+              <th>Hủy</th>
+              <th>Chọn</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let ticket of listTicketCustomerBook, let i = index">
+            <tr>
+              <td>{{i+1+index}}</td>
+              <td>{{ticket.ticketCode}}</td>
+              <td>{{ticket.pointOfDeparture}}</td>
+              <td>{{ticket.destination}}</td>
+              <td>{{ticket.bookingDate | date: 'dd'}}-{{ticket.bookingDate | date:'MM'}}-{{ticket.bookingDate | date: 'yyyy'}}</td>
+              <td>{{ticket.flightDate | date: 'dd'}}-{{ticket.flightDate | date:'MM'}}-{{ticket.flightDate | date: 'yyyy'}}</td>
+              <td class="text-center">{{ticket.priceSell | number}}</td>
+              <td class="text-center btnCancel huy-hover" (click)="dialogCancel(ticket.ticketId,ticket.ticketCode,ticket.priceSell,ticket.pointOfDeparture,ticket.destination)">Hủy</td>
+              <td class="text-center"><input type="checkbox" [value]="ticket.ticketId" [checked]="listTicketIdPayment.includes(ticket.ticketId.toString())" (change)="getListTicketId($event,ticket.ticketId,ticket.priceSell,ticket)"></td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="d-flex justify-content-end pt-1 pb-2">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" (click)="previousPage()" >Trang Trước</a></li>
+              <li class="page-item"><a class="page-link" >{{this.index/5+1}}</a></li>
+              <li class="page-item"><a class="page-link" (click)="nextPage()" >Trang sau</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="row justify-content-end mr-1">
+          <span id="myPaypalButton" ></span>
+        </div>
+        <div class="row my-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
