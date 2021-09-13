@@ -1,6 +1,6 @@
 <div>
   <div style="height: 650px;margin-left: -2%;margin-right: -2%">
-    <img class="m-0 p-0" src="{{destinations.destinationImage}}" style="width: 100%; height: 100%; object-fit: cover;">
+    <img class="m-0 p-0" src="{{destinations.destinationImage}}" style="width:100%; height: 100%; object-fit: cover;">
   </div>
 
   <div class="pt-0 bg-light content-destination">
@@ -15,16 +15,14 @@
     <div>
       <div class="ml-3 font-weight-bold"></div>
       <div class="ml-3">{{destinations.destinationDescription}} </div>
-      <div class="mt-4 mb-4 pb-1">
-        <div style="margin-left: 12%"><img src="{{destinations.destinationImage}}"></div>
-      </div>
     </div>
     <div *ngFor="let s of scenic">
       <div class="ml-3 font-weight-bold pb-1">{{s.scenicName}} </div>
       <div class="ml-3">{{s.scenicDescription}}</div>
       <div class="mt-4 mb-4">
-        <div style="margin-left: 12%"><img src="{{s.scenicImage}}"></div>
+        <div style="margin-left: 10%"><img style="  width: 1150px; height: 500px" src="{{s.scenicImage}}"></div>
       </div>
+      <br>
 
 
       <!--    <div>-->

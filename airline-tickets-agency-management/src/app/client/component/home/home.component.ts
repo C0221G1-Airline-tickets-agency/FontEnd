@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {MatDialog} from '@angular/material/dialog';
 import {ToastrService} from 'ngx-toastr';
@@ -18,43 +18,40 @@ export class HomeComponent implements OnInit {
   sortBy = 'destination_id';
   destinations: Destination[] = [];
   pages: Array<any> = [];
-  destination: Destination;
+  destination: Destination[] = [];
   change: number;
+  check = false;
 
   // tslint:disable-next-line:max-line-length
   constructor(private destinationService: DestinationService, private dialog: MatDialog, private toastr: ToastrService, private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.queryParams.subscribe(params => {
-      if (params.page != null) {
-        this.page = params.page - 1;
-      }
-
-      console.log(this.page); // Print the parameter to the console.
-    });
   }
+
   ngOnInit(): void {
     this.showDestination();
   }
+
   showDestination() {
     this.destinationService.showListDestination(this.page, this.sortBy).subscribe(destination => {
       // tslint:disable-next-line:triple-equals
-      if (destination == null) {
+      if (destination == undefined) {
         this.destinations = [];
         this.page = 0;
-      } else {
-        this.destinations = destination.content;
-        this.pages = new Array<any>(destination.totalPages);
-        console.log(this.pages);
-        console.log(this.destinations);
       }
+      destination.numberOfElements === 1 ? this.check = true : this.check = false;
+      this.destinations = destination.content;
+      this.pages = new Array<any>(destination.totalPages);
     });
   }
+
   setPage(i: number) {
     this.page = i;
     this.showDestination();
   }
+
   errorPage() {
     this.toastr.error('không tìm thấy trang', 'thông báo');
   }
+
   previous() {
     if (this.page === 0) {
       this.errorPage();
@@ -63,6 +60,7 @@ export class HomeComponent implements OnInit {
       this.showDestination();
     }
   }
+
   next() {
     if (this.page > this.pages.length - 2) {
       this.errorPage();
@@ -71,16 +69,19 @@ export class HomeComponent implements OnInit {
       this.showDestination();
     }
   }
+
   showSuccessDelete() {
     this.toastr.success('Đã xóa thành công !', 'Thông báo : ');
   }
+
   showErrorDelete() {
     this.toastr.error('Vui lòng chọn nhân viên bạn muốn xóa !', 'Cảnh báo : ');
   }
+
   deleteDestination(destinationName, destinationId) {
     Swal.fire({
       title: 'Bạn có chắc chắn muốn xoá?',
-      html: '<span style="color: #dc3545">' + 'địa điểm có tên là : ' + destinationName + '</span>',
+      html: '<span style="color: #dc3545">' + 'địa điểm: ' +  destinationName  + '</span>',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -98,6 +99,9 @@ export class HomeComponent implements OnInit {
               showConfirmButton: false,
               timer: 1500
             });
+            if (this.check) {
+              this.page = this.pages.length - 2;
+            }
             this.showDestination();
           }, error => {
             Swal.fire({

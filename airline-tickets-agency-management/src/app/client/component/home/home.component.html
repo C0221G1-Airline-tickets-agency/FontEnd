@@ -2,20 +2,26 @@
 <div class="row">
   <div class="container">
     <h3 class="text-center text-danger font-weight-bold">Điểm Đến Hấp Dẫn</h3>
+    <div class="d-flex justify-content-end">
+      <button class=" btn btn-primary" [routerLink]="['/destination/create-destination']">
+        <i class="fa fa-plus-square"></i>
+        Thêm
+      </button>
+    </div>
     <div class="row">
 
-      <div class="col-sm-4 col-md-4" style="width: 400px; height: 450px" *ngFor="let d of destinations">
+
+      <div class="col-sm-4 col-md-4" *ngFor="let d of destinations">
         <div class="my-card">
 
           <div class="my-card-titles">
             <div class="my-card-title">
               <div class="my-card-title-2"><img src="./assets/img/card-2.svg" alt=""></div>
-              <div class="my-card-title-3"><img style="" src="./assets/img/card-3.svg" alt=""></div>
-              {{d.destinationName}}
+              <div class="my-card-title-3" ><img style="" src="./assets/img/card-3.svg" alt=""></div>
+             <span style="font-size: 18px">{{d.destinationName}}</span>
             </div>
           </div>
-
-          <div class="my-card-title-1"><a [routerLink]="['destination/detail',d.destinationId]"><img src="{{d.destinationImage}}" style="object-fit: contain; max-width: 100%;max-height: 100%;width: auto;height: auto" alt=""></a>
+          <div class="my-card-title-1"><a [routerLink]="['destination/detail',d.destinationId]"><img src="{{d.destinationImage}}" style="width: 350px;height: 300px" alt=""></a>
 
           </div>
           <div class="dropdown buttonDeleteEdit">
@@ -24,14 +30,12 @@
               <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item"> <i class="fa fa-edit text-warning" ></i> Sửa</a>
+              <a class="dropdown-item"> <i class="fa fa-edit text-warning" [routerLink]="['destination/edit-destination',d.destinationId]" ></i> Sửa</a>
               <a class="dropdown-item" data-toggle="modal" (click)="deleteDestination(d.destinationName,d.destinationId)"> <i class="fa fa-trash text-danger"></i> Xóa</a>
             </div>
           </div>
-
         </div>
       </div>
-
     </div>
     <br>
     <div class="d-flex justify-content-end" *ngIf="destinations.length != 0">
@@ -45,12 +49,7 @@
         </ul>
       </nav>
     </div>
-    <div class="d-flex justify-content-end">
-      <button class=" btn btn-primary">
-        <i class="fa fa-plus-square"></i>
-        Thêm
-      </button>
-    </div>
+
   </div>
 </div>
 
