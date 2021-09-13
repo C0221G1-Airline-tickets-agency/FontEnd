@@ -7,12 +7,13 @@ import { Location } from '@angular/common';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-
+  data: any = null;
   constructor(private location: Location) {
   }
 
   ngOnInit(): void {
     console.log(this.location.getState());
+    this.data = this.location.getState();
   }
 
 }

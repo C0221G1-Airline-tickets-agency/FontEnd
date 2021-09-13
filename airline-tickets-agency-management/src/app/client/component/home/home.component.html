@@ -85,7 +85,7 @@
           <div class="row pt-1">
             <div class="col-12 mx-3">
               Ngày đi:
-              <input type="date" class="form-control mx-0" [min]="startDay" [(ngModel)]="startDay" [placeholder]="startDay">
+              <input type="date" class="form-control mx-0" [min]="dayNow" [max]="endDay" [(ngModel)]="startDay" [placeholder]="startDay">
             </div>
             <div class="col-12 mx-3 {{isTwoWay? 'd-block': 'd-none'}}">
               Ngày về:
@@ -145,9 +145,6 @@
             <div class="col">
               <img src="../../../../assets/img/nguoiLon.svg" alt="#" style="padding-left: 29px"><span
               style="padding-left: 20px">Người lớn</span>
-              <div class="info-person" style=" position: absolute;top: 25px;left: 72px;">
-                <small>12 tuổi trở lên</small>
-              </div>
             </div>
             <div class="col">
               <a class="btn" (click)="subPassenger('adults')"><i class="fa fa-minus" aria-hidden="true"></i></a>
