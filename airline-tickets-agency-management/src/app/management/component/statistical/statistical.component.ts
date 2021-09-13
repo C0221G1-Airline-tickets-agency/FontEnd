@@ -1,4 +1,6 @@
 import {Component, ViewChild, OnInit} from '@angular/core';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import {
   // top
   ApexStates,
@@ -25,6 +27,8 @@ import {
 } from 'ng-apexcharts';
 import {Report} from '../../../model/report';
 import {ReportService} from '../../../service/report/report.service';
+import {FontBase64} from '../../../font-base64';
+import {Router} from '@angular/router';
 
 export interface ChartOptions {
   // bar
@@ -34,7 +38,7 @@ export interface ChartOptions {
   // circle
   seriesPie: ApexNonAxisChartSeries;
   responsive: ApexResponsive[];
-  labels: any;
+  labelsPie: string[];
   // lie
   seriesLine: ApexAxisChartSeries;
   chart: ApexChart;
@@ -83,30 +87,28 @@ export class StatisticalComponent implements OnInit {
   isTopBar = false;
   isTopCircle = false;
   isTopLine = false;
-  week1 = 'Tuần 1';
-  week2 = 'Tuần 2';
+  totalMoney1 = 0;
+  totalMoney2 = 0;
   isEmployee = false;
   isAirline = false;
-  categories = [
-    'Ngày 1',
-    'Ngày 2',
-    'ngày 3',
-    'Ngày 4',
-    'Ngày 5',
-    'ngày 6',
-    'Ngày 7'
-  ];
+  formatter = new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'VND',
+  });
   topEmployee = 'Top 5 nhân viên Bán được nhiều vé nhất';
   topAirline = 'Top 5 hãng hàng không bán được nhiều vé nhất';
 
-  constructor(private reportService: ReportService) {
+  constructor(private reportService: ReportService,
+              private fontBase: FontBase64,
+              private router: Router) {
   }
 
   ngOnInit(): void {
-    // this.paintChartTypeLineTop();
     this.showChart();
-    // this.paintChartTypeTop();
-    // this.paintChartTypeLine();
+  }
+
+  redirectReport() {
+    this.router.navigate(['management/report']);
   }
 
   showChart() {
@@ -116,9 +118,9 @@ export class StatisticalComponent implements OnInit {
       switch (this.typeChart) {
         case 'circle':
           this.isCircle = true;
+          this.paintChartTypeCircle();
           this.setChartPie1();
           this.setChartPie2();
-          this.paintChartTypeCircle();
           return;
         case 'line':
           this.isLine = true;
@@ -128,9 +130,9 @@ export class StatisticalComponent implements OnInit {
           return;
         case 'bar':
           this.isBar = true;
+          this.paintChartTypeBar();
           this.setChartBar1();
           this.setChartBar2();
-          this.paintChartTypeBar();
           return;
         default:
           this.isBar = false;
@@ -176,6 +178,7 @@ export class StatisticalComponent implements OnInit {
       this.statisticalChart1 = chart1;
       let i;
       for (i = 0; i < this.statisticalChart1.length; i++) {
+        this.totalMoney1 += Number(this.statisticalChart1[i].totalMoney);
         // @ts-ignore
         this.chartOptions.seriesLine[0].data.push(this.statisticalChart1[i].totalMoney);
       }
@@ -189,29 +192,23 @@ export class StatisticalComponent implements OnInit {
       this.statisticalChart2 = chart2;
       let i;
       for (i = 0; i < this.statisticalChart2.length; i++) {
+        this.totalMoney2 += Number(this.statisticalChart1[i].totalMoney);
         // @ts-ignore
         this.chartOptions.seriesLine[1].data.push(this.statisticalChart2[i].totalMoney);
       }
     });
   }
 
-  setCategory() {
-    let i;
-    for (i = 0; i < this.categories.length; i++) {
-      this.chartOptions.xaxis.categories.push(this.categories[i]);
-    }
-  }
-
   paintChartTypeLine() {
     this.chartOptions = {
       seriesLine: [
         {
-          name: 'tuần 1',
-          data: [12000, 1000, 21000, 11000, 14000, 2000, 11000]
+          name: 'thời gian 1',
+          data: []
         },
         {
-          name: 'tuần 2',
-          data: [3000, 1500, 21000, 16000, 15000, 10000, 11000, 16000]
+          name: 'thời gian 2',
+          data: []
         },
       ],
       chart: {
@@ -303,6 +300,7 @@ export class StatisticalComponent implements OnInit {
         this.totalPie1 += Number(this.statisticalChart1[i].totalMoney);
       }
       this.chartOptions.seriesPie.push(this.totalPie1);
+      this.totalMoney1 = this.totalPie1;
     });
   }
 
@@ -317,6 +315,7 @@ export class StatisticalComponent implements OnInit {
         this.totalPie2 += Number(this.statisticalChart2[i].totalMoney);
       }
       this.chartOptions.seriesPie.push(this.totalPie2);
+      this.totalMoney2 = this.totalPie2;
     });
   }
 
@@ -327,7 +326,7 @@ export class StatisticalComponent implements OnInit {
         // width: 480,
         type: 'pie'
       },
-      labels: ['tuần 1', 'Tuần 2'],
+      labelsPie: ['thời gian 1', 'Thời gian 2'],
       responsive: [
         {
           breakpoint: 480,
@@ -352,6 +351,7 @@ export class StatisticalComponent implements OnInit {
       this.statisticalChart1 = chart1;
       let i;
       for (i = 0; i < this.statisticalChart1.length; i++) {
+        this.totalMoney1 += Number(this.statisticalChart1[i].totalMoney);
         // @ts-ignore
         this.chartOptions.seriesBar[0].data.push(this.statisticalChart1[i].totalMoney);
         this.chartOptions.seriesBar[0].name = 'Thời gian 1';
@@ -366,6 +366,7 @@ export class StatisticalComponent implements OnInit {
       this.statisticalChart2 = chart2;
       let i;
       for (i = 0; i < this.statisticalChart2.length; i++) {
+        this.totalMoney2 += Number(this.statisticalChart1[i].totalMoney);
         // @ts-ignore
         this.chartOptions.seriesBar[1].data.push(this.statisticalChart2[i].totalMoney);
         this.chartOptions.seriesBar[1].name = 'Thời gian 2';
@@ -545,6 +546,7 @@ export class StatisticalComponent implements OnInit {
     this.endDate1 = this.reportService.getParameterEndDate1();
     this.typeReport = this.reportService.getParameterTypeReport();
     if (this.typeReport === 'employee') {
+      this.isEmployee = true;
       this.reportService.getTop5Employee(this.startDate1, this.endDate1).subscribe(chart1 => {
         this.statisticalChart1 = chart1;
         let i;
@@ -556,6 +558,7 @@ export class StatisticalComponent implements OnInit {
       });
     }
     if (this.typeReport === 'airline') {
+      this.isAirline = true;
       this.reportService.getTop5Airline(this.startDate1, this.endDate1).subscribe(chart1 => {
         this.statisticalChart1 = chart1;
         let i;
@@ -650,7 +653,7 @@ export class StatisticalComponent implements OnInit {
         }
       ],
       chart: {
-        // height: 350,
+        height: 350,
         type: 'line',
         zoom: {
           enabled: false
@@ -674,5 +677,150 @@ export class StatisticalComponent implements OnInit {
         }
       },
     };
+  }
+
+  htmlToPDF() {
+    const doc = new jsPDF('l', 'mm', 'a4');
+    doc.addFileToVFS('src/assets/font/Calibri Light.ttf', this.fontBase.font);
+    doc.addFont('src/assets/font/Calibri Light.ttf', 'Calibri Light', 'normal');
+    doc.setFont('Calibri Light');
+    if (this.typeReport === 'revenue') {
+      const head = [['Thời gian', 'Tổng tiền']];
+      const body = [];
+      const number1 = 1;
+      this.statisticalChart1.forEach(s => {
+
+        // @ts-ignore
+        const temp = [s.flightDate, this.formatter.format(s.totalMoney)];
+        body.push(temp);
+      });
+      this.statisticalChart2.forEach(s => {
+
+        // @ts-ignore
+        const temp = [s.flightDate, this.formatter.format(s.totalMoney)];
+        body.push(temp);
+      });
+      doc.setFontSize(25);
+      doc.setTextColor('red');
+      doc.text('Báo cáo doanh thu', 110, 10);
+      doc.text('Công ty C0221G1 vé giá rẻ', 90, 20);
+      doc.setFontSize(20);
+      doc.setTextColor('black');
+      doc.text('Thông tin báo cáo', 15, 30);
+      doc.setFontSize(14);
+      // tslint:disable-next-line:max-line-length
+      doc.text('thời gian 1: từ ngày: ' + this.startDate1 + ' đến ngày: ' + this.endDate1 + ' tổng tiền: ' + this.formatter.format(this.totalPie1) + ' VNĐ', 25, 40);
+      // tslint:disable-next-line:max-line-length
+      doc.text('thời gian 2: từ ngày: ' + this.startDate2 + ' đến ngày: ' + this.endDate2 + ' tổng tiền: ' + this.formatter.format(this.totalPie2) + ' VNĐ', 25, 50);
+      doc.setFontSize(20);
+      // doc.text('Danh sách thuốc', 15, 70);
+      doc.setFontSize(14);
+      autoTable(doc, {
+        styles: {
+          font: 'Calibri Light',
+          fontSize: 14
+        },
+        margin: {top: 55},
+        head,
+        body,
+        didDrawCell: (data) => {
+        },
+      });
+      doc.setTextColor('red');
+      // doc.text('Tổng tiền : ' + this.formatter.format(), 230, this.statisticalChart1.length * 8.5 + 105);
+      doc.setTextColor('black');
+      doc.text('Đà Nẵng , Ngày......Tháng.......Năm.......', 160, this.statisticalChart1.length * 8.5 + 135);
+      // @ts-ignore
+      doc.text('Người lập phiếu', 180, this.statisticalChart1.length * 8.5 + 140);
+      doc.text('DongHP', 190, this.statisticalChart1.length * 8.5 + 145);
+      doc.text('Hoàng Phạm Đông', 180, this.statisticalChart1.length * 8.5 + 150);
+      doc.save('Báo cáo doanh thu.pdf');
+    }
+    if (this.typeReport === 'employee') {
+      const head = [['Tên nhân viên', 'Số lượng']];
+      const body = [];
+      const number1 = 1;
+      this.statisticalChart1.forEach(s => {
+
+        // @ts-ignore
+        const temp = [s.employeeName, s.quantity];
+        body.push(temp);
+      });
+      doc.setFontSize(25);
+      doc.setTextColor('red');
+      doc.text('Báo cáo top nhân viên bán được nhiều vé nhất', 60, 10);
+      doc.text('Công ty C0221G1 vé giá rẻ', 100, 20);
+      doc.setFontSize(20);
+      doc.setTextColor('black');
+      doc.text('Thông tin báo cáo', 15, 30);
+      doc.setFontSize(14);
+      // tslint:disable-next-line:max-line-length
+      doc.text('thời gian : từ ngày: ' + this.startDate1 + ' đến ngày: ' + this.endDate1 , 25, 40);
+      doc.setFontSize(20);
+      // doc.text('Danh sách thuốc', 15, 70);
+      doc.setFontSize(14);
+      autoTable(doc, {
+        styles: {
+          font: 'Calibri Light',
+          fontSize: 14
+        },
+        margin: {top: 50},
+        head,
+        body,
+        didDrawCell: (data) => {
+        },
+      });
+      doc.setTextColor('red');
+      doc.setTextColor('black');
+      doc.text('Đà Nẵng , Ngày......Tháng.......Năm.......', 180, this.statisticalChart1.length * 8.5 + 80);
+      // @ts-ignore
+      doc.text('Người lập phiếu', 200, this.statisticalChart1.length * 8.5 + 90);
+      doc.text('DongHP', 210, this.statisticalChart1.length * 8.5 + 95);
+      doc.text('Hoàng Phạm Đông', 200, this.statisticalChart1.length * 8.5 + 100);
+      doc.save('Báo cáo Top nhân viên.pdf');
+    }
+    if (this.typeReport === 'airline') {
+      const head = [['Tên hãng máy bay', 'Số lượng']];
+      const body = [];
+      const number1 = 1;
+      this.statisticalChart1.forEach(s => {
+
+        // @ts-ignore
+        const temp = [s.airlineName, s.quantity];
+        body.push(temp);
+      });
+      doc.setFontSize(25);
+      doc.setTextColor('red');
+      doc.text('Báo cáo top 5 hãng máy bay bán được nhiều vé nhất', 60, 10);
+      doc.text('Công ty C0221G1 vé giá rẻ', 105, 20);
+      doc.setFontSize(20);
+      doc.setTextColor('black');
+      doc.text('Thông tin báo cáo', 15, 30);
+      doc.setFontSize(14);
+      // tslint:disable-next-line:max-line-length
+      doc.text('thời gian : từ ngày: ' + this.startDate1 + ' đến ngày: ' + this.endDate1 , 25, 40);
+      doc.setFontSize(20);
+      // doc.text('Danh sách thuốc', 15, 70);
+      doc.setFontSize(14);
+      autoTable(doc, {
+        styles: {
+          font: 'Calibri Light',
+          fontSize: 14
+        },
+        margin: {top: 50},
+        head,
+        body,
+        didDrawCell: (data) => {
+        },
+      });
+      doc.setTextColor('red');
+      doc.setTextColor('black');
+      doc.text('Đà Nẵng , Ngày......Tháng.......Năm.......', 180, this.statisticalChart1.length * 8.5 + 80);
+      // @ts-ignore
+      doc.text('Người lập phiếu', 200, this.statisticalChart1.length * 8.5 + 90);
+      doc.text('DongHP', 210, this.statisticalChart1.length * 8.5 + 95);
+      doc.text('Hoàng Phạm Đông', 200, this.statisticalChart1.length * 8.5 + 100);
+      doc.save('Báo cáo Top hãng máy bay.pdf');
+    }
   }
 }

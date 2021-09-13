@@ -1,39 +1,45 @@
-.DongHP input[type=date] {
+input[type=date] {
   border: 1px solid;
   border-radius: 4px;
   width: 170px;
   height: 50px;
 }
 
-.DongHP select {
+select {
   border: 1px solid;
   border-radius: 4px;
   width: 170px;
   height: 50px;
 }
 
-.DongHP .bt {
+.bt {
   width: 150px;
   margin-left: 300px;
   margin-top: 20px;
 }
 
-.DongHP .bg1 {
+ .bg1 {
   background-color: white;
-  height: 615px;
+  height: 650px;
 }
 
-.DongHP .w {
-  margin-left: 10px;
+.w1 {
+  margin-left: 20px;
+}
+.w2 {
+  margin-left: 15px;
 }
 
-.DongHP .title {
+.title {
   background-color: #e54744;
   color: white;
 }
 
-.DongHP .bn-search {
+.bn-search {
   background-color: #18AEFF;
+}
+tr{
+  border: 5px solid white;
 }
 
 

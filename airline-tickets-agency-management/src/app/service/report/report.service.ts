@@ -18,11 +18,6 @@ export class ReportService {
 
   constructor(private http: HttpClient) {
   }
-
-  getAll(): Observable<Report[]> {
-    return this.http.get<Report[]>(`${API_URL}/api/reports/get-all`);
-  }
-
   getListStatisticalOneDate1(startDate: string, endDate: string): Observable<Report[]> {
     return this.http.get<Report[]>(`${API_URL}/api/reports/get-statistical-one-date?startDate=` + startDate + '&endDate=' + endDate);
   }
@@ -41,6 +36,12 @@ export class ReportService {
     this.endDate1 = endDate1;
     this.startDate2 = startDate2;
     this.endDate2 = endDate2;
+    this.typeChart = typeChart;
+    this.typeReport = typeReport;
+  }
+  setParameterTop(startDate1: string, endDate1: string, typeChart: string, typeReport: string) {
+    this.startDate1 = startDate1;
+    this.endDate1 = endDate1;
     this.typeChart = typeChart;
     this.typeReport = typeReport;
   }

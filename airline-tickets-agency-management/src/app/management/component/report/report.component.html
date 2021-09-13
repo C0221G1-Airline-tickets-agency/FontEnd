@@ -1,214 +1,177 @@
-<!--<div class="row DongHP">-->
-<!--  <h1 class="d-flex justify-content-center">TẠO BÁO CÁO</h1>-->
-<!--  <div class="bg1">-->
-<!--    <div class="d-flex justify-content-center title">-->
-<!--      <h3>Báo cáo</h3>-->
-<!--    </div>-->
-<!--    <div class="row pl-3">-->
-<!--      <div class="col-8">-->
-<!--        <div class="row my-3">-->
-<!--          <label class="m-3">Chọn kiểu: </label><br>-->
-<!--          <select class="mx-3" >-->
-<!--            <option selected value="">&#45;&#45;chọn&#45;&#45;</option>-->
-<!--            <option value="circle">Hình tròn</option>-->
-<!--            <option value="bar">Hình cột</option>-->
-<!--            <option value="line">Hình đường</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--        <div class="row my-3">-->
-<!--          <label class="m-3">Chọn loại: </label><br>-->
-<!--          <select class="mx-3" formControlName="typeReport" (change)="test($event.target)">-->
-<!--            <option selected value="">&#45;&#45;chọn&#45;&#45;</option>-->
-<!--            <option value="revenue">Doanh thu</option>-->
-<!--            <option value="employee">Top nhân viên</option>-->
-<!--            <option value="airline">Top hãng hàng không</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--            <input type="radio" name="datetime" (click)="chooseDateNow('date')" class="my-4">-->
-<!--           <label class="m-3">Thời gian: </label>-->
-<!--          <select (change)="getTimeNow($event.target)" [disabled]="!isTimeNow">-->
-<!--            <option selected value="">&#45;&#45;chọn&#45;&#45;</option>-->
-<!--            <option value="thisWeek">Tuần này</option>-->
-<!--            <option value="thisMonth">Tháng này</option>-->
-<!--            <option value="thisYear">Năm này</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--            <input type="radio" name="datetime" class="my-4" (click)="chooseDateNow('day')">-->
-<!--          <label class="m-3">Từ ngày:</label>-->
-<!--          <input type="date" class="w" >-->
-<!--          <label class="m-3">Đến ngày:</label>-->
-<!--          <input id="today2" type="date">-->
-<!--        </div>-->
-<!--        <span *ngIf="!hide">-->
-<!--                  <label>So sánh với</label>-->
-<!--                <div class="d-flex">-->
-<!--                  <input type="radio" class="my-4" name="fav_language">-->
-<!--                    <label class="m-3">Thời gian: </label>-->
-<!--                  <select (change)="getLastTime($event.target)">-->
-<!--                    <option selected value="">&#45;&#45;chọn&#45;&#45;</option>-->
-<!--                    <option value="lastWeek">Tuần trước</option>-->
-<!--                    <option value="lastMoth">Tháng trước</option>-->
-<!--                    <option value="lastYear">Năm trước</option>-->
-<!--                  </select>-->
-<!--                </div>-->
-<!--                <div class="d-flex">-->
-<!--                  <input type="radio" name="fav_language" value="JavaScript" class="my-4">-->
-<!--                  <label class="m-3">Từ ngày:</label>-->
-<!--                  <input type="date" class="w">-->
-<!--                  <label class="m-3">Đến ngày:</label>-->
-<!--                  <input id="today" type="date">-->
-<!--                </div>-->
-<!--              </span>-->
-<!--        <button type="button" (click)="search()" class="bt btn bn-search my-5"><i-->
-<!--          class="fa fa-search"-->
-<!--          aria-hidden="true"></i>-->
-<!--          xem-->
-<!--        </button>-->
-<!--      </div>-->
-<!--      <div class="col-4">-->
-<!--        <img src="./assets/img/bieu-do-tron-1024x530.jpg" height="150" width="250"/>-->
-
-<!--        <img src="./assets/img/bieu-do-histogram-1024x482.jpg" height="175" width="250"/>-->
-
-<!--        <img src="./assets/img/chart-line.png" height="175" width="250"/>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 <h1 class="d-flex justify-content-center">TẠO BÁO CÁO</h1>
-<div class="row DongHP">
+<div>
+  <div class="bg1">
+    <div class="d-flex justify-content-center title">
+      <h3>Báo cáo</h3>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <table>
+          <tr>
+            <td style="line-height: 26px">
+              Chọn kiểu:
+            </td>
+            <td>
+              <select name="typeChart" (click)="resetTyChart()" (change)="chooseTypeChart($event.target)">
+                <option selected value="">--Chọn--</option>
+                <option value="circle">Hình tròn</option>
+                <option value="bar">Hình cột</option>
+                <option value="line">Hình đường</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <small style="color: red">{{msgTyChart}}</small>
+            </td>
+          </tr>
+          <tr>
+            <td style="line-height: 26px">
+              Chọn loại:
+            </td>
+            <td>
+              <select (change)="chooseTypeReport($event.target)" (click)="resetTypeReport()">
+                <option selected value="">--Chọn--</option>
+                <option value="revenue">Doanh thu</option>
+                <option value="employee">Top nhân viên</option>
+                <option value="airline">Top hãng hàng không</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <small style="color: red">{{msgTyReport}}</small>
+            </td>
+          </tr>
+          <tr>
+            <td style="line-height: 26px">
+              <input type="radio" name="datetime" class="mt-4" (change)="chooseDateNow1('date1')" (click)="resetSetTime1()">
+                Thời gian:
+            </td>
+            <td>
+              <select [disabled]="!isDateNow1" (change)="chooseTime1($event.target)" (click)="resetTimeNow()">
+                <option selected>--Chọn--</option>
+                <!--            <option value="thisWeek">Tuần này</option>-->
+                <option value="thisMonth">Tháng này</option>
+                <option value="thisYear">Năm này</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <small style="color: red">{{msgChooseTimeNow}}</small>
+            </td>
+          </tr>
+          <tr>
+            <td style="line-height: 26px">
+              <input type="radio" name="datetime" class="mt-3" (change)="chooseDateNow1('time1')"
+                     (click)="resetChooseTimeNow1()">
+              Từ ngày:
+            </td>
+            <td>
+              <input type="date" (click)="resetStartDate1()" [disabled]="!isTimeNow1"
+                     [(ngModel)]="setStartDate1" name="startDate1">
+            </td>
+            <td>
+              <label class="pl-3 mt-3">Đến ngày: </label>
+            </td>
+            <td>
+              <input type="date" (click)="resetEndDate1()" [disabled]="!isTimeNow1" name="endDate1"
+                     [(ngModel)]="setEndDate1">
+            </td>
+          </tr>
+          <td>
 
-  <div>
-    <div class="bg1">
-      <div class="d-flex justify-content-center title">
-        <h3>Báo cáo</h3>
+          </td>
+          <tr>
+            <td></td>
+            <td colspan="2">
+              <small style="color: red">{{msgSetStartDate1}}</small>
+              <small style="color: red">{{msgStartDateLEndDate1}}</small>
+              <small style="color: red">{{msgStartDateLDateNow1}}</small>
+            </td>
+            <td colspan="2">
+              <small style="color: red">{{msgEndDateLDateNow1}}</small>
+              <small style="color: red">{{msgSetEndDate1}}</small>
+            </td>
+          </tr>
+          <tr *ngIf="!hide">So sánh với</tr>
+          <tr *ngIf="!hide">
+            <td style="line-height: 26px">
+             <input type="radio" name="fav_language" class="mt-4" (change)="chooseDateNow2('date2')"
+                    (click)="resetSetTime2()">
+              Thời gian:
+            </td>
+            <td>
+             <select [disabled]="!isDateNow2" (change)="chooseTime2($event.target)" (click)="resetChooseLastTime()">
+              <option selected> --chọn-- </option>
+               <!--              <option value="lastWeek">Tuần trước</option>-->
+              <option value="lastMonth">Tháng trước</option>
+              <option value="lastYear">Năm trước</option>
+            </select>
+            </td>
+          </tr>
+          <tr *ngIf="!hide">
+            <td></td>
+            <td>
+              <small style="color: red">{{msgChooseLastTime}}</small>
+            </td>
+          </tr>
+          <tr *ngIf="!hide">
+            <td style="line-height: 26px">
+              <input type="radio" name="fav_language" value="JavaScript" (change)="chooseDateNow2('time2')"
+                     (click)="resetChooseLastTime()">
+              Từ ngày:
+            </td>
+            <td>
+              <input type="date" [disabled]="!isTimeNow2" name="startDate2" [(ngModel)]="setStartDate2"
+                     (click)="resetStartDate2()">
+            </td>
+            <td>
+              <label class="pl-3 mt-3">Đến ngày: </label>
+            </td>
+            <td>
+              <input type="date" [disabled]="!isTimeNow2" name="endDate2" [(ngModel)]="setEndDate2"
+                     (click)="resetEndDate2()">
+            </td>
+          </tr>
+          <td>
+
+          </td>
+          <tr *ngIf="!hide">
+            <td></td>
+            <td colspan="3">
+              <small style="color: red">{{msgSetStartDate2}}</small>
+              <small style="color: red">{{msgStartDateLEndDate2}}</small>
+              <small style="color: red">{{msgStartDateLDateNow2}}</small>
+            </td>
+            <td></td>
+            <td colspan="3">
+              <small style="color: red">{{msgEndDateLDateNow2}}</small>
+              <small style="color: red">{{msgSetEndDate2}}</small>
+            </td>
+          </tr>
+          <tr *ngIf="!hide">
+            <td>
+            </td>
+            <td colspan="3"> <small style="color: red">{{msgChooseTypeTime}}</small></td>
+          </tr>
+        </table>
+        <button type="button" (click)="search()" class="bt btn bn-search my-5"><i
+          class="fa fa-search"
+          aria-hidden="true"></i>
+          xem
+        </button>
       </div>
-      <div class="main">
-        <div class="row ml-2">
-          <div class="col-8 ">
-            <form [formGroup]="reportFrom" (ngSubmit)="search()">
-              <div class="d-flex my-3">
-                <label class="m-3">Chọn kiểu: </label><br>
-                <select class="mx-3" formControlName="typeChart">
-                  <option selected value="">--chọn--</option>
-                  <option value="circle">Hình tròn</option>
-                  <option value="bar">Hình cột</option>
-                  <option value="line">Hình đường</option>
-                </select>
-              </div>
-              <div style="color:red;" *ngFor="let validate of validate_message.typeChart">
-                <div
-                  *ngIf="reportFrom.get('typeChart')?.hasError(validate.type) && reportFrom.get('typeChart')?.touched">
-                  <small>{{validate.message}}</small></div>
-              </div>
-              <div class="d-flex my-3">
-                <label class="m-3">Chọn loại: </label><br>
-                <select class="mx-3" formControlName="typeReport" (change)="test($event.target)">
-                  <option selected value="">--chọn--</option>
-                  <option value="revenue">Doanh thu</option>
-                  <option value="employee">Top nhân viên</option>
-                  <option value="airline">Top hãng hàng không</option>
-                </select>
-              </div>
-              <div style="color:red;" *ngFor="let validate of validate_message.typeReport">
-                <div
-                  *ngIf="reportFrom.get('typeReport')?.hasError(validate.type) && reportFrom.get('typeReport')?.touched">
-                  <small>{{validate.message}}</small></div>
-              </div>
-<!--              <div class="d-flex">-->
-<!--                  <input type="radio" name="datetime" class="my-4">-->
-<!--                 <label class="m-3">Thời gian: </label>-->
-<!--                <select (change)="getTimeNow($event.target)" [disabled]="!isDateNow">-->
-<!--                  <option selected value="">&#45;&#45;chọn&#45;&#45;</option>-->
-<!--                  <option value="thisWeek">Tuần này</option>-->
-<!--                  <option value="thisMonth">Tháng này</option>-->
-<!--                  <option value="thisYear">Năm này</option>-->
-<!--                </select>-->
-<!--              </div>-->
-              <div class="d-flex">
-                  <input type="radio" name="datetime" class="my-4">
-                <label class="m-3">Từ ngày:</label>
-                <input type="date" class="w" formControlName="startDate1">
-                <label class="m-3">Đến ngày:</label>
-                <input id="today2" type="date" formControlName="endDate1">
-              </div>
-              <div style="color:red;" *ngFor="let validate of validate_message.startDate">
-                <div
-                  *ngIf="reportFrom.get('startDate1')?.hasError(validate.type) && reportFrom.get('startDate1')?.touched">
-                  <small>{{validate.message}}</small></div>
-              </div>
-              <div style="color:red;" *ngFor="let validate of validate_message.endDate">
-                <div
-                  *ngIf="reportFrom.get('endDate1')?.hasError(validate.type) && reportFrom.get('endDate1')?.touched">
-                  <small>{{validate.message}}</small></div>
-              </div>
+      <div class="col-4">
+        <img src="./assets/img/bieu-do-tron-1024x530.jpg" height="130" width="250"/>
 
-              <div style="color:red;" *ngIf="reportFrom.hasError('validDate1')">
-                <small>* Vui lòng không nhập từ ngày lớn hơn đến ngày</small>
-              </div>
-              <div style="color:red;" *ngIf="reportFrom.hasError('validDateStartNow1')">
-                <small>* Vui lòng không nhập ngày lớn hơn ngày hiện tại</small>
-              </div>
-              <div style="color:red;" *ngIf="reportFrom.hasError('validDateEndNow1')">
-                <small>* Vui lòng không nhập ngày lớn hơn ngày hiện tại</small>
-              </div>
+        <img src="./assets/img/bieu-do-histogram-1024x482.jpg" height="175" width="250"/>
 
-              <span *ngIf="!hide">
-                  <label>So sánh với</label>
-<!--                <div class="d-flex">-->
-<!--                  <input type="radio" class="my-4" name="fav_language">-->
-<!--                    <label class="m-3">Thời gian: </label>-->
-<!--                  <select>-->
-<!--                    <option selected value="">&#45;&#45;chọn&#45;&#45;</option>-->
-<!--                    <option value="lastWeek">Tuần trước</option>-->
-<!--                    <option value="lastMoth">Tháng trước</option>-->
-<!--                    <option value="lastYear">Năm trước</option>-->
-<!--                  </select>-->
-<!--                </div>-->
-                <div class="d-flex">
-                  <input type="radio" name="fav_language" value="JavaScript" class="my-4">
-                  <label class="m-3">Từ ngày:</label>
-                  <input type="date" class="w" formControlName="startDate2">
-                  <label class="m-3">Đến ngày:</label>
-                  <input id="today" type="date" formControlName="endDate2">
-                </div>
-                  <div style="color:red;" *ngFor="let validate of validate_message.startDate">
-                <div
-                  *ngIf="reportFrom.get('startDate2')?.hasError(validate.type) && reportFrom.get('startDate2')?.touched"><small>{{validate.message}}</small></div>
-              </div>
-                  <div style="color:red;" *ngFor="let validate of validate_message.endDate">
-                <div
-                  *ngIf="reportFrom.get('endDate2')?.hasError(validate.type) && reportFrom.get('endDate2')?.touched"><small>{{validate.message}}</small></div>
-              </div>
-
-                <div style="color:red;" *ngIf="reportFrom.hasError('validDate2')">
-                <small>* Vui lòng nhập từ ngày không lớn hơn đến ngày</small>
-              </div>
-              <div style="color:red;" *ngIf="reportFrom.hasError('validDateStartNow2')">
-                <small>* Vui lòng nhập ngày không lớn hơn ngày hiện tại</small>
-              </div>
-              <div style="color:red;" *ngIf="reportFrom.hasError('validDateEndNow2')">
-                <small>*Vui lòng không nhập ngày lớn hơn hiện tại</small>
-              </div>
-
-              </span>
-              <button type="button" (click)="search()" class="bt btn bn-search my-5"><i
-                class="fa fa-search"
-                aria-hidden="true"></i>
-                xem
-              </button>
-            </form>
-          </div>
-          <div class="col-4">
-            <img src="./assets/img/bieu-do-tron-1024x530.jpg" height="150" width="250"/>
-
-            <img src="./assets/img/bieu-do-histogram-1024x482.jpg" height="175" width="250"/>
-
-            <img src="./assets/img/chart-line.png" height="175" width="250"/>
-          </div>
-        </div>
+        <img src="./assets/img/chart-line.png" height="175" width="250"/>
       </div>
     </div>
   </div>

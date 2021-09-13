@@ -14,13 +14,17 @@
 }
 .w {
   width: 850px;
-  height: 500px;
+  height: 400px;
 }
 .wLine {
   width: 850px;
-  height: 500px;
+  height: 550px;
 }
 .withCircle {
   width: 550px;
   height: 400px;
+}
+.bg1 {
+  background-color: white;
+  height: 715px;
 }
