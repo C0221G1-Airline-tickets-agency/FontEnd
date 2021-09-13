@@ -1,153 +1,10 @@
-:root {
-  --navbar-hidden: rgba(44, 62, 80, 0.9);
-  --text-color: #fff;
-}
-
-/*#region HEADER*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-header .checkBtn {
-  font-size: 25px;
-  color: var(--text-color);
-  float: right;
-  line-height: 80px;
-  margin-right: 40px;
-  cursor: pointer;
-  display: none;
-}
-
-header #check {
-  display: none;
-}
-
-@media (max-width: 1090px) {
-  label.logo1 {
-    width: 200px;
-    padding-left: 0;
-  }
-  label.logo1 {
-    display: inline;
-  }
-  label.logo {
-    display: none;
-  }
-}
-
-
-  header .checkBtn {
-    display: block;
-  }
-
-  header ul li {
-    display: block;
-    margin: 10px 0;
-    line-height: 30px;
-  }
-
-  header ul li a {
-    font-size: 15px;
-  }
-
-  header li a:hover {
-    background: none;
-  }
-
-  header #check:checked ~ ul {
-    left: 0;
-  }
-
-
-.carousel {
-  width: 100%;
-  height: calc(100vh - 80px);
-  margin-top: 80px;
-  clear: left;
-}
-
-/*#endregion*/
-
-/*#region MY-CART*/
-.my-card {
-  width: 100%;
-  height: 40%;
-  margin-top: 20px;
-  position: relative;
-}
-
-.my-card img {
-  width: 100%;
-  height: 100%;
-  padding-left: 20px;
-}
-
-.my-card .my-card-title {/* <<<<<<<<<<<<<<<<<<<<< */
-  color: white;
-  font-size: 20px;
-  padding-left: 10px;
-  padding-right: 20px;
-  background: red;
-  display: inline;
-  border-radius: 2px;
-  position: relative;
-  top: -10px;
-}
-
-.my-card .my-card-title-3 {
-  width: 59px;
-  height: 59px;
-  padding-left: 20px;
-  position: absolute;
-  top: 0px;
-  left: -38px;
-}
-
-.my-card .my-card-title-2 {
-  width: 100px;
-  height: 20px;
-  padding-left: 20px;
-  position: absolute;
-  top: -1px;
-  right: 0px;
-}
-.my-card-titles {
-  position: absolute;
-  top: -1.5px;
-  left: 0px;
-}
-.my-card .my-card-title-1 img {
-  width: 100%;
-  height: 100%;
-  padding-left: 20px;
-  border-radius: 4px;
-}
-/*#endregion*/
-
-/*#region PLANE-TICKET*/
-.carousel .plane-ticket {
+.plane-ticket {
   width: 380px;
   height: 400px;
   padding-top: 30px;
   background: rgba(255, 56, 53, 0.81);
   position: absolute;
-  top: -165%;
+  top: 110px;
   right: 10%;
   border-radius: 10px;
   box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.2);
@@ -155,7 +12,7 @@ header #check {
 }
 
 /*Edit input*/
-.carousel .plane-ticket input {
+.plane-ticket input {
   margin: 10px 0 0 18px;
   width: 90%;
   height: 48px;
@@ -164,19 +21,19 @@ header #check {
   background: white;
 }
 
-.carousel .plane-ticket .ticket-input-left,
-.carousel .plane-ticket .ticket-input-right {
+.plane-ticket .ticket-input-left,
+.plane-ticket .ticket-input-right {
   position: relative;
 }
 
-.carousel .plane-ticket .ticket-input-left .ticket-icon {
+.plane-ticket .ticket-input-left .ticket-icon {
   font-size: 20px;
   position: absolute;
   top: 20px;
   left: 30px;
 }
 
-.carousel .plane-ticket .ticket-title {
+.plane-ticket .ticket-title {
   color: #7C848B;
   font-size: 12px;
   position: absolute;
@@ -184,15 +41,15 @@ header #check {
   left: 55px;
 }
 
-.carousel .plane-ticket .ticket-normal {
+.plane-ticket .ticket-normal {
   padding-top: 15px;
 }
 
-.carousel .plane-ticket input.ticket-normal {
+.plane-ticket input.ticket-normal {
   border-radius: 5px;
 }
 
-.carousel .plane-ticket .ticket-input-left input {
+.plane-ticket .ticket-input-left input {
   width: 100%;
   padding-left: 32px;
   border-radius: unset;
@@ -200,25 +57,25 @@ header #check {
   border-bottom-left-radius: 5px;
 }
 
-.carousel .plane-ticket .ticket-input-right input {
+.plane-ticket .ticket-input-right input {
   width: 80%;
   border-radius: unset;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
-.carousel .plane-ticket .ticket-radio input {
+.plane-ticket .ticket-radio input {
   margin-top: 20px;
   width: 17px;
   height: 17px;
 }
 
 /*CHOOSE Passenger*/
-.carousel .plane-ticket .ticket-element {
+.plane-ticket .ticket-element {
   position: relative;
 }
 
-.carousel .plane-ticket .showHidden {
+.plane-ticket .showHidden {
   width: 350px;
   height: 270px;
   border-radius: 5px;
@@ -229,55 +86,70 @@ header #check {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
 }
 
-.carousel .plane-ticket .col:last-child {
+.plane-ticket .col:last-child {
   font-size: 25px;
   padding-right: 50px;
   text-align: end;
 }
 
-.carousel .plane-ticket table td a {
+.plane-ticket table td a {
   color: black;
 }
 
-.carousel .plane-ticket table td:first-child {
+.plane-ticket table td:first-child {
   padding-left: 30px;
 }
 
-.carousel .plane-ticket table td:last-child {
+.plane-ticket table td:last-child {
   font-weight: bold;
 }
 
 /*button Tìm chuyến bay*/
-.carousel .plane-ticket .findPlan {
+.plane-ticket .findPlan {
   position: absolute;
   bottom: 45px;
   left: 120px;
   z-index: -100;
 }
-
+.choose-location:hover {
+  background: #e3e3e3;
+}
 /*#endregion*/
 
 /*#region Top 10 cheapest flights*/
-
-
-.flights-10 .flight {
-  margin: 0 1%;
-  width: 150px;
-  height: 170px;
-  display: inline-block;
+.flights-10 {
+  height: auto;
+  /*background:  #f3b4ad;*/
+  /*background: linear-gradient( #f3b4ad, #EF9A9A);*/
 }
 
-.flights-10 .flight .flight-content {
+.flights-10 .flight {
+  margin: 0;
+  width: 20%;
+  height: 180px;
+  text-align: center;
+  display: inline-block;
   position: relative;
 }
 
 .flights-10 .flight .flight-content .flight-center {
   font-weight: 500;
   position: absolute;
-  top: 10px;
-  left: 45px;
+  top: 43px;
+  left: 38%;
+}
+.flight:hover {
+  margin: 10px 0;
+  background: rgba(57, 57, 57, 0.5);
+  color: white;
 }
 
+.flight:hover .location {
+  color: white;
+}
+.flight:hover img {
+  filter: drop-shadow(0 0 8px yellow);
+}
 /*#endregion*/
 
 /*#region SCROLL*/
@@ -309,6 +181,7 @@ header #check {
 
 
 .outer th {
+
   text-align: left;
   top: 0;
   position: sticky;
@@ -316,36 +189,71 @@ header #check {
 }
 
 /*#endregion*/
+@media (max-width: 1005px) {
+  .flights-10 .flight {
+    width: 25%;
+  }
+
+  .flights-10 .flight .flight-content .flight-center {
+    left: 33%;
+  }
+}
+
+@media (max-width: 775px) {
+  .flights-10 .flight {
+    width: 33.33%;
+  }
+
+  .flights-10 .flight .flight-content .flight-center {
+    left: 35%;
+  }
+}
+
+@media (max-width: 550px) {
+  .carousel-indicators {
+    margin-bottom: 10px !important;
+  }
+  .plane-ticket {
+    height: 300px!important;
+  }
+  .plane-ticket h4 {
+    margin-bottom: -10px;
+  }
+  .plane-ticket .findPlan {
+    top: 15px!important;
+  }
+  .flights-10 .flight {
+    width: 50%;
+  }
+
+  .flights-10 .flight .flight-content .flight-center {
+    left: 40%;
+  }
+}
 
 @media (max-width: 930px) {
-  .carousel {
+  .home-content {
     position: relative;
     height: 100%;
   }
 
-  .carousel-indicators {
-    position: absolute;
-    top: 80%;
-    left: 0;
-  }
 
-  .carousel .plane-ticket {
+  .plane-ticket {
     width: 100%;
-    padding: 0 20%;
-    padding-top: 30px;
+    padding: 0 20% 30px;
     position: unset;
     float: left;
     clear: left;
     z-index: 200;
   }
 
-  .carousel .plane-ticket .showHidden {
+  .plane-ticket .showHidden {
     margin-left: 18px;
     bottom: 0px;
     left: 0px;
   }
 
-  .carousel .plane-ticket .findPlan {
+  .plane-ticket .findPlan {
     position: relative;
     top: 25px;
     left: 30%;
@@ -354,82 +262,65 @@ header #check {
 
   .flights-10 .flight {
     box-sizing: border-box;
-    /*width: 20%;*/
-    /*height: 20%;*/
   }
 }
 
-
-
-/*#region FOOTER*/
-.footer {
+/*#region MY-CART*/
+.my-card {
   width: 100%;
-  padding: 20px 6%;
-  color: black;
-  font-weight: bold;
+  height: 40%;
+  margin-top: 20px;
   position: relative;
-  bottom: 0;
 }
 
-.footer .column:first-child img {
-  width: 26px;
-  height: 26px;
+.my-card img {
+  width: 100%;
+  height: 100%;
+  padding-left: 20px;
 }
 
-.footer .column:nth-child(3) img {
-  width: 101px;
-  height: 31px;
-
-}
-
-.footer .column:nth-child(3) img:first-child {
-  width: 43px;
-  height: 38px;
-
-}
-
-.footer .column:nth-child(4) img {
-  width: 112px;
-  height: 43px;
-
-}
-.btn-delete{
-  background-color: #dc3545;
-}
-
-.btn-edit {
-  background-color: #F58317;
+.my-card .my-card-title {/* <<<<<<<<<<<<<<<<<<<<< */
   color: white;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 20px;
+  background: red;
+  display: inline;
+  border-radius: 2px;
+  position: relative;
 }
 
-.btn{
-  min-width: 90px !important;
+.my-card .my-card-title-3 {
+  width: 59px;
+  height: 59px;
+  padding-left: 20px;
+  position: absolute;
+  top: 2px;
+  left: -38px;
 }
 
-.btn-search {
-  background-color: #18AEFF;
-  color: white;
+.my-card .my-card-title-2 {
+  width: 100px;
+  height: 20px;
+  padding-left: 20px;
+  position: absolute;
+  top: 0;
+  right: -1px;
 }
-
-.btn-print {
-  background-color: #F58317;
-  color: white;
+.my-card-titles {
+  position: absolute;
+  top: -1.5px;
+  left: 0px;
 }
-.btn-return{
-  background-color: #0062D2;
-  color: white;
-}
-
-.btn:hover{
-  color: black;
-}
-.my-card-title-1:hover {
-  color: #c82333;
+.my-card .my-card-title-1 img {
+  width: 100%;
+  height: 100%;
+  padding-left: 20px;
+  border-radius: 4px;
 }
 .buttonDeleteEdit{
   position: absolute;
   top: 0px;
-  right: -30px;
+  right: 0px;
 
 }
-

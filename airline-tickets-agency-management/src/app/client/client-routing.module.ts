@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {NewsManipulationComponent} from './component/news/news-manipulation/news-manipulation.component';
 import {ManagementComponent} from '../management/management/management.component';
 import {ReportComponent} from '../management/component/report/report.component';
@@ -7,7 +7,7 @@ import {ClientComponent} from './client/client.component';
 import {HomeComponent} from './component/home/home.component';
 import {DestinationDetailComponent} from './component/destination-detail/destination-detail.component';
 
-
+import {TestComponent} from './component/test/test.component';
 
 
 const routes: Routes = [
@@ -32,4 +32,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ClientRoutingModule { }
+export class ClientRoutingModule {
+}
