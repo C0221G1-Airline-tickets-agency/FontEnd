@@ -22,7 +22,7 @@ export class AdminInfoComponent implements OnInit {
   isAdmin = false;
 
   ngOnInit(): void {
-    this.getAdminById(3);
+    this.getAdminById(1);
   }
 
   getAdminById(id: number) {

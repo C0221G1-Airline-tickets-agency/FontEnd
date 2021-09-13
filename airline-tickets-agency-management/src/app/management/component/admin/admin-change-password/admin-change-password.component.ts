@@ -83,7 +83,6 @@ export class AdminChangePasswordComponent implements OnInit {
           }
         }
       }
-
     }
   }
   checkValidate(a: string) {
