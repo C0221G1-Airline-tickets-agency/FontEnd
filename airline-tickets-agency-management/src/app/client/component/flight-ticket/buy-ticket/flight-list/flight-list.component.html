@@ -1,21 +1,21 @@
-<div class="container-fluid">
+<div class="container-fluid" style="min-height: 800px">
   <div class="row">
     <div class="col-lg-8 col-xs-12 mt-3">
       <div class="col-lg-12 d-flex justify-content-end">
         <div class="flight-list w-100" *ngIf="searched">
           <div class="flight-list-go">
-            <div class="departure-summary pl-3">
+            <div class="departure-summary pt-1 pl-3">
               <h5>{{locationFromSearch.cityName}} ({{locationFromSearch.areaCode}}) <i
                 class="fa fa-fighter-jet"></i> {{locationToSearch.cityName}} ({{locationToSearch.areaCode}})</h5>
               <p class="text-grey">{{weekdaysGo[3]}} - Ngày {{datesGo[3] | date:'dd/MM/yyyy'}}</p>
             </div>
             <div class="days mt-3">
               <div class="btn-group d-flex align-items-center" role="group" aria-label="Basic example">
-                <button type="button" class="btn text-grey" (click)="changeDayGo(0)">{{weekdaysGo[0]}}
+                <button type="button" class="btn text-grey" (click)="changeDayGo(0)" [disabled]="datesGo[0] <= currentDate.getTime()" >{{weekdaysGo[0]}}
                   <br> {{ datesGo[0] | date:'dd/MM/yyyy'}}</button>
-                <button type="button" class="btn text-grey" (click)="changeDayGo(1)">{{weekdaysGo[1]}}
+                <button type="button" class="btn text-grey" (click)="changeDayGo(1)" [disabled]="datesGo[1] <= currentDate.getTime()">{{weekdaysGo[1]}}
                   <br> {{ datesGo[1] | date:'dd/MM/yyyy'}}</button>
-                <button type="button" class="btn text-grey" (click)="changeDayGo(2)">{{weekdaysGo[2]}}
+                <button type="button" class="btn text-grey" (click)="changeDayGo(2)" [disabled]="datesGo[3] <= currentDate.getTime()">{{weekdaysGo[2]}}
                   <br> {{ datesGo[2] | date:'dd/MM/yyyy'}}</button>
                 <button type="button" class="btn date-chosen" (click)="changeDayGo(3)">{{weekdaysGo[3]}}
                   <br> {{datesGo[3] | date:'dd/MM/yyyy' }}</button>
@@ -50,15 +50,18 @@
                   <td class="d-flex justify-content-around" style="border: hidden">
                     <button class="btn-detail" (click)="ticketDetail(flight.ticketId)">Chi tiết</button>
                   </td>
-                  <td><input type="radio"></td>
+                  <td>
+                  <button style="border-radius: 50%; height: 15px; width: 15px" [ngStyle]="{'background-image': flight.ticketId == ticketGoId ? chosenGo:''}" (click)="changeTicketGo(flight.ticketId)"></button>
+                  </td>
                 </tr>
                 <tr *ngIf="flight.ticketId == ticketDetailId && clickedButtonDetail">
                   <td colspan="6">
                     <div class="d-block">
                       <div class="d-flex align-items-center">
                         <p style="color: #F58317" class="mr-2"><i class="fa fa-plane"></i></p>
-                        <p class="mr-2">Số hiệu chuyến bay: </p><p
-                        style="color: #dc3545">{{flight.flightCode}}</p>
+                        <p class="mr-2">Số hiệu chuyến bay: </p>
+                        <p
+                          style="color: #dc3545">{{flight.flightCode}}</p>
                       </div>
                       <div class="d-flex align-items-center">
                         <span style="color: #dc3545" class="mr-2"><i class="fa fa-play-circle"></i></span>
@@ -81,6 +84,14 @@
                       <div class="d-flex align-items-center">
                         <p>{{locationTo.cityName}} - Sân bay {{locationTo.airportName}}</p>
                       </div>
+                      <div class="d-flex align-items-center">
+                        <span style="color: #F58317" class="mr-2"><i class="fa fa-check-circle-o"></i></span>
+                        <span>{{flight.ticketType}} - Vé {{flight.passengerType}}</span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2">Được khai thác bởi {{flight.airlineName}} </span>
+                        <img src="{{flight.logo}}">
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -99,20 +110,23 @@
                 <small class="text-grey pb-3">Vui lòng chọn ngày bay hoặc hãng bay khác</small>
               </div>
             </div>
+            <div class="mt-5 mb-3 d-flex justify-content-end">
+              <button class="btn-confirm" (click)="buyTicketGo()">Xác nhận</button>
+            </div>
           </div>
           <div class="flight-list-return" *ngIf="isTwoWay">
-            <div class="departure-summary pl-3">
+            <div class="departure-summary pt-1 pl-3">
               <h5>{{locationToSearch.cityName}} ({{locationToSearch.areaCode}}) <i
                 class="fa fa-fighter-jet"></i> {{locationFromSearch.cityName}} ({{locationFromSearch.areaCode}})</h5>
-              <p class="text-grey">{{weekdays[3]}} - Ngày {{datesReturn[3] | date:'dd/MM/yyyy'}}</p>
+              <p class="text-grey">{{weekdaysGo[3]}} - Ngày {{datesReturn[3] | date:'dd/MM/yyyy'}}</p>
             </div>
             <div class="days mt-3">
               <div class="btn-group d-flex align-items-center" role="group" aria-label="Basic example">
-                <button type="button" class="btn text-grey" (click)="changeDayReturn(0)">{{weekdaysReturn[0]}}
+                <button type="button" class="btn text-grey" (click)="changeDayReturn(0)" [disabled]="datesReturn[0] <= currentDate.getTime()">{{weekdaysReturn[0]}}
                   <br> {{ datesReturn[0] | date:'dd/MM/yyyy'}}</button>
-                <button type="button" class="btn text-grey" (click)="changeDayReturn(1)">{{weekdaysReturn[1]}}
+                <button type="button" class="btn text-grey" (click)="changeDayReturn(1)" [disabled]="datesReturn[1] <= currentDate.getTime()">{{weekdaysReturn[1]}}
                   <br> {{ datesReturn[1] | date:'dd/MM/yyyy'}}</button>
-                <button type="button" class="btn text-grey" (click)="changeDayReturn(2)">{{weekdaysReturn[2]}}
+                <button type="button" class="btn text-grey" (click)="changeDayReturn(2)" [disabled]="datesReturn[2] <= currentDate.getTime()">{{weekdaysReturn[2]}}
                   <br> {{ datesReturn[2] | date:'dd/MM/yyyy'}}</button>
                 <button type="button" class="btn date-chosen" (click)="changeDayReturn(3)">{{weekdaysReturn[3]}}
                   <br> {{datesReturn[3] | date:'dd/MM/yyyy' }}</button>
@@ -137,7 +151,7 @@
                   <th>Đặt vé</th>
                 </tr>
                 </thead>
-                <tbody  *ngFor="let flight of flightReturnList">
+                <tbody *ngFor="let flight of flightReturnList">
                 <tr>
                   <td style="text-align: left; padding-left: 20px"><img src="{{flight.logo}}">
                     {{flight.airlineName}}
@@ -148,15 +162,17 @@
                   <td class="d-flex justify-content-around" style="border: hidden">
                     <button class="btn-detail" (click)="ticketDetail(flight.ticketId)">Chi tiết</button>
                   </td>
-                  <td><input type="radio"></td>
+                  <td><button style="border-radius: 50%; height: 15px; width: 15px" [ngStyle]="{'background-image': flight.ticketId == ticketReturnId ? chosenReturn:''}" (click)="changeTicketReturn(flight.ticketId)"></button>
+                  </td>
                 </tr>
                 <tr *ngIf="flight.ticketId == ticketDetailId && clickedButtonDetail">
                   <td colspan="6">
                     <div class="d-block">
                       <div class="d-flex align-items-center">
                         <p style="color: #F58317" class="mr-2"><i class="fa fa-plane"></i></p>
-                        <p class="mr-2">Số hiệu chuyến bay: </p><p
-                        style="color: #dc3545">{{flight.flightCode}}</p>
+                        <p class="mr-2">Số hiệu chuyến bay: </p>
+                        <p
+                          style="color: #dc3545">{{flight.flightCode}}</p>
                       </div>
                       <div class="d-flex align-items-center">
                         <span style="color: #dc3545" class="mr-2"><i class="fa fa-play-circle"></i></span>
@@ -179,6 +195,14 @@
                       <div class="d-flex align-items-center">
                         <p>{{locationFrom.cityName}} - Sân bay {{locationFrom.airportName}}</p>
                       </div>
+                      <div class="d-flex align-items-center">
+                        <span style="color: #F58317" class="mr-2"><i class="fa fa-check-circle-o"></i></span>
+                        <span>{{flight.ticketType}} - Vé {{flight.passengerType}}</span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2">Được khai thác bởi {{flight.airlineName}} </span>
+                        <img src="{{flight.logo}}">
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -197,9 +221,9 @@
                 <small class="text-grey pb-3">Vui lòng chọn ngày bay hoặc hãng bay khác</small>
               </div>
             </div>
-          </div>
-          <div class="mt-5 mb-3 d-flex justify-content-end">
-            <button class="btn-confirm">Xác nhận</button>
+            <div class="mt-5 mb-3 d-flex justify-content-end">
+              <button class="btn-confirm" (click)="buyTicketReturn()">Xác nhận</button>
+            </div>
           </div>
         </div>
       </div>
@@ -275,7 +299,8 @@
               <div class="row pt-1">
                 <div class="col-12 mx-3">
                   Ngày đi:
-                  <input type="date" class="form-control mx-0" [min]="flightDate" [(ngModel)]="flightDate ">
+                  <input type="date" class="form-control mx-0" min="{{currentDate | date: 'yyyy-MM-dd'}}"
+                         [(ngModel)]="flightDate ">
                 </div>
                 <div class="col-12 mx-3 {{isTwoWay? 'd-block': 'd-none'}}">
                   Ngày về:

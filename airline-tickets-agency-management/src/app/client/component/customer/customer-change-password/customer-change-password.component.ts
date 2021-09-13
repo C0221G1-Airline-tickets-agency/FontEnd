@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Password} from '../../../../model/password';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from "../../../../model/user";
-import {UserService} from "../../../../service/user/user.service";
+import {CustomerService} from "../../../../service/customer/customer.service";
 import {comparePassword} from "./comparePassword";
 import {ToastrService} from 'ngx-toastr';
 
@@ -22,7 +22,7 @@ export class CustomerChangePasswordComponent implements OnInit {
     newPassword: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,20}$')]),
     confirmPassword: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,20}$')])
   }, comparePassword);
-  constructor(private customerService: UserService,
+  constructor(private customerService: CustomerService,
               private toast: ToastrService) {
   }
   ngOnInit(): void {
@@ -59,6 +59,7 @@ export class CustomerChangePasswordComponent implements OnInit {
                 this.customerService.updatePassword(this.id, this.password).subscribe(data => {
                   this.toast.success(data.msg, 'Chú ý !');
                   console.log(data);
+                  window.location.href = 'http://localhost:4200/';
                 }, error => {
                   this.toast.warning(error.error.msg, 'Chú ý !');
                   console.log(error);

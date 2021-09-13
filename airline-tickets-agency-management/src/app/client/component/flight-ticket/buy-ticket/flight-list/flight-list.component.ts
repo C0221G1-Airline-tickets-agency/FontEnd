@@ -30,6 +30,7 @@ export class FlightListComponent implements OnInit {
   locationToCity = '';
   locationFrom: Location;
   locationFromCity = '';
+  currentDate = new Date();
   flightDate;
   returnDate;
   adults = 0;
@@ -52,6 +53,12 @@ export class FlightListComponent implements OnInit {
   // Ticket detail
   ticketDetailId: number;
   clickedButtonDetail = false;
+  // buy ticket
+  chosenGo = '';
+  chosenReturn = '';
+  chosenTicket = false;
+  ticketGoId = '';
+  ticketReturnId = '';
   // Chức năng
   locationList: Location[];
 
@@ -61,7 +68,9 @@ export class FlightListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentDate = new Date()
     this.getAllLocations();
+
   }
   getDay(day) {
     const y = 24 * 60 * 60 * 1000;
@@ -186,9 +195,7 @@ export class FlightListComponent implements OnInit {
 
 //#region GET QUANTITY PASSENGER
   addPassenger(passenger: string) {
-    if (this.adults >= 9 && passenger === 'adults' ||
-      this.children >= this.adults && passenger === 'children' ||
-      this.baby >= this.adults && passenger === 'baby') {
+    if (this.adults >= 9 && passenger === 'adults') {
       return;
     }
     switch (passenger) {
@@ -209,19 +216,13 @@ export class FlightListComponent implements OnInit {
   subPassenger(passenger: string) {
     console.log(passenger);
     console.log(this.adults);
-    if (this.adults <= 1 && passenger === 'adults' ||
+    if (this.adults <= 0 && passenger === 'adults' ||
       this.children <= 0 && passenger === 'children' ||
       this.baby <= 0 && passenger === 'baby') {
       return;
     }
     switch (passenger) {
       case 'adults':
-        if (this.adults === this.children) {
-          this.children--;
-        }
-        if (this.adults === this.baby) {
-          this.baby--;
-        }
         this.adults--;
         break;
       case 'children':
@@ -240,9 +241,29 @@ export class FlightListComponent implements OnInit {
   changeOrderBy(orderBy) {
     this.orderBy = orderBy;
   }
+  changeTicketGo(id) {
+    if (this.ticketGoId == id) {
+      this.ticketGoId = '';
+      this.chosenGo = '';
+    } else {
+      this.ticketGoId = id;
+      this.chosenGo = 'linear-gradient(\n' +
+        '6.71deg, #F9A51A 2.28%, #FBB612 27.93%, #FBF300 86.9%';
+    }
+  }
+  changeTicketReturn(id) {
+    if (this.ticketReturnId == id) {
+      this.ticketReturnId = '';
+      this.chosenReturn = '';
+    } else {
+      this.ticketReturnId = id;
+      this.chosenReturn = 'linear-gradient(\n' +
+        '6.71deg, #F9A51A 2.28%, #FBB612 27.93%, #FBF300 86.9%';
+    }
+  }
   getSearchTicket() {
-    if ((this.isTwoWay && (!this.locationTo || !this.locationFrom || !this.returnDate)) ||
-      (!this.isTwoWay && (!this.locationTo || !this.locationFrom)) || (this.adults == 0 && this.children == 0)) {
+    if ((this.isTwoWay && (!this.locationTo || !this.locationFrom || !this.returnDate || !this.flightDate)) ||
+      (!this.isTwoWay && (!this.locationTo || !this.locationFrom || !this.flightDate)) || (this.adults == 0 && this.children == 0)) {
       Swal.fire({
         icon: 'error',
         title: 'Xảy ra lỗi',
@@ -293,11 +314,33 @@ export class FlightListComponent implements OnInit {
     }
   }
   ticketDetail(ticketId): void {
-      this.ticketDetailId = ticketId;
-      if (this.clickedButtonDetail) {
-        this.clickedButtonDetail = false;
+    if ( this.ticketDetailId == ticketId) {
+        this.clickedButtonDetail = !this.clickedButtonDetail;
       } else {
+      this.ticketDetailId = ticketId;
         this.clickedButtonDetail = true;
       }
+  }
+  buyTicketGo() {
+    if (this.ticketGoId == '') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Chưa chọn vé đi',
+        text: 'Vui lòng chọn vé!'
+      });
+    } else {
+      alert('Mua thoi');
+    }
+  }
+  buyTicketReturn() {
+    if (this.ticketReturnId == '') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Chưa chọn vé về',
+        text: 'Vui lòng chọn vé!'
+      });
+    } else {
+      alert('Mua thoi');
+    }
   }
 }
