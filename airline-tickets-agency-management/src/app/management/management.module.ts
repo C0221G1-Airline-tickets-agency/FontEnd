@@ -7,19 +7,22 @@ import { HomeComponent } from '../client/component/home/home.component';
 import { ManagementComponent } from './management/management.component';
 import {AppModule} from '../app.module';
 import {CommonClientModule} from '../common/common-client/common-client.module';
-import { EmployeeComponent } from './component/employee/employee.component';
-import {FormsModule} from '@angular/forms';
+import { EmployeeComponent } from './component/employee/list-delete-employee/employee.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AddEmployeeComponent } from './component/employee/add-employee/add-employee.component';
+import { UpdateEmployeeComponent } from './component/employee/update-employee/update-employee.component';
 
 
 
 @NgModule({
-    imports: [
-        CommonModule,
-        ManagementRoutingModule,
-        CommonClientModule,
-        FormsModule,
-    ],
-  declarations: [ReportComponent, HomeComponent, ManagementComponent, EmployeeComponent],
+  imports: [
+    CommonModule,
+    ManagementRoutingModule,
+    CommonClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  declarations: [ReportComponent, HomeComponent, ManagementComponent, EmployeeComponent, AddEmployeeComponent, UpdateEmployeeComponent],
   bootstrap: [ManagementComponent]
 })
 export class ManagementModule { }
