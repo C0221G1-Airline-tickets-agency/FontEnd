@@ -17,11 +17,5 @@ export class NewsReviewComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getContent();
-  }
-  getContent() {
-    document.getElementById('content').innerHTML = this.data.newsContent.toString();
-    console.log(this.data.newsContent);
-
   }
 }
