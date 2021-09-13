@@ -1,3 +1,4 @@
+<form [formGroup]="ticketForm" (submit)="updateTicket()" novalidate>
 <div class="container-fluid">
   <div class="row justify-content-center">
     <h2><b>Thông tin hành khách thực hiện chuyến bay</b></h2>
@@ -15,7 +16,7 @@
           <div class="row">{{ticket.flight.locationFrom.airportName}}</div>
           <div class="row">
             <div class="col-lg-6">
-              <div class="row">Loại hành khách</div>
+              <div class="row">Loại hành khách:</div>
               <div class="row">{{ticket.passengerType}}</div>
             </div>
             <div class="col-lg-6">
@@ -25,7 +26,7 @@
 
           <div class="row">
             <div class="col-lg-6">
-              <div class="row">Hành lý ký gửi</div>
+              <div class="row">Hành lý ký gửi:</div>
             </div>
             <div class="col-lg-6">
               <div class="row">{{ticket.checkInBaggage}} kg</div>
@@ -38,11 +39,11 @@
           <div class="row">{{ticket.flight.locationTo.airportName}}</div>
           <div class="row">
             <div class="col-lg-6">
-              <div class="row">Giá mỗi vé</div>
+              <div class="row">Giá mỗi vé:</div>
               <div class="row">{{ticket.ticketPrice | currency: 'VNĐ': '' | slice:0:9 }} VNĐ</div>
             </div>
             <div class="col-lg-6">
-              <div class="row">Thuế & Phí</div>
+              <div class="row">Thuế & Phí:</div>
               <div class="row">{{ticket.tax*ticket.ticketPrice | currency: 'VND': ''}} VNĐ</div>
             </div>
           </div>
@@ -53,24 +54,24 @@
           <div class="row">Loại vé: {{ticket.ticketType}}</div>
           <div class="row">
             <div class="col-lg-12">
-              <div class="row">Tổng giá</div>
+              <div class="row">Tổng giá:</div>
               <div class="row">{{ticket.ticketPrice + (ticket.ticketPrice * ticket.ticketTypePrice) + ticket.plusBaggage + (ticket.ticketPrice * ticket.tax) - (ticket.ticketPrice * ticket.passengerTypePrice) | currency : 'VND' : ''}} VNĐ</div>
             </div>
           </div>
         </div>
       </div>
       <div class="row">Thông tin người bay từ TP Hồ Chí Minh --> Hà Nội</div>
-      <form [formGroup]="ticketForm" novalidate>
+
         <div class="row border border-dark px-2 my-2">
           <div class="col-lg-12 pb-1">
             <div class="row py-2 align-items-center">
               <div class="col-lg-6">
                 <div class="row">
-                  <div class="col-lg-6">
-                    <div class="row">Hành khách số 1</div>
+                  <div class="col-lg-5 mr-0 pr-0 pl-0">
+                    Hành khách số 1
                   </div>
-                  <div class="col-lg-6">
-                    <div class="row align-items-start">
+                  <div class="col-lg-7">
+                    <div class="row align-items-start ml-2 pl-1">
                       <div class="col-lg-1 px-0">
                         <input type="checkbox">
                       </div>
@@ -84,18 +85,18 @@
             </div>
             <div class="row">
               <div class="col-lg-2">
-                <div class="row"><label class="label-text">Họ và tên <span style="color: red">(*)</span></label>
+                <div class="row"><label for="passengerName" class="label-text">Họ và tên <span style="color: red">(*)</span></label>
                 </div>
               </div>
               <div class="col-lg-4">
-                <div class="row"><input type="text" formControlName="passengerName"></div>
+                <div class="row"><input id="passengerName" type="text" formControlName="passengerName"></div>
               </div>
               <div class="col-lg-2 pr-1">
-                <div class="row">Hành lý ký gửi</div>
+                <div class="row"><label for="plusBaggage">Hành lý ký gửi</label></div>
               </div>
               <div class="col-lg-4 pl-4">
                 <div class="row">
-                  <select formControlName="plusBaggage">
+                  <select id="plusBaggage" formControlName="plusBaggage">
                     <option value="" selected disabled>Chọn mua thêm hành lý</option>
                     <option value="100">Mua thêm 7kg - 100.000 VNĐ</option>
                     <option value="170">Mua thêm 15kg - 170.000 VNĐ</option>
@@ -123,12 +124,12 @@
             </div>
             <div class="row">
               <div class="col-lg-2">
-                <div class="row"><label class="label-text">Giới tính <span style="color: red">(*)</span></label>
+                <div class="row"><label for="passengerGender" class="label-text">Giới tính <span style="color: red">(*)</span></label>
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="row">
-                  <select formControlName="passengerGender">
+                  <select id="passengerGender" formControlName="passengerGender">
                     <option value="" selected disabled>Chọn giới tính</option>
                     <option>Nam</option>
                     <option>Nữ</option>
@@ -136,11 +137,11 @@
                 </div>
               </div>
               <div class="col-lg-2 pr-1">
-                <div class="row">Email</div>
+                <div class="row"><label class="label-text" for="passengerEmail">Email</label></div>
               </div>
               <div class="col-lg-4 pl-4">
                 <div class="row">
-                  <input style="height: 25px" type="text" formControlName="passengerEmail">
+                  <input id="passengerEmail" style="height: 25px" type="text" formControlName="passengerEmail">
                 </div>
               </div>
             </div>
@@ -164,20 +165,20 @@
             </div>
             <div class="row">
               <div class="col-lg-2">
-                <div class="row">Số điện thoại</div>
+                <div class="row"><label for="passengerPhone">Số điện thoại</label></div>
               </div>
               <div class="col-lg-4">
                 <div class="row">
-                  <input style="height: 25px" type="text" formControlName="passengerPhone">
+                  <input id="passengerPhone" style="height: 25px" type="text" formControlName="passengerPhone">
                 </div>
               </div>
-              <div *ngIf="ticket.passengerType=='nguoi lon'" class="col-lg-2 pr-1">
-                <div class="row"><label class="label-text">CMND/Passport <span
+              <div *ngIf="ticket.passengerType=='Người lớn'" class="col-lg-2 pr-1">
+                <div class="row"><label for="passengerIdCard" class="label-text">CMND/Passport <span
                   style="color: red">(*)</span></label></div>
               </div>
-              <div *ngIf="ticket.passengerType=='nguoi lon'" class="col-lg-4 pl-4">
+              <div *ngIf="ticket.passengerType=='Người lớn'" class="col-lg-4 pl-4">
                 <div class="row">
-                  <input style="height: 25px" type="text" formControlName="passengerIdCard">
+                  <input id="passengerIdCard" style="height: 25px" type="text" formControlName="passengerIdCard">
                 </div>
               </div>
             </div>
@@ -203,23 +204,21 @@
 
 
         </div>
-      </form>
+
 
     </div>
   </div>
-
   <div class="container">
     <div class="row mt-2">
       <div class="col-lg-6">
         <div class="row justify-content-center align-items-center">
-          <button class=" btn btn-return fa fa-reply" type="button" style="height: 30px"> Chọn lại chuyến
-            bay
+          <button class=" btn btn-return fa fa-reply" style="height: 30px"> Chọn lại chuyến bay
           </button>
         </div>
       </div>
       <div class="col-lg-6">
         <div class="row justify-content-center align-items-center">
-          <button class="btn btn-search fa fa-plus" (click)="updateTicket()" style="height: 30px;width: 177px"> Đặt vé</button>
+          <button class="btn btn-search fa fa-plus" type="submit" (keydown.enter)="$event" [disabled]="ticketForm.invalid" style="height: 30px;width: 177px"> Đặt vé</button>
         </div>
       </div>
     </div>
@@ -227,3 +226,4 @@
   </div>
 
 </div>
+</form>

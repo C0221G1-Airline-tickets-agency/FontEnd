@@ -29,7 +29,7 @@ export class PassengerInformationComponent implements OnInit {
 
   getTicket(id: number){
     return this.ticketService.findTicketById(id).subscribe( (ticket: Ticket) => {
-      if (ticket.passengerType=='nguoi lon'){
+      if (ticket.passengerType=='Người lớn'){
         this.ticketForm = new FormGroup({
           passengerName: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(50), Validators.pattern('[A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴa-zàáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ ]*')]),
           passengerGender: new FormControl('', Validators.required),
