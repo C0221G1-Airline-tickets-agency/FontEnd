@@ -1,0 +1,138 @@
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12" style="">
+  <div class="right-content w-100">
+
+    <!--        nơi đổ dữ liệu router-outlet              -->
+
+    <fieldset class="scheduler-border" style="background: white;box-shadow: 0 0 2px 2px #cccccc;">
+      <legend class="scheduler-border text-center" style="background: #e54744"><h2>Thêm mới nhân viên</h2></legend>
+      <br>
+      <form action="" class="form-group col-12" [formGroup]="employeeForm">
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Mã nhân viên <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <div class="d-flex align-items-center">
+              <input class="form-control" type="text" formControlName="employeeCode">
+            </div>
+            <!--            <small *ngIf="" style="color: red">Trường này không được để trống. (*)</small>-->
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Họ và tên <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="text" formControlName="employeeName">
+            <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Ngày sinh <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <input type="date" class="form-control" style="width: 100%" formControlName="employeeBirthday">
+            <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Giới tính <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <select class="form-control" formControlName="employeeGender">
+              <option value="nam">Nam</option>
+              <option value="nữ">Nữ</option>
+            </select>
+            <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Điện thoại <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="text" formControlName="employeePhone">
+            <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Địa chỉ <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="text" formControlName="employeeAddress">
+            <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Ảnh đại diện <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <input id="img" formControlName="employeeImage" type="file" (change)="showPreview($event)">
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Tài khoản <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="text" formControlName="username">
+            <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Mật khẩu <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <input class="form-control" type="password" formControlName="password">
+            <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
+          </div>
+        </div>
+        <br>
+        <div class="row input-group">
+          <div class="col-3 folow-right">
+            <span>Phân quyền <label>(*)</label></span>
+          </div>
+          <div class="col-8">
+            <select class="form-control" formControlName="role">
+              <option value="ADMIN">ADMIN</option>
+              <option value="MODERATOR">MODERATOR</option>
+            </select>
+            <!--            <small style="color: red">Trường này không được để trống. (*)</small>-->
+          </div>
+        </div>
+      </form>
+
+      <div class="d-flex justify-content-end pb-3">
+        <button class="mr-3 btn btn-success" type="button" (click)="submit()"><i class="fa fa-check"
+                                                                                 aria-hidden="true"></i> Hoàn
+          tất
+        </button>
+        <button class="mr-3 btn btn-back" style="background: #005cbf;color: white;margin-right: 47px"
+                type="button" (click)="backToList()">
+          <i class="icon-sidebar fa fa-reply "></i>
+          Trở về
+        </button>
+        <button class="mr-3 btn btn-back" style="background: red;color: white; margin-right: 94px"
+                type="button" (click)="cancel()">
+          <i class="icon-sidebar fa fa-trash "></i>
+          Xóa
+        </button>
+      </div>
+    </fieldset>
+
+  </div>
+</div>
+

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {EmployeeService} from '../../../service/employee/employee.service';
-import {Employee} from '../../../model/employee';
+import {Component, ElementRef, OnInit} from '@angular/core';
+import {EmployeeService} from '../../../../service/employee/employee.service';
+import {Employee} from '../../../../model/employee';
 import Swal from 'sweetalert2';
 import {ToastrService} from 'ngx-toastr';
 
@@ -20,12 +20,27 @@ export class EmployeeComponent implements OnInit {
   employeeNameChoice = '';
   mggSearch = '';
   isRole = false;
+  isLoading = true;
+  flag = false;
 
-  constructor(private sv: EmployeeService, private toast: ToastrService) {
+  constructor(private sv: EmployeeService, private toast: ToastrService, private elementRef: ElementRef) {
   }
 
   ngOnInit(): void {
     this.getList();
+    addEventListener('keydown', event => {
+      console.log('keydown', event.keyCode);
+    });
+  }
+
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngAfterViewInit() {
+    this.elementRef.nativeElement.querySelector('my-element')
+      .addEventListener('click', this.onClick.bind(this));
+  }
+
+  onClick(event) {
+    console.log(event);
   }
 
 
@@ -34,15 +49,21 @@ export class EmployeeComponent implements OnInit {
         this.isFail = false;
         // @ts-ignore
         this.employees = data.content;
+        // @ts-ignore
+        // tslint:disable-next-line:no-unused-expression
+        data.numberOfElements === 1 ? this.flag = true : this.flag = false;
         if (this.employees.length < 1) {
           this.isFail = true;
         }
         // @ts-ignore
         this.pages = new Array<any>(data.totalPages);
       }, error => {
+        this.isLoading = false;
         this.isFail = true;
         this.employees = [];
         console.log('Lỗi');
+      }, () => {
+        this.isLoading = false;
       }
     );
   }
@@ -79,10 +100,6 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee() {
-    if (this.employeeIdChoice === 0) {
-      alert('chọn đi bạn ơi!! chớ ai biết xoá cái chi mà xoá');
-      return;
-    }
     Swal.fire({
       title: 'Bạn có chắc chắn muốn xoá?',
       html: '<span style="color: #dc3545">' + this.employeeNameChoice + '</span>',
@@ -98,6 +115,9 @@ export class EmployeeComponent implements OnInit {
         this.sv.deleteEmployee(this.employeeIdChoice).subscribe(e => {
             this.toast.success('Xoá thành công', 'Thông báo');
             this.employeeIdChoice = 0;
+            if (this.flag) {
+              this.page = this.pages.length - 2;
+            }
             this.getList();
           }, error => {
             this.toast.error('Lỗi', 'Thông báo');
