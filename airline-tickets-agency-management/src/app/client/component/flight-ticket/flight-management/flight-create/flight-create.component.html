@@ -196,6 +196,9 @@
             <div [hidden]="!flightPrice.errors.required">
               <p style="color: red">Gía không được để trống</p>
             </div>
+            <div [hidden]="!flightPrice.errors.pattern">
+              <p style="color: red">Giá phải đúng định dạng số</p>
+            </div>
           </div>
 
         </div>
