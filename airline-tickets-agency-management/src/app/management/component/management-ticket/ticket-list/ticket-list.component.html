@@ -49,12 +49,13 @@
       </ng-container>
       <tr *ngFor="let t of tickets, let i = index" (click)="getTicketId(t.ticketId, t)"
           [class.selected]="t.ticketId === idSelect">
-        <td>{{i + 1}}</td>
-        <td>{{t.passengerName}}</td>
+        <td>{{i + 1 + page*5}}</td>
+        <td style="text-align: left; padding-left: 20px">{{t.passengerName}}</td>
         <td>{{t.ticketCode}}</td>
         <td>{{t.flight.locationFrom.cityName + " - " + t.flight.locationTo.cityName}} </td>
         <td>{{t.flight.flightDate | date : "dd/MM/yyyy"}}</td>
-        <td>{{t.ticketPrice + (t.ticketPrice * t.ticketTypePrice) + t.plusBaggage + (t.ticketPrice * t.tax) - (t.ticketPrice * t.passengerTypePrice) | currency : "VND" : ""}}</td>
+        <td style="text-align: right;padding-right: 20px">{{t.ticketPrice + (t.ticketPrice * t.ticketTypePrice) + t.plusBaggage + (t.ticketPrice * t.tax) - (t.ticketPrice * t.passengerTypePrice) | currency : "VND" : ""}}</td>
+
       </tr>
       </tbody>
     </table>

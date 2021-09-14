@@ -4,7 +4,7 @@
     <i class="fa fa-bars" aria-hidden="true"></i>
   </label>
   <ul class="background-side">
-    <li class="menu-item p-0" *ngIf="!isAdmin">
+    <li class="menu-item p-0">
       <ul class="menu-item-child">
         <li class="item item-hover"><a class="pl-2 to-text-sidebar">Quản lý khách hàng<i
           class="fa fa-caret-down ml-2" aria-hidden="true"></i></a></li>
@@ -32,7 +32,7 @@
         </div>
       </ul>
     </li>
-    <li class="menu-item p-0" *ngIf="isAdmin">
+    <li class="menu-item p-0">
       <ul class="menu-item-child">
         <li class="item item-hover"><a class="pl-2 to-text-sidebar">Quản trị viên<i
           class="fa fa-caret-down ml-2" aria-hidden="true"></i></a></li>
@@ -83,7 +83,7 @@
             <div>Quản lý khách hàng</div>
           </a>
           </li>
-          <li class="item-hover"><a href="" class="pl-4 d-flex">
+          <li class="item-hover"><a href="/management/ticket/list" class="pl-4 d-flex">
             <div class="pr-2" style="margin-top: -2px">
               <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </div>

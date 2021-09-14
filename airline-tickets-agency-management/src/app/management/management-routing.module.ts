@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {ReportComponent} from './component/report/report.component';
 import {ManagementComponent} from './management/management.component';
+
 import {CustomerComponent} from './component/ business/customer/customer.component';
 import {CreateCustomerComponent} from './component/ business/create-customer/create-customer.component';
 import {EditCustomerComponent} from './component/ business/edit-customer/edit-customer.component';
@@ -11,6 +12,7 @@ import {EmployeeComponent} from './component/employee/list-delete-employee/emplo
 import {AddEmployeeComponent} from './component/employee/add-employee/add-employee.component';
 import {UpdateEmployeeComponent} from './component/employee/update-employee/update-employee.component';
 import {EmployeeInformationComponent} from './component/employee-information/employee-information.component';
+
 
 
 const routes: Routes = [

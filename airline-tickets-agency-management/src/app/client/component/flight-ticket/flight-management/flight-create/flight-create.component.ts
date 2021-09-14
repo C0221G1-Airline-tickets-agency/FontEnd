@@ -98,6 +98,7 @@ export class FlightCreateComponent implements OnInit {
       endTime: flightObj1.timeGroup.endTime,
       flightPrice: flightObj1.flightPrice,
       airline: flightObj1.airline,
+      flag: true,
       locationTo: flightObj1.locationGroup.locationTo,
       locationFrom: flightObj1.locationGroup.locationFrom
     }
@@ -115,8 +116,10 @@ export class FlightCreateComponent implements OnInit {
           timeOut: 2000,
           progressBar: false
         });
+
+        this.flightForm.reset();
       }
-      this.flightForm.reset();
+
     })
   }
 

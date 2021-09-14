@@ -1,8 +1,4 @@
 
-
-import {Customer} from '../../model/customer/customer';
-
-const API_URL = 'http://localhost:8080/api/customer';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from "rxjs";
@@ -10,10 +6,17 @@ import {environment} from "../../../environments/environment";
 import {Password} from "../../model/password";
 import {Message} from "../../model/message";
 import {User} from "../../model/user";
+import {Customer} from "../../model/customer/customer";
+
+
+const API_URL = `${environment.apiUrl}`;
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
+
   constructor(private http: HttpClient) {
   }
 
@@ -48,5 +51,6 @@ export class CustomerService {
 
   updatePassword(id: number, password: Password): Observable<Message> {
     return this.http.patch<Message>(`${API_URL}/changePassword?id=${id}`, password);
+
   }
 }

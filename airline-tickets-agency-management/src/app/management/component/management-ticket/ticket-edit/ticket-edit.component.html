@@ -95,7 +95,9 @@
 
 
   <div class=" justify-content-end pb-3">
-    <button [disabled]="!editForm.valid" style="margin-left: 170px" class="btn btn-success" type="submit"(click)="dialogRef.close(true)">
+
+    <button [disabled]="!editForm.valid" style="margin-left: 170px" class="btn btn-success" type="submit" (click)="dialogRef.close(true)">
+
       <i class="fa fa-check" aria-hidden="true"  ></i> Hoàn tất
     </button>
     <button class="btn btn-back" style="background: #005cbf;color: white;margin-left: 10px"
