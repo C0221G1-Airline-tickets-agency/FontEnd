@@ -6,6 +6,7 @@ import {CustomerComponent} from './component/ business/customer/customer.compone
 import {CreateCustomerComponent} from './component/ business/create-customer/create-customer.component';
 import {EditCustomerComponent} from './component/ business/edit-customer/edit-customer.component';
 import {TicketListComponent} from "./component/management-ticket/ticket-list/ticket-list.component";
+import {StatisticalComponent} from './component/statistical/statistical.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,9 @@ const routes: Routes = [
         {
           path: 'ticket/list', component: TicketListComponent
         },
+        {
+          path: 'statistical', component: StatisticalComponent
+        }
       ]
   },
 ];
