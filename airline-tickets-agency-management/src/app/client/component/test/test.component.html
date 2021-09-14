@@ -1,0 +1,20 @@
+<div class="container">
+  <table class="table table-active">
+    <tr>
+      <th>Điểm đi</th>
+      <th>Điểm đến</th>
+      <th>Ngày đi</th>
+      <th>Ngày về</th>
+      <th>Hành khách</th>
+    </tr>
+    <tr>
+      <td>{{data.locationFrom}}</td>
+      <td>{{data.locationTo}}</td>
+      <td>{{data.locationFrom}}</td>
+      <td>{{data.departureTime}}</td>
+      <td>{{data.endTime}}</td>
+      <td>{{data.passenger.split(",")[0] + 'người lớn, ' +
+      data.passenger.split(",")[1] + 'Trẻ em' }}</td>
+    </tr>
+  </table>
+</div>

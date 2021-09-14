@@ -1,3 +1,13 @@
 .bg{
   background-color: white;
 }
+.btn-back{
+  background: #0062D2;
+color: white;
+}
+#formCreate .custom-file-input ~ .custom-file-label::after {
+  content: "Chọn ảnh" !important;
+}
+#formCreate label.error {
+  display: none !important;
+}

@@ -59,7 +59,9 @@ export class CustomerChangePasswordComponent implements OnInit {
                 this.customerService.updatePassword(this.id, this.password).subscribe(data => {
                   this.toast.success(data.msg, 'Chú ý !');
                   console.log(data);
+
                   window.location.href = 'http://localhost:4200/';
+
                 }, error => {
                   this.toast.warning(error.error.msg, 'Chú ý !');
                   console.log(error);

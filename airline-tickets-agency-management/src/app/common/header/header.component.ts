@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
+import '../../../assets/header';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit {
   getDropDown() {
     this.isDropDown = !this.isDropDown;
   }
+
 
 
 }
