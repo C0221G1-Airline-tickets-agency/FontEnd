@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import Swal from 'sweetalert2';
 import {formatDate} from '@angular/common';
 import {SearchFlightDto} from '../../../../../model/flight-ticket/searchFlightDto';
@@ -9,14 +9,15 @@ import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {TicketNumber} from "../../../../../model/flight-ticket/ticketNumber";
 import {TicketArrayId} from "../../../../../model/flight-ticket/ticketArrayId";
 import {BookingDetailComponent} from "../booking-details/booking-detail.component";
-
+import {ActivatedRoute} from "@angular/router";
+import {Location as LocationHome} from '@angular/common';
 
 @Component({
   selector: 'app-flight-list',
   templateUrl: './flight-list.component.html',
   styleUrls: ['./flight-list.component.css']
 })
-export class FlightListComponent implements OnInit {
+export class FlightListComponentTrang implements OnInit {
   // search flight
   searchFlightList: SearchFlightDto[] = [];
   flightGoList: SearchFlightDto[] = [];
@@ -71,85 +72,55 @@ export class FlightListComponent implements OnInit {
   constructor(private searchFlightService: SearchFlightService,
               private ticketService: TicketService,
               private dialog: MatDialog,
-              // private location: Location
+              private locationHome: LocationHome
   ) {
   }
 
   ngOnInit(): void {
     this.currentDate = new Date();
     this.getAllLocations();
-    this.data = {departureTime: '2021-10-22',
-    endTime: '',
-    locationFrom: 'Hà Nội',
-    locationTo: 'Hải phòng',
-    navigationId: 2,
-    passenger: [1, 0]
-    };
+    // this.data = {departureTime: '2021-10-22',
+    // endTime: '',
+    // locationFrom: 'Hồ Chí Minh',
+    // locationTo: 'Hà Nội',
+    // navigationId: 2,
+    // passenger: [1, 0]
+    // };
 
-    // this.data = this.location.getState();
+    this.data = this.locationHome.getState();
     this.start();
+  }
+
+  getData() {
+
+  }
+
+  findLocation() {
+    this.searchFlightService.findLocationByCityName(this.data.locationFrom).subscribe((data: Location) => {
+      this.locationFrom = data;
+      console.log(this.locationFrom);
+      this.locationFromCity = data.cityName;
+      this.searchFlightService.findLocationByCityName(this.data.locationTo).subscribe((data2: Location) => {
+        this.locationTo = data2;
+        this.locationToCity = data2.cityName;
+        this.getSearchTicket();
+      });
+    });
   }
 
   start() {
     this.flightDate = this.data.departureTime;
+    this.returnDate = this.data.endTime;
     if (this.data.endTime == '') {
       this.isTwoWay = 0;
       this.returnDate = '';
     } else {
       this.isTwoWay = 1;
     }
-    this.searchFlightService.findLocationByCityName(this.data.locationFrom).subscribe((data: Location)  => {
-      this.locationFrom = data;
-      this.locationFromCity = data.cityName;
-    });
-    this.searchFlightService.findLocationByCityName(this.data.locationTo).subscribe((data: Location)  => {
-      this.locationTo = data;
-      this.locationToCity = data.cityName;
-    });
-    this.adults = this.data.passenger[0];
-    this.children = this.data.passenger[1];
-    console.log(this.locationFrom);
-    if (this.adults > 0) {
-      this.passengerType1 = 'người lớn';
-      if (this.children > 0) {
-        this.passengerType2 = 'trẻ em';
-      } else {
-        this.passengerType2 = 'nguời lớn';
-      }
-    } else {
-      this.passengerType1 = 'trẻ em';
-      this.passengerType2 = 'trẻ em';
-    }
-    this.locationFromSearch = this.locationFrom;
-    this.locationToSearch = this.locationTo;
-    this.searchFlightService.searchFlight(this.locationFrom.locationId, this.locationTo.locationId, this.flightDate, this.passengerType1, this.passengerType2, this.orderBy).subscribe((searchFlightList: SearchFlightDto[]) => {
-      this.flightGoList = searchFlightList;
-      this.flightGoDateSearch = this.flightDate;
-      this.getDay(new Date(this.flightGoDateSearch));
-      this.weekdaysGo = this.weekdays;
-      this.datesGo = this.dates;
-      if (searchFlightList == null) {
-        this.searchGoSuccess = false;
-      } else {
-        this.searchGoSuccess = true;
-      }
-    });
-    if (this.isTwoWay) {
-      this.searchFlightService.searchFlight(this.locationTo.locationId, this.locationFrom.locationId, this.returnDate, this.passengerType1, this.passengerType2, this.orderBy).subscribe((searchFlightList: SearchFlightDto[]) => {
-        this.flightReturnList = searchFlightList;
-        this.flightReturnDateSearch = this.returnDate;
-        this.getDay(new Date(this.flightReturnDateSearch));
-        this.weekdaysReturn = this.weekdays;
-        this.datesReturn = this.dates;
-        if (searchFlightList == null) {
-          this.searchReturnSuccess = false;
-        } else {
-          this.searchReturnSuccess = true;
-        }
-      });
-    }
-    this.searched = true;
 
+    this.adults = this.data.passenger.split(',')[0];
+    this.children = this.data.passenger.split(',')[1];
+    this.findLocation();
   }
 
   getDay(day) {
@@ -490,8 +461,9 @@ export class FlightListComponent implements OnInit {
         data: {data1: this.listTicketId}
       });
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        window.location.href = 'http://localhost:4200/customer/payment';
+        if (result) {
+          window.location.href = 'http://localhost:4200/customer/payment';
+        }
       });
     }
   }

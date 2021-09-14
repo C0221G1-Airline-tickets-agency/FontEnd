@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   accountName = 'Việt Nam Vô Địch';
   ismod: boolean;
   @Input()
-  isAdmin = false;
+  isAdmin =  false;
   private roles: string[];
   isLoggedIn = false;
   username: string;
@@ -50,6 +50,10 @@ export class HeaderComponent implements OnInit {
       // @ts-ignore
       // tslint:disable-next-line:triple-equals
       this.ismod = (this.roles == 'ROLE_MODERATOR' || this.roles == 'ROLE_ADMIN')
+      if(this.ismod){
+        this.isAdmin = true;
+      }
+      console.log(this.ismod)
     }
   }
 
