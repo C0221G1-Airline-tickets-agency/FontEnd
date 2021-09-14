@@ -1,3 +1,4 @@
+
 export interface AddRequest {
   employeeId?: number;
   employeeCode?: string;
@@ -14,3 +15,4 @@ export interface AddRequest {
   flag?: boolean;
   userCode?: string;
 }
+

@@ -1,3 +1,4 @@
+
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {AddRequest} from '../../../../model/employee/add-request';
@@ -35,7 +36,6 @@ export class UpdateEmployeeComponent implements OnInit {
       console.log(param.get('id'));
       }
     );
-
   }
 
   getEmployee() {
@@ -119,4 +119,5 @@ export class UpdateEmployeeComponent implements OnInit {
       this.createEmployeeForm();
     }
   }
+
 }
