@@ -11,6 +11,7 @@ import {TicketService} from "../../../../service/flight-ticket/ticket/ticket.ser
 import {Router} from "@angular/router";
 
 
+
 @Component({
   selector: 'app-ticket-list',
   templateUrl: './ticket-list.component.html',
@@ -138,11 +139,14 @@ export class TicketListComponent implements OnInit {
       this.toastr.error('Bạn chưa chọn vé', 'Cảnh báo : ')
     } else {
       Swal.fire({
-        title: 'Xóa vé ?',
+        title: '<div class="scheduler-border d-flex justify-content-center align-items-center" style="background: #e54744;height: 50px;color: white">' +
+          '  <h2>Xóa vé ?</h2>' +
+          '</div>',
         width: 400,
         heightAuto: true,
         html: '<hr><div style="text-align: left; padding-left: 30px; font-size: 14px"><p style="color: red;">Bạn có chắc chắn muốn xóa vé có :</p>\n' +
-          '                    <p>Mã đặt chỗ: ' + this.ticket.chairName + '&emsp;&emsp;&emsp;&emsp;Họ tên: ' + this.ticket.passengerName + '</p>\n' +
+          '                    <p>Mã đặt chỗ: ' + this.ticket.chairName+'</p>\n' +
+          '                    <p>Họ và tên: ' + this.ticket.passengerName+'</p>\n' +
           '                    <p>Chuyến bay: ' + this.ticket.flight.locationFrom.cityName + ' - ' + this.ticket.flight.locationTo.cityName + '</p>\n' +
           '                    <p>Ngày: ' + this.formatDate(this.ticket.flight.flightDate) + '</p>\n' +
           '                    <p style="text-align: left">Giá: ' + this.formatter.format(this.ticket.ticketPrice + (this.ticket.ticketPrice * this.ticket.ticketTypePrice) + this.ticket.plusBaggage + (this.ticket.ticketPrice * this.ticket.tax) - (this.ticket.ticketPrice * this.ticket.passengerTypePrice)) +
@@ -156,7 +160,8 @@ export class TicketListComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           this.ticketService.deleteTicketById(this.idSelect).subscribe(() => {
-            this.toastr.success('Xóa vé thành công', 'Thông báo : ')
+            this.toastr.success('Xóa vé thành công', 'Thông báo : ', { timeOut: 2000 })
+
           }, error => {
             this.toastr.error('Xóa vé thất bại', 'Cảnh báo : ')
           }, () => {
@@ -181,12 +186,12 @@ export class TicketListComponent implements OnInit {
   }
 
   onInputHandler() {
-    this.router.navigateByUrl("/flight-management");
+    this.router.navigateByUrl("/search-flight");
   }
 
   onReturnHandler() {
     Swal.fire({
-      titleText:'Trở về',
+      icon: 'question',
       text:'Bạn có chắc muốn trở về màn hình trang chủ?',
       showCancelButton: true,
       confirmButtonText: '<i class="fa fa-check"></i> Xác nhận',
@@ -196,7 +201,7 @@ export class TicketListComponent implements OnInit {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.router.navigateByUrl("");
+        this.router.navigateByUrl("/management");
       }
     })
   }

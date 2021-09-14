@@ -54,7 +54,7 @@ export class FlightCreateComponent implements OnInit {
         endTime: new FormControl('', [Validators.required, Validators.pattern(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)]),
       }, comparisonTime),
 
-      flightPrice: new FormControl('', [Validators.required]),
+      flightPrice: new FormControl('', [Validators.required, Validators.pattern(/[0-9]{1,9}/)]),
       airline: new FormControl('', [Validators.required]),
       locationGroup: new FormGroup({
         locationTo: new FormControl('', [Validators.required]),
@@ -98,6 +98,7 @@ export class FlightCreateComponent implements OnInit {
       endTime: flightObj1.timeGroup.endTime,
       flightPrice: flightObj1.flightPrice,
       airline: flightObj1.airline,
+      flag: true,
       locationTo: flightObj1.locationGroup.locationTo,
       locationFrom: flightObj1.locationGroup.locationFrom
     }
@@ -115,8 +116,10 @@ export class FlightCreateComponent implements OnInit {
           timeOut: 2000,
           progressBar: false
         });
+
+        this.flightForm.reset();
       }
-      this.flightForm.reset();
+
     })
   }
 

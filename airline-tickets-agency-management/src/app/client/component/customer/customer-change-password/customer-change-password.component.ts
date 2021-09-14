@@ -5,6 +5,7 @@ import {User} from "../../../../model/user";
 import {CustomerService} from "../../../../service/customer/customer.service";
 import {comparePassword} from "./comparePassword";
 import {ToastrService} from 'ngx-toastr';
+import {TokenStorageService} from "../../../../user/user-service/token-storage.service";
 
 
 @Component({
@@ -23,10 +24,11 @@ export class CustomerChangePasswordComponent implements OnInit {
     confirmPassword: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,20}$')])
   }, comparePassword);
   constructor(private customerService: CustomerService,
-              private toast: ToastrService) {
+              private toast: ToastrService,
+              private tokenService: TokenStorageService) {
   }
   ngOnInit(): void {
-    this.id = 1;
+    this.id = this.tokenService.getUser().id;
     this.getPasswordAdmin(this.id);
   }
   getPasswordAdmin(id: number) {
@@ -59,7 +61,9 @@ export class CustomerChangePasswordComponent implements OnInit {
                 this.customerService.updatePassword(this.id, this.password).subscribe(data => {
                   this.toast.success(data.msg, 'Chú ý !');
                   console.log(data);
-                  window.location.href = 'http://localhost:4200/customer/change-password';
+
+                  window.location.href = 'http://localhost:4200/';
+
                 }, error => {
                   this.toast.warning(error.error.msg, 'Chú ý !');
                   console.log(error);

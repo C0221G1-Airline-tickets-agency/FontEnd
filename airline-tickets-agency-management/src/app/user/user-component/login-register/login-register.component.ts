@@ -29,8 +29,9 @@ export class LoginRegisterComponent implements OnInit {
     ],
     'password':[
       {type: 'required',message: 'Mật khẩu không được để trống!'},
-      {type:'minLength',message: 'Mật khẩu phải nhiều hơn 6 ký tự!'},
-      {type:'maxLength',message: 'Mật khẩu phải ít hơn 20 ký tự!'}
+      {type:'minLength',message: 'Mật khẩu phải nhiều hơn 8 ký tự!'},
+      {type:'maxLength',message: 'Mật khẩu phải ít hơn 20 ký tự!'},
+      {type:'pattern',message: 'Mật khẩu phải có ký tự in hoa và số , độ dài từ 8 - 20 ký tự!'},
     ],
     'phone':[
       {type: 'required',message: 'Số điện thoại không được để trống!'},
@@ -62,7 +63,7 @@ export class LoginRegisterComponent implements OnInit {
 
     this.formRegister = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8),Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/), Validators.maxLength(20)]),
       phone: new FormControl('',[Validators.required, Validators.pattern('[- +()0-9]+')]),
       name: new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(50)]),
       birthday: new FormControl(),
@@ -117,6 +118,7 @@ export class LoginRegisterComponent implements OnInit {
 
   onSubmitRegister() {
     this.signupRequest = this.formRegister.value;
+
     this.authService.register(this.signupRequest).subscribe(() => {
         this.toastr.success('Đăng ký thành công. Vui lòng xác thực tại email.', 'Đăng ký ', {
           timeOut: 2000,
@@ -126,7 +128,8 @@ export class LoginRegisterComponent implements OnInit {
           console.log("Đã gởi mail!")
         });
       },
-      err => {
+      err => {    console.log(err);
+
         this.toastr.error('Các trường dữ liệu phải đúng format', 'Đăng ký ', {
           timeOut: 2000,
           extendedTimeOut: 1500

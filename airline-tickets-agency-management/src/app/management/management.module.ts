@@ -27,6 +27,7 @@ import {EmployeeInformationComponent} from './component/employee-information/emp
 import {EmployeeChangePasswordComponent} from './component/employee-change-password/employee-change-password.component';
 
 
+
 @NgModule({
   imports: [
     CommonModule,

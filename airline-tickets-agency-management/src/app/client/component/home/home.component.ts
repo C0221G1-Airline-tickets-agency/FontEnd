@@ -169,7 +169,7 @@ export class HomeComponent implements OnInit {
       endTime: this.endDay,
       passenger: this.adults + ',' + this.children
     };
-    this.router.navigateByUrl('/test', {state: this.searchTicket});
+    this.router.navigateByUrl('/search-flight', {state: this.searchTicket});
   }
 
   chosenFlight(flightId: number) {

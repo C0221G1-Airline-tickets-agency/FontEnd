@@ -16,7 +16,7 @@
         </div>
     <div class="account-login" *ngIf="isLoggedIn">
       <span class="font-weight-bold">Xin chào, {{username}} &nbsp; |</span>
-        <li>  <a type="button" class="header-btn" href="#"> &nbsp; Quản lí tài khoản </a></li>
+        <li>  <a type="button" [routerLink]="[isAdmin? 'management/customer':'/customer']" class="header-btn" href="#"> &nbsp; Quản lí tài khoản </a></li>
       |
         <li> <a type="button" class="header-btn" (click)="logout()">Đăng xuất</a></li>
         </div>

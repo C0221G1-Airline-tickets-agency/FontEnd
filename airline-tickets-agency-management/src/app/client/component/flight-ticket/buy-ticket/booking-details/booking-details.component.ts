@@ -10,8 +10,11 @@ import {Ticket} from '../../../../../model/flight-ticket/ticket';
 export class BookingDetailsComponent implements OnInit {
   ticket: Ticket;
 
+  tickets: Ticket[] = [];
+
   constructor(private ticketService: TicketService) {
-    this.viewTicket(7);
+    this.viewTicket(4);
+
   }
 
   ngOnInit(): void {
