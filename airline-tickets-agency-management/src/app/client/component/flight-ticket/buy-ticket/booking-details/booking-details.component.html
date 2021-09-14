@@ -12,12 +12,12 @@
 </ng-template>
 
 
-<div *ngIf="ticket!=null; else notExist" class="container-fluid">
+<div *ngIf="tickets.length>0; else notExist" class="container-fluid">
 
   <div class="row justify-content-center">
     <h2><b>Thông tin chuyến bay</b></h2>
   </div>
-  <div class="border border-dark px-5 py-1 bg-white rounded">
+  <div *ngFor="let ticket of tickets" class="border border-dark px-5 py-1 bg-white rounded">
     <div class="row">
       <h4><b>{{ticket.flight.locationFrom.cityName}} <i class="fa fa-fighter-jet"></i> {{ticket.flight.locationTo.cityName}}</b></h4>
     </div>

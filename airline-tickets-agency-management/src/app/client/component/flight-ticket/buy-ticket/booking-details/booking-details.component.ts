@@ -9,21 +9,25 @@ import {Ticket} from '../../../../../model/flight-ticket/ticket';
 })
 export class BookingDetailsComponent implements OnInit {
   ticket: Ticket;
-
+  listId: number[] = [1,2,3];
   tickets: Ticket[] = [];
 
+
   constructor(private ticketService: TicketService) {
-    this.viewTicket(4);
+    this.viewTicket(this.listId);
 
   }
 
   ngOnInit(): void {
   }
-  viewTicket(id: number){
-    return this.ticketService.findTicketById(id).subscribe( ticket => {
-      console.log(ticket);
-      this.ticket = ticket;
-    });
+
+  viewTicket(list: number[]){
+    for (var i=0;i<list.length;i++) {
+      return this.ticketService.findTicketById(list[i]).subscribe( ticket => {
+        // console.log(ticket);
+        this.tickets.push(ticket);
+      });
+    }
   }
 
 }
