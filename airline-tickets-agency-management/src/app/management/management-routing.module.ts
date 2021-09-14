@@ -48,6 +48,9 @@ const routes: Routes = [
         {
           path: 'employee-information', component: EmployeeInformationComponent
         },
+        {
+          path: 'employee-add', component: AddEmployeeComponent
+        }
       ]
   },
 ];

@@ -1,14 +1,17 @@
-import {Injectable} from '@angular/core';
+
+import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Employee} from '../../model/employee';
-import {AddRequest} from '../../model/employee/add-request';
+import {AddRequest} from "../../model/employee/add-request";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
+
+  private URl = 'http://localhost:8080/employee';
   private API_URL = 'http://localhost:8080/api/employee';
 
   constructor(private http: HttpClient) {
@@ -33,5 +36,6 @@ export class EmployeeService {
 
   updateEmployee(addRequest: AddRequest, employeeId: number) {
     return this.http.put(this.API_URL + '/update-employee', addRequest);
+
   }
 }

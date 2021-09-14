@@ -31,7 +31,7 @@ export class EmployeeInformationComponent implements OnInit {
 
   ngOnInit(): void {
     // Tạo localStorage data
-    localStorage.setItem('account', JSON.stringify(this.account));
+    // localStorage.setItem('account', JSON.stringify(this.account));
     // Lấy data từ localStorage
     this.employeeId = JSON.parse(localStorage.getItem('account')).accountId;
     this.email = JSON.parse(localStorage.getItem('account')).email;
