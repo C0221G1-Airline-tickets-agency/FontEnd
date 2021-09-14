@@ -8,8 +8,6 @@ import {DatePipe} from '@angular/common';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 import {Overlay, ToastrComponentlessModule, ToastrModule, ToastrService} from 'ngx-toastr';
-
-
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
@@ -19,11 +17,13 @@ import {httpInterceptorProviders} from './service/auth/auth-interceptor';
 import {AdminAuthService} from './service/auth/admin-auth.service';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
+import {UserModule} from './user/user.module';
+import {CommonClientModule} from './common/common-client/common-client.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,16 +32,12 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
     MatDialogModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
-
-    ToastrModule.forRoot({
-      timeOut: 2000,
-    }),
-
     MatSnackBarModule,
     AngularFireDatabaseModule,
-    AngularFireAuthModule
-
+    AngularFireAuthModule,
+    UserModule,
+    CommonClientModule,
+    ToastrModule.forRoot()
   ],
   providers: [FormBuilder, DatePipe, MatDialog, Overlay, httpInterceptorProviders, AdminAuthService],
 

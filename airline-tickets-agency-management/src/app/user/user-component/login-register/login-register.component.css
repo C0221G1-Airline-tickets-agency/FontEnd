@@ -1,0 +1,345 @@
+.to-card {
+  /*position: absolute;*/
+  border-radius: 50px;
+  width: 600px;
+  height: 1500px;
+  overflow: hidden;
+  perspective: 1000px;
+
+}
+
+.to-inner-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.to-text {
+  margin: 15px 0 5px 57px;
+  color: black;
+
+}
+
+.to-social-icons {
+  magin: 30px auto;
+  text-align: center;
+}
+
+.to-social-icons img {
+  width: 30px;
+  magin: 0 12px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.26);
+  cursor: pointer;
+  border-radius: 50%;
+}
+.to-social-icons img:hover {
+  width: 35px;
+}
+
+.to-card-front, .to-card-back {
+  border-radius: 10px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  background-size: cover;
+  background: white;
+
+  padding: 0px 55px;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+}
+.to-card-front {
+  padding-top: 25px;
+}
+
+.to-card-back {
+
+  transform: rotateY(180deg);
+}
+
+.to-card h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.to-div-input{
+  padding-bottom: 20px;
+  position: relative;
+
+}
+.to-input-box {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #030103;
+  magin-top: 10px;
+  margin-bottom: 5px;
+  height: 32px;
+  border-radius: 20px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  outline: none;
+  text-align: center;
+  color: #060206;
+}
+
+::placeholder {
+  color: #0b0b0b;
+  font-size: 12px;
+}
+
+.to-error-text {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  color: #e54744;
+  font-size: 12px;
+  margin-left: 20px;
+}
+.to-error-sign{
+  top: 52px;
+}
+
+
+
+
+.to-sign-submit {
+  width: 100%;
+  /*background: transparent;*/
+  height: 32px;
+  border-radius: 50px;
+  position: relative;
+
+  background: #e54744;
+  color: white;
+}
+
+.to-sign-submit:hover {
+  background: white;
+  color: #e54744;
+  /*box-shadow: rgba(0, 0, 0, 0.5) 0 4px 12px;*/
+}
+
+.to-sign-submit::after {
+  color: #333;
+  line-height: 32px;
+  font-size: 17px;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+  right: -1px;
+  top: -1px;
+
+}
+
+span {
+  font-size: 13px;
+  margin-left: 10px;
+}
+
+.to-card .change {
+  magin-top: 70px;
+}
+.to-change{
+  width: 100%;
+  /*background: transparent;*/
+  height: 32px;
+  border-radius: 58px;
+  background: #e54744;
+  color: white;
+}
+.to-change:hover {
+  background: white;
+  color: #e54744;
+  /*box-shadow: rgba(0, 0, 0, 0.5) 0 4px 12px;*/
+}
+
+.to-change-facebook{
+  width: 100%;
+  /*background: transparent;*/
+  height: 32px;
+  border-radius: 58px;
+  background: dodgerblue;
+  color: white;
+}
+.to-change-facebook:hover {
+  background: white;
+  color: dodgerblue;
+  /*box-shadow: rgba(0, 0, 0, 0.5) 0 4px 12px;*/
+}
+
+hr.hr-login-signup {
+  border-top: 1px solid #e54744;
+}
+
+.card {
+  -moz-box-shadow: 0 0 3px black;
+  -webkit-box-shadow: 0 0 3px black;
+  box-shadow: 0 0 3px black;
+}
+
+input,
+textarea {
+  background-color: #F3E5F5;
+  padding: 8px 0px 8px 0px !important;
+  /*width: 100%;*/
+  border-radius: 0 !important;
+  box-sizing: border-box;
+  border: none !important;
+  border-bottom: 1px solid #F3E5F5 !important;
+  font-size: 18px !important;
+  color: #000 !important;
+  font-weight: 300
+}
+
+input.remember {
+  background-color: #F3E5F5;
+  font-size: 18px !important;
+  color: #000 !important;
+  font-weight: 300
+}
+
+input:focus,
+textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid #e54744 !important;
+  outline-width: 0;
+  font-weight: 400
+}
+
+button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0
+}
+
+.card {
+  border-radius: 0;
+  border: none;
+  position: relative
+}
+
+.card1 {
+  width: 150%;
+  height: 150%;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem
+}
+
+.form-control {
+  background-color: white;
+}
+
+.form-control-placeholder {
+  position: absolute;
+  top: 0;
+  padding: 7px 0 0 0;
+  transition: all 300ms;
+  opacity: 0.5
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+  font-size: 100%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+  color: #e54744;
+  font-weight: bolder;
+}
+
+
+.bottom {
+  bottom: 0;
+  position: absolute;
+  width: 100%
+}
+
+.sm-text {
+  font-size: 15px
+}
+
+span.required-symbol {
+  color: red;
+  font-weight: bolder;
+}
+
+p.error-msg {
+  color: red;
+}
+
+button.facebook-button {
+  background-color: blue;
+  color: white;
+  border-radius: 50px;
+}
+
+button.facebook-button:hover {
+  background-color: white;
+  color: blue;
+  border-radius: 50px;
+}
+
+button.google-button {
+  background-color: red;
+  color: white;
+  border-radius: 50px;
+}
+
+button.google-button:hover {
+  background-color: white;
+  color: red;
+  border-radius: 50px;
+}
+
+
+
+@media screen and (max-width: 1200px) {
+  .card1 {
+    width: 100%;
+    padding: 10px 30px
+  }
+
+  .bottom {
+    position: relative
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 10px !important
+  }
+}
+
+::placeholder {
+  color: red;
+  opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,9 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule, DatePipe} from '@angular/common';
-
-import { FlightListComponent } from './component/flight-ticket/buy-ticket/flight-list/flight-list.component';
-
-
 import {ClientRoutingModule} from './client-routing.module';
 import {NewsManipulationComponent} from './component/news/news-manipulation/news-manipulation.component';
 import {NewsReviewComponent} from './component/news/news-review/news-review.component';
@@ -54,6 +50,7 @@ import {FlightCreateComponent} from "./component/flight-ticket/flight-management
 import {FlightEditComponent} from "./component/flight-ticket/flight-management/flight-edit/flight-edit.component";
 
 import { CustomerChangePasswordComponent } from './component/customer/customer-change-password/customer-change-password.component';
+import {FlightListComponentTrang} from "./component/flight-ticket/buy-ticket/flight-list/flight-list.component";
 
 @NgModule({
 
@@ -72,7 +69,8 @@ import { CustomerChangePasswordComponent } from './component/customer/customer-c
     FlightListComponent,AirlineCreateComponent,AirlineListComponent,
     FlightEditComponent,FlightCreateComponent, DialogDeleteComponent, BookingDetailsComponent,
     PassengerInformationComponent, DialogReturnComponent,CustomCurrencyPipe,
-    CustomerTransactionHistoryComponent,CustomerPaymentComponent, CustomerChangePasswordComponent, FlightListComponent],
+    CustomerTransactionHistoryComponent,CustomerPaymentComponent, CustomerChangePasswordComponent, FlightListComponent,
+    FlightListComponentTrang],
 
   imports: [
     CommonModule,

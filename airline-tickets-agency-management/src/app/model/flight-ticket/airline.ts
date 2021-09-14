@@ -1,5 +1,5 @@
 export interface Airline {
-  airlineId?: number;
-  airlineName?: string;
-  logo?: string;
+  airlineId: number;
+  airlineName: string;
+  logo: string;
 }

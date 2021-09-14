@@ -1,0 +1,128 @@
+<h1 class="d-flex justify-content-center">THỐNG KÊ</h1>
+<div class="bg1">
+  <div *ngIf="statisticalChart1.length==0">
+    <div class="d-flex justify-content-center">
+      <h5 style="color: red">Không tìm thấy dữ liệu</h5>
+    </div>
+  </div>
+  <div>
+  <span *ngIf="isLine || isBar || isCircle">
+<div>
+  <p>- Thời gian 1: từ: <span>{{startDate1 | date:'dd/MM/yyyy'}}</span> đến: <span>{{endDate1 | date:'dd/MM/yyyy'}}</span></p>
+  <p>- Thời gian 2: từ: <span>{{startDate2 | date:'dd/MM/yyyy'}}</span> đến: <span>{{endDate2 | date:'dd/MM/yyyy'}}</span></p>
+</div>
+</span>
+    <span *ngIf="isTopLine || isTopBar || isTopCircle">
+<div>
+  <p>- Thời gian: từ: <span>{{startDate1 | date:'dd/MM/yyyy'}}</span> đến: <span>{{endDate1 | date:'dd/MM/yyyy'}}</span></p>
+</div>
+</span>
+    <div class="d-flex justify-content-center">
+         <span *ngIf="isLine || isBar">
+        <h5 class="d-flex justify-content-center">DOANH THU</h5>
+        <hr>
+        <div class="w">
+          <apx-chart *ngIf="isLine"
+                     [series]="chartOptions.seriesLine"
+                     [chart]="chartOptions.chart"
+                     [xaxis]="chartOptions.xaxis"
+                     [stroke]="chartOptions.stroke"
+                     [tooltip]="chartOptions.tooltip"
+                     [dataLabels]="chartOptions.dataLabels"
+          ></apx-chart>
+          <apx-chart *ngIf="isBar"
+                     [series]="chartOptions.seriesBar"
+                     [chart]="chartOptions.chart"
+                     [dataLabels]="chartOptions.dataLabels"
+                     [plotOptions]="chartOptions.plotOptions"
+                     [yaxis]="chartOptions.yaxis"
+                     [legend]="chartOptions.legend"
+                     [fill]="chartOptions.fill"
+                     [stroke]="chartOptions.stroke"
+                     [tooltip]="chartOptions.tooltip"
+                     [xaxis]="chartOptions.xaxis"
+          ></apx-chart>
+        </div>
+          <hr>
+           <div class="d-flex justify-content-center">
+          <div class="mx-2">Thời gian 1: {{totalMoney1 | currency: 'VND' : ' ': '1.0-0'}} VNĐ</div>
+          <div class="mx-2">Thời gian 2: {{totalMoney2 | currency: 'VND' : ' ': '1.0-0'}} VND</div>
+        </div>
+        </span>
+      <span *ngIf="isTopLine">
+            <hr>
+        <div class="wLine">
+          <apx-chart *ngIf="isTopLine"
+                     [series]="chartOptions.seriesLineTop"
+                     [chart]="chartOptions.chart"
+                     [xaxis]="chartOptions.xaxis"
+                     [dataLabels]="chartOptions.dataLabels"
+                     [grid]="chartOptions.grid"
+                     [stroke]="chartOptions.stroke"
+                     [title]="chartOptions.title"
+          ></apx-chart>
+        </div>
+          <hr>
+        </span>
+      <span *ngIf="isTopBar">
+        <hr>
+        <div class="wLine">
+          <apx-chart *ngIf="isTopBar"
+                     [series]="chartOptions.seriesBarTop"
+                     [chart]="chartOptions.chart"
+                     [dataLabels]="chartOptions.dataLabels"
+                     [stroke]="chartOptions.stroke"
+                     [colors]="chartOptions.colors"
+                     [title]="chartOptions.title"
+                     [subtitle]="chartOptions.subtitle"
+                     [plotOptions]="chartOptions.plotOptions"
+                     [yaxis]="chartOptions.yaxis"
+                     [xaxis]="chartOptions.xaxis"
+                     [tooltip]="chartOptions.tooltip"
+          ></apx-chart>
+        </div>
+          <hr>
+        </span>
+
+      <span *ngIf="isCircle || isTopCircle">
+          <h5 class="d-flex justify-content-center" *ngIf="isCircle">DOANH THU</h5>
+          <h5 class="d-flex justify-content-center"
+              *ngIf="isTopCircle&&isEmployee">Top 5 nhân viên bán vé nhiều nhất</h5>
+          <h5 class="d-flex justify-content-center"
+              *ngIf="isTopCircle&&isAirline">Top 5 hãng máy bay bán vé nhiều nhất</h5>
+        <hr>
+        <div class="withCircle">
+          <apx-chart *ngIf="isCircle"
+                     [series]="chartOptions.seriesPie"
+                     [chart]="chartOptions.chart"
+                     [xaxis]="chartOptions.xaxis"
+                     [stroke]="chartOptions.stroke"
+                     [tooltip]="chartOptions.tooltip"
+                     [labels]="chartOptions.labelsPie"
+                     [dataLabels]="chartOptions.dataLabels"
+          ></apx-chart>
+          <apx-chart *ngIf="isTopCircle"
+                     [series]="chartOptions.seriesCircleTop"
+                     [chart]="chartOptions.chart"
+                     [labels]="chartOptions.labelsCircle"
+                     [responsive]="chartOptions.responsive"
+          ></apx-chart>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-center" *ngIf="isCircle">
+          <div class="mx-2">Tuần 1: {{totalMoney1 | currency: 'VND' : ' ': '1.0-0'}} VNĐ</div>
+          <div class="mx-2">Tuần 2: {{totalMoney2 | currency: 'VND' : ' ': '1.0-0'}} VNĐ</div>
+        </div>
+           </span>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button (click)="redirectReport()" class="btn-back btn m-3" type="button"><i class="fa fa-reply"></i> Quay lại
+      </button>
+      <button (click)="htmlToPDF()" class="btn-print btn m-3" type="button"><i class="fa fa-print"
+                                                                               aria-hidden="true"></i>
+        In báo
+        cáo
+      </button>
+    </div>
+  </div>
+</div>
