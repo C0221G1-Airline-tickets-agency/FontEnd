@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-3 col-lg-3">
+    <app-side-bar></app-side-bar>
+  </div>
+  <div class="col-xl-9  col-lg-9 col-md-12 col-sm-12">
+    <div class="right-content w-100">
+
+      <!--        nơi đổ dữ liệu router-outlet              -->
+
+      <div id="content" class="container mb-5 sub-main  ">
+        <div class="pt-4  mb-4 text-center">
+          <h2 class="pb-2 title-header">Lịch sử giao dịch</h2>
+        </div>
+
+        <div class="" style="overflow-x: auto">
+
+          <table class="table table-striped table-bordered" >
+            <thead class="thead">
+            <tr>
+              <th>STT</th>
+              <th>Nơi đi</th>
+              <th>Nơi đến</th>
+              <th>Ngày đặt</th>
+              <th>Ngày bay</th>
+              <th>Giá (VND)</th>
+              <th>Tình trạng</th>
+            </tr>
+            </thead>
+            <tr *ngIf="listTicketTransaction.length == 0">
+            <td colspan="7" style="color: red; text-align: center">Không có dữ liệu</td>
+            </tr>
+            <tbody *ngFor="let ticket of listTicketTransaction, let i = index">
+            <tr>
+              <td>{{i+1+this.index}}</td>
+              <td>{{ticket.pointOfDeparture}}</td>
+              <td>{{ticket.destination}}</td>
+              <td>{{ticket.bookingDate | date: 'dd'}}-{{ticket.bookingDate | date:'MM'}}-{{ticket.bookingDate | date: 'yyyy'}}</td>
+              <td>{{ticket.flightDate | date: 'dd'}}-{{ticket.flightDate | date:'MM'}}-{{ticket.flightDate | date: 'yyyy'}}</td>
+              <td class="text-center">{{ticket.priceSell | number}}</td>
+              <td>{{ticket.ticketStatusName}}</td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="d-flex justify-content-end pt-1 pb-2">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" (click)="previousPage()" >Trang Trước</a></li>
+              <li class="page-item"><a class="page-link" >{{this.index/5+1}}</a></li>
+              <li class="page-item"><a class="page-link" (click)="nextPage()" >Trang sau</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

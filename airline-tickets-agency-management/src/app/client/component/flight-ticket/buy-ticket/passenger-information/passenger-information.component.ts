@@ -29,6 +29,7 @@ export class PassengerInformationComponent implements OnInit {
 
   getTicket(id: number){
     return this.ticketService.findTicketById(id).subscribe( (ticket: Ticket) => {
+
       if (ticket.passengerType=='Người lớn'){
         this.ticketForm = new FormGroup({
           passengerName: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(50), Validators.pattern('[A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴa-zàáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ ]*')]),
@@ -48,6 +49,7 @@ export class PassengerInformationComponent implements OnInit {
           passengerIdCard: new FormControl('000000001'),
         });
       }
+
       this.ticket = ticket;
     })
   }
@@ -59,12 +61,14 @@ export class PassengerInformationComponent implements OnInit {
     this.ticket.passengerEmail = this.ticketForm.value.passengerEmail;
     this.ticket.passengerIdCard = this.ticketForm.value.passengerIdCard;
     this.ticket.ticketStatus.ticketStatusId = 1;
-    // console.log(this.ticket);
+
     this.ticketService.update(this.id, this.ticket).subscribe(() => {
       // console.log(this.ticket);
       this.toast.success('Mua vé thành công!', 'Chúc mừng:')
     }, error => {
+
       this.toast.error('Mua vé không thành công!', 'Thất bại:')
+
     });
   }
 

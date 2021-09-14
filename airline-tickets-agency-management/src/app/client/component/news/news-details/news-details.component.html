@@ -1,0 +1,73 @@
+<div class="col-xl-9 mx-auto col-lg-9 col-md-12 col-sm-12">
+
+  <div class="row ">
+    <div class="ml-3"><h4 style="font-weight: bold; margin-right: 120px">Tin liên quan</h4></div>
+  </div>
+  <div class=" d-none d-flex  ">
+    <hr>
+    <div class="row d-block mx-0" style="width: 100%" *ngFor="let hot of hotNews ">
+      <div class="">
+        <div class="row shadow news-card p-3 ml-1 mr-1 mb-2 bg-white ">
+          <div class="col-md-4 px-0">
+            <div class="feed-image"><img style="width: 150px ; height: 80px" class="news-feed-image rounded img-fluid img-responsive"
+                                         src="{{hot.newsImage}}" alt=""></div>
+          </div>
+          <div class="col-md-8">
+            <div class="news-feed-text">
+              <a [routerLink]="['/news/news-details',hot.newsId]">{{hot.newsTitle  | limitToPipe :  60}}</a>
+              <div class="d-flex flex-row justify-content-between align-items-center mt-2">
+                <div class="d-flex creator-profile">
+                  <div class="d-flex flex-column ml-2"><span class="date">{{hot.newsWriteDay}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div style="background: white; margin-top: 15px">
+    <div>
+      <div class=" d-flex justify-content-center">
+        <div class="col-sm-15 col-md-10 col-lg-10 py-0 pl-3 pr-1">
+          <div id="featured" class=" slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="card bg-dark text-white" style="margin-top: 50px "><img  class="card-img img-fluid" src="{{item.newsImage}}" alt="">
+                  <div class="card-img-overlay d-flex ">
+                    <div href="" class="align-self-end">
+                    <span class=""
+                          style="color: white;background: #e54744; font-size: 110%;">{{item.category.categoryName}}</span>
+                      <br>
+                      <h4 class="card-title" style="color: white; background: #0b41ff">{{item.newsTitle}}</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  header chi tiết tin      -->
+
+        <!--  body chi tiết tin      -->
+      </div>
+
+      <div class="row  justify-content-center">
+
+        <div class="col-sm-15 col-md-10 col-lg-10 py-0 pl-3 pr-1">
+          <small class="my-2" style="font-weight: 900">{{item.employee.employeeName}} | {{item.newsWriteDay}}</small>
+          <p id="content">
+            {{item.newsContent}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+
+</div>
