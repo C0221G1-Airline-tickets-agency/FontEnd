@@ -22,6 +22,7 @@ import {TicketListComponent} from './component/management-ticket/ticket-list/tic
 
 
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -36,6 +37,7 @@ import {TicketListComponent} from './component/management-ticket/ticket-list/tic
     ReportComponent, ManagementComponent, CustomerComponent, DeleteCustomerComponent,
     CreateCustomerComponent, EditCustomerComponent, CustomPipe,
     TicketEditComponent, TicketPrintComponent, TicketListComponent ],
+
   bootstrap: [ManagementComponent]
 })
 export class ManagementModule { }
