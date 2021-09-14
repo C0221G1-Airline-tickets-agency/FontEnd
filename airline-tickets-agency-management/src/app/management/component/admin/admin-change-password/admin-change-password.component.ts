@@ -56,13 +56,13 @@ export class AdminChangePasswordComponent implements OnInit {
       this.toast.warning('Chưa nhập mật khẩu', 'Chú ý !');
     } else {
       if (!this.checkValidate(oldPassword)) {
-        this.toast.warning('Kí tự chữ a -z không dấu , kí tự số 0-9 , ít nhất 5 kí tự ', 'Chú ý');
+        this.toast.warning('Mật khẩu là kí tự chữ a -z không dấu , kí tự số 0-9 , ít nhất 5 kí tự ', 'Chú ý');
       } else {
         if (newPassword === '') {
           this.toast.warning('Chưa nhập mật khẩu mới', 'Chú ý !');
         } else {
           if (!this.checkValidate(newPassword)) {
-            this.toast.warning('Kí tự chữ a -z không dấu , kí tự số 0-9 , ít nhất 5 kí tự ', 'Chú ý');
+            this.toast.warning('Mật khẩu là kí tự chữ a -z không dấu , kí tự số 0-9 , ít nhất 5 kí tự ', 'Chú ý');
           } else {
             if (confirmPassword === '') {
               this.toast.warning('Chưa nhập lại mật khẩu mới', 'Chú ý');
