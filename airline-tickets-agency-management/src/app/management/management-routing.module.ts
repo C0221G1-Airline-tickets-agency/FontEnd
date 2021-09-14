@@ -6,6 +6,11 @@ import {CustomerComponent} from './component/ business/customer/customer.compone
 import {CreateCustomerComponent} from './component/ business/create-customer/create-customer.component';
 import {EditCustomerComponent} from './component/ business/edit-customer/edit-customer.component';
 import {TicketListComponent} from "./component/management-ticket/ticket-list/ticket-list.component";
+import {StatisticalComponent} from './component/statistical/statistical.component';
+import {EmployeeComponent} from './component/employee/list-delete-employee/employee.component';
+import {AddEmployeeComponent} from './component/employee/add-employee/add-employee.component';
+import {UpdateEmployeeComponent} from './component/employee/update-employee/update-employee.component';
+import {EmployeeInformationComponent} from './component/employee-information/employee-information.component';
 
 
 const routes: Routes = [
@@ -27,6 +32,21 @@ const routes: Routes = [
         },
         {
           path: 'ticket/list', component: TicketListComponent
+        },
+        {
+          path: 'statistical', component: StatisticalComponent
+        },
+        {
+          path: 'employee', component: EmployeeComponent
+        },
+        {
+          path: 'employee/create', component: AddEmployeeComponent
+        },
+        {
+          path: 'employee/update/:id', component: UpdateEmployeeComponent
+        },
+        {
+          path: 'employee-information', component: EmployeeInformationComponent
         },
       ]
   },
