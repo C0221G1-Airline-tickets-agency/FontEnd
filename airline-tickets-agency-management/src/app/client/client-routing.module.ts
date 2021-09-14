@@ -4,6 +4,8 @@ import {NewsManipulationComponent} from './component/news/news-manipulation/news
 
 import {ClientComponent} from './client/client.component';
 import {HomeComponent} from './component/home/home.component';
+import {FlightListComponent} from './component/flight-ticket/buy-ticket/flight-list/flight-list.component';
+import {CustomerChangePasswordComponent} from './component/customer/customer-change-password/customer-change-password.component';
 
 import {DestinationDetailComponent} from './component/destination-detail/destination-detail.component';
 
@@ -43,6 +45,17 @@ const routes: Routes = [
           path: '', component: HomeComponent
         },
         {
+
+          path: 'news/manipulation', component: NewsManipulationComponent
+        },
+        {
+          path: 'search-flight', component: FlightListComponent
+        },
+        {
+          path: 'customer', component: CustomerChangePasswordComponent 
+        },
+        {
+
           path: 'news/news-list', component: NewsListComponent
         },
         {

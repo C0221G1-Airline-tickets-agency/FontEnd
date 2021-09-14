@@ -1,4 +1,6 @@
-import {Flight} from './flight';
+
+import {Flight} from './Flight';
+
 import {TicketStatus} from './ticket-status';
 
 

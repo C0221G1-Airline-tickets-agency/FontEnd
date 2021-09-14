@@ -6,7 +6,9 @@ import {AppComponent} from './app.component';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+
 import {Overlay, ToastrComponentlessModule, ToastrModule, ToastrService} from 'ngx-toastr';
+
 
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
@@ -30,6 +32,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
     MatDialogModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
 
     ToastrModule.forRoot({
       timeOut: 2000,
