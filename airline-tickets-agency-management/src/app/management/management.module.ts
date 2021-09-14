@@ -20,6 +20,11 @@ import {TicketPrintComponent} from './component/management-ticket/ticket-print/t
 import {TicketListComponent} from './component/management-ticket/ticket-list/ticket-list.component';
 import {StatisticalComponent} from './component/statistical/statistical.component';
 import {NgApexchartsModule} from 'ng-apexcharts';
+import {EmployeeComponent} from './component/employee/list-delete-employee/employee.component';
+import {AddEmployeeComponent} from './component/employee/add-employee/add-employee.component';
+import {UpdateEmployeeComponent} from './component/employee/update-employee/update-employee.component';
+import {EmployeeInformationComponent} from './component/employee-information/employee-information.component';
+import {EmployeeChangePasswordComponent} from './component/employee-change-password/employee-change-password.component';
 
 
 @NgModule({
@@ -36,7 +41,9 @@ import {NgApexchartsModule} from 'ng-apexcharts';
   declarations: [
     ReportComponent, ManagementComponent, CustomerComponent, DeleteCustomerComponent,
     CreateCustomerComponent, EditCustomerComponent, CustomPipe,
-    TicketEditComponent, TicketPrintComponent, TicketListComponent, StatisticalComponent],
+    TicketEditComponent, TicketPrintComponent, TicketListComponent, StatisticalComponent ,
+    EmployeeComponent, AddEmployeeComponent, UpdateEmployeeComponent,
+    EmployeeInformationComponent, EmployeeChangePasswordComponent],
   bootstrap: [ManagementComponent]
 })
 export class ManagementModule {
