@@ -14,4 +14,7 @@ export class SearchFlightService {
   getAllLocations(): Observable<any> {
     return this.http.get(this.URl + 'location/list-location');
   }
+  findLocationByCityName(cityName): Observable<any> {
+    return this.http.get(this.URl + 'location?cityName=' + cityName);
+  }
 }
