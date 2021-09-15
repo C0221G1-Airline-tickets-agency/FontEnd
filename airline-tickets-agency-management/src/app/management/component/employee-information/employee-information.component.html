@@ -1,0 +1,88 @@
+
+<fieldset class="scheduler-border" style="background: white;box-shadow: 0 0 2px 2px #cccccc;">
+  <legend class="scheduler-border text-center" style="background: #e54744">
+    <h2>Thông tin nhân viên</h2></legend>
+  <br>
+  <div class="container row ">
+    <div class="form-group ml-5 col-7">
+      <div class="row input-group ml-5">
+        <div class="col-4">
+          <span>Mã nhân viên:</span>
+        </div>
+        <div class="col-8">
+          <div class="d-flex ml-5">
+            <span>{{code}}</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row input-group ml-5">
+        <div class="col-4">
+          <span>Họ & Tên:</span>
+        </div>
+        <div class="col-8">
+          <div class="d-flex ml-5">
+            <span>{{name}}</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row input-group ml-5">
+        <div class="col-4">
+          <span>Ngày sinh:</span>
+        </div>
+        <div class="col-8">
+          <div class="d-flex ml-5">
+            <span>{{birthday | date : "dd/MM/yyyy"}}</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row input-group ml-5">
+        <div class="col-4">
+          <span>Địa chỉ:</span>
+        </div>
+        <div class="col-8">
+          <div class="d-flex ml-5">
+            <span>{{address}}</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row input-group ml-5">
+        <div class="col-4">
+          <span>Số điện thoại:</span>
+        </div>
+        <div class="col-8">
+          <div class="d-flex ml-5">
+            <span>{{phone}}</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row input-group ml-5">
+        <div class="col-4">
+          <span>Email:</span>
+        </div>
+        <div class="col-8">
+          <div class="d-flex ml-5">
+            <span>{{email}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-4">
+      <div class="row" style="border-radius: 150px" height="200px" width="200px">
+        <img src="{{image}}" alt="" style="border-radius: 150px" height="200px" width="200px">
+      </div>
+      <br>
+      <br>
+      <div class="row mb-2" style="margin-left: 30px">
+        <button data-toggle="modal" data-target="#exampleModal1" class="btn btn-success"
+                type="button" (click)="openDialogChangePassword()">
+          Đổi mật khẩu
+        </button>
+      </div>
+    </div>
+  </div>
+</fieldset>

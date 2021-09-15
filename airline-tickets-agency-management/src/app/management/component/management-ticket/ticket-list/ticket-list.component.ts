@@ -185,7 +185,7 @@ export class TicketListComponent implements OnInit {
   }
 
   onInputHandler() {
-    this.router.navigateByUrl("/flight-management");
+    this.router.navigateByUrl("/search-flight");
   }
 
   onReturnHandler() {
@@ -200,7 +200,7 @@ export class TicketListComponent implements OnInit {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.router.navigateByUrl("");
+        this.router.navigateByUrl("/management");
       }
     })
   }
