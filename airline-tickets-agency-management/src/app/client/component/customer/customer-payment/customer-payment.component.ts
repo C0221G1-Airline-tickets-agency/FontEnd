@@ -4,6 +4,7 @@ import {TicketCustomerDto} from '../../../../model/flight-ticket/TicketCustomerD
 import {TicketService} from '../../../../service/flight-ticket/ticket.service';
 import {ToastrService} from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import {TokenStorageService} from "../../../../user/user-service/token-storage.service";
 
 
 declare let paypal: any;
@@ -15,7 +16,8 @@ declare let paypal: any;
 })
 export class CustomerPaymentComponent implements OnInit {
 
-  constructor(private matDialog: MatDialog, private ticketService: TicketService, private  toast: ToastrService) {
+  constructor(private matDialog: MatDialog, private ticketService: TicketService, private  toast: ToastrService,
+              private tokenStorageService: TokenStorageService) {
   }
 
   listTicketCustomerBook: TicketCustomerDto[] = [];
@@ -59,7 +61,7 @@ export class CustomerPaymentComponent implements OnInit {
           }, error => {
           });
         }
-        this.ticketService.sendMailInformation('ducdoan5695@gmail.com', this.listTicketPayment).subscribe(() => {
+        this.ticketService.sendMailInformation(this.tokenStorageService.getUser().username, this.listTicketPayment).subscribe(() => {
           this.getListTicketCustomerBookFinish();
         }, error => {
         });
@@ -124,7 +126,7 @@ export class CustomerPaymentComponent implements OnInit {
   }
 
   getListTicketCustomerBook() {
-    this.ticketService.getListTicketCustomerBook(1, this.index).subscribe(next => {
+    this.ticketService.getListTicketCustomerBook(this.tokenStorageService.getUser().id, this.index).subscribe(next => {
       if (next == null) {
         this.index = this.index - 5;
         this.toast.warning('Không có dữ liệu', 'Thông báo');
@@ -136,7 +138,7 @@ export class CustomerPaymentComponent implements OnInit {
 
   getListTicketCustomerBookFinish() {
     this.index = 0;
-    this.ticketService.getListTicketCustomerBook(1, this.index).subscribe(next => {
+    this.ticketService.getListTicketCustomerBook(this.tokenStorageService.getUser().id, this.index).subscribe(next => {
       this.listTicketCustomerBook = next;
     });
   }

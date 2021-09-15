@@ -25,7 +25,7 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="row">Loại hành khách:</div>
-            <div class="row">{{ticket.passengerType}}</div>
+            <div class="row" style="font-weight: bold; color: #dc3545">{{ticket.passengerType}}</div>
           </div>
           <div class="col-lg-6">
 
@@ -88,7 +88,7 @@
     </div>
     <div class="col-lg-6">
       <div class="row justify-content-center align-items-center">
-        <button class="btn btn-search fa fa-plus" (click)="closeDialog()" [routerLink]="['/passenger-information/', {listId:listId}]" style="height: 30px;width: 170px"> Chọn</button>
+        <button class="btn btn-search fa fa-plus" (click)="openPassengerInformation()" style="height: 30px;width: 170px"> Chọn</button>
       </div>
     </div>
   </div>

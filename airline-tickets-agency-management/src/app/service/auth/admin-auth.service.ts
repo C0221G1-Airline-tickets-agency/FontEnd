@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {TokenStorageService} from './token-storage.service';
+
 import {ActivatedRouteSnapshot, CanActivate, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import {TokenStorageService} from "../../user/user-service/token-storage.service";
 
 
 @Injectable({
@@ -13,10 +14,10 @@ export class AdminAuthService implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    const token = this.tokenStorageService.getToken();
+    const token = this.tokenStorageService.getUser();
     if (token == null) {
       this.router.navigateByUrl('/');
-      this.toastr.error('Chưa login', '401');
+      this.toastr.warning('Chưa login', '401');
       return false;
     } else if (!token || !this.isRole()) {
       this.router.navigateByUrl('/');
@@ -28,14 +29,13 @@ export class AdminAuthService implements CanActivate {
   }
 
   isRole() {
-    // const tokenPayload = this.tokenStorageService.getAuthorities();
-    const tokenPayload = ['ROLE_ADMIN'];
-    for (const role of tokenPayload) {
+    const user = this.tokenStorageService.getUser();
+    const roles = user.roles;
+    for (const role of roles) {
       if (role === 'ROLE_ADMIN') {
         return true;
       }
     }
     return false;
   }
-
 }

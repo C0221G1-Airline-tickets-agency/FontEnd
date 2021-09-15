@@ -44,10 +44,6 @@ const routes: Routes = [
           path: '', component: HomeComponent
         },
         {
-
-          path: 'news/manipulation', component: NewsManipulationComponent
-        },
-        {
           path: 'search-flight', component: FlightListComponentTrang
         },
         {
