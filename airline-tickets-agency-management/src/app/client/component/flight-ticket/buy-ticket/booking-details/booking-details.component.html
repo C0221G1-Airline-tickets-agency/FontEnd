@@ -1,36 +1,30 @@
-
 <ng-template #notExist>
   <div class="container-fluid">
-
     <div class="row">
       <div class="col-lg-12 d-flex justify-content-center">
         <h2 style="color: black">Vé này không tồn tại!</h2>
       </div>
     </div>
   </div>
-
 </ng-template>
 
 
-<div *ngIf="ticket!=null; else notExist" class="container-fluid">
-
+<div *ngIf="tickets.length>0; else notExist" class="container-fluid">
   <div class="row justify-content-center">
     <h2><b>Thông tin chuyến bay</b></h2>
   </div>
-  <div class="border border-dark px-5 py-1 bg-white rounded">
+  <div *ngFor="let ticket of tickets" class="border border-dark px-5 py-1 bg-white rounded">
     <div class="row">
       <h4><b>{{ticket.flight.locationFrom.cityName}} <i class="fa fa-fighter-jet"></i> {{ticket.flight.locationTo.cityName}}</b></h4>
     </div>
     <div class="row">
       <div class="col-lg-4">
         <div class="row">{{ticket.flight.locationFrom.cityName}} {{ticket.flight.locationFrom.areaCode}}</div>
-
         <div class="row">{{ticket.flight.departureTime}}, {{ticket.bookingDate | date: 'dd/MM/yyyy'}}</div>
         <div class="row">{{ticket.flight.locationFrom.airportName}}</div>
         <div class="row">
           <div class="col-lg-6">
             <div class="row">Loại hành khách:</div>
-
             <div class="row">{{ticket.passengerType}}</div>
           </div>
           <div class="col-lg-6">
@@ -38,7 +32,6 @@
           </div>
         </div>
         <div class="row" style="color: red"></div>
-
         <div class="row mt-3">Điều kiện hành lý:</div>
         <div class="row">
           <div class="col-lg-6">
@@ -46,23 +39,19 @@
           </div>
           <div class="col-lg-6">
             <div class="row">{{ticket.carryOnBaggage}} Kg</div>
-
           </div>
         </div>
         <div class="row">
           <div class="col-lg-6">
-
             <div class="row">Hành lý ký gửi:</div>
           </div>
           <div class="col-lg-6">
             <div class="row">{{ticket.checkInBaggage}} Kg</div>
-
           </div>
         </div>
       </div>
       <div class="col-lg-4">
         <div class="row">{{ticket.flight.locationTo.cityName}} {{ticket.flight.locationTo.areaCode}}</div>
-
         <div class="row">{{ticket.flight.endTime}}, {{ticket.bookingDate | date: 'dd/MM/yyyy'}}</div>
         <div class="row">{{ticket.flight.locationTo.airportName}}</div>
         <div class="row">
@@ -73,7 +62,6 @@
           <div class="col-lg-6">
             <div class="row">Thuế & Phí:</div>
             <div class="row">{{ticket.tax*ticket.ticketPrice | currency: 'VND': ''}} VNĐ</div>
-
           </div>
         </div>
       </div>
@@ -83,10 +71,8 @@
         <div class="row">Loại vé: {{ticket.ticketType}}</div>
         <div class="row">
           <div class="col-lg-12">
-
             <div class="row">Tổng giá:</div>
             <div class="row">{{ticket.ticketPrice+(ticket.ticketPrice*ticket.ticketTypePrice)+ticket.plusBaggage+(ticket.ticketPrice*ticket.tax)-(ticket.ticketPrice*ticket.passengerTypePrice) | currency: 'VND': ''}} VNĐ</div>
-
           </div>
         </div>
       </div>
@@ -97,12 +83,12 @@
   <div class="row mt-3">
     <div class="col-lg-6">
       <div class="row justify-content-center">
-        <button class=" btn btn-return fa fa-reply"  style="height: 30px;width: 170px"> Hủy</button>
+        <button class=" btn btn-return fa fa-reply" (click)="closeDialog()" style="height: 30px;width: 170px"> Hủy</button>
       </div>
     </div>
     <div class="col-lg-6">
       <div class="row justify-content-center align-items-center">
-        <button class="btn btn-search fa fa-plus" [routerLink]="['/passenger-information',ticket.ticketId]" style="height: 30px;width: 170px"> Chọn</button>
+        <button class="btn btn-search fa fa-plus" (click)="closeDialog()" [routerLink]="['/passenger-information/', {listId:listId}]" style="height: 30px;width: 170px"> Chọn</button>
       </div>
     </div>
   </div>

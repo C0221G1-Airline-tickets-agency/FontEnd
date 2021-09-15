@@ -8,9 +8,10 @@ import {TicketService} from '../../../../../service/flight-ticket/ticket/ticket.
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {TicketNumber} from "../../../../../model/flight-ticket/ticketNumber";
 import {TicketArrayId} from "../../../../../model/flight-ticket/ticketArrayId";
-import {BookingDetailComponent} from "../booking-details/booking-detail.component";
+
 import {ActivatedRoute} from "@angular/router";
 import {Location as LocationHome} from '@angular/common';
+import {BookingDetailsComponent} from '../booking-details/booking-details.component';
 
 @Component({
   selector: 'app-flight-list',
@@ -109,18 +110,18 @@ export class FlightListComponentTrang implements OnInit {
   }
 
   start() {
-    this.flightDate = this.data.departureTime;
-    this.returnDate = this.data.endTime;
-    if (this.data.endTime == '') {
-      this.isTwoWay = 0;
-      this.returnDate = '';
-    } else {
-      this.isTwoWay = 1;
-    }
-
-    this.adults = this.data.passenger.split(',')[0];
-    this.children = this.data.passenger.split(',')[1];
-    this.findLocation();
+    // this.flightDate = this.data.departureTime;
+    // this.returnDate = this.data.endTime;
+    // if (this.data.endTime == '') {
+    //   this.isTwoWay = 0;
+    //   this.returnDate = '';
+    // } else {
+    //   this.isTwoWay = 1;
+    // }
+    //
+    // this.adults = this.data.passenger.split(',')[0];
+    // this.children = this.data.passenger.split(',')[1];
+    // this.findLocation();
   }
 
   getDay(day) {
@@ -455,9 +456,9 @@ export class FlightListComponentTrang implements OnInit {
           }
         }
       }
-      const dialogRef = this.dialog.open(BookingDetailComponent, {
-        width: '500px',
-        height: '300px',
+      const dialogRef = this.dialog.open(BookingDetailsComponent, {
+        width: '1000px',
+        height: '800px',
         data: {data1: this.listTicketId}
       });
       dialogRef.afterClosed().subscribe(result => {

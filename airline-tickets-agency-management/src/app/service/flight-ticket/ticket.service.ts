@@ -32,4 +32,6 @@ export class TicketService {
     const listTest = {ticketMailDtoList: listTicket, email};
     return this.http.post(this.TICKET_API + '/email/send', listTest);
   }
+
+
 }
