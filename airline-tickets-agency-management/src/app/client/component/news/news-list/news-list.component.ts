@@ -2,6 +2,7 @@ import {Component, OnInit, Pipe} from '@angular/core';
 import {News} from '../../../../model/news';
 import {NewsService} from '../../../../service/news.service';
 import Swal from 'sweetalert2';
+import {TokenStorageService} from "../../../../user/user-service/token-storage.service";
 
 @Component({
   selector: 'app-news-list',
@@ -17,14 +18,26 @@ export class NewsListComponent implements OnInit {
   hotNews: News[] = [];
   news: News = {};
   checkDelete = false;
+  isAdmin = false;
+  isLoggedIn = false;
 
-
-  constructor(private newsService: NewsService) {
+  constructor(private newsService: NewsService, private tokenStorageService: TokenStorageService) {
   }
 
   ngOnInit(): void {
+    this.checkAdmin();
     this.getAllNews();
     this.getHotNews();
+
+  }
+
+  checkAdmin() {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      const roles = user.roles;
+      this.isAdmin = roles.includes('ROLE_ADMIN');
+    }
   }
 
   getAllNews() {

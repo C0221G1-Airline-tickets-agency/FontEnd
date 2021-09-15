@@ -51,9 +51,10 @@ export class HeaderComponent implements OnInit {
       // tslint:disable-next-line:triple-equals
       this.ismod = (this.roles == 'ROLE_MODERATOR' || this.roles == 'ROLE_ADMIN')
       if(this.ismod){
+
         this.isAdmin = true;
+        console.log(this.isAdmin)
       }
-      console.log(this.ismod)
     }
   }
 
@@ -63,7 +64,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.tokenStorageService.signOut();
-    window.location.reload();
+    this.router.navigateByUrl('').then(() => {window.location.reload()})
   }
 
   openDialogLogin() {
