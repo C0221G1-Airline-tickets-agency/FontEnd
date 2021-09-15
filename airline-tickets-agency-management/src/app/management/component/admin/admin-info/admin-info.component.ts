@@ -20,9 +20,13 @@ export class AdminInfoComponent implements OnInit {
   admin: User;
   roles: Role[];
   isAdmin = false;
-
+  adminId: number;
   ngOnInit(): void {
-    this.getAdminById(1);
+    // localStorage.setItem('account', JSON.stringify(this.account));
+    // // Lấy data từ localStorage
+    // this.adminId = JSON.parse(localStorage.getItem('account')).accountId;
+    // this.email = JSON.parse(localStorage.getItem('account')).email;
+    this.getAdminById(this.adminId);
   }
 
   getAdminById(id: number) {
