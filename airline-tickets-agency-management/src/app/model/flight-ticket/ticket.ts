@@ -26,6 +26,6 @@ export interface Ticket {
   passengerEmail?: string;
   flag?: boolean;
   flight?: Flight;
-  ticketStatus?: TicketStatus;
+  ticketStatus?: any;
   user?: String;
 }

@@ -4,6 +4,8 @@ import {TicketService} from '../../../../../service/flight-ticket/ticket/ticket.
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Ticket} from '../../../../../model/flight-ticket/ticket';
 import {ToastrService} from 'ngx-toastr';
+import {TicketStatus} from '../../../../../model/flight-ticket/ticket-status';
+import {TokenStorageService} from '../../../../../user/user-service/token-storage.service';
 
 @Component({
   selector: 'app-passenger-information',
@@ -21,7 +23,7 @@ export class PassengerInformationComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private ticketService: TicketService,
               private toast: ToastrService,
-              private formBuilder: FormBuilder) {
+              private tokenStorageService: TokenStorageService) {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
         // this.id = +paramMap.get('id');
       let id1 = paramMap.get('listId');
@@ -74,7 +76,7 @@ export class PassengerInformationComponent implements OnInit {
       this.tickets[i].plusBaggage = this.formArray.value[i].plusBaggage;
       this.tickets[i].passengerEmail = this.formArray.value[i].passengerEmail;
       this.tickets[i].passengerIdCard = this.formArray.value[i].passengerIdCard;
-      this.tickets[i].ticketStatus.ticketStatusId = 1;
+      this.tickets[i].ticketStatus =  {ticketStatusId: 1};
       this.ticketService.update(this.tickets[i].ticketId, this.tickets[i]).subscribe(() => {
           // console.log(this.ticket);
           // this.toast.success('Mua vé thành công!', 'Chúc mừng:')

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {TicketService} from '../../../../../service/flight-ticket/ticket/ticket.service';
 import {Ticket} from '../../../../../model/flight-ticket/ticket';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-booking-details',
@@ -11,18 +12,19 @@ import {MatDialogRef} from '@angular/material/dialog';
 export class BookingDetailsComponent implements OnInit {
   ticket: Ticket;
   tickets: Ticket[] = [];
-  listId: number[] = [1,2];
+  listId: number[] = [];
 
 
   constructor(private ticketService: TicketService,
-              private dialogRef: MatDialogRef<BookingDetailsComponent>) {
-    for (const id of this.listId) {
-      this.viewTicket(id);
-    }
-    console.log(this.tickets);
+              private dialogRef: MatDialogRef<BookingDetailsComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+
   }
 
   ngOnInit(): void {
+    for (const id of this.data.data1) {
+      this.viewTicket(id);
+    }
   }
   viewTicket(id: number) {
       return this.ticketService.findTicketById(id).subscribe( ticket => {
