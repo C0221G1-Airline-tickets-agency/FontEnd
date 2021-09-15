@@ -13,6 +13,7 @@ import {Category} from '../../../../model/category';
 import {NewsService} from '../../../../service/news.service';
 import {UploadFileService} from '../../../../service/upload-file.service';
 import {NewsReviewComponent} from '../news-review/news-review.component';
+import {TokenStorageService} from "../../../../user/user-service/token-storage.service";
 
 @Component({
   selector: 'app-news-manipulation',
@@ -53,17 +54,21 @@ export class NewsManipulationComponent implements OnInit {
               private route: ActivatedRoute,
               private newsService: NewsService,
               private toastr: ToastrService,
-              private el: ElementRef) {
+              private el: ElementRef,
+              private tokenStorageService: TokenStorageService) {
   }
 
 
   ngOnInit(): void {
+    this.getUser()
     this.initForm();
     this.getNews();
     this.getListCategory();
 
   }
-
+  getUser(){
+    this.employee = this.tokenStorageService.getUser().employee;
+  }
   get category() {
     return this.formNews.get('category');
   }

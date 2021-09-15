@@ -17,7 +17,7 @@
       <div class="col-md-8">
         <div class="position-absolute "  style="top: 0px; right: 0" >
           <button class="btn  " routerLink="/news/manipulation"
-                  style="background:#e54744; color: white;">Thêm mới
+                  style="background:#e54744; color: white;" *ngIf="isAdmin">Thêm mới
           </button>
         </div>
         <div class="row " style="height: 40px">
@@ -33,11 +33,11 @@
               <!-- Example single danger button -->
               <div id="editNews" class="btn-group position-absolute" style="top:0px;right: 35px">
                 <a class="" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false" style="width: 20px">
+                   aria-expanded="false" style="width: 20px" *ngIf="isAdmin">
                   <i style="font-size: 150% ; margin-left: 50px;color: #797979" class="fa fa-ellipsis-v"
                      aria-hidden="true"></i>
                 </a>
-                <div class="dropdown-menu ">
+                <div class="dropdown-menu " >
                   <a class="dropdown-item" [routerLink]="['/news/manipulation',item.newsId]"> <i class="fa fa-edit text-warning" ></i> Sửa</a>
                   <a class="dropdown-item" data-toggle="modal"
                      (click)="deleteNews(item.newsId , item.newsCode)"> <i class="fa fa-trash text-danger"></i> Xóa</a>

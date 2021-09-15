@@ -21,29 +21,29 @@ export class CustomerService {
   }
 
   saveCustomer(customer: Customer): Observable<Customer> {
-    return this.http.post<Customer>(API_URL + '/create', customer);
+    return this.http.post<Customer>(API_URL + '/customer/create', customer);
   }
 
   updateCustomer(id: number, customerDto: Customer): Observable<Customer>{
-    return this.http.put<Customer>(`${API_URL}/update/${id}`,customerDto)
+    return this.http.put<Customer>(`${API_URL}/customer/update/${id}`,customerDto)
   }
 
   findById(id: number): Observable<Customer> {
-    return this.http.get<Customer>(`${API_URL}/${id}`)
+    return this.http.get<Customer>(`${API_URL}/customer/${id}`)
   }
 
 
   getListCustomer(page: number): Observable<any> {
-    return this.http.get(API_URL + '/list' + '?page=' + page);
+    return this.http.get(API_URL + '/customer/list' + '?page=' + page);
 
   }
 
   searchCustomer(page: number, field: any, search: any): Observable<any> {
-    return this.http.get(API_URL + '/search' + '?page=' + page + '&field=' + field + '&search=' + search);
+    return this.http.get(API_URL + '/customer/search' + '?page=' + page + '&field=' + field + '&search=' + search);
   }
 
   deleteCustomer(data: any): Observable<any> {
-    return this.http.patch(API_URL + '/delete', data);
+    return this.http.patch(API_URL + '/customer/delete', data);
   }
   findCustomerById(id: number): Observable<User> {
     return this.http.get<User>(`${API_URL}/customer/findCustomerById?id=${id}`);
