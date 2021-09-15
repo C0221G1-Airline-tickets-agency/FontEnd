@@ -2,15 +2,17 @@
   <div class="row">
     <header>
       <div class="logo d-inline">
-        <img src="./assets/img/logo.png" height="70px" width="220px" class="mt-1 rounded-pill"
-             style=" filter:  brightness(1.25) ;" alt="">
+        <a href="#"><img src="./assets/img/logo.png" height="70px" width="220px" class="mt-1 rounded-pill"
+             style=" filter:  brightness(1.25) ;" alt=""></a>
       </div>
       <span class="account">
+
          <ul class="my-nav-account">
            <div class="account-name" *ngIf="!isLoggedIn">
                   <li>
                    <a type="button" class="header-btn" (click)="openDialogLogin()">Đăng ký / Đăng nhập</a>
                   </li>
+
         </div>
     <div class="account-login" *ngIf="isLoggedIn">
       <span class="font-weight-bold">Xin chào, {{username}} &nbsp; |</span>
@@ -59,9 +61,10 @@
       </label>
       <ul class="my-nav">
         <li><a href="#">Trang chủ</a></li>
-        <li><a href="#">Tin tức</a></li>
+        <li><a href="news/news-list">Tin tức</a></li>
         <li><a href="#">Dịch vụ chuyến bay</a></li>
         <li><a href="#">Chuyến bay của tôi</a></li>
+        <li><a  *ngIf="isAdmin" routerLink="roomAdmin">Tin nhắn từ khách hàng</a></li>
       </ul>
     </header>
   </div>

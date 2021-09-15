@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-
 import {ManagementRoutingModule} from './management-routing.module';
 import {ReportComponent} from './component/report/report.component';
 
@@ -18,7 +17,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CustomPipe} from './custom-pipe';
 import {TicketEditComponent} from './component/management-ticket/ticket-edit/ticket-edit.component';
 import {TicketPrintComponent} from './component/management-ticket/ticket-print/ticket-print.component';
-
 import {TicketListComponent} from './component/management-ticket/ticket-list/ticket-list.component';
 import {StatisticalComponent} from './component/statistical/statistical.component';
 import {NgApexchartsModule} from 'ng-apexcharts';
@@ -29,11 +27,14 @@ import {EmployeeInformationComponent} from './component/employee-information/emp
 import {EmployeeChangePasswordComponent} from './component/employee-change-password/employee-change-password.component';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
     ManagementRoutingModule,
     CommonClientModule,
+    ToastrModule,
+    MatDialogModule,
     ReactiveFormsModule,
     FormsModule,
     NgApexchartsModule

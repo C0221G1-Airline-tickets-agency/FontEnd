@@ -58,7 +58,11 @@
               <p style="color: red">ngày không được để trống</p>
             </div>
             <div [hidden]="!flightDate.errors.gte">
+<<<<<<< HEAD
               <p style="color: red">Ngày phải lớn hơn ngày hiện tại</p>
+=======
+              <p style="color: red">ngày phải lớn hơn ngày hiện tại</p>
+>>>>>>> origin/dev
             </div>
           </div>
         </div>
@@ -192,17 +196,25 @@
       <br>
       <div class="row input-group">
         <div class="col-3 folow-right">
+<<<<<<< HEAD
           <span>Giá <label>(*)</label></span>
+=======
+          <span>Gía <label>(*)</label></span>
+>>>>>>> origin/dev
         </div>
         <div class="col-8">
           <input type="text" class="form-control" formControlName="flightPrice">
           <div class="alert alert-danger" role="alert"
                *ngIf="!flightPrice.valid && (flightPrice.dirty || flightPrice.touched)">
             <div [hidden]="!flightPrice.errors.required">
+<<<<<<< HEAD
               <p style="color: red">Giá không được để trống</p>
             </div>
             <div [hidden]="!flightPrice.errors.pattern">
               <p style="color: red">Giá phải đúng định dạng số</p>
+=======
+              <p style="color: red">Gía không được để trống</p>
+>>>>>>> origin/dev
             </div>
           </div>
 
@@ -210,7 +222,9 @@
       </div>
       <div class="d-flex justify-content-end pb-3 mt-3">
         <button class="mr-5 btn btn-success" type="submit"
+
                  [disabled]="!flightForm.valid" ><i class="fa fa-check"
+
                                                    aria-hidden="true"></i> Sửa
         </button>
         <button class="btn btn-back" style="background: #005cbf;color: white;margin-right: 94px"

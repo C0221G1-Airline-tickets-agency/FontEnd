@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import {FooterComponent} from '../footer/footer.component';
 import {HeaderComponent} from '../header/header.component';
 import {SideBarComponent} from '../side-bar/side-bar.component';
-import {RouterModule} from '@angular/router';
+import {ClientRoutingModule} from '../../client/client-routing.module';
 
 
 
@@ -14,10 +14,10 @@ import {RouterModule} from '@angular/router';
     HeaderComponent,
     SideBarComponent,
   ],
-    imports: [
-        CommonModule,
-        RouterModule
-    ], exports: [
+  imports: [
+    CommonModule,
+    ClientRoutingModule
+  ], exports: [
     SideBarComponent,
     FooterComponent,
     HeaderComponent

@@ -1,3 +1,4 @@
+/*flight-list*/
 .flight-list {
   max-width: 1000px;
   min-width: 750px;
@@ -201,3 +202,5 @@
   position: sticky;
   background-color: #567FEA;
 }
+
+/*#endregion*/

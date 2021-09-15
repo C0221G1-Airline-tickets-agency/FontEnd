@@ -27,23 +27,14 @@ export class PassengerInformationComponent implements OnInit {
       let id1 = paramMap.get('listId');
       this.listId = id1.split(',');
       console.log(this.listId);
-      // for (var id of this.listId) {
-      //   this.getTicket();
-      // }
+
         this.getTicket(id1);
     })
   }
 
   ngOnInit(): void {
-    // this.ticketForm = this.formBuilder.group({
-    //   name: '',
-    //   arrayTicket: this.formBuilder.array([])
-    // })
   }
 
-  // getArray(): FormArray {
-  //   return this.ticketForm.get('arrayTicket') as FormArray;
-  // }
 
   getTicket(array: string){
     return this.ticketService.findManyTicketById(array).subscribe( (tickets: Ticket[]) => {

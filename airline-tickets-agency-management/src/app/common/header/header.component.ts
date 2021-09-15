@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {TokenStorageService} from '../../user/user-service/token-storage.service';
 import {LoginRegisterComponent} from '../../user/user-component/login-register/login-register.component';
 
+import '../../../assets/header';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -71,6 +72,7 @@ export class HeaderComponent implements OnInit {
 
     });
   }
+
 
 
 }

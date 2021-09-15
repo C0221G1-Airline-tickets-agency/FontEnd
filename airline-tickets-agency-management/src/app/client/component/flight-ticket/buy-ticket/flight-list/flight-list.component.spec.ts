@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FlightListComponentTrang } from './flight-list.component';
+import { FlightListComponent } from './flight-list.component';
 
 describe('FlightListComponent', () => {
   let component: FlightListComponent;
@@ -10,7 +10,7 @@ describe('FlightListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ FlightListComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {

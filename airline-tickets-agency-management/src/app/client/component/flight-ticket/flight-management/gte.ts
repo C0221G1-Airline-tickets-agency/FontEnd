@@ -2,6 +2,7 @@ import {AbstractControl, ValidationErrors} from "@angular/forms";
 
 export function gte(control: AbstractControl): ValidationErrors|null {
   let v = control.value;
+
   let t= new Date(v);
   let date = new Date();
 
@@ -19,6 +20,8 @@ export function comparisonTime(control: AbstractControl): ValidationErrors|null{
 
 export function comparisonLocation(control: AbstractControl): ValidationErrors|null{
   const v = control.value;
-  console.log(v)
+
+  console.log(v);
   return (v.locationTo.cityName === v.locationFrom.cityName) ? { comparisonLocation: true } : null;
+
 }

@@ -58,7 +58,7 @@
                     </select>
                   </td>
                   <td>
-                    <button style="border-radius: 50%; height: 15px; width: 15px" [ngStyle]="{'background-image': checkChosen(flight.ticketId) ? changeColor(flight.ticketId):''}" (click)="addTicketId(flight.ticketId, flight.listId)"></button>
+                  <button style="border-radius: 50%; height: 15px; width: 15px" [ngStyle]="{'background-image': checkChosen(flight.ticketId) ? changeColor(flight.ticketId):''}" (click)="addTicketId(flight.ticketId, flight.listId)"></button>
                   </td>
                 </tr>
                 <tr *ngIf="flight.ticketId == ticketDetailId && clickedButtonDetail">

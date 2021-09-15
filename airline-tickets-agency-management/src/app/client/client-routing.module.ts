@@ -4,7 +4,6 @@ import {NewsManipulationComponent} from './component/news/news-manipulation/news
 
 import {ClientComponent} from './client/client.component';
 import {HomeComponent} from './component/home/home.component';
-
 import {CustomerChangePasswordComponent} from './component/customer/customer-change-password/customer-change-password.component';
 
 import {DestinationDetailComponent} from './component/destination-detail/destination-detail.component';
@@ -19,7 +18,6 @@ import {DestinationCreateComponent} from './component/destination/destination-cr
 import {DestinationUpdateComponent} from './component/destination/destination-update/destination-update.component';
 import {ManageChatRoomComponent} from "./component/adminInbox/manage-chat-room/manage-chat-room.component";
 
-
 import {FlightListComponent} from './component/flight-ticket/flight-management/flight-list/flight-list.component';
 import {BookingDetailsComponent} from './component/flight-ticket/buy-ticket/booking-details/booking-details.component';
 import {PassengerInformationComponent} from './component/flight-ticket/buy-ticket/passenger-information/passenger-information.component';
@@ -27,7 +25,6 @@ import {FlightCreateComponent} from './component/flight-ticket/flight-management
 import {FlightEditComponent} from './component/flight-ticket/flight-management/flight-edit/flight-edit.component';
 import {AirlineListComponent} from './component/flight-ticket/flight-management/airline-list/airline-list.component';
 import {AirlineCreateComponent} from './component/flight-ticket/flight-management/airline-create/airline-create.component';
-
 
 
 // tslint:disable-next-line:max-line-length
@@ -47,10 +44,10 @@ const routes: Routes = [
           path: '', component: HomeComponent
         },
         {
+
           path: 'news/manipulation', component: NewsManipulationComponent
         },
         {
-
           path: 'search-flight', component: FlightListComponentTrang
         },
         {
@@ -89,7 +86,6 @@ const routes: Routes = [
 
         },
         {
-
           path: 'flight-management', component: FlightListComponent,
         },
         {
@@ -97,7 +93,8 @@ const routes: Routes = [
           path: 'booking-details', component: BookingDetailsComponent
         },
         {
-          path: 'passenger-information;:listId[]', component: PassengerInformationComponent
+
+          path: 'passenger-information/:id', component: PassengerInformationComponent
         },
 
         {
@@ -114,10 +111,14 @@ const routes: Routes = [
         },
         {
           path: 'airline-list/airline-create', component: AirlineCreateComponent
+        },
+        {
+          path: 'customer/change-password',component: CustomerChangePasswordComponent
 
         }
       ]
-  }
+  },
+
 ];
 
 @NgModule({

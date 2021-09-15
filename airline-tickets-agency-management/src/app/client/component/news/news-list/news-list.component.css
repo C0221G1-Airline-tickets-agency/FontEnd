@@ -1,0 +1,71 @@
+/*#region MY-CART*/
+.my-card {
+  width: 103%;
+  height: 40%;
+  margin-top: 20px;
+  position: absolute;
+  top: -25PX;
+  left: -8px;
+  /*background: white;*/
+}
+
+.my-card img {
+  width: 95%;
+  height: 110%;
+  padding-left: 20px;
+
+}
+
+.my-card .my-card-title { /* <<<<<<<<<<<<<<<<<<<<< */
+  color: white;
+  font-size: 30px;
+  padding-left: 10px;
+  padding-right: 20px;
+  background: red;
+  display: inline;
+  border-radius: 2px;
+  position: relative;
+}
+
+.my-card .my-card-title-3 {
+  width: 65px;
+  height: 65px;
+  padding-left: 20px;
+  position: absolute;
+  top: 14.5px;
+  left: -38px;
+}
+
+.my-card .my-card-title-2 {
+  width: 100px;
+  height: 20px;
+  padding-left: 20px;
+  position: absolute;
+  top: 9px;
+  right: -4px;
+}
+
+.my-card-titles {
+  position: absolute;
+  top: -1.5px;
+  left: 0px;
+}
+
+.my-card .my-card-title-1 img {
+  width: 100%;
+  height: 100%;
+  padding-left: 20px;
+  border-radius: 4px;
+}
+
+/*#endregion*/
+@media (max-width: 768px ) {
+  #addNews {
+    right: 20px !important;
+
+  }
+  #editNews{
+    top:10px!important;
+    right: 60px!important;
+  }
+}
