@@ -1,8 +1,4 @@
-
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {News} from '../../../../model/news';
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-news-review',
@@ -11,11 +7,9 @@ import {News} from '../../../../model/news';
 })
 export class NewsReviewComponent implements OnInit {
 
-
-  constructor(public dialogRef: MatDialogRef<NewsReviewComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: News) { }
-
+  constructor() { }
 
   ngOnInit(): void {
   }
+
 }

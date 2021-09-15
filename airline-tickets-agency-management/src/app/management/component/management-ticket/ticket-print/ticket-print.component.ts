@@ -17,7 +17,6 @@ export class TicketPrintComponent implements OnInit {
   money = this.data.ticketPrice + (this.data.tax * this.data.ticketPrice) + (this.data.ticketPrice * this.data.ticketTypePrice) - (this.data.ticketPrice * this.data.passengerTypePrice) + this.data.plusBaggage;
   ticketBack: string;
   baggage: number;
-  msg: string;
 
   constructor(public dialogRef: MatDialogRef<TicketPrintComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -25,7 +24,6 @@ export class TicketPrintComponent implements OnInit {
     this.getGender();
     this.getBackGroup();
     this.getBaggage();
-    this.getPlusBaby();
   }
 
   ngOnInit(): void {
@@ -95,14 +93,6 @@ export class TicketPrintComponent implements OnInit {
 
   err() {
     this.toastr.error('In thất bại!!!', 'Cảnh báo :');
-  }
-
-  getPlusBaby() {
-    if (this.data.plusBaby === true) {
-      this.msg = 'Có';
-    } else {
-      this.msg = 'Không';
-    }
   }
 
 }

@@ -153,6 +153,7 @@ export class FlightListComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
+
       if (!result) {
         this.ngOnInit();
       }

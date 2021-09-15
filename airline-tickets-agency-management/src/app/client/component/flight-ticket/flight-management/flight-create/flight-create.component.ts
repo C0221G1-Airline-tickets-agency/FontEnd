@@ -54,7 +54,7 @@ export class FlightCreateComponent implements OnInit {
         endTime: new FormControl('', [Validators.required, Validators.pattern(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)]),
       }, comparisonTime),
 
-      flightPrice: new FormControl('', [Validators.required, Validators.pattern(/[0-9]{1,9}/)]),
+      flightPrice: new FormControl('', [Validators.required]),
       airline: new FormControl('', [Validators.required]),
       locationGroup: new FormGroup({
         locationTo: new FormControl('', [Validators.required]),
@@ -115,7 +115,6 @@ export class FlightCreateComponent implements OnInit {
           timeOut: 2000,
           progressBar: false
         });
-
         this.flightForm.reset();
       }
 

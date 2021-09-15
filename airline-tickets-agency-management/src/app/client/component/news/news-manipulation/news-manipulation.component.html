@@ -1,112 +1,101 @@
-<div class="row" id="formCreate">
-  <div class="col-xl-9 mx-auto col-lg-9 col-md-12 col-sm-12">
-    <div class="container container-new bg  position-relative ">
-      <div class="row d-flex justify-content-center position-relative">
-        <h5 class="bg-danger text-light p-3 w-100 ">{{typeComponent=== 'create'? 'Tạo mới' : 'Chỉnh sửa'}} tin
-          tức</h5>
-        <div class="container-fluid shadow" [formGroup]="formNews">
-          <div class="">
-            <div class="form-row">
-              <div class="col-md-4 mb-3">
-                <label for="nameEmployee">Tên người viết</label>
-                <input type="text" class="form-control" (change)="checkNameEmployee()" [ngClass]="!checkNameEmployee()?'is-invalid': 'is-valid'" id="nameEmployee" readonly
-                       value="{{employee.employeeName}}">
-                <div class="invalid-feedback" *ngIf="!checkNameEmployee()">{{typeComponent === 'create'? 'Thêm mới': 'Chỉnh sửa'}} không cho phép sửa đổi tên người viết
-                </div>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="codeFeedNews">Mã bài viết</label>
-                <input type="text" class="form-control is-valid" [ngClass]="!checkCodeFeedNews()?'is-invalid': 'is-valid'" id="codeFeedNews" readonly
-                       formControlName="newsCode">
-                <div class="invalid-feedback" *ngIf="!checkCodeFeedNews()">Mã bài viết được tạo tự động không thể sửa
-                </div>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="dateWrites">Ngày viết </label>
-                <input type='date' id="dateWrites" class="form-control is-valid"
-                       [ngClass]="!checkNewsWriteDay()?'is-invalid': 'is-valid'"   formControlName="newsWriteDay" readonly>
-                <span class="input-group-addon">
+<div class="container container-new bg  position-relative ">
+  <div class="row d-flex justify-content-center position-relative">
+    <h5 class="bg-danger text-light p-3 w-100 ">Thêm mới tin
+      tức</h5>
+    <div class="container-fluid shadow" [formGroup]="formNews">
+      <div class="">
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label for="nameEmployee">Tên người viết</label>
+            <input type="text" class="form-control is-valid" id="nameEmployee" readonly
+                   value="{{employee.employeeName}}">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="codeFeedNews">Mã bài viết</label>
+            <input type="text" class="form-control is-valid" id="codeFeedNews" readonly
+                   formControlName="newsCode">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="dateWrites">Ngày viết </label>
+            <input type='date' id="dateWrites" class="form-control is-valid"
+                   formControlName="newsWriteDay" readonly>
+            <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                      </span>
-                <div class="invalid-feedback" *ngIf="!checkNewsWriteDay()">Ngày viết được tạo tự động không thể sửa
-                </div>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6 mb-3">
-                <label for="category" class="">Chọn danh mục <span>(<span style="color: red">*</span>)</span> :</label>
-                <select [ngClass]="category.invalid? 'is-invalid': 'is-valid'" class="custom-select" id="category"
-                        (change)="changeCategory($event)" formGroupName="category" required>
-                  <option value="">Chọn danh mục</option>
-                  <option *ngFor="let category of categorys"
-                          [selected]="checkCategory(category.categoryId)?'selected':''"  value="{{category.categoryId}}">{{category.categoryName}}</option>
-                </select>
-                <div class="invalid-feedback" *ngIf="checkCategoryInvalid">Danh mục không được để trống</div>
-                <div class="invalid-feedback" *ngIf="checkCategoryInList">Danh mục không có trong hệ thống</div>
-              </div>
-              <div class=" form-group col-md-6 mb-3">
-                <label for="validatedCustomFile" class="">Thêm ảnh <span>(<span style="color: red">*</span>)</span>  :</label>
-                <div class="custom-file">
-                  <input type="file" [ngClass]="newsImageName?.errors? 'is-invalid': 'is-valid'"
-                         (change)="showPreview($event)" class="custom-file-input"
-                         accept="image/png, image/gif, image/jpeg" id="validatedCustomFile">
-                  <label class="custom-file-label"
-                         [ngClass]="newsImageName?.errors? 'is-invalid': 'is-valid'"
-                         for="validatedCustomFile">{{newsImageName.value !== '' ? newsImageName.value : 'Thêm ảnh minh họa'}}</label>
-                  <div class="invalid-feedback" *ngIf="checkImage">Ảnh không đúng định dạng</div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label  for="title">Tiêu đề <span>(<span style="color: red">*</span>)</span> </label>
-              <textarea rows="3" class="form-control" formControlName="newsTitle" id="title"
-                        [ngClass]="newsTitle?.errors?'is-invalid': 'is-valid'"></textarea>
-              <div class="invalid-feedback" *ngIf="newsTitle.hasError('required') && newsTitle.touched">Tiêu đề không
-                được để
-                trống
-              </div>
-              <div class="invalid-feedback" *ngIf="newsTitle.hasError('minlength') && newsTitle.touched">Tiêu đề không
-                nhỏ hơn 66
-                ký tự
-              </div>
-              <div class="invalid-feedback" *ngIf="newsTitle.hasError('maxlength') && newsTitle.touched">Tiêu đề không
-                lớn hơn
-                120 ký tự
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="content">Nội dung <span>(<span style="color: red">*</span>)</span> </label>
-              <textarea class="form-control" id="content" formControlName="newsContent"
-                        rows="7" [ngClass]="newsContent?.errors?'is-invalid': 'is-valid'"></textarea>
-              <div class="invalid-feedback" *ngIf="newsContent.hasError('required') && newsContent.touched">Nội dung
-                không được
-                để trống
-              </div>
-              <div class="invalid-feedback" *ngIf="newsContent.hasError('minlength') && newsContent.touched">Nội dung
-                không nhỏ
-                hơn 666 ký tự
-              </div>
-              <div class="invalid-feedback" *ngIf="newsContent.hasError('maxlength') && newsContent.touched">Nội dung
-                không lớn
-                hơn 120.000 ký tự
-              </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6 mb-3">
+            <label for="category" class="">Chọn danh mục :</label>
+            <select [ngClass]="category.invalid? 'is-invalid': 'is-valid'" class="custom-select" id="category"
+                    (change)="changeCategory($event)" formGroupName="category" required>
+              <option value="">Chọn danh mục</option>
+              <option *ngFor="let category of categorys"
+                      value="{{category.categoryId}}">{{category.categoryName}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="category.invalid">Danh mục không được để trống</div>
+          </div>
+          <div class=" form-group col-md-6 mb-3">
+            <label for="validatedCustomFile" class="">Thêm ảnh :</label>
+            <div class="custom-file">
+              <input type="file" [ngClass]="newsImageName?.errors? 'is-invalid': 'is-valid'"
+                     (change)="showPreview($event)" class="custom-file-input"
+                     accept="image/png, image/gif, image/jpeg" id="validatedCustomFile">
+              <label class="custom-file-label"
+                     [ngClass]="newsImageName?.errors? 'is-invalid': 'is-valid'"
+                     for="validatedCustomFile">{{newsImageName.value !== '' ? newsImageName.value : 'Chọn ảnh'}}</label>
+              <div class="invalid-feedback">Bạn chưa chọn ảnh</div>
             </div>
           </div>
-          <div>
-            <div class="container d-flex justify-content-end pt-4 pb-5">
-              <div class="d-flex">
-                <button class="mr-4 btn btn-success button"
-                        (click)="save()" type="submit"><i class="fa fa-check" aria-hidden="true"></i> Hoàn tất
-                </button>
-                <button class="mr-4 btn btn-secondary button"
-                        (click)="previewNews()" type="submit"><i class="fa fa-eye" aria-hidden="true"></i> Xem trước
-                </button>
-                <button (click)="back()" class="mr-4 btn btn-back " type="button"><i
-                  class="icon-sidebar fa fa-reply "></i>
-                  Trở về
-                </button>
-              </div>
-            </div>
+        </div>
+        <div class="form-group">
+          <label for="title">Tiêu đề</label>
+          <textarea rows="3" class="form-control" formControlName="newsTitle" id="title"
+                    [ngClass]="newsTitle?.errors?'is-invalid': 'is-valid'"></textarea>
+          <div class="invalid-feedback" *ngIf="newsTitle.hasError('required') && newsTitle.touched">Tiêu đề không
+            được để
+            trống
+          </div>
+          <div class="invalid-feedback" *ngIf="newsTitle.hasError('minlength') && newsTitle.touched">Tiêu đề không
+            nhỏ hơn 5
+            ký tự
+          </div>
+          <div class="invalid-feedback" *ngIf="newsTitle.hasError('maxlength') && newsTitle.touched">Tiêu đề không
+            lớn hơn
+            120 ký tự
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="content">Nội dung</label>
+          <textarea class="form-control" id="content" formControlName="newsContent"
+                    rows="7" [ngClass]="newsContent?.errors?'is-invalid': 'is-valid'"></textarea>
+          <div class="invalid-feedback" *ngIf="newsContent.hasError('required') && newsContent.touched">Nội dung
+            không được
+            để trống
+          </div>
+          <div class="invalid-feedback" *ngIf="newsContent.hasError('minlength') && newsContent.touched">Nội dung
+            không nhỏ
+            hơn 5 ký tự
+          </div>
+          <div class="invalid-feedback" *ngIf="newsContent.hasError('maxlength') && newsContent.touched">Nội dung
+            không lớn
+            hơn 1200 ký tự
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="container d-flex justify-content-end pt-4 pb-5">
+          <div class="d-flex">
+            <button class="mr-4 btn btn-success button"
+                    (click)="save()" type="submit"><i class="fa fa-check" aria-hidden="true"></i> Hoàn tất
+            </button>
+            <button class="mr-4 btn btn-primary button"
+                    (click)="previewNews()" type="submit"><i class="fa fa-eye" aria-hidden="true"></i> Xem trước
+            </button>
+            <button class="mr-4 btn btn-back " type="button"><i
+              class="icon-sidebar fa fa-reply "></i>
+              Trở về
+            </button>
           </div>
         </div>
       </div>

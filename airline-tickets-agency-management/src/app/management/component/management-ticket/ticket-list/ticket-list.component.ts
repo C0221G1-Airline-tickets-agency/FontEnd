@@ -9,7 +9,7 @@ import {DatePipe} from "@angular/common";
 import Swal from "sweetalert2";
 import {TicketService} from "../../../../service/flight-ticket/ticket/ticket.service";
 import {Router} from "@angular/router";
-
+import {timeout} from "rxjs/operators";
 
 
 @Component({
@@ -161,7 +161,6 @@ export class TicketListComponent implements OnInit {
         if (result.isConfirmed) {
           this.ticketService.deleteTicketById(this.idSelect).subscribe(() => {
             this.toastr.success('Xóa vé thành công', 'Thông báo : ', { timeOut: 2000 })
-
           }, error => {
             this.toastr.error('Xóa vé thất bại', 'Cảnh báo : ')
           }, () => {

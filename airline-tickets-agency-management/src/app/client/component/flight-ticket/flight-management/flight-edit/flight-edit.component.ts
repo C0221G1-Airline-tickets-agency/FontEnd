@@ -25,6 +25,9 @@ export class FlightEditComponent implements OnInit {
   flightForm : FormGroup;
   error : string;
 
+
+
+
   constructor(private flightService: FlightService,private locationService : LocationService , private airlineService : AirlineService,
               public dialogRef: MatDialogRef<FlightEditComponent>,@Inject(MAT_DIALOG_DATA) public data: any, private toast: ToastrService) {
     console.log(data);
@@ -45,9 +48,7 @@ export class FlightEditComponent implements OnInit {
           departureTime: new FormControl(this.data.departureTime, [Validators.required, Validators.pattern(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)]),
           endTime: new FormControl(this.data.endTime, [Validators.required, Validators.pattern(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)]),
         }, comparisonTime),
-
         flightPrice: new FormControl(this.data.flightPrice, [Validators.required,Validators.pattern(/[0-9]{1,9}/)]),
-
         airline: new FormControl(this.data.airline, [Validators.required]),
         locationGroup: new FormGroup({
           locationTo: new FormControl(this.data.locationTo, [Validators.required]),
@@ -55,13 +56,15 @@ export class FlightEditComponent implements OnInit {
         },comparisonLocation)
 
       }
-    );
+    )
     console.log(this.flightForm.value)
   }
 
   ngOnInit(): void {
     this.getAllLocation();
     this.getAllAirline();
+
+
 
   }
   getAllLocation(){
@@ -103,6 +106,8 @@ export class FlightEditComponent implements OnInit {
           timeOut: 2000,
           progressBar: false
         });
+
+
       }
     });
   }
