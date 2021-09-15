@@ -25,7 +25,7 @@ export class AdminInfoComponent implements OnInit {
   }
 
   admin: Employee;
-  checkAdmin = false;
+  isAdmin = false;
   userId: number;
   user: User;
   userEmail : string;
@@ -54,7 +54,7 @@ export class AdminInfoComponent implements OnInit {
   checkRole() {
     for (let i = 0; i < this.user.roles.length; i++) {
       if(this.user.roles[i].name === 'ROLE_ADMIN'){
-        this.checkAdmin=true;
+        this.isAdmin=true;
       }
     }
   }
