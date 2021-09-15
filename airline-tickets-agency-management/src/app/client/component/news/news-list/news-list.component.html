@@ -1,0 +1,121 @@
+
+<!--tin tức-->
+
+<div class="content" style="margin-top: -23px">
+  <div class="container container-new bg-white p-3 position-relative ">
+    <div class="row d-flex justify-content-center position-relative">
+      <div class="my-card ">
+        <div class="my-card-titles justify-content-between d-flex">
+          <div class="my-card-title d-block">
+            <div class="my-card-title-2"><img src="../../../../../assets/img-news/card-2.svg" alt=""></div>
+            <div class="my-card-title-3"><img src="../../../../../assets/img-news/card-3.svg" alt=""></div>
+            Tin tức
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="position-absolute "  style="top: 0px; right: 0" >
+          <button class="btn  " routerLink="/news/manipulation"
+                  style="background:#e54744; color: white;" *ngIf="isAdmin">Thêm mới
+          </button>
+        </div>
+        <div class="row " style="height: 40px">
+        </div>
+
+        <div *ngFor="let item of newsList">
+          <div class="row shadow position-relative news-card p-3 ml-1 mb-2 bg-white">
+            <div class="col-md-4">
+              <div class="feed-image"><img  style="width: 170px ; height: 130px" class="news-feed-image rounded img-fluid img-responsive"
+                                           src="{{item.newsImage}}" alt=""></div>
+            </div>
+            <div class="col-md-8 position-relative">
+              <!-- Example single danger button -->
+              <div id="editNews" class="btn-group position-absolute" style="top:0px;right: 35px">
+                <a class="" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false" style="width: 20px" *ngIf="isAdmin">
+                  <i style="font-size: 150% ; margin-left: 50px;color: #797979" class="fa fa-ellipsis-v"
+                     aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu " >
+                  <a class="dropdown-item" [routerLink]="['/news/manipulation',item.newsId]"> <i class="fa fa-edit text-warning" ></i> Sửa</a>
+                  <a class="dropdown-item" data-toggle="modal"
+                     (click)="deleteNews(item.newsId , item.newsCode)"> <i class="fa fa-trash text-danger"></i> Xóa</a>
+                </div>
+              </div>
+              <div class="news-feed-text">
+<!--                <p>views : {{item.newsViews}}</p>-->
+                <a [routerLink]="['/news/news-details',item.newsId]"><h5 style="color: black">{{item.newsTitle}}</h5></a>
+                <!--                <span>{{item.newsContent}}<br></span>-->
+                <span> {{ item.newsContent | limitToPipe :  100 }}</span>
+                <div class="d-flex flex-row justify-content-between align-items-center mt-2">
+                  <div class="d-flex creator-profile">
+                    <div class="d-flex flex-column ml-2">
+                      <span class="date">{{item.newsWriteDay}}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <button type="button" [routerLink]="['/news/news-details',item.newsId]"
+                            class="btn btn-outline-primary rounded-pill" (click)="addViews(item.newsId)">
+                      Xem thêm <i class="fa fa-arrow-circle-o-right "></i>
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="container d-flex footer-new justify-content-center align-content-between">
+          <div class="d-flex justify-content-end" *ngIf="newsList.length != 0">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" (click)="previous()">Trang trước</a></li>
+                <li class="page-item" *ngFor="let p of pages; let i=index"><a class="page-link" (click)="setPage(i)"
+                                                                              [style]="((i <=  page + 1 && i >= page - 1) ? (i == page? 'background: #567FEA; color: white; display:block': 'display: block'): 'display: none ')">{{i + 1}}</a>
+                </li>
+                <li class="page-item"><a class="page-link" (click)="next()">Trang sau</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-4 d-none d-md-inline-block  ">
+        <div class="row d-block">
+          <div class="ml-3"><h4 style="font-weight: bold">Tin nổi bật</h4></div>
+        </div>
+        <hr>
+        <div class="row d-block mx-0" style="width: 100%">
+          <div class="ml-3" *ngFor="let hot of hotNews">
+            <div class="row shadow news-card p-3 ml-1 mr-1 mb-2 bg-white ">
+              <div class="col-md-4 px-0">
+                <div class="feed-image"><img  style="width: 100px ; height: 80px" class="news-feed-image rounded img-fluid img-responsive"
+                                             src="{{hot.newsImage}}" alt=""></div>
+              </div>
+              <div class="col-md-8">
+                <div class="news-feed-text">
+                  <a [routerLink]="['/news/news-details',hot.newsId] "><h5 style="color: black">{{hot.newsTitle | limitToPipe :  60}}</h5> </a>
+                  <div class="d-flex flex-row justify-content-between align-items-center mt-2">
+                    <div class="d-flex creator-profile">
+                      <div class="d-flex flex-column ml-2">
+                                               <span
+                                                 class="date">{{hot.newsWriteDay}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

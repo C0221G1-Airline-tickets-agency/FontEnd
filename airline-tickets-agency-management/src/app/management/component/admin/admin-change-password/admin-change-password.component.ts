@@ -1,11 +1,14 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Password} from '../../../model/password';
+
 import {comparePassword} from './validation/compare-password';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ToastrService} from 'ngx-toastr';
-import {UserService} from '../../../service/user.service';
-import {User} from '../../../model/user';
+import {Password} from "../../../../model/password";
+import {Employee} from "../../../../model/employee";
+import {EmployeeService} from "../../../../service/employee/employee.service";
+import {PasswordService} from "../../../../service/password/password.service";
+
 
 @Component({
   selector: 'app-admin-change-password',
@@ -13,41 +16,44 @@ import {User} from '../../../model/user';
   styleUrls: ['./admin-change-password.component.css']
 })
 export class AdminChangePasswordComponent implements OnInit {
-  admin: User;
+  admin: Employee;
   password: Password;
   id: number;
-
+  name : string;
   checkPassForm = new FormGroup({
     oldPassword: new FormControl('', [Validators.required, Validators.pattern('^\\w{5,}$')]),
     newPassword: new FormControl('', [Validators.required, Validators.pattern('^\\w{5,}$')]),
-    confirmNewPassword: new FormControl('')
+    confirmPassword: new FormControl('')
   }, comparePassword);
 
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<AdminChangePasswordComponent>,
-              private employeeService: UserService, private toast: ToastrService
+              private employeeService: EmployeeService, private toast: ToastrService, private passwordService : PasswordService
   ) {
   }
 
   ngOnInit(): void {
-    this.getPasswordAdmin(this.data.id);
+    // this.getPasswordAdmin(this.data.id);
     this.id = this.data.id;
+    this.name =this.data.name;
+    console.log(this.id);
+    console.log(this.name);
   }
 
   closeDialog(): void {
     this.dialogRef.close();
   }
 
-  getPasswordAdmin(id: number) {
-    this.employeeService.findAdminById(id).subscribe(data => {
-      this.admin = data;
-    });
-  }
+  // getPasswordAdmin(id: number) {
+  //   this.employeeService.findAdminById(id).subscribe(data => {
+  //     this.admin = data;
+  //   });
+  // }
 
   changePassword() {
     this.password = this.checkPassForm.value;
     const oldPassword = this.password.oldPassword;
     const newPassword = this.password.newPassword;
-    const confirmPassword = this.password.confirmNewPassword;
+    const confirmPassword = this.password.confirmPassword;
     console.log('old password = ' + oldPassword);
     console.log('new password = ' + newPassword);
     console.log('confirm  new password = ' + newPassword);
@@ -68,7 +74,7 @@ export class AdminChangePasswordComponent implements OnInit {
               this.toast.warning('Chưa nhập lại mật khẩu mới', 'Chú ý');
             } else {
               if (newPassword === confirmPassword) {
-                this.employeeService.updatePassword(this.id, this.password).subscribe(data => {
+                this.passwordService.sendPassword(this.id, this.password).subscribe(data => {
                   this.closeDialog();
                   this.toast.success(data.msg, 'Chú ý !');
                   console.log(data);

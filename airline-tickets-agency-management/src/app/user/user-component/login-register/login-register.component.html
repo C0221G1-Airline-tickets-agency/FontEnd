@@ -1,0 +1,410 @@
+<div class="to-card">
+  <div class="to-inner-box" id="card" [ngStyle]="{'transform': flag? 'rotateY(-180deg)' : 'rotateY(0deg)'}">
+    <div class="to-card-front">
+      <br>
+      <h2 style="color: black">Đăng Nhập</h2>
+      <br>
+      <form [formGroup]="formSignin" (ngSubmit)="onSubmit()">
+        <div class="to-div-input">
+          <input type="email" formControlName="username" class="to-input-box" placeholder="Email"
+                 required>
+          <small class="to-error-text" *ngIf="formSignin.get('username')?.hasError('required')
+                        && formSignin.get('username')?.touched">Email Không được để trống!!!
+          </small>
+        </div>
+        <div class="to-div-input">
+          <input type="password" formControlName="password" class="to-input-box" placeholder="Mật Khẩu" required>
+          <small class="to-error-text" *ngIf="formSignin.get('password')?.hasError('required')
+                        && formSignin.get('password')?.touched">Mật khẩu không được để trống!!!
+          </small>
+        </div>
+        <input type="checkbox"><span style="color: black">Nhớ tài khoản</span>
+        <br>
+        <div class="to-div-input">
+          <button type="submit" [disabled]="formSignin.invalid" class="to-sign-submit"
+                  style="margin-top: 20px;margin-bottom: 10px">Đăng nhập
+          </button>
+        </div>
+      </form>
+      <br>
+      <div class="justify-content-center text-center mt-2">
+        <h6>Lựa Chọn Đăng Nhập Khác?</h6>
+      </div>
+        <button type="button" class="to-change my-2"><span class="fa fa-google">&nbsp; </span> Google &nbsp; &nbsp;
+        </button>
+        <button type="button" class="to-change-facebook my-2" ><span class="fa fa-facebook">&nbsp;  </span> Facebook
+        </button>
+
+      <!--      <p class="to-text">Đăng nhập bằng</p>-->
+      <!--      <div class="to-social-icons">-->
+      <!--        <img src="../../../../assets/image/client-login-image/fb2.png" style="margin-right: 5px">-->
+      <!--        <img src="../../../../assets/image/client-login-image/gmail2.png">-->
+      <!--      </div>-->
+      <br><br><br><br>
+      <div class="justify-content-center text-center mt-4">
+        <h6>Chưa Có Tài Khoản?</h6>
+      </div>
+      <button type="button" class="to-change" (click)="openRegister()">Đăng Ký
+      </button>
+    </div>
+
+    <!--     Đăng ký-->
+    <div class="to-card-back" style="height: 500px">
+      <h2 style="color: black">Đăng Ký</h2>
+      <form [formGroup]="formRegister" (ngSubmit)="onSubmitRegister()">
+        <div class="to-div-input">
+          <input type="text" class="to-input-box" formControlName="username" placeholder="Email(*)" required>
+          <div *ngFor="let validation of validation_messages.username">
+            <small class="text-danger"
+                   *ngIf="formRegister.get('username').hasError(validation.type) && formRegister.get('username').touched">
+              {{validation.message}}</small>
+          </div>
+<!--          <small class="to-error-text" *ngIf="formRegister.get('username')?.hasError('required')-->
+<!--                  && formRegister.get('username')?.touched">Không được để trống!</small>-->
+<!--          <small class="to-error-text" *ngIf="formRegister.get('username')?.hasError('minlength')-->
+<!--                  && formRegister.get('username')?.touched">Tên đăng nhập ít nhất 5 ký tự</small>-->
+        </div>
+        <div class="to-div-input">
+          <input type="password" class="to-input-box" formControlName="password" placeholder="Mật Khẩu(*)" required>
+          <div *ngFor="let validation of validation_messages.password">
+            <small class="text-danger"
+                   *ngIf="formRegister.get('password').hasError(validation.type) && formRegister.get('password').touched">
+              {{validation.message}}</small>
+          </div>
+<!--          <small class="to-error-text" *ngIf="formRegister.get('password')?.hasError('required')-->
+<!--                  && formRegister.get('password')?.touched">Không được để trống!</small>-->
+<!--          <small class="to-error-text" *ngIf="formRegister.get('password')?.hasError('minlength')-->
+<!--                  && formRegister.get('password')?.touched">Mật khẩu ít nhất 5 ký tự</small>-->
+        </div>
+        <div class="to-div-input">
+          <input type="text" class="to-input-box" formControlName="phone" placeholder="Số Điện Thoại(*)" required>
+          <div *ngFor="let validation of validation_messages.phone">
+            <small class="text-danger"
+                   *ngIf="formRegister.get('phone').hasError(validation.type) && formRegister.get('phone').touched">
+              {{validation.message}}</small>
+          </div>
+<!--          <small class="to-error-text" *ngIf="formRegister.get('phone')?.hasError('required')-->
+<!--                  && formRegister.get('phone')?.touched">Không được để trống!</small>-->
+        </div>
+        <div class="to-div-input">
+          <input type="text" class="to-input-box" formControlName="name" placeholder="Họ Và Tên" required>
+          <div *ngFor="let validation of validation_messages.name">
+            <small class="text-danger"
+                   *ngIf="formRegister.get('name').hasError(validation.type) && formRegister.get('name').touched">
+              {{validation.message}}</small>
+          </div>
+<!--          <small class="to-error-text" *ngIf="formRegister.get('fullName')?.hasError('required')-->
+<!--                  && formRegister.get('fullName')?.touched">Không được để trống!</small>-->
+        </div>
+        <div class="to-div-input" style="font-size: 13px; text-align: center; justify-content: center">
+          <label >Ngày Sinh</label>
+          <input type="date" class="to-input-box" id="birthday" formControlName="birthday" placeholder="Ngày sinh">
+          <!--          <small class="to-error-text" *ngIf="formRegister.get('fullName')?.hasError('required')-->
+          <!--                  && formRegister.get('fullName')?.touched">Không được để trống!</small>-->
+        </div>
+        <div class="to-div-input">
+          <input type="text" class="to-input-box" formControlName="address" placeholder="Địa Chỉ">
+          <!--          <small class="to-error-text" *ngIf="formRegister.get('fullName')?.hasError('required')-->
+          <!--                  && formRegister.get('fullName')?.touched">Không được để trống!</small>-->
+        </div>
+        <div class="to-div-input" style="font-size: 13px; text-align: center; justify-content: center">
+          <label for="gender">Giới Tính</label>
+          <br>
+          <select id="gender" class="form-control" formControlName="gender" style="width: 100%; text-align: center; justify-content: center">
+            <option value="" selected disabled hidden>Chọn Giới Tính</option>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+            <option value="Khác">Khác</option>
+          </select>
+        </div>
+        <div class="to-div-input" style="font-size: 13px; text-align: center; justify-content: center">
+          <label for="nationality">Quốc tịch</label>
+          <br>
+          <select id="nationality" class="form-control" style="width: 100%; text-align: center; justify-content: center" formControlName="nationality">
+            <option value="" selected>Chọn Quốc Tịch</option>
+            <option value="Afganistan">Afghanistan</option>
+            <option value="Albania">Albania</option>
+            <option value="Algeria">Algeria</option>
+            <option value="American Samoa">American Samoa</option>
+            <option value="Andorra">Andorra</option>
+            <option value="Angola">Angola</option>
+            <option value="Anguilla">Anguilla</option>
+            <option value="Antigua & Barbuda">Antigua & Barbuda</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Armenia">Armenia</option>
+            <option value="Aruba">Aruba</option>
+            <option value="Australia">Australia</option>
+            <option value="Austria">Austria</option>
+            <option value="Azerbaijan">Azerbaijan</option>
+            <option value="Bahamas">Bahamas</option>
+            <option value="Bahrain">Bahrain</option>
+            <option value="Bangladesh">Bangladesh</option>
+            <option value="Barbados">Barbados</option>
+            <option value="Belarus">Belarus</option>
+            <option value="Belgium">Belgium</option>
+            <option value="Belize">Belize</option>
+            <option value="Benin">Benin</option>
+            <option value="Bermuda">Bermuda</option>
+            <option value="Bhutan">Bhutan</option>
+            <option value="Bolivia">Bolivia</option>
+            <option value="Bonaire">Bonaire</option>
+            <option value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
+            <option value="Botswana">Botswana</option>
+            <option value="Brazil">Brazil</option>
+            <option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+            <option value="Brunei">Brunei</option>
+            <option value="Bulgaria">Bulgaria</option>
+            <option value="Burkina Faso">Burkina Faso</option>
+            <option value="Burundi">Burundi</option>
+            <option value="Cambodia">Cambodia</option>
+            <option value="Cameroon">Cameroon</option>
+            <option value="Canada">Canada</option>
+            <option value="Canary Islands">Canary Islands</option>
+            <option value="Cape Verde">Cape Verde</option>
+            <option value="Cayman Islands">Cayman Islands</option>
+            <option value="Central African Republic">Central African Republic</option>
+            <option value="Chad">Chad</option>
+            <option value="Channel Islands">Channel Islands</option>
+            <option value="Chile">Chile</option>
+            <option value="China">China</option>
+            <option value="Christmas Island">Christmas Island</option>
+            <option value="Cocos Island">Cocos Island</option>
+            <option value="Colombia">Colombia</option>
+            <option value="Comoros">Comoros</option>
+            <option value="Congo">Congo</option>
+            <option value="Cook Islands">Cook Islands</option>
+            <option value="Costa Rica">Costa Rica</option>
+            <option value="Cote DIvoire">Cote DIvoire</option>
+            <option value="Croatia">Croatia</option>
+            <option value="Cuba">Cuba</option>
+            <option value="Curaco">Curacao</option>
+            <option value="Cyprus">Cyprus</option>
+            <option value="Czech Republic">Czech Republic</option>
+            <option value="Denmark">Denmark</option>
+            <option value="Djibouti">Djibouti</option>
+            <option value="Dominica">Dominica</option>
+            <option value="Dominican Republic">Dominican Republic</option>
+            <option value="East Timor">East Timor</option>
+            <option value="Ecuador">Ecuador</option>
+            <option value="Egypt">Egypt</option>
+            <option value="El Salvador">El Salvador</option>
+            <option value="Equatorial Guinea">Equatorial Guinea</option>
+            <option value="Eritrea">Eritrea</option>
+            <option value="Estonia">Estonia</option>
+            <option value="Ethiopia">Ethiopia</option>
+            <option value="Falkland Islands">Falkland Islands</option>
+            <option value="Faroe Islands">Faroe Islands</option>
+            <option value="Fiji">Fiji</option>
+            <option value="Finland">Finland</option>
+            <option value="France">France</option>
+            <option value="French Guiana">French Guiana</option>
+            <option value="French Polynesia">French Polynesia</option>
+            <option value="French Southern Ter">French Southern Ter</option>
+            <option value="Gabon">Gabon</option>
+            <option value="Gambia">Gambia</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Germany">Germany</option>
+            <option value="Ghana">Ghana</option>
+            <option value="Gibraltar">Gibraltar</option>
+            <option value="Great Britain">Great Britain</option>
+            <option value="Greece">Greece</option>
+            <option value="Greenland">Greenland</option>
+            <option value="Grenada">Grenada</option>
+            <option value="Guadeloupe">Guadeloupe</option>
+            <option value="Guam">Guam</option>
+            <option value="Guatemala">Guatemala</option>
+            <option value="Guinea">Guinea</option>
+            <option value="Guyana">Guyana</option>
+            <option value="Haiti">Haiti</option>
+            <option value="Hawaii">Hawaii</option>
+            <option value="Honduras">Honduras</option>
+            <option value="Hong Kong">Hong Kong</option>
+            <option value="Hungary">Hungary</option>
+            <option value="Iceland">Iceland</option>
+            <option value="Indonesia">Indonesia</option>
+            <option value="India">India</option>
+            <option value="Iran">Iran</option>
+            <option value="Iraq">Iraq</option>
+            <option value="Ireland">Ireland</option>
+            <option value="Isle of Man">Isle of Man</option>
+            <option value="Israel">Israel</option>
+            <option value="Italy">Italy</option>
+            <option value="Jamaica">Jamaica</option>
+            <option value="Japan">Japan</option>
+            <option value="Jordan">Jordan</option>
+            <option value="Kazakhstan">Kazakhstan</option>
+            <option value="Kenya">Kenya</option>
+            <option value="Kiribati">Kiribati</option>
+            <option value="Korea North">Korea North</option>
+            <option value="Korea Sout">Korea South</option>
+            <option value="Kuwait">Kuwait</option>
+            <option value="Kyrgyzstan">Kyrgyzstan</option>
+            <option value="Laos">Laos</option>
+            <option value="Latvia">Latvia</option>
+            <option value="Lebanon">Lebanon</option>
+            <option value="Lesotho">Lesotho</option>
+            <option value="Liberia">Liberia</option>
+            <option value="Libya">Libya</option>
+            <option value="Liechtenstein">Liechtenstein</option>
+            <option value="Lithuania">Lithuania</option>
+            <option value="Luxembourg">Luxembourg</option>
+            <option value="Macau">Macau</option>
+            <option value="Macedonia">Macedonia</option>
+            <option value="Madagascar">Madagascar</option>
+            <option value="Malaysia">Malaysia</option>
+            <option value="Malawi">Malawi</option>
+            <option value="Maldives">Maldives</option>
+            <option value="Mali">Mali</option>
+            <option value="Malta">Malta</option>
+            <option value="Marshall Islands">Marshall Islands</option>
+            <option value="Martinique">Martinique</option>
+            <option value="Mauritania">Mauritania</option>
+            <option value="Mauritius">Mauritius</option>
+            <option value="Mayotte">Mayotte</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Midway Islands">Midway Islands</option>
+            <option value="Moldova">Moldova</option>
+            <option value="Monaco">Monaco</option>
+            <option value="Mongolia">Mongolia</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Morocco">Morocco</option>
+            <option value="Mozambique">Mozambique</option>
+            <option value="Myanmar">Myanmar</option>
+            <option value="Nambia">Nambia</option>
+            <option value="Nauru">Nauru</option>
+            <option value="Nepal">Nepal</option>
+            <option value="Netherland Antilles">Netherland Antilles</option>
+            <option value="Netherlands">Netherlands (Holland, Europe)</option>
+            <option value="Nevis">Nevis</option>
+            <option value="New Caledonia">New Caledonia</option>
+            <option value="New Zealand">New Zealand</option>
+            <option value="Nicaragua">Nicaragua</option>
+            <option value="Niger">Niger</option>
+            <option value="Nigeria">Nigeria</option>
+            <option value="Niue">Niue</option>
+            <option value="Norfolk Island">Norfolk Island</option>
+            <option value="Norway">Norway</option>
+            <option value="Oman">Oman</option>
+            <option value="Pakistan">Pakistan</option>
+            <option value="Palau Island">Palau Island</option>
+            <option value="Palestine">Palestine</option>
+            <option value="Panama">Panama</option>
+            <option value="Papua New Guinea">Papua New Guinea</option>
+            <option value="Paraguay">Paraguay</option>
+            <option value="Peru">Peru</option>
+            <option value="Phillipines">Philippines</option>
+            <option value="Pitcairn Island">Pitcairn Island</option>
+            <option value="Poland">Poland</option>
+            <option value="Portugal">Portugal</option>
+            <option value="Puerto Rico">Puerto Rico</option>
+            <option value="Qatar">Qatar</option>
+            <option value="Republic of Montenegro">Republic of Montenegro</option>
+            <option value="Republic of Serbia">Republic of Serbia</option>
+            <option value="Reunion">Reunion</option>
+            <option value="Romania">Romania</option>
+            <option value="Russia">Russia</option>
+            <option value="Rwanda">Rwanda</option>
+            <option value="St Barthelemy">St Barthelemy</option>
+            <option value="St Eustatius">St Eustatius</option>
+            <option value="St Helena">St Helena</option>
+            <option value="St Kitts-Nevis">St Kitts-Nevis</option>
+            <option value="St Lucia">St Lucia</option>
+            <option value="St Maarten">St Maarten</option>
+            <option value="St Pierre & Miquelon">St Pierre & Miquelon</option>
+            <option value="St Vincent & Grenadines">St Vincent & Grenadines</option>
+            <option value="Saipan">Saipan</option>
+            <option value="Samoa">Samoa</option>
+            <option value="Samoa American">Samoa American</option>
+            <option value="San Marino">San Marino</option>
+            <option value="Sao Tome & Principe">Sao Tome & Principe</option>
+            <option value="Saudi Arabia">Saudi Arabia</option>
+            <option value="Senegal">Senegal</option>
+            <option value="Seychelles">Seychelles</option>
+            <option value="Sierra Leone">Sierra Leone</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Slovakia">Slovakia</option>
+            <option value="Slovenia">Slovenia</option>
+            <option value="Solomon Islands">Solomon Islands</option>
+            <option value="Somalia">Somalia</option>
+            <option value="South Africa">South Africa</option>
+            <option value="Spain">Spain</option>
+            <option value="Sri Lanka">Sri Lanka</option>
+            <option value="Sudan">Sudan</option>
+            <option value="Suriname">Suriname</option>
+            <option value="Swaziland">Swaziland</option>
+            <option value="Sweden">Sweden</option>
+            <option value="Switzerland">Switzerland</option>
+            <option value="Syria">Syria</option>
+            <option value="Tahiti">Tahiti</option>
+            <option value="Taiwan">Taiwan</option>
+            <option value="Tajikistan">Tajikistan</option>
+            <option value="Tanzania">Tanzania</option>
+            <option value="Thailand">Thailand</option>
+            <option value="Togo">Togo</option>
+            <option value="Tokelau">Tokelau</option>
+            <option value="Tonga">Tonga</option>
+            <option value="Trinidad & Tobago">Trinidad & Tobago</option>
+            <option value="Tunisia">Tunisia</option>
+            <option value="Turkey">Turkey</option>
+            <option value="Turkmenistan">Turkmenistan</option>
+            <option value="Turks & Caicos Is">Turks & Caicos Is</option>
+            <option value="Tuvalu">Tuvalu</option>
+            <option value="Uganda">Uganda</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Ukraine">Ukraine</option>
+            <option value="United Arab Erimates">United Arab Emirates</option>
+            <option value="United States of America">United States of America</option>
+            <option value="Uraguay">Uruguay</option>
+            <option value="Uzbekistan">Uzbekistan</option>
+            <option value="Vanuatu">Vanuatu</option>
+            <option value="Vatican City State">Vatican City State</option>
+            <option value="Venezuela">Venezuela</option>
+            <option value="Vietnam">Vietnam</option>
+            <option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+            <option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+            <option value="Wake Island">Wake Island</option>
+            <option value="Wallis & Futana Is">Wallis & Futana Is</option>
+            <option value="Yemen">Yemen</option>
+            <option value="Zaire">Zaire</option>
+            <option value="Zambia">Zambia</option>
+            <option value="Zimbabwe">Zimbabwe</option>
+          </select>
+        </div>
+        <div class="to-div-input">
+          <input type="text" class="to-input-box" formControlName="passport" placeholder="Số Hộ Chiếu / CMND(*)" required>
+          <div *ngFor="let validation of validation_messages.passport">
+            <small class="text-danger"
+                   *ngIf="formRegister.get('passport').hasError(validation.type) && formRegister.get('passport').touched">
+              {{validation.message}}</small>
+          </div>
+<!--          <small class="to-error-text" *ngIf="formRegister.get('passport')?.hasError('required')-->
+<!--                  && formRegister.get('passport')?.touched">Không được để trống!</small>-->
+        </div>
+        <button type="submit" class="to-sign-submit" style="margin-top: 20px;margin-bottom: 10px">Đăng ký
+        </button>
+      </form>
+      <!--      <p class="to-text">Đăng nhập bằng</p>-->
+      <!--      <div class="to-social-icons">-->
+      <!--        <img src="../../../../assets/image/client-login-image/fb2.png" alt="" style="margin-right: 5px">-->
+      <!--        <img src="../../../../assets/image/client-login-image/gmail2.png" alt="">-->
+      <!--      </div>-->
+      <div class="justify-content-center text-center mt-2">
+      <h6>Đã có tài khoản?</h6>
+      <button type="button" class="to-change" (click)="openRegister()">Đăng nhập
+      </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function validateForm(event) {
+    let dateOfBirthFieldValue = document.getElementById("birthday").value;
+    let bday = new Date(dateOfBirthFieldValue);
+    let todayDate = new Date();
+    let timeDiff = Math.abs(todayDate.getTime() - bday.getTime());
+    let diffyears = Math.ceil(timeDiff / (1000 * 3600 * 24)/365);
+    return diffyears > 18;
+  }
+</script>

@@ -1,0 +1,39 @@
+
+<div class="row">
+  <div class=" d-flex justify-content-center position-relative">
+    <!--  header chi tiết tin      -->
+    <div class="col-sm-15 col-md-10 col-lg-10 py-0 pl-3 pr-1">
+      <div id="featured" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="card bg-dark text-white">
+              <img class="card-img img-fluid"
+                                                      src="{{data.newsImage}}" alt="">
+              <div class="card-img-overlay d-flex linkfeat"><a href=""
+                                                               class="align-self-end">
+                <span class="badge">{{data.category.categoryName}}</span>
+                <h4 class="card-title">{{data.newsTitle}}</h4>
+              </a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  header chi tiết tin      -->
+
+    <!--  body chi tiết tin      -->
+  </div>
+  <div class=" d-flex justify-content-center">
+
+    <div class="col-sm-15 col-md-10 col-lg-10 py-0 pl-3 pr-1">
+      <small class="my-2"><strong>{{data.employee.employeeName}}</strong> | <span>{{data.newsWriteDay | date :'dd/MM/yyyy'}}</span></small>
+      <p id="content" [innerHTML] = "data.newsContent">
+{{data.newsContent}}
+
+      </p>
+
+    </div>
+  </div>
+</div>
+
+

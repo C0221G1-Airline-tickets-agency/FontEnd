@@ -1,0 +1,129 @@
+*{
+  font-size: 14px;
+}
+
+.main{
+  /*background-image: url("./image/half-opacity-pink-smallsize.png");*/
+}
+.text-center {
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 0 2px #5f6062;
+  background-color: #aaaaaa;
+}
+
+/*select option*/
+
+.select{
+  width: 100px;
+}
+.select-width{
+  width: 250px;
+  height: 36px !important;
+}
+
+.selected {
+  background-color: #f3b4ad !important;
+}
+
+.select-field{
+  height: 36px;
+  border-radius: 5px;
+  width: 100px;
+}
+
+
+.icon{
+  padding: 10px 10px 0 0;
+}
+
+#content {
+  box-shadow: 0 0 2px 2px #cccccc;
+  margin-top: 100px !important;
+}
+
+/*bảng*/
+
+table {
+  background-color: white;
+}
+.thead{
+  background-color: #fe8f83;
+  color: black;
+
+}
+
+.choose-row{
+  background-color: #f3b4ad;
+}
+
+.sub-main{
+  /*background-image: url("../../../../assets/") ;*/
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: white;
+}
+
+i{
+  padding-bottom: 6px;
+}
+.pointer {cursor: pointer;}
+i:hover {
+  pointer-events: fill;
+}
+.search-form{
+  width: 50%;
+
+}
+
+.input-search{
+  border-radius: 5px;
+  height: 30px;
+  outline: none;
+  padding-left: 15px;
+
+}
+
+/*button*/
+
+.search-text{
+  margin-top: 2px;
+  font-size: 16px;
+}
+
+
+.btn-delete{
+  background-color: #dc3545;
+}
+
+.btn-edit {
+  background-color: #F58317;
+  color: white;
+}
+
+.btn{
+  min-width: 90px !important;
+}
+
+.btn-search {
+  background-color: #18AEFF;
+  color: white;
+  margin-bottom: 3px;
+}
+
+.btn-print {
+  background-color: #F58317;
+  color: white;
+}
+.btn-return{
+  background-color: #0062D2;
+  color: white;
+}
+
+.btn:hover{
+  color: black;
+}
+
+.search{
+  width: 70%;
+}

@@ -4,39 +4,39 @@
     <legend class="scheduler-border text-center" style="background: #e54744">
       <h2 style="color: white">Thông tin admin</h2>
     </legend>
-    <div *ngIf="isAdmin== false" style="color: red"> <b>(Không có dữ liệu phù hợp) </b> </div>
-    <div class="row" style="height:100% ; width: auto" *ngIf="isAdmin == true">
+    <div *ngIf="checkAdmin == false" style="color: red"> <b>(Không có dữ liệu phù hợp) </b> </div>
+    <div class="row" style="height:100% ; width: auto" *ngIf="checkAdmin == true">
       <div class="col-lg-6 pl-5">
         <table  class="table" style="height: 100% ; width: 100% ">
           <tr>
             <td> <u>Họ và tên: </u></td>
-            <td style="text-align: right" >{{admin.employee.employeeName | uppercase}} </td>
+            <td style="text-align: right" >{{admin.employeeName | uppercase}} </td>
           </tr>
           <tr>
             <td> <u>Ngày sinh: </u></td>
-            <td style="text-align: right" >{{admin.employee.employeeBirthday | date:"dd-MM-yyyy"}} </td>
+            <td style="text-align: right" >{{admin.employeeBirthday | date:"dd-MM-yyyy"}} </td>
           </tr>
           <tr>
             <td> <u>Địa chỉ: </u></td>
-            <td style="text-align: right" >{{admin.employee.employeeAddress}}</td>
-          </tr>
-          <tr>
-            <td> <u> Email: </u></td>
-            <td style="text-align: right" >{{admin.email}}</td>
+            <td style="text-align: right" >{{admin.employeeAddress}}</td>
           </tr>
           <tr>
             <td> <u> Giới tính:</u></td>
-            <td style="text-align: right"  >{{admin.employee.employeeGender}}</td>
+            <td style="text-align: right"  >{{admin.employeeGender}}</td>
           </tr>
           <tr>
             <td> <u>Điện thoại: </u></td>
-            <td style="text-align: right" >{{admin.employee.employeePhoneNumber}}</td>
+            <td style="text-align: right" >{{admin.employeePhoneNumber}}</td>
+          </tr>
+          <tr>
+            <td> <u> Email: </u></td>
+            <td style="text-align: right" >{{userEmail}}</td>
           </tr>
         </table>
       </div>
       <div class="col-lg-6 text-center pl-5">
         <div class="row text-center">
-          <img src="{{admin.employee.employeeImage}}"
+          <img src="{{admin.employeeImage}}"
                style="background: #dddddd; border-radius: 50%; border: 2px solid #a1a1a1; height:200px; padding: 10px; text-align: center;margin-left:auto;margin-right:auto;margin-bottom: 20px"/>
         </div>
         <button (click)="openDialog()" type="button" class="btn btn-success">

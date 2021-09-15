@@ -1,9 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminChangePasswordComponent} from '../admin-change-password/admin-change-password.component';
 import {MatDialog} from '@angular/material/dialog';
-import {UserService} from '../../../service/user.service';
-import {User} from '../../../model/user';
-import {Role} from '../../../model/role';
+
+import {Employee} from "../../../../model/employee";
+import {EmployeeService} from "../../../../service/employee/employee.service";
+import {TokenStorageService} from "../../../../user/user-service/token-storage.service";
+
+import {Role} from "../../../../model/role";
+import {UserService} from "../../../../service/user/user.service";
+import {User} from "../../../../model/user";
 
 
 @Component({
@@ -13,48 +18,57 @@ import {Role} from '../../../model/role';
 })
 export class AdminInfoComponent implements OnInit {
 
-  constructor(private employeeService: UserService,
-              private dialog: MatDialog) {
+  constructor(private employeeService: EmployeeService,
+              private dialog: MatDialog,
+              private tokenStorageService: TokenStorageService,
+              private userService: UserService) {
   }
 
-  admin: User;
-  roles: Role[];
-  isAdmin = false;
-  adminId: number;
+  admin: Employee;
+  checkAdmin = false;
+  userId: number;
+  user: User;
+  userEmail : string;
+
   ngOnInit(): void {
-    // localStorage.setItem('account', JSON.stringify(this.account));
-    // // Lấy data từ localStorage
-    // this.adminId = JSON.parse(localStorage.getItem('account')).accountId;
-    // this.email = JSON.parse(localStorage.getItem('account')).email;
-    this.getAdminById(this.adminId);
+    this.getIdUserByTokenStorageService();
+    this.getUserById(this.userId);
+    this.getAdminByTokenStorageService();
+    this.getEmailUserByTokenStorageService()
   }
 
-  getAdminById(id: number) {
-    this.employeeService.findAdminById(id).subscribe(data => {
-      this.admin = data;
-      console.log(this.admin.password);
-      this.checkRole(data);
-    });
+  getIdUserByTokenStorageService() {
+    this.userId = this.tokenStorageService.getUser().id;
   }
 
-  checkRole(user: User) {
-    this.roles = user.roles;
-    for (let i = 0; i < this.roles.length; i++) {
-      if (this.roles[i].name === 'ROLE_ADMIN') {
-        this.isAdmin = true;
+  getUserById(id: number) {
+    this.userService.findById(id).subscribe(data => {
+      this.user = data;
+      this.checkRole();
+    })
+  }
+  getAdminByTokenStorageService() {
+    this.admin = this.tokenStorageService.getUser().employee;
+  }
+
+  checkRole() {
+    for (let i = 0; i < this.user.roles.length; i++) {
+      if(this.user.roles[i].name === 'ROLE_ADMIN'){
+        this.checkAdmin=true;
       }
     }
-    console.log(this.isAdmin);
-    console.log(this.roles);
+  }
+  getEmailUserByTokenStorageService(){
+    this.userEmail = this.tokenStorageService.getUser().username;
   }
 
   openDialog(): void {
-    const id = this.admin.employee.employeeId;
-    const name = this.admin.employee.employeeName;
+    const id = this.tokenStorageService.getUser().id;
+    const name = this.tokenStorageService.getUser().employee.employeeName;
+    console.log(id);
     const dialogRef = this.dialog.open(AdminChangePasswordComponent, {
       width: 'auto', height: 'auto',
       data: {id, name},
     });
   }
-
 }
