@@ -9,6 +9,7 @@ import {TokenStorageService} from "../../user/user-service/token-storage.service
 export class SideBarComponent implements OnInit {
   @Input()
   isAdmin = false;
+  isModerator = false;
   private roles: string[];
   isLoggedIn = false;
   username: string;
@@ -20,6 +21,7 @@ export class SideBarComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.isAdmin = this.roles.includes('ROLE_ADMIN');
+      this.isModerator = this.roles.includes('ROLE_MODERATOR');
     }
   }
 

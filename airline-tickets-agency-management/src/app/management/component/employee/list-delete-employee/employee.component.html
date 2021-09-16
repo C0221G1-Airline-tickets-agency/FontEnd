@@ -18,7 +18,7 @@
           </select>
           <small style="color: red">{{mggSearch}}</small>
         </div>
-        <div class="col-6 px-0 pl-3">
+        <div class="col-6 px-0 pl-4">
           <input id="valueSearch" *ngIf="!isRole" [type]="typeSearch==='employee_birthday'?'date':'search'"
                  placeholder="Vui lòng nhập"
                  (keydown)="$event.key=='Enter'?searchEmployee():''"
@@ -31,9 +31,9 @@
             <option value="ROLE_MODERATOR">Nhân viên</option>
           </select>
         </div>
-        <div class="col-4 px-0 pl-3">
-          <button class="btn btn-search " (click)="searchEmployee()"><i
-            class="fa fa-search "></i> Tìm
+        <div class="col-4 px-0 ">
+          <button class="btn btn-search " style="margin-left: 40px" (click)="searchEmployee()"><i
+            class="fa fa-search "></i> Xem
           </button>
         </div>
       </div>
@@ -57,7 +57,6 @@
       <tr style="background: white" *ngIf="isLoading">
         <td id="loader" colspan="8">
           <div class="d-flex justify-content-center">
-
             <!--            <div class="loader"></div>-->
             <div class="position-relative">
               <img src="../../../../../assets/img/spin_360.gif" height="150px" width="150px"/>
@@ -69,17 +68,17 @@
       <tr *ngIf="isFail">
         <td class="text-center " colspan="8">Không tìm thấy dữ liệu</td>
       </tr>
-        <tr *ngFor="let i of employees;index as j" [style]="i.employeeId==employeeIdChoice?'background: #f3b4ad': ''"
-            (click)="getEmployeeDelete(i.employeeId,i.employeeName)">
-          <td>{{j + page * 5 + 1}}</td>
-          <td>{{i.employeeCode}}</td>
-          <td>{{i.employeeName}}</td>
-          <td>{{i.employeeGender}}</td>
-          <td>{{i.employeePhoneNumber}}</td>
-          <td>{{i.employeeBirthday|date:'dd-MM-yyyy'}}</td>
-          <td>{{i.account}}</td>
-          <td>{{i.role == 'ROLE_ADMIN' ? 'Quản Lý' : 'Nhân viên'}}</td>
-        </tr>
+      <tr *ngFor="let i of employees;index as j" [style]="i.employeeId==employeeIdChoice?'background: #f3b4ad': ''"
+          (click)="getEmployeeDelete(i.employeeId,i.employeeName)">
+        <td>{{j + page * 5 + 1}}</td>
+        <td>{{i.employeeCode}}</td>
+        <td>{{i.employeeName}}</td>
+        <td>{{i.employeeGender}}</td>
+        <td>{{i.employeePhoneNumber}}</td>
+        <td>{{i.employeeBirthday|date:'dd-MM-yyyy'}}</td>
+        <td>{{i.account}}</td>
+        <td>{{i.role == 'ROLE_ADMIN' ? 'Quản Lý' : 'Nhân viên'}}</td>
+      </tr>
       </tbody>
     </table>
   </div>
@@ -94,8 +93,6 @@
   <!--      </ul>-->
   <!--    </nav>-->
   <!--  </div>-->
-
-
   <div class="d-flex justify-content-end" *ngIf="employees.length != 0">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
@@ -108,13 +105,11 @@
                   [style]="((i <=  page + 1 && i >= page - 1) ? (i == page? 'background: #567FEA; color: white; display:block': 'display: block'): 'display: none ')">{{i + 1}}</button>
         </li>
         <li class="page-item">
-          <button class="page-link"   (click)="next()">Trang sau</button>
+          <button class="page-link" (click)="next()">Trang sau</button>
         </li>
       </ul>
     </nav>
   </div>
-
-
   <div class="d-flex justify-content-end  pb-3">
     <button class="mr-3 btn btn-search " routerLink="/management/employee/create" type="button"><i
       class="fa fa-plus"></i> Thêm
@@ -129,4 +124,3 @@
     <button class="btn btn-return" routerLink="/management" type="button"><i class="fa fa-reply"></i> Trở về</button>
   </div>
 </div>
-

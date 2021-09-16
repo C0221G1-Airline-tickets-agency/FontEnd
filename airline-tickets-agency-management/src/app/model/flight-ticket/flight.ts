@@ -1,5 +1,5 @@
-import {Airline} from './Airline';
-import {Location} from './Location';
+import {Airline} from './airline';
+import {Location} from './location';
 
 export interface Flight {
   flightId: number;

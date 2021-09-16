@@ -9,7 +9,7 @@
           <div><h5 class="my-2">Phòng vé C0221G1</h5></div>
         </div>
         <div class="ticket-t-content ">
-          <div class="row">
+          <div class="row position-relative" style="height: 176.18px">
             <div class="col-3 text-center">
               <div class="font-weight-bold">Mã đặt chỗ</div>
               <div class="text-primary">{{data.ticketCode}}</div>
@@ -20,38 +20,40 @@
             <div class="col-6 px-0">
               <div class="ticket-t-code">||||||||||||||||||||||</div>
               <div class="font-weight-bold my-2" style="padding-left: 70px">Thông tin chuyến bay</div>
+
+            </div>
+            <div class="position-absolute" style="top: 80px;left: 200px">
               <div class="d-flex">
                 <div>
-                  <span class="font-weight-bold ml-2">Số hiệu:</span> <span
-                  class="text-primary">{{data.flight.flightCode}}</span><br>
+                  <span class="font-weight-bold ml-1">Số hiệu:</span> <span
+                  class="text-primary"> {{data.flight.flightCode}}</span><br>
                   <span class="font-weight-bold ml-1">Điểm đi:</span>
                   <span class="text-primary"> {{data.flight.locationFrom.cityName}}({{data.flight.locationFrom.areaCode}})</span><br>
-                    <span class="font-weight-bold ml-1">Khởi Hành:</span> <span
-                    class="text-primary pr-2"> {{data.flight.departureTime}}</span><br>
+                  <span class="font-weight-bold ml-1">Khởi Hành:</span> <span
+                  class="text-primary pr-1"> {{data.flight.departureTime}}</span><br>
                   <span class="font-weight-bold ml-1">Ghế:</span> <span
-                  class="text-primary pr-2"> {{data.chairName}}</span>
+                  class="text-primary pr-1"> {{data.chairName}}</span>
 
                 </div>
                 <div style="padding-left: 20px">
                   <span class="font-weight-bold">Ngày bay:</span> <span
-                  class="text-primary"> {{data.flight.flightDate | date : 'dd/MM/yyyy'}}</span><br>
+                  class="text-primary"> {{data.flight.flightDate}}</span><br>
                   <span class="font-weight-bold">Điểm đến:</span> <span
-                  class="text-primary"> {{data.flight.locationTo.cityName}}({{data.flight.locationTo.areaCode}})</span><br>
-                    <span class="font-weight-bold">Giờ đến: </span> <span
-                    class="text-primary pr-2"> {{data.flight.endTime}}</span><br>
+                  class="text-primary"> {{data.flight.locationTo.cityName}} ({{data.flight.locationTo.areaCode}})</span><br>
+                  <span class="font-weight-bold">Giờ đến: </span> <span
+                  class="text-primary pr-1"> {{data.flight.endTime}}</span><br>
                   <span class="font-weight-bold">Khoang hạng: </span> <span
-                  class="text-primary pr-2"> {{data.ticketType}}</span>
+                  class="text-primary pr-1"> {{data.ticketType}}</span>
                 </div>
               </div>
             </div>
-            <div class="col-3 pl-0">
+            <div class="col-3 pl-0" >
               <div class="text-center m-1 my-border">
                 Giá trị thanh toán <br>
                 <span class="text-danger">{{money | currency: 'VND' : '' : '1.0-0'}}</span>&nbsp; &nbsp; VND
               </div>
             </div>
-          </div>
-          <div class="row">
+          </div>          <div class="row">
             <div class="col-2 mt-4   text-center">
               <div class="font-weight-bold">Điện  Thoại</div>
               0905123123

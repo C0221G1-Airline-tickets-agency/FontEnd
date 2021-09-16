@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Scenic} from '../../../model/destination/Scenic';
+
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {DestinationService} from '../../../service/destiantion/destination.service';
 import {logger} from 'codelyzer/util/logger';
 import {Destination} from '../../../model/destination/Destination';
+import {Scenic} from "../../../model/destination/scenic";
 
 @Component({
   selector: 'app-destination-detail',

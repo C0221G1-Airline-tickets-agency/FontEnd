@@ -5,17 +5,9 @@
 
   <div class="pt-0 bg-light content-destination">
     <br>
-    <div class="d-flex justify-content-end">
-      <button class=" btn btn-edit" type="button"><i class="fa fa-edit"></i> Sửa</button>
-
-    </div>
     <div class="p-3 mt-3"><h1
       style="color: red;font-family: 'Bodoni MT';font-weight: bold; font-size: 50px;">{{destinations.destinationName}}</h1></div>
     <div class="ml-3 mb-3">{{destinations.destinationDescription}}</div>
-    <div>
-      <div class="ml-3 font-weight-bold"></div>
-      <div class="ml-3">{{destinations.destinationDescription}} </div>
-    </div>
     <div *ngFor="let s of scenic">
       <div class="ml-3 font-weight-bold pb-1">{{s.scenicName}} </div>
       <div class="ml-3">{{s.scenicDescription}}</div>

@@ -3,6 +3,7 @@ import {EmployeeService} from '../../../../service/employee/employee.service';
 import {Employee} from '../../../../model/employee';
 import Swal from 'sweetalert2';
 import {ToastrService} from 'ngx-toastr';
+import {TokenStorageService} from "../../../../user/user-service/token-storage.service";
 
 @Component({
   selector: 'app-employee',
@@ -24,7 +25,8 @@ export class EmployeeComponent implements OnInit {
   flag = false;
   employeeIdRole = 0;
 
-  constructor(private sv: EmployeeService, private toast: ToastrService, private elementRef: ElementRef) {
+  constructor(private sv: EmployeeService, private toast: ToastrService, private elementRef: ElementRef,
+              private tokenStorageService: TokenStorageService ) {
   }
 
   ngOnInit(): void {
@@ -32,6 +34,7 @@ export class EmployeeComponent implements OnInit {
     addEventListener('keydown', event => {
       console.log('keydown', event.keyCode);
     });
+    this.employeeIdRole = this.tokenStorageService.getUser().employee.employeeId;
   }
 
 

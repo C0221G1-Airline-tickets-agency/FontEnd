@@ -12,6 +12,10 @@ import {EmployeeComponent} from './component/employee/list-delete-employee/emplo
 import {AddEmployeeComponent} from './component/employee/add-employee/add-employee.component';
 import {UpdateEmployeeComponent} from './component/employee/update-employee/update-employee.component';
 import {EmployeeInformationComponent} from './component/employee-information/employee-information.component';
+import {AdminAuthService} from "../service/auth/admin-auth.service";
+import {AdminInfoComponent} from "./component/admin/admin-info/admin-info.component";
+import {AuthGuard} from "../service/auth/auth.guard.service";
+import {ModeratorAuthService} from "../service/auth/moderator-auth.service";
 
 
 
@@ -21,37 +25,40 @@ const routes: Routes = [
     children:
       [
         {
-          path: 'report', component: ReportComponent
+          path: 'admin', component: AdminInfoComponent, canActivate: [AdminAuthService]
         },
         {
-          path: 'customer', component: CustomerComponent
+          path: 'report', component: ReportComponent, canActivate: [ModeratorAuthService]
         },
         {
-          path: 'create-customer', component: CreateCustomerComponent
+          path: 'customer', component: CustomerComponent, canActivate: [ModeratorAuthService]
         },
         {
-          path: 'edit-customer/:id', component: EditCustomerComponent
+          path: 'create-customer', component: CreateCustomerComponent, canActivate: [AdminAuthService]
         },
         {
-          path: 'ticket/list', component: TicketListComponent
+          path: 'edit-customer/:id', component: EditCustomerComponent, canActivate: [AdminAuthService]
         },
         {
-          path: 'statistical', component: StatisticalComponent
+          path: 'ticket/list', component: TicketListComponent, canActivate: [ModeratorAuthService]
         },
         {
-          path: 'employee', component: EmployeeComponent
+          path: 'statistical', component: StatisticalComponent, canActivate: [AdminAuthService]
         },
         {
-          path: 'employee/create', component: AddEmployeeComponent
+          path: 'employee', component: EmployeeComponent, canActivate: [AdminAuthService]
         },
         {
-          path: 'employee/update/:id', component: UpdateEmployeeComponent
+          path: 'employee/create', component: AddEmployeeComponent, canActivate: [AdminAuthService]
         },
         {
-          path: 'employee-information', component: EmployeeInformationComponent
+          path: 'employee/update/:id', component: UpdateEmployeeComponent, canActivate: [AdminAuthService]
         },
         {
-          path: 'employee-add', component: AddEmployeeComponent
+          path: 'employee-information', component: EmployeeInformationComponent, canActivate: [ModeratorAuthService]
+        },
+        {
+          path: 'employee-add', component: AddEmployeeComponent, canActivate: [AdminAuthService]
         }
       ]
   },
