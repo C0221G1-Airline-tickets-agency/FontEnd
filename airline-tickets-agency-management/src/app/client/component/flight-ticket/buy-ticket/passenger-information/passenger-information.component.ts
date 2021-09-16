@@ -74,7 +74,7 @@ export class PassengerInformationComponent implements OnInit {
       this.tickets[i].plusBaggage = this.formArray.value[i].plusBaggage;
       this.tickets[i].passengerEmail = this.formArray.value[i].passengerEmail;
       this.tickets[i].passengerIdCard = this.formArray.value[i].passengerIdCard;
-      this.tickets[i].ticketStatus.ticketStatusId = 1;
+      this.tickets[i].ticketStatus =  {ticketStatusId: 1};
       this.ticketService.update(this.tickets[i].ticketId, this.tickets[i]).subscribe(() => {
           // console.log(this.ticket);
           // this.toast.success('Mua vé thành công!', 'Chúc mừng:')
@@ -86,8 +86,10 @@ export class PassengerInformationComponent implements OnInit {
     }
     if(flag) {
       this.toast.success('Mua vé thành công!', 'Chúc mừng:')
+      window.location.href = 'http://localhost:4200/customer/payment';
     } else {
       this.toast.error('Mua vé không thành công!', 'Thất bại:')
+      window.location.href = 'http://localhost:4200';
     }
 
     // this.ticket.passengerName = this.ticketForm.value.passengerName;

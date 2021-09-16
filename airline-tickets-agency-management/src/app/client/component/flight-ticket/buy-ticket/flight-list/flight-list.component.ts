@@ -110,18 +110,18 @@ export class FlightListComponentTrang implements OnInit {
   }
 
   start() {
-    // this.flightDate = this.data.departureTime;
-    // this.returnDate = this.data.endTime;
-    // if (this.data.endTime == '') {
-    //   this.isTwoWay = 0;
-    //   this.returnDate = '';
-    // } else {
-    //   this.isTwoWay = 1;
-    // }
-    //
-    // this.adults = this.data.passenger.split(',')[0];
-    // this.children = this.data.passenger.split(',')[1];
-    // this.findLocation();
+    this.flightDate = this.data.departureTime;
+    this.returnDate = this.data.endTime;
+    if (this.data.endTime == '') {
+      this.isTwoWay = 0;
+      this.returnDate = '';
+    } else {
+      this.isTwoWay = 1;
+    }
+
+    this.adults = this.data.passenger.split(',')[0];
+    this.children = this.data.passenger.split(',')[1];
+    this.findLocation();
   }
 
   getDay(day) {
@@ -465,6 +465,7 @@ export class FlightListComponentTrang implements OnInit {
         if (result) {
           window.location.href = 'http://localhost:4200/customer/payment';
         }
+        this.listTicketId = [];
       });
     }
   }
