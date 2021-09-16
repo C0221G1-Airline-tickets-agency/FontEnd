@@ -20,6 +20,7 @@ export class PassengerInformationComponent implements OnInit {
   formArray: FormArray = new FormArray([]);
   tickets: Ticket[];
   ticket: Ticket;
+  checkbox: boolean = false;
 
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -42,6 +43,7 @@ export class PassengerInformationComponent implements OnInit {
     this.listId = this.data.data1;
     console.log(this.listId);
     this.getTicket(this.listId);
+    console.log(this.checkbox);
     // for (let id of this.listId) {
     //   this.getTicket(id);
     // }
@@ -88,6 +90,7 @@ export class PassengerInformationComponent implements OnInit {
       this.tickets[i].passengerEmail = this.formArray.value[i].passengerEmail;
       this.tickets[i].passengerIdCard = this.formArray.value[i].passengerIdCard;
       this.tickets[i].ticketStatus =  {ticketStatusId: 1};
+      this.tickets[i].plusBaby = this.checkbox;
       this.tickets[i].user = {userId: this.tokenStorageService.getUser().id};
 
       this.ticketService.update(this.tickets[i].ticketId, this.tickets[i]).subscribe(() => {
@@ -103,4 +106,15 @@ export class PassengerInformationComponent implements OnInit {
 
   }
 
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
+  plusBaby() {
+    if (this.checkbox){
+      this.checkbox=false;
+    } else {
+      this.checkbox=true;
+    }
+  }
 }

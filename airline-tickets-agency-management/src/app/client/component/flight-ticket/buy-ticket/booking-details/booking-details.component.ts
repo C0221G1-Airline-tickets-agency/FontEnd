@@ -60,7 +60,7 @@ export class BookingDetailsComponent implements OnInit {
       if (result) {
         // window.location.href = 'http://localhost:4200/customer/payment';
       }
-      this.listId = [];
+      // this.listId = [];
     });
   }
 }

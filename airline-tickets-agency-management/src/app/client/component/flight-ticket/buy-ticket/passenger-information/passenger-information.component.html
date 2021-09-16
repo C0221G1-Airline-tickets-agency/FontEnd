@@ -17,7 +17,7 @@
         <div class="row">
           <div class="col-lg-4">
             <div class="row">{{tickets[i].flight.locationFrom.cityName}} {{tickets[i].flight.locationFrom.areaCode}}</div>
-            <div class="row">{{tickets[i].flight.departureTime}}, {{tickets[i].bookingDate | date: 'dd/MM/yyyy'}}</div>
+            <div class="row">{{tickets[i].flight.departureTime}}, {{tickets[i].flight.flightDate | date: 'dd/MM/yyyy'}}</div>
             <div class="row">{{tickets[i].flight.locationFrom.airportName}}</div>
             <div class="row">
               <div class="col-lg-6">
@@ -40,7 +40,7 @@
           </div>
           <div class="col-lg-4">
             <div class="row">{{tickets[i].flight.locationTo.cityName}} {{tickets[i].flight.locationTo.areaCode}}</div>
-            <div class="row">{{tickets[i].flight.endTime}}, {{tickets[i].bookingDate | date: 'dd/MM/yyyy'}}</div>
+            <div class="row">{{tickets[i].flight.endTime}}, {{tickets[i].flight.flightDate | date: 'dd/MM/yyyy'}}</div>
             <div class="row">{{tickets[i].flight.locationTo.airportName}}</div>
             <div class="row">
               <div class="col-lg-6">
@@ -60,7 +60,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="row">Tổng giá:</div>
-                <div class="row">{{tickets[i].ticketPrice + (tickets[i].ticketPrice * tickets[i].ticketTypePrice) + tickets[i].plusBaggage + (tickets[i].ticketPrice * tickets[i].tax) - (tickets[i].ticketPrice * tickets[i].passengerTypePrice) | currency : 'VND' : ''}} VNĐ</div>
+                <div class="row">{{tickets[i].ticketPrice + (tickets[i].ticketPrice * tickets[i].ticketTypePrice) + tickets[i].plusBaggage*1000 + (tickets[i].ticketPrice * tickets[i].tax) - (tickets[i].ticketPrice * tickets[i].passengerTypePrice) | currency : 'VND' : ''}} VNĐ</div>
               </div>
             </div>
           </div>
@@ -80,7 +80,8 @@
                   <div class="col-lg-7">
                     <div class="row align-items-start ml-2 pl-1">
                       <div class="col-lg-1 px-0">
-                        <input type="checkbox">
+                        <button style="border-radius: 50%; height: 15px; width: 15px" [ngStyle]="{'background': checkbox? 'blue': 'white'}" (click)="plusBaby()"></button>
+
                       </div>
                       <div class="col-lg-11 px-0 align-items-start">
                         Có kèm em bé
@@ -225,7 +226,7 @@
   <div class="row mt-2">
     <div class="col-lg-6">
       <div class="row justify-content-center align-items-center">
-        <button class=" btn btn-return fa fa-reply" style="height: 30px"> Chọn lại chuyến bay
+        <button class=" btn btn-return fa fa-reply" style="height: 30px" (click)="closeDialog()"> Hủy
         </button>
       </div>
     </div>
