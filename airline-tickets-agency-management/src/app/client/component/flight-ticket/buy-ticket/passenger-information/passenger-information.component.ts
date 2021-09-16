@@ -23,6 +23,7 @@ export class PassengerInformationComponent implements OnInit {
   checkbox: boolean = false;
 
 
+
   constructor(private activatedRoute: ActivatedRoute,
               private ticketService: TicketService,
               private toast: ToastrService,
@@ -101,7 +102,7 @@ export class PassengerInformationComponent implements OnInit {
         this.toast.error('Mua vé không thành công!', 'Thất bại:');
         window.location.href = 'http://localhost:4200';
         });
-
+        this.setCheckboxFalse();
     }
 
   }
@@ -116,5 +117,13 @@ export class PassengerInformationComponent implements OnInit {
     } else {
       this.checkbox=true;
     }
+  }
+
+  setCheckboxTrue() {
+    this.checkbox=true;
+  }
+
+  setCheckboxFalse() {
+    this.checkbox = false;
   }
 }

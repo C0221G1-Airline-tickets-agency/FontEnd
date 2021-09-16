@@ -49,6 +49,8 @@ export class HeaderComponent implements OnInit {
         this.username = user.customer.customerName;
       }
       // @ts-ignore
+      this.isModerator = this.roles == 'ROLE_MODERATOR';
+      // @ts-ignore
       // tslint:disable-next-line:triple-equals
       this.ismod = (this.roles == 'ROLE_MODERATOR' || this.roles == 'ROLE_ADMIN')
       if(this.ismod){

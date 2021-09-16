@@ -186,7 +186,7 @@ export class TicketListComponent implements OnInit {
   }
 
   onInputHandler() {
-    this.router.navigateByUrl("/search-flight");
+    this.router.navigateByUrl("");
   }
 
   onReturnHandler() {

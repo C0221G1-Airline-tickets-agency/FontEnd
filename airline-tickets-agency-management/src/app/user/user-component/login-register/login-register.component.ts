@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SignupRequest} from '../../user-entity/signupRequest';
 import {AuthService} from '../../user-service/auth.service';
 import {TokenStorageService} from '../../user-service/token-storage.service';
 import {ToastrService} from 'ngx-toastr';
+import {ChatboxService} from "../../../service/chatbox.service";
 
 @Component({
   selector: 'app-login-register',
@@ -11,6 +12,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./login-register.component.css']
 })
 export class LoginRegisterComponent implements OnInit {
+  @Output() control:EventEmitter<any>=new EventEmitter<any>();
   flag = false;
   isLoggedIn = false;
   isLoginFailed = false;
@@ -50,7 +52,7 @@ export class LoginRegisterComponent implements OnInit {
 
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService, private auth:ChatboxService,) {
     this.formSignin = new FormGroup({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
@@ -151,4 +153,15 @@ export class LoginRegisterComponent implements OnInit {
     }
   }
 
+  googleLogin(){
+    this.auth.googleLogin().then(()=>{
+      this.control.emit(true)
+    })
+  }
+
+  facebookLogin(){
+    this.auth.facebookLogin().then(()=>{
+      this.control.emit(true);
+    })
+  }
 }

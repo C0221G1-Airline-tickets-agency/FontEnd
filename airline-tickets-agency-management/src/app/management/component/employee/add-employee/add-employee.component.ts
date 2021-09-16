@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 import {finalize} from 'rxjs/operators';
 import {formatDate} from '@angular/common';
 import {AddRequest} from '../../../../model/employee/add-request';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-add-employee',
@@ -24,7 +25,8 @@ export class AddEmployeeComponent implements OnInit {
               private userService: UserService,
               private userRoleService: UserRoleService,
               private storage: AngularFireStorage,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService) {
     this.createEmployeeForm();
   }
 
@@ -59,8 +61,15 @@ export class AddEmployeeComponent implements OnInit {
           this.addRequest.employeeImage = url;
           this.employeeService.addEmployee(this.addRequest).subscribe(() => {
             this.router.navigateByUrl('/management/employee');
+            this.toastr.success('Tạo mới thành công', 'Đăng nhập ', {
+              timeOut: 2000,
+              extendedTimeOut: 1500
+            })
           }, error => {
-            alert('lỗi');
+            this.toastr.success('Tạo mới thành công', 'Đăng nhập ', {
+              timeOut: 2000,
+              extendedTimeOut: 1500
+            })
           });
         });
       })

@@ -16,7 +16,7 @@
         </div>
     <div class="account-login" *ngIf="isLoggedIn">
       <span class="font-weight-bold">Xin chào, {{username}} &nbsp; |</span>
-        <li>  <a type="button" [routerLink]="[isAdmin? 'management/customer':'/customer']" class="header-btn" href="#"> &nbsp; Quản lí tài khoản </a></li>
+        <li>  <a type="button" [routerLink]="[isAdmin? 'management/customer':'/customer']" class="header-btn" href="#"> &nbsp;Quản lí &nbsp; </a></li>
       |
         <li> <a type="button" class="header-btn" (click)="logout()">Đăng xuất</a></li>
         </div>
@@ -62,9 +62,9 @@
       <ul class="my-nav">
         <li><a href="#">Trang chủ</a></li>
         <li><a href="news/news-list">Tin tức</a></li>
-        <li><a *ngIf="isAdmin" href="flight-management">Dịch vụ chuyến bay</a></li>
+        <li *ngIf="isAdmin && !isModerator"><a  href="flight-management">Dịch vụ chuyến bay</a></li>
         <li><a href="#">Chuyến bay của tôi</a></li>
-        <li><a  *ngIf="isAdmin" routerLink="roomAdmin">Tin nhắn từ khách hàng</a></li>
+        <li *ngIf="isAdmin && !isModerator"><a   routerLink="roomAdmin">Tin nhắn từ khách hàng</a></li>
       </ul>
     </header>
   </div>

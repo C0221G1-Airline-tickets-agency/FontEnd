@@ -9,7 +9,7 @@
         <li class="item item-hover"><a class="pl-2 to-text-sidebar">Quản lý khách hàng<i
           class="fa fa-caret-down ml-2" aria-hidden="true"></i></a></li>
         <div class="menu-item-child active">
-          <li class="item-hover"><a href="" class="pl-4 d-flex">
+          <li *ngIf="!isAdmin && !isModerator" class="item-hover"><a href="" class="pl-4 d-flex">
             <div class="pr-2" style="margin-top: -2px"><i class="fa fa-arrow-right"
                                                           aria-hidden="true"></i></div>
             <div>Thông tin cá nhân</div>
@@ -24,7 +24,7 @@
                                                           aria-hidden="true"></i></div>
             <div>Lịch sử giao dịch</div>
           </a></li>
-          <li class="item-hover"><a href="/customer/change-password" class="pl-4 d-flex">
+          <li *ngIf="!isAdmin && !isModerator" class="item-hover"><a href="/customer/change-password" class="pl-4 d-flex">
             <div class="pr-2" style="margin-top: -2px"><i class="fa fa-arrow-right"
                                                           aria-hidden="true"></i></div>
             <div>Đổi mật khẩu</div>
@@ -52,7 +52,7 @@
             <div>Quản lý nhân viên</div>
           </a>
           </li>
-          <li class="item-hover"><a href="management/report" class="pl-4 d-flex">
+          <li *ngIf="!isModerator && !isAdmin" class="item-hover"><a href="management/report" class="pl-4 d-flex">
             <div class="pr-2" style="margin-top: -2px">
               <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </div>
@@ -67,7 +67,7 @@
         <li class="item item-hover"><a class="pl-2 to-text-sidebar">Quản lý nhân viên<i
           class="fa fa-caret-down ml-2" aria-hidden="true"></i></a></li>
         <div class="menu-item-child active">
-          <li class="item-hover"><a href="/management/employee-information" class="pl-4 d-flex">
+          <li *ngIf="!isAdmin" class="item-hover"><a href="/management/employee-information" class="pl-4 d-flex">
             <div class="pr-2" style="margin-top: -2px">
               <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </div>
@@ -97,7 +97,7 @@
             <div>Đặt vé</div>
           </a>
           </li>
-          <li class="item-hover"><a href="management/report" class="pl-4 d-flex">
+          <li *ngIf="!isModerator" class="item-hover"><a href="management/report" class="pl-4 d-flex">
             <div class="pr-2" style="margin-top: -2px">
               <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </div>

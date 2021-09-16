@@ -28,16 +28,16 @@ const routes: Routes = [
           path: 'admin', component: AdminInfoComponent, canActivate: [AdminAuthService]
         },
         {
-          path: 'report', component: ReportComponent, canActivate: [ModeratorAuthService]
+          path: 'report', component: ReportComponent, canActivate: [AdminAuthService]
         },
         {
           path: 'customer', component: CustomerComponent, canActivate: [ModeratorAuthService]
         },
         {
-          path: 'create-customer', component: CreateCustomerComponent, canActivate: [AdminAuthService]
+          path: 'create-customer', component: CreateCustomerComponent, canActivate: [ModeratorAuthService]
         },
         {
-          path: 'edit-customer/:id', component: EditCustomerComponent, canActivate: [AdminAuthService]
+          path: 'edit-customer/:id', component: EditCustomerComponent, canActivate: [ModeratorAuthService]
         },
         {
           path: 'ticket/list', component: TicketListComponent, canActivate: [ModeratorAuthService]

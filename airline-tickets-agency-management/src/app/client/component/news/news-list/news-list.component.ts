@@ -36,7 +36,7 @@ export class NewsListComponent implements OnInit {
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       const roles = user.roles;
-      this.isAdmin = roles.includes('ROLE_ADMIN');
+      this.isAdmin = (roles.includes('ROLE_ADMIN') || roles.includes('ROLE_MODERATOR'));
     }
   }
 

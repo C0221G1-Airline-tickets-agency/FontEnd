@@ -1,3 +1,11 @@
 label {
   color: red;
 }
+.btn-print {
+  background-color: #F58317;
+  color: white;
+}
+
+.btn-print:hover{
+  color: white;
+}

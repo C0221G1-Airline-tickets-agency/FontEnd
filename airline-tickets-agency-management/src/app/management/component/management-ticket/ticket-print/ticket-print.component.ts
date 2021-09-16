@@ -14,7 +14,7 @@ import {ToastrService} from 'ngx-toastr';
 export class TicketPrintComponent implements OnInit {
   title = 'in';
   gender: string;
-  money = this.data.ticketPrice + (this.data.tax * this.data.ticketPrice) + (this.data.ticketPrice * this.data.ticketTypePrice) - (this.data.ticketPrice * this.data.passengerTypePrice) + this.data.plusBaggage;
+  money = this.data.ticketPrice + (this.data.tax * this.data.ticketPrice) + (this.data.ticketPrice * this.data.ticketTypePrice) - (this.data.ticketPrice * this.data.passengerTypePrice) + (this.data.plusBaggage * 1000);
   ticketBack: string;
   baggage: number;
   msg: string;
@@ -85,7 +85,7 @@ export class TicketPrintComponent implements OnInit {
     html2canvas(e).then((canvas) => {
       const imgDta = canvas.toDataURL('image/png');
       const doc = new jsPDF();
-      const imgHeight = canvas.height * 208 / canvas.width;
+      const imgHeight = canvas.height * 220 / canvas.width;
       // @ts-ignore
       doc.addImage(imgDta, 5, 10, 208, imgHeight);
       doc.save('Vé-'+ this.data.ticketCode+'.pdf');

@@ -254,7 +254,15 @@ export class StatisticalComponent implements OnInit {
           'Ngày 4',
           'Ngày 5',
           'ngày 6',
-          'Ngày 7'
+          'Ngày 7',
+          'Ngày 8',
+          'Ngày 9',
+          'Ngày 10',
+          'Ngày 11',
+          'Ngày 12',
+          'Ngày 13',
+          'Ngày 14',
+          'Ngày 15'
         ]
       },
       tooltip: {

@@ -44,12 +44,12 @@
             <div class="row">{{tickets[i].flight.locationTo.airportName}}</div>
             <div class="row">
               <div class="col-lg-6">
-                <div class="row">Giá mỗi vé:</div>
-                <div class="row">{{tickets[i].ticketPrice | currency: 'VNĐ': '' | slice:0:9 }} VNĐ</div>
+<!--                <div class="row">Giá mỗi vé:</div>-->
+<!--                <div class="row">{{tickets[i].ticketPrice | currency: 'VNĐ': '' | slice:0:9 }} VNĐ</div>-->
               </div>
               <div class="col-lg-6">
-                <div class="row">Thuế & Phí:</div>
-                <div class="row">{{tickets[i].tax*tickets[i].ticketPrice | currency: 'VND': ''}} VNĐ</div>
+<!--                <div class="row">Thuế & Phí:</div>-->
+<!--                <div class="row">{{tickets[i].tax*tickets[i].ticketPrice | currency: 'VND': ''}} VNĐ</div>-->
               </div>
             </div>
           </div>
@@ -80,8 +80,7 @@
                   <div class="col-lg-7">
                     <div class="row align-items-start ml-2 pl-1">
                       <div class="col-lg-1 px-0">
-                        <button style="border-radius: 50%; height: 15px; width: 15px" [ngStyle]="{'background': checkbox? 'blue': 'white'}" (click)="plusBaby()"></button>
-
+                        <input type="checkbox" [(ngModel)]="checkbox" (click)="setCheckboxTrue()"/>
                       </div>
                       <div class="col-lg-11 px-0 align-items-start">
                         Có kèm em bé
@@ -105,7 +104,7 @@
               <div class="col-lg-4 pl-4">
                 <div class="row">
                   <select id="plusBaggage" formControlName="plusBaggage">
-                    <option value="" selected disabled>Chọn mua thêm hành lý</option>
+                    <option value="0">Chọn mua thêm hành lý</option>
                     <option value="100">Mua thêm 7kg - 100.000 VNĐ</option>
                     <option value="170">Mua thêm 15kg - 170.000 VNĐ</option>
                   </select>

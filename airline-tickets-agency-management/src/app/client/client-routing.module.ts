@@ -85,7 +85,7 @@ const routes: Routes = [
 
         },
         {
-          path: 'flight-management', component: FlightListComponent, canActivate: [ModeratorAuthService]
+          path: 'flight-management', component: FlightListComponent, canActivate: [AdminAuthService]
         },
         {
 
