@@ -2,6 +2,7 @@
 import {Flight} from './flight';
 
 import {TicketStatus} from './ticket-status';
+import {User} from '../user';
 
 
 export interface Ticket {
@@ -26,6 +27,6 @@ export interface Ticket {
   passengerEmail?: string;
   flag?: boolean;
   flight?: Flight;
-  ticketStatus?: TicketStatus;
-  user?: String;
+  ticketStatus?: any;
+  user?: any;
 }

@@ -36,8 +36,7 @@ export class TicketService {
   findById(id: number): Observable<any> {
     return this.http.get<any>(this.API_TICKET + '?id=' + id);
   }
-  findManyTicketById(listId: string): Observable<any>{
-    // @ts-ignore
+  findManyTicketById(listId: number[]): Observable<any>{
     return this.http.get<any>(this.API_TICKET+'/manyticket/'+listId);
   }
 

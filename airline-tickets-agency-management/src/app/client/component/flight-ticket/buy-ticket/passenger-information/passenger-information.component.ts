@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {TicketService} from '../../../../../service/flight-ticket/ticket/ticket.service';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Ticket} from '../../../../../model/flight-ticket/ticket';
 import {ToastrService} from 'ngx-toastr';
+import {TicketStatus} from '../../../../../model/flight-ticket/ticket-status';
+import {TokenStorageService} from '../../../../../user/user-service/token-storage.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-passenger-information',
@@ -12,33 +15,44 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class PassengerInformationComponent implements OnInit {
   id: number;
-  listId: string[];
+  listId: number[];
   ticketForm: FormGroup;
   formArray: FormArray = new FormArray([]);
   tickets: Ticket[];
   ticket: Ticket;
+  checkbox: boolean = false;
+
 
   constructor(private activatedRoute: ActivatedRoute,
               private ticketService: TicketService,
               private toast: ToastrService,
-              private formBuilder: FormBuilder) {
-    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-        // this.id = +paramMap.get('id');
-      let id1 = paramMap.get('listId');
-      this.listId = id1.split(',');
-      console.log(this.listId);
-
-        this.getTicket(id1);
-    })
+              private tokenStorageService: TokenStorageService,
+              private dialogRef: MatDialogRef<PassengerInformationComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+    // this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+    //     // this.id = +paramMap.get('id');
+    //   let id1 = paramMap.get('listId');
+    //   this.listId = id1.split(',');
+    //   console.log(this.listId);
+    //
+    //     this.getTicket(id1);
+    // })
   }
 
   ngOnInit(): void {
+    this.listId = this.data.data1;
+    console.log(this.listId);
+    this.getTicket(this.listId);
+    console.log(this.checkbox);
+    // for (let id of this.listId) {
+    //   this.getTicket(id);
+    // }
   }
 
 
-  getTicket(array: string){
+  getTicket(array: number[]){
     return this.ticketService.findManyTicketById(array).subscribe( (tickets: Ticket[]) => {
-      console.log(tickets);
+
       for (const ticket of tickets) {
         if (ticket.passengerType=='Người lớn'){
           this.ticketForm = new FormGroup({
@@ -62,11 +76,12 @@ export class PassengerInformationComponent implements OnInit {
         this.formArray.push(this.ticketForm);
       }
       this.tickets = tickets;
+      console.log(this.tickets);
 
     })
   }
   updateTicket(){
-    let flag: boolean = true;
+
     for (let i=0;i<this.formArray.length;i++) {
       this.tickets[i].passengerName = this.formArray.value[i].passengerName;
       this.tickets[i].passengerGender = this.formArray.value[i].passengerGender;
@@ -75,37 +90,31 @@ export class PassengerInformationComponent implements OnInit {
       this.tickets[i].passengerEmail = this.formArray.value[i].passengerEmail;
       this.tickets[i].passengerIdCard = this.formArray.value[i].passengerIdCard;
       this.tickets[i].ticketStatus =  {ticketStatusId: 1};
+      this.tickets[i].plusBaby = this.checkbox;
+      this.tickets[i].user = {userId: this.tokenStorageService.getUser().id};
+
       this.ticketService.update(this.tickets[i].ticketId, this.tickets[i]).subscribe(() => {
-          // console.log(this.ticket);
-          // this.toast.success('Mua vé thành công!', 'Chúc mừng:')
-        flag = true;
+        this.toast.success('Mua vé thành công!', 'Chúc mừng:');
+        window.location.href = 'http://localhost:4200/customer/payment';
+
         }, error => {
-          // this.toast.error('Mua vé không thành công!', 'Thất bại:')
-        flag = false;
-        })
-    }
-    if(flag) {
-      this.toast.success('Mua vé thành công!', 'Chúc mừng:')
-      window.location.href = 'http://localhost:4200/customer/payment';
-    } else {
-      this.toast.error('Mua vé không thành công!', 'Thất bại:')
-      window.location.href = 'http://localhost:4200';
+        this.toast.error('Mua vé không thành công!', 'Thất bại:');
+        window.location.href = 'http://localhost:4200';
+        });
+
     }
 
-    // this.ticket.passengerName = this.ticketForm.value.passengerName;
-    // this.ticket.passengerGender = this.ticketForm.value.passengerGender;
-    // this.ticket.passengerPhone = this.ticketForm.value.passengerPhone;
-    // this.ticket.plusBaggage = this.ticketForm.value.plusBaggage;
-    // this.ticket.passengerEmail = this.ticketForm.value.passengerEmail;
-    // this.ticket.passengerIdCard = this.ticketForm.value.passengerIdCard;
-    // this.ticket.ticketStatus.ticketStatusId = 1;
-    // console.log(this.ticket);
-    // this.ticketService.update(this.id, this.ticket).subscribe(() => {
-    //   // console.log(this.ticket);
-    //   this.toast.success('Mua vé thành công!', 'Chúc mừng:')
-    // }, error => {
-    //   this.toast.error('Mua vé không thành công!', 'Thất bại:')
-    // });
   }
 
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
+  plusBaby() {
+    if (this.checkbox){
+      this.checkbox=false;
+    } else {
+      this.checkbox=true;
+    }
+  }
 }

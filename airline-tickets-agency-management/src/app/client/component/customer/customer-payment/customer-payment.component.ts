@@ -79,6 +79,7 @@ export class CustomerPaymentComponent implements OnInit {
   ngOnInit(): void {
     this.getListTicketCustomerBook();
     this.getPaypPal();
+    console.log(this.tokenStorageService.getUser().id);
   }
 
   //#region Paypal

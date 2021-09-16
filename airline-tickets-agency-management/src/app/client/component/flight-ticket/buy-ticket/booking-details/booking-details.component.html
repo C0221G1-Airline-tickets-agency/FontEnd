@@ -20,12 +20,12 @@
     <div class="row">
       <div class="col-lg-4">
         <div class="row">{{ticket.flight.locationFrom.cityName}} {{ticket.flight.locationFrom.areaCode}}</div>
-        <div class="row">{{ticket.flight.departureTime}}, {{ticket.bookingDate | date: 'dd/MM/yyyy'}}</div>
+        <div class="row">{{ticket.flight.departureTime}}, {{ticket.flight.flightDate | date: 'dd/MM/yyyy'}}</div>
         <div class="row">{{ticket.flight.locationFrom.airportName}}</div>
         <div class="row">
           <div class="col-lg-6">
             <div class="row">Loại hành khách:</div>
-            <div class="row">{{ticket.passengerType}}</div>
+            <div class="row" style="font-weight: bold; color: #dc3545">{{ticket.passengerType}}</div>
           </div>
           <div class="col-lg-6">
 
@@ -52,7 +52,7 @@
       </div>
       <div class="col-lg-4">
         <div class="row">{{ticket.flight.locationTo.cityName}} {{ticket.flight.locationTo.areaCode}}</div>
-        <div class="row">{{ticket.flight.endTime}}, {{ticket.bookingDate | date: 'dd/MM/yyyy'}}</div>
+        <div class="row">{{ticket.flight.endTime}}, {{ticket.flight.flightDate | date: 'dd/MM/yyyy'}}</div>
         <div class="row">{{ticket.flight.locationTo.airportName}}</div>
         <div class="row">
           <div class="col-lg-6">
@@ -72,7 +72,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="row">Tổng giá:</div>
-            <div class="row">{{ticket.ticketPrice+(ticket.ticketPrice*ticket.ticketTypePrice)+ticket.plusBaggage+(ticket.ticketPrice*ticket.tax)-(ticket.ticketPrice*ticket.passengerTypePrice) | currency: 'VND': ''}} VNĐ</div>
+            <div class="row">{{ticket.ticketPrice+(ticket.ticketPrice*ticket.ticketTypePrice)+ticket.plusBaggage*1000+(ticket.ticketPrice*ticket.tax)-(ticket.ticketPrice*ticket.passengerTypePrice) | currency: 'VND': ''}} VNĐ</div>
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@
     </div>
     <div class="col-lg-6">
       <div class="row justify-content-center align-items-center">
-        <button class="btn btn-search fa fa-plus" (click)="closeDialog()" [routerLink]="['/passenger-information/', {listId:listId}]" style="height: 30px;width: 170px"> Chọn</button>
+        <button class="btn btn-search fa fa-plus" (click)="openPassengerInformation()" style="height: 30px;width: 170px"> Chọn</button>
       </div>
     </div>
   </div>

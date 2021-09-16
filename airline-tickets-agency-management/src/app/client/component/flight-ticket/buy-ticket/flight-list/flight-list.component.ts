@@ -69,6 +69,7 @@ export class FlightListComponentTrang implements OnInit {
   // Chức năng
   locationList: Location[];
   data: any = null;
+  searchReturn: boolean = false;
 
   constructor(private searchFlightService: SearchFlightService,
               private ticketService: TicketService,
@@ -89,7 +90,10 @@ export class FlightListComponentTrang implements OnInit {
     // };
 
     this.data = this.locationHome.getState();
-    this.start();
+    if (this.data!=null) {
+      this.start();
+    }
+
   }
 
   getData() {
@@ -395,6 +399,7 @@ export class FlightListComponentTrang implements OnInit {
             this.searchReturnSuccess = true;
           }
         });
+        this.searchReturn = true;
       }
       this.searched = true;
     }

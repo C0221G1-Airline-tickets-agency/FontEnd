@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {TicketService} from '../../../../../service/flight-ticket/ticket/ticket.service';
 import {Ticket} from '../../../../../model/flight-ticket/ticket';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {News} from "../../../../../model/news";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {PassengerInformationComponent} from '../passenger-information/passenger-information.component';
 
 @Component({
   selector: 'app-booking-details',
@@ -12,16 +12,19 @@ import {News} from "../../../../../model/news";
 export class BookingDetailsComponent implements OnInit {
   ticket: Ticket;
   tickets: Ticket[] = [];
+
   listId: number[] ;
 
 
+
+
   constructor(private ticketService: TicketService,
+              private dialog: MatDialog,
               private dialogRef: MatDialogRef<BookingDetailsComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
     this.listId = this.data.data1;
     for (const id of this.listId) {
       this.viewTicket(id);
@@ -44,5 +47,20 @@ export class BookingDetailsComponent implements OnInit {
   // }
   closeDialog() {
     this.dialogRef.close();
+
+  }
+
+  openPassengerInformation() {
+    const dialogRef = this.dialog.open(PassengerInformationComponent, {
+      width: '1000px',
+      height: '800px',
+      data: {data1: this.listId}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // window.location.href = 'http://localhost:4200/customer/payment';
+      }
+      // this.listId = [];
+    });
   }
 }
