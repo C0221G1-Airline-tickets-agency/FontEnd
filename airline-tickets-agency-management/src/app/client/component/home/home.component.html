@@ -197,7 +197,7 @@
               <div class="flight-center">
                 <div class="text-danger font-weight-bold">Chỉ từ</div>
                 <div class="text-danger font-italic font-weight-bold"
-                     style="font-size: 25px"> {{flight.ticketPrice / 1000}}
+                     style="font-size: 25px"> {{flight.ticketPrice / 1000 | currency: 'VND': ''}}
                 </div>
                 <div><span class="text-danger font-weight-bold">000</span> VND</div>
               </div>
@@ -215,7 +215,7 @@
     <div class="container">
       <h3 class="text-center text-danger font-weight-bold">Điểm Đến Hấp Dẫn</h3>
       <div class="d-flex justify-content-end">
-        <button class=" btn btn-primary" [routerLink]="['/destination/create-destination']">
+        <button class=" btn btn-primary" *ngIf="isAdmin" [routerLink]="['/destination/create-destination']">
           <i class="fa fa-plus-square"></i>
           Thêm
         </button>
@@ -240,8 +240,8 @@
                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item"> <i class="fa fa-edit text-warning" [routerLink]="['destination/edit-destination',d.destinationId]" ></i> Sửa</a>
-                <a class="dropdown-item" data-toggle="modal" (click)="deleteDestination(d.destinationName,d.destinationId)"> <i class="fa fa-trash text-danger"></i> Xóa</a>
+                <a *ngIf="isAdmin" class="dropdown-item"> <i class="fa fa-edit text-warning" [routerLink]="['destination/edit-destination',d.destinationId]" ></i> Sửa</a>
+                <a *ngIf="isAdmin" class="dropdown-item" data-toggle="modal" (click)="deleteDestination(d.destinationName,d.destinationId)"> <i class="fa fa-trash text-danger"></i> Xóa</a>
               </div>
             </div>
           </div>

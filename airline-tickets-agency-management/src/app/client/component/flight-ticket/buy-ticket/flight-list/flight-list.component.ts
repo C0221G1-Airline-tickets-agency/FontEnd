@@ -2,7 +2,7 @@ import {Component, Inject, Input, OnInit} from '@angular/core';
 import Swal from 'sweetalert2';
 import {formatDate} from '@angular/common';
 import {SearchFlightDto} from '../../../../../model/flight-ticket/searchFlightDto';
-import {Location} from '../../../../../model/flight-ticket/Location';
+import {Location} from '../../../../../model/flight-ticket/location';
 import {SearchFlightService} from '../../../../../service/flight-ticket/search-flight/search-flight.service';
 import {TicketService} from '../../../../../service/flight-ticket/ticket/ticket.service';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';

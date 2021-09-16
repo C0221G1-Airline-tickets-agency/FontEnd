@@ -1,4 +1,5 @@
-import {Destiation} from './destiation';
+import {Destiation} from "./destiation";
+
 
 export interface Scenic {
   scenicId?: number;

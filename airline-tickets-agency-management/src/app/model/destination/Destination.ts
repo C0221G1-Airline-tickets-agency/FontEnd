@@ -1,4 +1,4 @@
-import {Scenic} from './Scenic';
+import {Scenic} from './scenic';
 
 export class Destination {
   destinationId: number;

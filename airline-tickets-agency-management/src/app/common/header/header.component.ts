@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   ismod: boolean;
   @Input()
   isAdmin =  false;
+  isModerator = false;
   private roles: string[];
   isLoggedIn = false;
   username: string;

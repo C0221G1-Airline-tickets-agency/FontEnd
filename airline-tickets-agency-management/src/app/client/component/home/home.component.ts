@@ -12,6 +12,7 @@ import {SearchTicket} from '../../../model/home/search-ticket';
 import {Router} from '@angular/router';
 
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import {TokenStorageService} from "../../../user/user-service/token-storage.service";
 
 @Component({
   selector: 'app-home',
@@ -44,19 +45,32 @@ export class HomeComponent implements OnInit {
   change: number;
   check = false;
   displayFlat: boolean= true;
+  isAdmin = false;
+  isLoggedIn = false;
+
   constructor(private ticketHomeService: TicketHomeService,
               private router: Router,
               private destinationService: DestinationService, private dialog: MatDialog,
-              private toastr: ToastrService, private activatedRoute: ActivatedRoute) {
+              private toastr: ToastrService, private activatedRoute: ActivatedRoute,
+              private tokenStorageService: TokenStorageService) {
   }
 
   ngOnInit(): void {
+    this.checkAdmin();
     this.getDayNow();
     this.getAllLocation();
     this.getTop10cheapestFlights();
     this.startDay = this.dayNow;
-
     this.showDestination();
+  }
+
+  checkAdmin() {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      const roles = user.roles;
+      this.isAdmin = roles.includes('ROLE_ADMIN');
+    }
   }
 
   //#region effect ticket

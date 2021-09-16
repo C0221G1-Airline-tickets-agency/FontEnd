@@ -25,6 +25,8 @@ import {AddEmployeeComponent} from './component/employee/add-employee/add-employ
 import {UpdateEmployeeComponent} from './component/employee/update-employee/update-employee.component';
 import {EmployeeInformationComponent} from './component/employee-information/employee-information.component';
 import {EmployeeChangePasswordComponent} from './component/employee-change-password/employee-change-password.component';
+import {AdminChangePasswordComponent} from "./component/admin/admin-change-password/admin-change-password.component";
+import {AdminInfoComponent} from "./component/admin/admin-info/admin-info.component";
 
 
 
@@ -44,7 +46,7 @@ import {EmployeeChangePasswordComponent} from './component/employee-change-passw
     CreateCustomerComponent, EditCustomerComponent, CustomPipe,
     TicketEditComponent, TicketPrintComponent, TicketListComponent, StatisticalComponent ,
     EmployeeComponent, AddEmployeeComponent, UpdateEmployeeComponent,
-    EmployeeInformationComponent, EmployeeChangePasswordComponent],
+    EmployeeInformationComponent, EmployeeChangePasswordComponent, AdminChangePasswordComponent, AdminInfoComponent],
 
   bootstrap: [ManagementComponent]
 })

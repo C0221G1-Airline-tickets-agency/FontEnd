@@ -5,6 +5,7 @@ import {PasswordDto} from '../../../model/password-dto';
 import {PasswordService} from '../../../service/password/password.service';
 import {ToastrService} from 'ngx-toastr';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {TokenStorageService} from "../../../user/user-service/token-storage.service";
 
 @Component({
   selector: 'app-employee-change-password',
@@ -14,7 +15,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 export class EmployeeChangePasswordComponent implements OnInit {
 
   constructor(private sv: PasswordService, private toast: ToastrService,
-              public dialogRef: MatDialogRef<EmployeeChangePasswordComponent>) {
+              public dialogRef: MatDialogRef<EmployeeChangePasswordComponent>,
+              public tokenStorageService: TokenStorageService) {
   }
 
   password: PasswordDto;
@@ -44,7 +46,7 @@ export class EmployeeChangePasswordComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.userId = JSON.parse(localStorage.getItem('account')).accountId;
+    this.userId = this.tokenStorageService.getUser().id;
     this.showForm();
   }
 

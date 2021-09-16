@@ -14,7 +14,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   findById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.API_URL}/users/${id}`);
+    return this.http.get<any>(`${this.API_URL}/${id}`);
   }
 
   addUser(user: User): Observable<User> {

@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {EmployeeService} from '../../../service/employee/employee.service';
 import {Employee} from '../../../model/employee';
 import {EmployeeChangePasswordComponent} from '../employee-change-password/employee-change-password.component';
+import {TokenStorageService} from "../../../user/user-service/token-storage.service";
 
 
 @Component({
@@ -11,8 +12,7 @@ import {EmployeeChangePasswordComponent} from '../employee-change-password/emplo
   styleUrls: ['./employee-information.component.css']
 })
 export class EmployeeInformationComponent implements OnInit {
-  employee: Employee;
-  employeeId: number;
+  empl: Employee;
   id: number;
   name: string;
   code: string;
@@ -26,29 +26,30 @@ export class EmployeeInformationComponent implements OnInit {
     accountId: 1
   };
 
-  constructor(private dialog: MatDialog, private sv: EmployeeService) {
+  constructor(private dialog: MatDialog, private sv: EmployeeService,
+              private tokenStorageService: TokenStorageService) {
   }
 
   ngOnInit(): void {
     // Tạo localStorage data
     // localStorage.setItem('account', JSON.stringify(this.account));
     // Lấy data từ localStorage
-    this.employeeId = JSON.parse(localStorage.getItem('account')).accountId;
-    this.email = JSON.parse(localStorage.getItem('account')).email;
     this.getEmployees();
   }
 
   getEmployees() {
-    this.sv.getEmployee(this.employeeId).subscribe(e => {
-      this.id = e.employeeId;
-      this.name = e.employeeName;
-      this.code = e.employeeCode;
-      this.birthday = e.employeeBirthday;
-      this.address = e.employeeAddress;
-      this.phone = e.employeePhoneNumber;
-      this.image = e.employeeImage;
-    });
-  }
+    this.empl = this.tokenStorageService.getUser().employee;
+    {
+      this.id = this.empl.employeeId;
+      this.name = this.empl.employeeName;
+      this.code = this.empl.employeeCode;
+      this.birthday = this.empl.employeeBirthday;
+      this.address = this.empl.employeeAddress;
+      this.phone = this.empl.employeePhoneNumber;
+      this.image = this.empl.employeeImage;
+      this.email = this.tokenStorageService.getUser().username;
+    }
+  };
 
   openDialogChangePassword() {
     this.dialog.open(EmployeeChangePasswordComponent);

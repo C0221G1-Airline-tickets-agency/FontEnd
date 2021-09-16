@@ -31,6 +31,9 @@ import {AirlineCreateComponent} from './component/flight-ticket/flight-managemen
 import {CustomerTransactionHistoryComponent} from './component/customer/customer-transaction-history/customer-transaction-history.component';
 import {CustomerPaymentComponent} from './component/customer/customer-payment/customer-payment.component';
 import {FlightListComponentTrang} from "./component/flight-ticket/buy-ticket/flight-list/flight-list.component";
+import {AuthGuard} from "../service/auth/auth.guard.service";
+import {canActivate} from "@angular/fire/auth-guard";
+import {ModeratorAuthService} from "../service/auth/moderator-auth.service";
 
 
 
@@ -44,10 +47,10 @@ const routes: Routes = [
           path: '', component: HomeComponent
         },
         {
-          path: 'search-flight', component: FlightListComponentTrang
+          path: 'search-flight', component: FlightListComponentTrang, canActivate: [AuthGuard]
         },
         {
-          path: 'customer', component: CustomerChangePasswordComponent
+          path: 'customer', component: CustomerChangePasswordComponent, canActivate: [AuthGuard]
         },
         {
 
@@ -57,32 +60,32 @@ const routes: Routes = [
           path: 'news/news-details/:id', component: NewsDetailsComponent
         },
         {
-          path: 'news/manipulation', component: NewsManipulationComponent, canActivate: [AdminAuthService]
+          path: 'news/manipulation', component: NewsManipulationComponent, canActivate: [ModeratorAuthService]
         },
         {
-          path: 'news/manipulation/:id', component: NewsManipulationComponent, canActivate: [AdminAuthService]
+          path: 'news/manipulation/:id', component: NewsManipulationComponent, canActivate: [ModeratorAuthService]
         },
         {
           path: 'destination/detail/:id', component: DestinationDetailComponent
         },
         {
-          path: 'destination/create-destination', component: DestinationCreateComponent
+          path: 'destination/create-destination', component: DestinationCreateComponent, canActivate: [AdminAuthService]
         },
         {
-          path: 'destination/edit-destination/:id', component: DestinationUpdateComponent
+          path: 'destination/edit-destination/:id', component: DestinationUpdateComponent, canActivate: [AdminAuthService]
         },
         {
-          path:'roomAdmin',component:ManageChatRoomComponent},
+          path:'roomAdmin',component:ManageChatRoomComponent, canActivate: [AdminAuthService]
+        },
+        {
+          path: 'customer/transaction-history', component: CustomerTransactionHistoryComponent, canActivate: [AuthGuard]
+        },
+        {
+          path: 'customer/payment', component: CustomerPaymentComponent, canActivate: [AuthGuard]
 
-        {
-          path: 'customer/transaction-history', component: CustomerTransactionHistoryComponent
         },
         {
-          path: 'customer/payment', component: CustomerPaymentComponent
-
-        },
-        {
-          path: 'flight-management', component: FlightListComponent,
+          path: 'flight-management', component: FlightListComponent, canActivate: [ModeratorAuthService]
         },
         {
 
@@ -90,26 +93,26 @@ const routes: Routes = [
         },
         {
 
-          path: 'passenger-information/:id', component: PassengerInformationComponent
+          path: 'passenger-information/:id', component: PassengerInformationComponent, canActivate: [AuthGuard]
         },
 
         {
-          path: 'passenger-information', component: PassengerInformationComponent
+          path: 'passenger-information', component: PassengerInformationComponent, canActivate: [AuthGuard]
         },
         {
-          path: 'flight-management/flight-management-create', component: FlightCreateComponent
+          path: 'flight-management/flight-management-create', component: FlightCreateComponent, canActivate: [AdminAuthService]
         },
         {
-          path: 'flight-management-update', component: FlightEditComponent
+          path: 'flight-management-update', component: FlightEditComponent, canActivate: [AdminAuthService]
         },
         {
           path: 'airline-list', component: AirlineListComponent
         },
         {
-          path: 'airline-list/airline-create', component: AirlineCreateComponent
+          path: 'airline-list/airline-create', component: AirlineCreateComponent,  canActivate: [AdminAuthService]
         },
         {
-          path: 'customer/change-password',component: CustomerChangePasswordComponent
+          path: 'customer/change-password',component: CustomerChangePasswordComponent, canActivate: [AuthGuard]
 
         }
       ]

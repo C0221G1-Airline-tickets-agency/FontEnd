@@ -1,5 +1,5 @@
 
-import {Flight} from './Flight';
+import {Flight} from './flight';
 
 import {TicketStatus} from './ticket-status';
 import {User} from '../user';
