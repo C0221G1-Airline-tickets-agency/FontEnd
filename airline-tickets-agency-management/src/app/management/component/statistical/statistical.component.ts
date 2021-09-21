@@ -203,11 +203,11 @@ export class StatisticalComponent implements OnInit {
     this.chartOptions = {
       seriesLine: [
         {
-          name: 'thời gian 1',
+          name: 'Thời gian 1',
           data: []
         },
         {
-          name: 'thời gian 2',
+          name: 'Thời gian 2',
           data: []
         },
       ],
@@ -253,7 +253,7 @@ export class StatisticalComponent implements OnInit {
           'ngày 3',
           'Ngày 4',
           'Ngày 5',
-          'ngày 6',
+          'Ngày 6',
           'Ngày 7',
           'Ngày 8',
           'Ngày 9',
@@ -334,7 +334,7 @@ export class StatisticalComponent implements OnInit {
         // width: 480,
         type: 'pie'
       },
-      labelsPie: ['thời gian 1', 'Thời gian 2'],
+      labelsPie: ['Thời gian 1', 'Thời gian 2'],
       responsive: [
         {
           breakpoint: 480,
@@ -417,7 +417,7 @@ export class StatisticalComponent implements OnInit {
           'Ngày 1',
           'Ngày 2',
           'Ngày 3',
-          'ngày 4',
+          'Ngày 4',
           'Ngày 5',
           'Ngày 6',
           'Ngày 7'
@@ -452,7 +452,7 @@ export class StatisticalComponent implements OnInit {
           this.chartOptions.xaxis.categories.push(this.statisticalChart1[i].employeeName);
         }
       });
-      this.chartOptions.title.text = 'Top hãng nhân viên bán được nhiều vé nhất';
+      this.chartOptions.title.text = 'Top nhân viên bán được nhiều vé nhất';
     }
     if (this.typeReport === 'airline') {
       this.reportService.getTop5Airline(this.startDate1, this.endDate1).subscribe(chart1 => {

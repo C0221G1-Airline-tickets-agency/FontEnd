@@ -15,15 +15,23 @@ export class ListRoomComponent implements OnInit {
   msg:string;
   email: string;
   password: string;
+  check: boolean= false;
+
   constructor(
     private auth:ChatboxService
   ) {}
 
-  ngOnInit(): void {
-    firebase.database().ref('rooms').on('value', res=>{
+  async ngOnInit() {
+    this.check=false;
+    await firebase.database().ref('rooms').on('value', res=>{
       this.listRoom = snapshotToArray(res);
       console.log(snapshotToArray(res))
+
     });
+
+    setTimeout(()=>{
+      this.check=true;
+    },2000);
     console.log("list room");
   }
 

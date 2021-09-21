@@ -31,7 +31,9 @@
   height: 43px;
 
 }
-
+.footer-icon a {
+  padding: 0 5px;
+}
 /*#endregion*/
 /*#region HOME - CHAT - TOP*/
 .home-chat-top {

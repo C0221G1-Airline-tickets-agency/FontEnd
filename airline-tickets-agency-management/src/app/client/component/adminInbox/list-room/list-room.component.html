@@ -1,4 +1,6 @@
-<ul class="user_list">
+<img *ngIf="!check"
+     src="../../../../../assets/img/spin_360.gif" style="width: 100%">
+<ul *ngIf="check" class="user_list">
 
   <li *ngFor="let item of listRoom" >
     <div class="user_item" (click)="goToRoom(item.roomname)">
@@ -10,4 +12,3 @@
     </div>
   </li>
 </ul>
-
